@@ -1,0 +1,18 @@
+
+@keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+.animate-slide-down{ animation: slideDown 180ms ease-out both; }
+
+/* Sticky CTA safe-area */
+.sticky-cta { bottom: calc(env(safe-area-inset-bottom) + 1.5rem); }
+.sticky-cta.cta-lift { bottom: calc(env(safe-area-inset-bottom) + 6.5rem); }
+
+/* CTA lift when cookie bar visible (mobile) */
+@media (max-width:640px){ .cta-lift{ bottom:6.5rem !important } }
+
+/* Light mode readability */
+body.bg-white.text-black{ color:#111 }
+body.bg-white.text-black h1, 
+body.bg-white.text-black h2, 
+body.bg-white.text-black h3{ color:#1a1a1a }
+body.bg-white.text-black p, 
+body.bg-white.text-black li{ color:#333 }

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nautilus Security – Sicherheit mit System</title>
+  <meta name="description" content="Nautilus Security – Sicherheitsdienst in Berlin: Objektschutz, Baustellenbewachung, Eventschutz, Empfangsdienste, Beratung.">
+  <meta name="keywords" content="Sicherheitsdienst Berlin, Objektschutz, Eventschutz, Baustellenbewachung, Bewachung">
+  <meta property="og:title" content="Nautilus Security – Sicherheit mit System">
+  <meta property="og:description" content="Moderne, diskrete und effektive Sicherheitslösungen – maßgeschneidert für Ihr Projekt.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./logo-gold.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body class="min-h-screen font-sans bg-[#0a0f1c] text-white scroll-smooth">
+  <header id="site-header" class="border-b border-yellow-500 bg-[#0a0f1c] p-4 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center relative">
+      <div class="flex items-center space-x-3">
+        <img src="./logo-gold.png" alt="Logo Nautilus Security" class="w-10 h-10" />
+        <h1 class="text-xl font-bold tracking-wide">Nautilus Security</h1>
+      </div>
+      <div class="flex items-center space-x-4">
+        <button id="darkToggle" class="text-sm border px-2 py-1 rounded hover:opacity-70" aria-label="Farbschema umschalten">🌙</button>
+        <div class="md:hidden">
+          <button id="burger" class="text-yellow-500 text-2xl" aria-label="Navigation öffnen">☰</button>
+        </div>
+      </div>
+      <nav class="hidden md:flex space-x-4 text-sm" id="mainNav">
+        <button data-target="home" class="nav-link hover:text-yellow-500 transition">Start</button>
+        <button data-target="about" class="nav-link hover:text-yellow-500 transition">Über uns</button>
+        <button data-target="services" class="nav-link hover:text-yellow-500 transition">Leistungen</button>
+        <button data-target="why" class="nav-link hover:text-yellow-500 transition">Warum wir</button>
+        <button data-target="values" class="nav-link hover:text-yellow-500 transition">Unsere Werte</button>
+        <button data-target="team" class="nav-link hover:text-yellow-500 transition">Team</button>
+        <button data-target="jobs" class="nav-link hover:text-yellow-500 transition">Karriere</button>
+        <button data-target="faq" class="nav-link hover:text-yellow-500 transition">FAQ</button>
+        <button data-target="testimonials" class="nav-link hover:text-yellow-500 transition">Kundenstimmen</button>
+        <button data-target="contact" class="nav-link hover:text-yellow-500 transition">Kontakt</button>
+      </nav>
+      <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-60 z-40"></div>
+      <div id="mobileMenu" class="hidden absolute top-16 left-0 w-full bg-[#0a0f1c] border-t border-yellow-500 md:hidden flex-col text-center py-4 z-50 animate-slide-down">
+        <button data-target="home" class="mobile-link py-2">Start</button>
+        <button data-target="about" class="mobile-link py-2">Über uns</button>
+        <button data-target="services" class="mobile-link py-2">Leistungen</button>
+        <button data-target="why" class="mobile-link py-2">Warum wir</button>
+        <button data-target="values" class="mobile-link py-2">Unsere Werte</button>
+        <button data-target="team" class="mobile-link py-2">Team</button>
+        <button data-target="jobs" class="mobile-link py-2">Karriere</button>
+        <button data-target="faq" class="mobile-link py-2">FAQ</button>
+        <button data-target="testimonials" class="mobile-link py-2">Kundenstimmen</button>
+        <button data-target="contact" class="mobile-link py-2">Kontakt</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="cookieBar" class="fixed bottom-0 left-0 w-full bg-black bg-opacity-90 text-sm text-white px-6 py-4 z-50 flex justify-between items-center">
+    <p>Diese Website verwendet Cookies. Durch die Nutzung stimmen Sie der Datenschutzerklärung zu.</p>
+    <button id="cookieOk" class="bg-yellow-500 text-black px-4 py-1 rounded hover:bg-yellow-400 ml-4">Verstanden</button>
+  </div>
+
+  <main>
+    <section id="home" class="h-screen flex items-center justify-center text-center px-4 bg-gradient-to-b from-[#0b1222] via-[#0a0f1c] to-[#0a0f1c]" data-aos="fade-up">
+      <div>
+        <div class="mx-auto mb-6 w-48 md:w-56 lg:w-64 aspect-square rounded-full bg-[#0d1528] flex items-center justify-center shadow-2xl ring-2 ring-yellow-500/60 ring-offset-2 ring-offset-[#0a0f1c]">
+          <img src="./logo-gold.png" alt="Nautilus Security Logo" class="w-40 md:w-48 lg:w-56 drop-shadow-xl opacity-95" />
+        </div>
+        <h2 class="text-4xl font-bold text-yellow-500 mb-4">Ihre Sicherheit ist unsere Mission</h2>
+        <p class="text-lg max-w-xl mx-auto">Nautilus Security steht für moderne, diskrete und effektive Sicherheitslösungen – maßgeschneidert auf Ihre Anforderungen.</p>
+        <div class="mt-8">
+          <button data-target="contact" class="cta-btn bg-yellow-500 text-black px-6 py-3 rounded-full text-lg shadow-lg hover:bg-yellow-400 transition-transform transform hover:scale-105">Jetzt Kontakt aufnehmen</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="py-16 px-6 max-w-3xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-4">Über uns</h2>
+      <p class="text-gray-300 mb-4">
+        Die Nautilus Security UG mit Sitz in Berlin ist Ihr vertrauensvoller Partner für professionelle Sicherheitsdienstleistungen. Wir bieten durchdachte Schutzkonzepte für Unternehmen, Baustellen, Events und Privatpersonen.
+      </p>
+      <p class="text-gray-300">
+        Unser Anspruch: zuverlässiger, respektvoller und vorausschauender Schutz. Jedes unserer Teammitglieder verfügt über fundierte Qualifikationen nach §34a GewO und wird regelmäßig geschult, um stets auf dem neuesten Stand zu bleiben.
+      </p>
+    </section>
+
+    <section id="services" class="py-16 px-6 max-w-4xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-6">Unsere Leistungen</h2>
+      <ul class="list-disc pl-6 space-y-3 text-gray-300">
+        <li>Objektschutz & Baustellenbewachung: Präsenz zeigen, Gefahren verhindern</li>
+        <li>Revier- und Streifendienste: mobile Kontrolle mit GPS-Protokollierung</li>
+        <li>Event- und Veranstaltungsschutz: geordnete Abläufe & diskrete Präsenz</li>
+        <li>Empfangs- und Doorman-Services: professionelle Visitenkarte Ihres Hauses</li>
+        <li>Personenschutz: unauffälliger Schutz für gefährdete Personen</li>
+        <li>Sicherheitsberatung: individuelle Konzepte & präventive Maßnahmen</li>
+      </ul>
+    </section>
+
+    <section id="why" class="py-16 px-6 max-w-3xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-6">Warum Nautilus?</h2>
+      <ul class="space-y-4 text-gray-300">
+        <li>✅ Qualifiziertes Personal mit §34a-Nachweis & Einsatzroutine</li>
+        <li>✅ Klare Kommunikation, feste Ansprechpartner – keine Hotline</li>
+        <li>✅ Flexibel buchbar – 24/7 in Berlin & Brandenburg im Einsatz</li>
+        <li>✅ Digitale Protokolle und moderne Sicherheitsausstattung</li>
+        <li>✅ Vertraulichkeit, Loyalität & Diskretion garantiert</li>
+        <li>✅ Zusätzliche Qualifikationen: Erste Hilfe, ASG, Fremdsprachen</li>
+        <li>✅ Auf Wunsch speziell geschultes Personal für besondere Branchen</li>
+      </ul>
+    </section>
+
+    <section id="values" class="max-w-5xl mx-auto py-16 px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Unsere Werte</h2>
+      <div class="grid md:grid-cols-3 gap-10 text-center text-gray-300">
+        <div>
+          <div class="text-5xl mb-4">🔒</div>
+          <h3 class="text-xl font-semibold text-white mb-2">Vertrauen</h3>
+          <p>Unsere Kunden vertrauen auf Verschwiegenheit, Diskretion und Loyalität – das Fundament jeder Zusammenarbeit.</p>
+        </div>
+        <div>
+          <div class="text-5xl mb-4">🎯</div>
+          <h3 class="text-xl font-semibold text-white mb-2">Präzision</h3>
+          <p>Jeder Einsatz wird sorgfältig geplant, dokumentiert und mit höchster Genauigkeit ausgeführt.</p>
+        </div>
+        <div>
+          <div class="text-5xl mb-4">⚡</div>
+          <h3 class="text-xl font-semibold text-white mb-2">Reaktionsfähigkeit</h3>
+          <p>Ob im Alltag oder im Ernstfall – wir reagieren schnell, strukturiert und mit klarem Handlungsrahmen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="max-w-6xl mx-auto py-16 px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 text-center mb-12">Unser Team</h2>
+      <div class="grid md:grid-cols-3 gap-10 text-center">
+        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg">
+          <div class="w-24 h-24 rounded-full mx-auto bg-gray-600 mb-4"></div>
+          <h3 class="text-xl font-semibold text-white">Philipp D. B.</h3>
+          <p class="text-gray-300">Geschäftsführer</p>
+        </div>
+        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg">
+          <div class="w-24 h-24 rounded-full mx-auto bg-gray-600 mb-4"></div>
+          <h3 class="text-xl font-semibold text-white">Beatrix K.</h3>
+          <p class="text-gray-300">Assistentin der Geschäftsführung und Personalmanagement</p>
+        </div>
+        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg">
+          <div class="w-24 h-24 rounded-full mx-auto bg-gray-600 mb-4"></div>
+          <h3 class="text-xl font-semibold text-white">Justin G.</h3>
+          <p class="text-gray-300">Einsatzkoordinator</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="jobs" class="max-w-3xl mx-auto py-16 px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-6 text-center">Karriere bei Nautilus</h2>
+      <p class="text-gray-300 text-center mb-6">
+        Du hast Erfahrung im Sicherheitsdienst, bist zuverlässig und teamfähig? Dann werde Teil von Nautilus Security.
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-300">
+        <li>Gültige §34a-Sachkundeprüfung</li>
+        <li>Gepflegtes Auftreten & Deutschkenntnisse</li>
+        <li>Bereitschaft zu Nacht- & Wochenendschichten</li>
+        <li>Zusatzqualifikationen wie Waffensachkunde, Erste Hilfe oder Fremdsprachen von Vorteil</li>
+      </ul>
+      <div class="text-center mt-8">
+        <button data-target="contact" class="cta-btn bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition">Jetzt bewerben</button>
+      </div>
+    </section>
+
+    <section id="career-form" class="max-w-3xl mx-auto pt-2 pb-16 px-6" data-aos="fade-up">
+      <h3 class="text-2xl font-semibold text-yellow-500 mb-4">Online-Bewerbung</h3>
+      <form id="careerForm" class="space-y-4">
+        <div class="grid md:grid-cols-2 gap-4">
+          <input name="name" type="text" placeholder="Vollständiger Name" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+          <input name="email" type="email" placeholder="E-Mail" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <input name="phone" type="tel" placeholder="Telefon (optional)" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" />
+          <input name="position" type="text" placeholder="Gewünschte Position / Bereich" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+        </div>
+        <textarea name="message" placeholder="Kurz zu Ihrer Erfahrung..." rows="4" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white"></textarea>
+        <div>
+          <label class="block text-sm mb-2">Lebenslauf (PDF, optional)</label>
+          <input id="cvFile" type="file" accept="application/pdf" class="w-full text-sm" />
+        </div>
+        <button type="submit" class="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition-transform transform hover:scale-105">Bewerbung senden</button>
+        <p id="careerStatus" class="text-sm mt-2"></p>
+      </form>
+    </section>
+
+    <section id="faq" class="max-w-3xl mx-auto py-16 px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-6">Häufige Fragen (FAQ)</h2>
+      <div class="space-y-6 text-gray-300">
+        <div>
+          <h3 class="font-semibold text-white">Welche Einsatzgebiete deckt Nautilus Security ab?</h3>
+          <p>Wir sind in Berlin und Umgebung tätig und decken sämtliche Anforderungen vom Objektschutz bis zum Eventschutz ab.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-white">Wie kurzfristig sind Einsätze möglich?</h3>
+          <p>In vielen Fällen können wir bereits innerhalb von 24 Stunden Personal bereitstellen – kontaktieren Sie uns direkt!</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-white">Bieten Sie auch bewaffnete Sicherheitsdienste an?</h3>
+          <p>Ja, wir verfügen über Mitarbeiter mit Waffensachkunde nach §7 WaffG – bitte sprechen Sie uns für spezielle Anforderungen an.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-white">Ist eine langfristige Zusammenarbeit möglich?</h3>
+          <p>Ja, wir bieten sowohl kurzfristige als auch dauerhafte Sicherheitslösungen mit festen Ansprechpartnern.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="bg-[#111827] py-20 px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 text-center mb-8">Was unsere Kunden sagen</h2>
+      <div class="max-w-6xl mx-auto relative">
+        <div class="flex justify-between items-center mb-6">
+          <button id="tsPrev" class="px-3 py-2 rounded bg-gray-800 hover:bg-gray-700 text-sm">← Zurück</button>
+          <div class="text-gray-400 text-sm">3 von 9 Bewertungen werden gleichzeitig angezeigt</div>
+          <button id="tsNext" class="px-3 py-2 rounded bg-gray-800 hover:bg-gray-700 text-sm">Weiter →</button>
+        </div>
+        <div id="tsTrack" class="grid md:grid-cols-3 gap-6">
+          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
+            <p class="text-gray-300 italic">„Diskret, pünktlich und immer lösungsorientiert. Unsere Nachtlogistik läuft seitdem ohne Zwischenfälle.“</p>
+            <p class="text-yellow-500 font-bold mt-3">– R. Stein, Logistikleiter</p>
+          </article>
+          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
+            <p class="text-gray-300 italic">„Kurzfristig Personal gestellt und direkt Struktur reingebracht. Top Koordination.“</p>
+            <p class="text-yellow-500 font-bold mt-3">– C. Werner, Bauprojektleitung</p>
+          </article>
+          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
+            <p class="text-gray-300 italic">„Angenehm unauffällig, aber präsent. Gäste fühlten sich sicher, Abläufe blieben entspannt.“</p>
+            <p class="text-yellow-500 font-bold mt-3">– M. Aziz, Veranstalter</p>
+          </article>
+          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
+            <p class="text-gray-300 italic">„Transparente Kommunikation, digitale Übergaben, keine leeren Versprechen – so muss es sein.“</p>
+            <p class="text-yellow-500 font-bold mt-3">– M. Reuter, Facility Manager</p>
+          </article>
+          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
+            <p class="text-gray-300 italic">„Endlich verlässliche Revierfahrten. Vorkommnisse sauber dokumentiert und zeitnah gemeldet.“</p>
+            <p class="text-yellow-500 font-bold mt-3">– M. Lenz, Immobilienverwaltung</p>
+          </article>
+          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
+            <p class="text-gray-300 italic">„Auch an Wochenenden schnell reagiert. Professionelles Auftreten am Empfang, sehr kundenorientiert.“</p>
+            <p class="text-yellow-500 font-bold mt-3">– M. Hahn, Office Management</p>
+          </article>
+          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
+            <p class="text-gray-300 italic">„Diebstähle auf der Baustelle aufgehört. Präsenz und Abstimmung mit der Polizei tadellos.“</p>
+            <p class="text-yellow-500 font-bold mt-3">– M. Ulrich, Bauherr</p>
+          </article>
+          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
+            <p class="text-gray-300 italic">„Mehrsprachige Teams waren für unser internationales Event Gold wert.“</p>
+            <p class="text-yellow-500 font-bold mt-3">– M. Pereira, Eventkoordination</p>
+          </article>
+          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
+            <p class="text-gray-300 italic">„Schnell, ruhig, professionell. Genau die Art Sicherheitsdienst, die man selten findet.“</p>
+            <p class="text-yellow-500 font-bold mt-3">– L. Berger, Hoteldirektion</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="max-w-2xl mx-auto py-16 px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-6">Kontakt aufnehmen</h2>
+      <form id="contactForm" class="space-y-4">
+        <input name="name" type="text" placeholder="Ihr Name" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+        <input name="email" type="email" placeholder="Ihre E-Mail" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+        <textarea name="message" placeholder="Ihre Nachricht..." rows="5" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required></textarea>
+        <button type="submit" class="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition-transform transform hover:scale-105">Absenden</button>
+        <p id="contactStatus" class="text-sm mt-2"></p>
+      </form>
+    </section>
+  </main>
+
+  <button id="stickyCta" class="sticky-cta fixed bottom-6 right-6 bg-yellow-500 text-black px-5 py-3 rounded-full text-sm shadow-lg hover:bg-yellow-400 transition z-50 animate-bounce">📞 Jetzt anfragen</button>
+
+  <footer class="bg-[#0a0f1c] text-yellow-500 p-4 text-center text-sm border-t border-yellow-500">
+    &copy; <span id="year"></span> Nautilus Security UG (haftungsbeschränkt)
+    <div class="mt-2 space-x-4 text-yellow-400 text-xs">
+      <a href="./impressum.html" class="hover:underline">Impressum</a>
+      <a href="./datenschutz.html" class="hover:underline">Datenschutz</a>
+    </div>
+  </footer>
+
+  <script defer src="./app.js"></script>
+</body>
+</html>
