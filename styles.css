@@ -1,52 +1,44 @@
-/* Base */
-body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; scroll-behavior:smooth; }
-:root { --gold:#f59e0b; }
-
-/* Animations */
 @keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
 .animate-slide-down{ animation: slideDown 180ms ease-out both; }
 
-/* Nav active */
-.nav-link.active{ color:var(--gold); font-weight:700; }
+/* Sticky CTA safe-area + Abstand zur Cookie-Bar auf Mobile */
+.sticky-cta { bottom: calc(env(safe-area-inset-bottom) + 1.5rem); }
+@media (max-width:640px){ .sticky-cta{ bottom: 6.5rem } }
 
-/* Hover Glow */
-.feature-card,.why-bullet,.value-card{
-  background:#111827; border-radius:.5rem;
-  transition:transform .25s ease, box-shadow .25s ease;
+/* Light mode readability (falls du Dark/Light schaltest) */
+body.bg-white.text-black{ color:#111 }
+body.bg-white.text-black h1, 
+body.bg-white.text-black h2, 
+body.bg-white.text-black h3{ color:#1a1a1a }
+body.bg-white.text-black p, 
+body.bg-white.text-black li{ color:#333 }
+
+/* Goldener Schild-Bullet */
+.gold-shield{
+  width: 18px; height: 18px; display:inline-block;
+  background: conic-gradient(from 180deg at 50% 50%, #facc15, #b45309, #facc15);
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-4z"/></svg>') center/contain no-repeat;
+          mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-4z"/></svg>') center/contain no-repeat;
 }
-.feature-card:hover,.why-bullet:hover,.value-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 0 15px rgba(245,158,11,.5);
-}
 
-/* Warum wir: goldene Schilder */
-.why-bullet-icon{
-  width:28px;height:28px;border-radius:50%;
-  background:var(--gold); color:#0a0f1c; display:flex;align-items:center;justify-content:center;
-  margin-right:.75rem; flex-shrink:0;
-}
+/* Hover-Glows */
+.hover\:shadow-why:hover{ box-shadow: 0 0 0 1px rgba(250, 204, 21, .25), 0 8px 24px rgba(250, 204, 21, .08); }
+.hover\:shadow-values:hover{ box-shadow: 0 0 0 1px rgba(250, 204, 21, .25), 0 10px 30px rgba(250, 204, 21, .10); }
 
-/* Werte */
-.value-icon{ color:var(--gold); margin-bottom:.75rem }
+/* Werte: Icon-Zentrierung */
+.values-icon svg { display:block }
 
-/* Team */
-.team-position{ color:var(--gold); font-weight:600; margin-bottom:.25rem }
+/* FAQ: Smooth Accordion (voll sichtbar) */
+.faq-item { border:1px solid rgba(250,204,21,0.08) }
+.faq-q { color:#fff }
+.faq-q .faq-icon { transition: transform .25s ease }
+.faq-item.open .faq-q .faq-icon { transform: rotate(45deg) } /* + → x */
+.faq-a { max-height: 0; opacity: 0; transform: translateY(-4px); transition: max-height .35s ease, opacity .3s ease, transform .3s ease; }
+.faq-item.open .faq-a { opacity:1; transform: translateY(0); }
 
-/* FAQ */
-.faq-item{ border-bottom:1px solid rgba(255,255,255,.1) }
-.faq-btn{ width:100%; background:none; border:none; padding:.75rem 0; color:#fff; text-align:left; font-size:1rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center }
-.faq-panel{ max-height:0; overflow:hidden; opacity:0; transition:max-height .35s ease, opacity .3s ease, padding .3s ease; padding:0 }
-.faq-item.open .faq-panel{ opacity:1; padding:.5rem 0 }
+/* Services/Why: Karten leichter Glow on hover (gleichmäßig) */
+.service-card:hover { box-shadow: 0 10px 30px rgba(250,204,21,.10) }
 
-/* Testimonials 3er Slider */
-#tsViewport{ overflow:hidden }
-#tsTrack{ display:flex; transition:transform .7s ease-in-out; will-change:transform }
-.ts-slide{ flex:0 0 33.3333%; box-sizing:border-box }
-
-/* Sticky CTA (höher, Cookie-Bar Platz) */
-#stickyCta{
-  position:fixed; bottom:6rem; right:1.5rem; z-index:50;
-  background:var(--gold); color:#000; padding:.75rem 1.25rem; border-radius:9999px; font-weight:700;
-  box-shadow:0 4px 8px rgba(0,0,0,.3); animation:bounce 2s infinite
-}
-@keyframes bounce{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+/* Testimonials (falls JS animiert) */
+.ts-fade { opacity:0; transition: opacity .5s ease }
+.ts-fade.ts-show { opacity:1 }
