@@ -1,123 +1,117 @@
-// AOS init
+// AOS
 document.addEventListener("DOMContentLoaded", () => {
   if (window.AOS) AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
 });
 
 // Jahr im Footer
-document.addEventListener("DOMContentLoaded", () => {
-  const y = document.getElementById("year");
-  if (y) y.textContent = new Date().getFullYear();
-});
+document.getElementById("year").textContent = new Date().getFullYear();
 
-// Smooth Scroll (Buttons)
-function scrollToId(id){ const el = document.getElementById(id); if(el){ el.scrollIntoView({behavior:"smooth"}); } }
-
-// Burger & Mobile-Navigation
-document.addEventListener("DOMContentLoaded", () => {
-  const burger = document.getElementById("burger");
-  const menu = document.getElementById("mobileMenu");
-  const overlay = document.getElementById("mobileOverlay");
-
-  function closeMenu(){ menu.classList.add("hidden"); overlay.classList.add("hidden"); }
-  function openMenu(){ menu.classList.remove("hidden"); overlay.classList.remove("hidden"); }
-
-  burger && burger.addEventListener("click", () => menu.classList.contains("hidden") ? openMenu() : closeMenu());
-  overlay && overlay.addEventListener("click", closeMenu);
-
-  document.querySelectorAll(".mobile-link, .nav-link, .cta-btn").forEach(btn=>{
-    btn.addEventListener("click", (e)=>{
-      const target = e.currentTarget.getAttribute("data-target");
-      if (target) { scrollToId(target); }
-      closeMenu();
-    });
+// Burger / Mobile
+const burger = document.getElementById("burger");
+const mobileMenu = document.getElementById("mobileMenu");
+const mobileOverlay = document.getElementById("mobileOverlay");
+if (burger) {
+  burger.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+    mobileOverlay.classList.toggle("hidden");
+  });
+}
+if (mobileOverlay) {
+  mobileOverlay.addEventListener("click", () => {
+    mobileMenu.classList.add("hidden");
+    mobileOverlay.classList.add("hidden");
+  });
+}
+document.querySelectorAll(".mobile-link").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const id = btn.getAttribute("data-target");
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({behavior:"smooth"});
+    mobileMenu.classList.add("hidden");
+    mobileOverlay.classList.add("hidden");
   });
 });
 
-// Cookie-Bar + CTA-Lift
-document.addEventListener("DOMContentLoaded", () => {
-  const bar = document.getElementById("cookieBar");
-  const ok = document.getElementById("cookieOk");
-  const cta = document.getElementById("stickyCta");
+// Smooth Scroll (Desktop Nav + CTA)
+function scrollToId(id){ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:"smooth"}); }
+document.querySelectorAll("#mainNav .nav-link, .cta-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=> scrollToId(btn.getAttribute("data-target")));
+});
 
-  function hideBar(){
-    if (bar) bar.style.display = "none";
-    if (cta) cta.classList.remove("cta-lift");
-  }
-  function showBar(){
-    if (bar) bar.style.display = "flex";
-    if (cta) cta.classList.add("cta-lift");
-  }
+// Sticky CTA liften, wenn Cookiebar sichtbar
+const cookieBar = document.getElementById("cookieBar");
+const stickyCta = document.getElementById("stickyCta");
+const cookieOk = document.getElementById("cookieOk");
+function updateCtaLift(){
+  if (!cookieBar || !stickyCta) return;
+  const styles = getComputedStyle(cookieBar);
+  const isVisible = styles.display !== "none" && cookieBar.offsetHeight > 0;
+  stickyCta.classList.toggle("cta-lift", isVisible);
+}
+updateCtaLift();
+if (cookieOk) cookieOk.addEventListener("click", ()=>{
+  cookieBar.style.display = "none";
+  updateCtaLift();
+});
 
-  // Einfache Persistenz
-  if (localStorage.getItem("cookiesAccepted") === "1"){ hideBar(); }
-  else { showBar(); }
-
-  ok && ok.addEventListener("click", ()=>{
-    localStorage.setItem("cookiesAccepted","1");
-    hideBar();
+// Active Section Highlight
+const sectionIds = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    const id = entry.target.id;
+    const link = document.querySelector(`#mainNav .nav-link[data-target="${id}"]`);
+    if (link) {
+      if (entry.isIntersecting) link.classList.add("active");
+      else link.classList.remove("active");
+    }
   });
-
-  // Sticky CTA scrollt zu Kontakt
-  cta && cta.addEventListener("click", ()=> scrollToId("contact"));
-});
-
-// Scrollspy (aktiviert aktuelles Menü-Item)
-document.addEventListener("DOMContentLoaded", () => {
-  const links = Array.from(document.querySelectorAll("#mainNav .nav-link"));
-  const sections = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"]
-    .map(id => document.getElementById(id))
-    .filter(Boolean);
-
-  const byId = id => links.find(l => l.getAttribute("data-target") === id);
-
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if (entry.isIntersecting){
-        const id = entry.target.id;
-        links.forEach(l => l.classList.remove("text-yellow-500","font-bold"));
-        const active = byId(id);
-        if (active){ active.classList.add("text-yellow-500","font-bold"); }
-      }
-    });
-  }, { root:null, threshold:0.5 });
-
-  sections.forEach(sec => obs.observe(sec));
-});
+},{ root:null, rootMargin:"-50% 0px -50% 0px", threshold:0 });
+sectionIds.forEach(id=>{ const el=document.getElementById(id); if(el) observer.observe(el); });
 
 // FAQ Accordion
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".faq-item .faq-q").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const item = btn.closest(".faq-item");
-      item.classList.toggle("open");
-    });
+document.querySelectorAll(".faq-item").forEach(item=>{
+  const q = item.querySelector(".faq-q");
+  q.addEventListener("click", ()=>{
+    item.classList.toggle("open");
   });
 });
 
-// Testimonials Carousel – 3 gleichzeitig, Auto-Slide 5s, sanftes Schieben
-document.addEventListener("DOMContentLoaded", () => {
-  const track = document.getElementById('tsTrack');
-  if (!track) return;
-
-  const slides = Array.from(track.querySelectorAll('.ts-slide'));
-  const dots = Array.from(document.querySelectorAll('.ts-dot'));
-  const total = slides.length;
+// Testimonials – 3 Karten pro Slide, Auto alle 5s, smooth translate
+(function initTestimonials(){
+  const track = document.getElementById("tsTrack");
+  if(!track) return;
+  const totalCards = track.children.length; // 9
+  const perSlide = 3;
+  const slides = Math.ceil(totalCards / perSlide); // 3
   let index = 0;
-  let timer = null;
 
-  function setActive(i){
-    index = (i + total) % total;
-    track.style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach((d, di) => d.classList.toggle('active', di === index));
+  function apply() {
+    const gap = 24; // Tailwind gap-6 ≈ 24px
+    const cardWidth = track.children[0].getBoundingClientRect().width;
+    const viewportWidth = (cardWidth * perSlide) + (gap * (perSlide - 1));
+    track.style.transform = `translateX(-${index * (viewportWidth + gap)}px)`;
   }
-  function start(){ stop(); timer = setInterval(()=> setActive(index+1), 5000); }
-  function stop(){ if (timer) clearInterval(timer); }
 
-  setActive(0); start();
+  // Initial after layout
+  setTimeout(apply, 0);
+  window.addEventListener("resize", apply);
 
-  track.addEventListener('mouseenter', stop);
-  track.addEventListener('mouseleave', start);
-  dots.forEach((dot, di)=> dot.addEventListener('click', ()=>{ setActive(di); start(); }));
+  setInterval(()=>{
+    index = (index + 1) % slides;
+    apply();
+  }, 5000);
+})();
 
-  window.addEventListener('resize', ()=> setActive(index));
+// Kontakt & Karriere – (EmailJS ggf. später)
+document.getElementById("contactForm")?.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const status = document.getElementById("contactStatus");
+  status.textContent = "Danke! Wir melden uns kurzfristig.";
+  e.target.reset();
+});
+document.getElementById("careerForm")?.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const status = document.getElementById("careerStatus");
+  status.textContent = "Bewerbung gesendet. Wir melden uns zeitnah.";
+  e.target.reset();
 });
