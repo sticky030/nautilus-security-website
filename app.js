@@ -1,255 +1,95 @@
-/* ---------- Utils ---------- */
-const $ = (sel, ctx = document) => ctx.querySelector(sel);
-const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-const smoothScrollTo = (id) => {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-};
+/* Helpers */
+const $ = (s, c=document)=>c.querySelector(s);
+const $$ = (s, c=document)=>Array.from(c.querySelectorAll(s));
+const smoothScrollTo = (id)=>{ const el = document.getElementById(id); if(el) el.scrollIntoView({behavior:"smooth", block:"start"}); };
 
-/* ---------- Cookie-Bar & Sticky CTA ---------- */
-(function initCookieBar() {
-  const bar = $("#cookieBar");
-  const ok = $("#cookieOk");
-  const cta = $("#stickyCta");
-
-  if (!bar || !ok) return;
-
-  const KEY = "nautilus_cookie_ok";
-  const accepted = localStorage.getItem(KEY) === "1";
-
-  if (accepted) {
-    bar.style.display = "none";
-  } else {
-    // hebe den CTA etwas an, solange die Bar sichtbar ist
-    if (cta) cta.style.bottom = "6rem";
-  }
-
-  ok.addEventListener("click", () => {
-    localStorage.setItem(KEY, "1");
-    bar.style.display = "none";
-    if (cta) cta.style.bottom = "1.5rem";
-  });
+/* Cookie-Bar + CTA */
+(function(){
+  const bar=$("#cookieBar"), ok=$("#cookieOk"), cta=$("#stickyCta");
+  if(!bar||!ok) return;
+  const KEY="nautilus_cookie_ok";
+  if(localStorage.getItem(KEY)==="1"){ bar.style.display="none"; if(cta) cta.style.bottom="1.5rem"; }
+  else { if(cta) cta.style.bottom="6rem"; }
+  ok.addEventListener("click",()=>{ localStorage.setItem(KEY,"1"); bar.style.display="none"; if(cta) cta.style.bottom="1.5rem"; });
 })();
 
-/* ---------- Mobile-Burger ---------- */
-(function initBurger() {
-  const burger = $("#burger");
-  const mobileMenu = $("#mobileMenu");
-  const overlay = $("#mobileOverlay");
-
-  if (!burger || !mobileMenu || !overlay) return;
-
-  const close = () => {
-    mobileMenu.classList.add("hidden");
-    overlay.classList.add("hidden");
-  };
-  const open = () => {
-    mobileMenu.classList.remove("hidden");
-    overlay.classList.remove("hidden");
-  };
-
-  burger.addEventListener("click", () => {
-    const isHidden = mobileMenu.classList.contains("hidden");
-    isHidden ? open() : close();
-  });
-
-  overlay.addEventListener("click", close);
-
-  $$(".mobile-link").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const target = btn.getAttribute("data-target");
-      if (target) smoothScrollTo(target);
-      close();
-    });
-  });
+/* Burger */
+(function(){
+  const b=$("#burger"), menu=$("#mobileMenu"), overlay=$("#mobileOverlay");
+  if(!b||!menu||!overlay) return;
+  const open=()=>{ menu.classList.remove("hidden"); overlay.classList.remove("hidden"); };
+  const close=()=>{ menu.classList.add("hidden"); overlay.classList.add("hidden"); };
+  b.addEventListener("click",()=> menu.classList.contains("hidden")?open():close());
+  overlay.addEventListener("click",close);
+  $$(".mobile-link").forEach(btn=>btn.addEventListener("click",()=>{ const t=btn.getAttribute("data-target"); if(t) smoothScrollTo(t); close(); }));
 })();
 
-/* ---------- Smooth Scroll für Desktop-Nav & CTAs ---------- */
-(function initNavScroll() {
-  $$("#mainNav .nav-link").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const target = btn.getAttribute("data-target");
-      if (target) smoothScrollTo(target);
-    });
+/* Smooth Scroll (Nav + CTA) */
+(function(){
+  $$("#mainNav .nav-link").forEach(btn=>{
+    btn.addEventListener("click",()=>{ const t=btn.getAttribute("data-target"); if(t) smoothScrollTo(t); });
   });
-
-  $$(".cta-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const target = btn.getAttribute("data-target") || "contact";
-      smoothScrollTo(target);
-    });
+  $$(".cta-btn").forEach(btn=>{
+    btn.addEventListener("click",()=> smoothScrollTo(btn.getAttribute("data-target")||"contact"));
   });
-
-  const stickyCta = $("#stickyCta");
-  if (stickyCta) {
-    stickyCta.addEventListener("click", () => smoothScrollTo("contact"));
-  }
+  const sticky=$("#stickyCta"); if(sticky) sticky.addEventListener("click",()=> smoothScrollTo("contact"));
 })();
 
-/* ---------- Scrollspy (aktiver Menüpunkt) ---------- */
-(function initScrollSpy() {
-  const navLinks = $$("#mainNav .nav-link");
-  if (!navLinks.length) return;
-
-  const ids = navLinks.map((b) => b.getAttribute("data-target"));
-  const sections = ids
-    .map((id) => document.getElementById(id))
-    .filter(Boolean);
-
-  const mapById = new Map(
-    navLinks.map((b) => [b.getAttribute("data-target"), b])
-  );
-
-  const onIntersect = (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        navLinks.forEach((l) => l.classList.remove("active"));
-        const link = mapById.get(id);
-        if (link) link.classList.add("active");
+/* Scrollspy */
+(function(){
+  const links=$$("#mainNav .nav-link"); if(!links.length) return;
+  const map=new Map(links.map(l=>[l.getAttribute("data-target"), l]));
+  const secs=links.map(l=>document.getElementById(l.getAttribute("data-target"))).filter(Boolean);
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(x=>x.classList.remove("active"));
+        const id=e.target.id, link=map.get(id);
+        if(link) link.classList.add("active");
       }
     });
-  };
-
-  const obs = new IntersectionObserver(onIntersect, {
-    root: null,
-    rootMargin: "-40% 0px -50% 0px", // „Aktiv“, wenn Sektion mittig im Viewport
-    threshold: 0.0,
-  });
-
-  sections.forEach((sec) => obs.observe(sec));
+  },{root:null, rootMargin:"-40% 0px -50% 0px", threshold:0});
+  secs.forEach(s=>io.observe(s));
 })();
 
-/* ---------- FAQ: weiches Auf-/Zuklappen ---------- */
-(function initFAQ() {
-  const faqs = $$(".faq-item");
-  if (!faqs.length) return;
-
-  faqs.forEach((item) => {
-    const btn = $(".faq-btn", item);
-    const panel = $(".faq-panel", item);
-    if (!btn || !panel) return;
-
-    // Startzustand
-    panel.style.maxHeight = "0px";
-    panel.style.opacity = "0";
-
-    btn.addEventListener("click", () => {
-      const isOpen = item.classList.contains("open");
-
-      // andere schließen (optional; auskommentieren, falls mehrere offen bleiben sollen)
-      faqs.forEach((it) => {
-        if (it !== item) {
-          it.classList.remove("open");
-          const p = $(".faq-panel", it);
-          if (p) {
-            p.style.maxHeight = "0px";
-            p.style.opacity = "0";
-          }
-        }
-      });
-
-      if (isOpen) {
-        item.classList.remove("open");
-        panel.style.maxHeight = "0px";
-        panel.style.opacity = "0";
-      } else {
-        item.classList.add("open");
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        panel.style.opacity = "1";
-      }
+/* FAQ soft toggle */
+(function(){
+  const items=$$(".faq-item"); if(!items.length) return;
+  items.forEach(item=>{
+    const btn=$(".faq-btn",item), panel=$(".faq-panel",item); if(!btn||!panel) return;
+    panel.style.maxHeight="0px"; panel.style.opacity="0";
+    btn.addEventListener("click",()=>{
+      const open=item.classList.contains("open");
+      items.forEach(i=>{ if(i!==item){ i.classList.remove("open"); const p=$(".faq-panel",i); if(p){ p.style.maxHeight="0px"; p.style.opacity="0"; } } });
+      if(open){ item.classList.remove("open"); panel.style.maxHeight="0px"; panel.style.opacity="0"; }
+      else{ item.classList.add("open"); panel.style.maxHeight=panel.scrollHeight+"px"; panel.style.opacity="1"; }
     });
   });
 })();
 
-/* ---------- Testimonials: 3 gleichzeitig, Auto-Slide alle 5s ---------- */
-(function initTestimonials() {
-  const track = document.getElementById("tsTrack");
-  if (!track) return;
+/* Testimonials: 3 sichtbar, Auto-Slide alle 5s (weich) */
+(function(){
+  const track=$("#tsTrack"), viewport=$("#tsViewport");
+  if(!track||!viewport) return;
+  const slides=$$(".ts-slide", track); if(!slides.length) return;
 
-  // Finde den „Viewport“ (Eltern-Container) und stelle sicher, dass overflow hidden ist
-  let viewport = document.getElementById("tsViewport");
-  if (!viewport) {
-    viewport = track.parentElement;
-    if (viewport) viewport.style.overflow = "hidden";
-  }
+  let index=0;
+  const groups=Math.ceil(slides.length/3);
+  const apply=()=>{ track.style.transform=`translateX(-${index*100}%)`; };
+  const next=()=>{ index=(index+1)%groups; apply(); };
 
-  const slides = $$(".ts-card", track);
-  if (!slides.length) return;
+  let timer=setInterval(next, 5000);
+  const stop=()=>{ if(timer){ clearInterval(timer); timer=null; } };
+  const start=()=>{ stop(); timer=setInterval(next,5000); };
 
-  // Packe Cards in „.ts-slide“-Wrapper, damit jede 33.333% Breite hat
-  if (!slides[0].parentElement.classList.contains("ts-slide")) {
-    slides.forEach((card) => {
-      const wrap = document.createElement("div");
-      wrap.className = "ts-slide";
-      card.parentNode.insertBefore(wrap, card);
-      wrap.appendChild(card);
-    });
-  }
-
-  const groups = Math.ceil(track.children.length / 3);
-  let index = 0;
-  let timer = null;
-
-  const applyTransform = () => {
-    // Jede Gruppe belegt 100% der Viewport-Breite
-    track.style.transform = `translateX(-${index * 100}%)`;
-  };
-
-  const next = () => {
-    index = (index + 1) % groups;
-    applyTransform();
-  };
-
-  // Auto-Advance alle 5 Sekunden
-  const start = () => {
-    stop();
-    timer = setInterval(next, 5000);
-  };
-  const stop = () => timer && clearInterval(timer);
-
-  // Start
-  applyTransform();
-  start();
-
-  // Pause bei Hover (Desktop)
-  if (viewport) {
-    viewport.addEventListener("mouseenter", stop);
-    viewport.addEventListener("mouseleave", start);
-  }
-
-  // Fallback für manuelle Buttons, falls vorhanden (werden ignoriert, wenn es sie nicht gibt)
-  const prevBtn = document.getElementById("tsPrev");
-  const nextBtn = document.getElementById("tsNext");
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      stop();
-      index = (index - 1 + groups) % groups;
-      applyTransform();
-      start();
-    });
-  }
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      stop();
-      next();
-      start();
-    });
-  }
-
-  // Responsiveness: bei Größenänderung kurz neu messen (hier reicht Re-Transform)
-  window.addEventListener("resize", () => {
-    applyTransform();
-  });
+  viewport.addEventListener("mouseenter", stop);
+  viewport.addEventListener("mouseleave", start);
+  window.addEventListener("resize", apply);
+  apply();
 })();
 
-/* ---------- AOS init (smooth reinkommen) ---------- */
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.AOS) {
-    window.AOS.init({ duration: 700, once: true, easing: "ease-out-cubic" });
-  }
-
-  // Jahr im Footer
-  const y = $("#year");
-  if (y) y.textContent = new Date().getFullYear();
+/* AOS & Jahr */
+document.addEventListener("DOMContentLoaded", ()=>{
+  if(window.AOS){ window.AOS.init({ duration:700, once:true, easing:"ease-out-cubic" }); }
+  const y=$("#year"); if(y) y.textContent=new Date().getFullYear();
 });
