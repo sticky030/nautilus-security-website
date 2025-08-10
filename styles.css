@@ -1,17 +1,13 @@
-/* Slide-down anim für Mobile-Menü */
+/* Kleine Anim-Util */
 @keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
 .animate-slide-down{ animation: slideDown 180ms ease-out both; }
 
-/* Cards / Muted Text */
-.card { backdrop-filter: blur(2px); }
-.muted { color:#d1d5db; }
+/* Sticky CTA: safe-area & höher als Cookie-Bar */
+.sticky-cta { bottom: calc(env(safe-area-inset-bottom) + 5.5rem); } /* höher gesetzt */
+.sticky-cta.cta-lift { bottom: calc(env(safe-area-inset-bottom) + 8rem); }
+@media (min-width: 640px) { .sticky-cta { bottom: 4rem; } }
 
-/* Sticky CTA – höher gesetzt und safe-area */
-.sticky-cta{ bottom:calc(env(safe-area-inset-bottom) + 2.5rem); }
-.sticky-cta.cta-lift{ bottom:calc(env(safe-area-inset-bottom) + 9rem); }
-@media (max-width:640px){ .cta-lift{ bottom:9rem!important } }
-
-/* Light mode readability (falls umgeschaltet) */
+/* Light mode readability (falls DarkToggle genutzt wird) */
 body.bg-white.text-black{ color:#111 }
 body.bg-white.text-black h1, 
 body.bg-white.text-black h2, 
@@ -19,37 +15,47 @@ body.bg-white.text-black h3{ color:#1a1a1a }
 body.bg-white.text-black p, 
 body.bg-white.text-black li{ color:#333 }
 
-/* Reveal on scroll */
-.reveal{
-  opacity:0;
-  transform: translateY(24px);
-  transition: opacity .6s ease, transform .6s ease;
-}
-.reveal.visible{
-  opacity:1;
-  transform:none;
+/* Gold Bullet für Leistungen */
+.bullet-gold{
+  width: .5rem; height: .5rem; border-radius: 999px;
+  background: #facc15; box-shadow: 0 0 0 2px rgba(250,204,21,.25);
+  flex-shrink:0;
 }
 
-/* FAQ modern */
-.faq-toggle .chev { color:#f59e0b; } /* gelb */
-.faq-item[aria-current="open"] { border-color: rgba(245,158,11,.6); box-shadow: 0 0 0 1px rgba(245,158,11,.15) inset; }
-.faq-panel {
-  transition: max-height .35s ease, opacity .25s ease, transform .25s ease;
-  opacity: 0;
-  transform: translateY(-4px);
+/* Werte – Icons & Hover-Glow */
+.icon-gold { color:#facc15 }
+.card-glow{
+  box-shadow: 0 0 0 0 rgba(250,204,21,.0);
+  transition: box-shadow .25s ease, transform .25s ease;
+  border: 1px solid rgba(250,204,21,.15);
 }
-.faq-panel.open {
-  opacity: 1;
-  transform: none;
+.card-glow:hover{
+  box-shadow: 0 10px 30px -10px rgba(250,204,21,.35);
+  transform: translateY(-2px);
 }
 
-/* Testimonials slider */
-#tsViewport{ position:relative }
-#tsTrack{
-  width:300%;
-  gap: 0;
+/* Testimonials Carousel */
+#tsTrack { transition: transform 600ms ease; }
+.ts-dot{ width:8px; height:8px; border-radius:999px; background:#555 }
+.ts-dot.active{ background:#facc15 }
+.ts-card{
+  background:#1f2937; border-radius:.5rem; padding:1.5rem; box-shadow:0 6px 16px rgba(0,0,0,.25);
 }
-#tsTrack > .ts-group{
-  width:100%;
-  padding-right:0.001px; /* safari rounding fix */
+.ts-card p{ color:#d1d5db }
+.ts-card p.by{ color:#facc15; font-weight:600; margin-top:.75rem }
+
+/* FAQ Accordion modern */
+.faq-item{ border:1px solid rgba(250,204,21,.15); border-radius:.75rem; background:#111827 }
+.faq-q{
+  width:100%; text-align:left; color:#fff; font-weight:600; padding:1rem 1.25rem;
+  display:flex; justify-content:space-between; align-items:center;
 }
+.faq-q::after{ content:"+"; color:#facc15; font-weight:700 }
+.faq-item.open .faq-q::after{ content:"–"; }
+.faq-a{
+  color:#d1d5db; padding:0 1.25rem 1rem 1.25rem; display:none;
+}
+.faq-item.open .faq-a{ display:block }
+
+/* Cookie-Bar: wenn sichtbar, CTA noch etwas liften (Fallback) */
+@media (max-width:640px){ .cta-lift{ bottom:8rem !important } }
