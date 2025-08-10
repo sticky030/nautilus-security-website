@@ -1,201 +1,123 @@
-/* Utilities */
-const $ = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
-
-/* Year */
-$("#year").textContent = new Date().getFullYear();
-
-/* AOS init (optional, wir nutzen zusätzlich eigene Reveals) */
+// AOS init
 document.addEventListener("DOMContentLoaded", () => {
   if (window.AOS) AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
 });
 
-/* Mobile Menü */
-const burger = $("#burger");
-const mobileMenu = $("#mobileMenu");
-const mobileOverlay = $("#mobileOverlay");
-if (burger) {
-  burger.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-    mobileOverlay.classList.toggle("hidden");
-  });
-}
-if (mobileOverlay) {
-  mobileOverlay.addEventListener("click", () => {
-    mobileMenu.classList.add("hidden");
-    mobileOverlay.classList.add("hidden");
-  });
-}
-
-/* Smooth Scroll (Nav & CTA) */
-function scrollToId(id){
-  const el = document.getElementById(id);
-  if(!el) return;
-  el.scrollIntoView({ behavior:"smooth", block:"start" });
-  mobileMenu?.classList.add("hidden");
-  mobileOverlay?.classList.add("hidden");
-}
-$$("[data-target]").forEach(btn=>{
-  btn.addEventListener("click", ()=> scrollToId(btn.getAttribute("data-target")));
+// Jahr im Footer
+document.addEventListener("DOMContentLoaded", () => {
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
 });
 
-/* Cookie-Bar & CTA lift */
-const cookieBar = $("#cookieBar");
-const cookieOk = $("#cookieOk");
-const stickyCta = $("#stickyCta");
-const liftCTA = (lift) => {
-  if(!stickyCta) return;
-  stickyCta.classList.toggle("cta-lift", !!lift);
-};
-if (cookieOk) {
-  cookieOk.addEventListener("click", ()=>{
-    cookieBar.style.display = "none";
-    liftCTA(false);
-  });
-}
-/* initial: wenn Cookie-Bar sichtbar, CTA liften */
-if (cookieBar && getComputedStyle(cookieBar).display !== "none") {
-  liftCTA(true);
-}
+// Smooth Scroll (Buttons)
+function scrollToId(id){ const el = document.getElementById(id); if(el){ el.scrollIntoView({behavior:"smooth"}); } }
 
-/* Active Nav / Scrollspy */
-const sectionIds = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
-const navLinks = $$("#mainNav .nav-link");
-const mobileLinks = $$("#mobileMenu .mobile-link");
-const markActive = (id)=>{
-  [...navLinks, ...mobileLinks].forEach(l=>{
-    const match = l.getAttribute("data-target") === id;
-    l.classList.toggle("text-yellow-500", match);
-    l.classList.toggle("font-bold", match);
-  });
-};
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      markActive(entry.target.id);
-    }
-  });
-},{ rootMargin:"-40% 0px -50% 0px", threshold:0.01 });
-sectionIds.forEach(id=>{
-  const el = document.getElementById(id);
-  if(el) io.observe(el);
-});
+// Burger & Mobile-Navigation
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("mobileMenu");
+  const overlay = document.getElementById("mobileOverlay");
 
-/* Reveal on scroll (smooth-in) */
-const revealTargets = [
-  ...$$(".section"),
-  ...$$(".card"),
-  ...$$(".faq-item"),
-  $("#tsViewport")
-].filter(Boolean);
-// initial: alle als "reveal" markieren
-revealTargets.forEach(el => el.classList.add("reveal"));
-const revealIO = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-      revealIO.unobserve(entry.target); // einmalig animieren
-    }
-  });
-},{ rootMargin:"-10% 0px -10% 0px", threshold:0.01 });
-revealTargets.forEach(el => revealIO.observe(el));
+  function closeMenu(){ menu.classList.add("hidden"); overlay.classList.add("hidden"); }
+  function openMenu(){ menu.classList.remove("hidden"); overlay.classList.remove("hidden"); }
 
-/* FAQ Accordion (ein Panel offen) */
-(function(){
-  const items = Array.from(document.querySelectorAll('#faqList .faq-item'));
-  if(!items.length) return;
+  burger && burger.addEventListener("click", () => menu.classList.contains("hidden") ? openMenu() : closeMenu());
+  overlay && overlay.addEventListener("click", closeMenu);
 
-  const setMaxH = (panel, open) => {
-    if(open){
-      panel.classList.add('open');
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-    } else {
-      panel.classList.remove('open');
-      panel.style.maxHeight = '0px';
-    }
-  };
-
-  items.forEach(it => {
-    const btn = it.querySelector('.faq-toggle');
-    const panel = it.querySelector('.faq-panel');
-    setMaxH(panel, false);
-    btn.addEventListener('click', () => {
-      const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-      // close all
-      items.forEach(other => {
-        const b = other.querySelector('.faq-toggle');
-        const p = other.querySelector('.faq-panel');
-        b.setAttribute('aria-expanded','false');
-        other.removeAttribute('aria-current');
-        other.querySelector('.chev')?.classList.remove('rotate-180');
-        setMaxH(p, false);
-      });
-
-      // open clicked (if it was closed)
-      if(!isOpen){
-        btn.setAttribute('aria-expanded','true');
-        it.setAttribute('aria-current','open');
-        it.querySelector('.chev')?.classList.add('rotate-180');
-        setMaxH(panel, true);
-      }
+  document.querySelectorAll(".mobile-link, .nav-link, .cta-btn").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      const target = e.currentTarget.getAttribute("data-target");
+      if (target) { scrollToId(target); }
+      closeMenu();
     });
   });
-})();
+});
 
-/* Testimonials – 3er Carousel, auto alle 5s */
-(function(){
-  const viewport = $("#tsViewport");
-  const track = $("#tsTrack");
-  if(!viewport || !track) return;
+// Cookie-Bar + CTA-Lift
+document.addEventListener("DOMContentLoaded", () => {
+  const bar = document.getElementById("cookieBar");
+  const ok = document.getElementById("cookieOk");
+  const cta = document.getElementById("stickyCta");
 
-  const groups = $$("#tsTrack .ts-group");
+  function hideBar(){
+    if (bar) bar.style.display = "none";
+    if (cta) cta.classList.remove("cta-lift");
+  }
+  function showBar(){
+    if (bar) bar.style.display = "flex";
+    if (cta) cta.classList.add("cta-lift");
+  }
+
+  // Einfache Persistenz
+  if (localStorage.getItem("cookiesAccepted") === "1"){ hideBar(); }
+  else { showBar(); }
+
+  ok && ok.addEventListener("click", ()=>{
+    localStorage.setItem("cookiesAccepted","1");
+    hideBar();
+  });
+
+  // Sticky CTA scrollt zu Kontakt
+  cta && cta.addEventListener("click", ()=> scrollToId("contact"));
+});
+
+// Scrollspy (aktiviert aktuelles Menü-Item)
+document.addEventListener("DOMContentLoaded", () => {
+  const links = Array.from(document.querySelectorAll("#mainNav .nav-link"));
+  const sections = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"]
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  const byId = id => links.find(l => l.getAttribute("data-target") === id);
+
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if (entry.isIntersecting){
+        const id = entry.target.id;
+        links.forEach(l => l.classList.remove("text-yellow-500","font-bold"));
+        const active = byId(id);
+        if (active){ active.classList.add("text-yellow-500","font-bold"); }
+      }
+    });
+  }, { root:null, threshold:0.5 });
+
+  sections.forEach(sec => obs.observe(sec));
+});
+
+// FAQ Accordion
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".faq-item .faq-q").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const item = btn.closest(".faq-item");
+      item.classList.toggle("open");
+    });
+  });
+});
+
+// Testimonials Carousel – 3 gleichzeitig, Auto-Slide 5s, sanftes Schieben
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById('tsTrack');
+  if (!track) return;
+
+  const slides = Array.from(track.querySelectorAll('.ts-slide'));
+  const dots = Array.from(document.querySelectorAll('.ts-dot'));
+  const total = slides.length;
   let index = 0;
-  const total = groups.length; // 3
+  let timer = null;
 
-  const applyTransform = () => {
-    const offset = -(index % total) * 100; // 0, -100, -200
-    track.style.transform = `translateX(${offset}%)`;
-  };
+  function setActive(i){
+    index = (i + total) % total;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((d, di) => d.classList.toggle('active', di === index));
+  }
+  function start(){ stop(); timer = setInterval(()=> setActive(index+1), 5000); }
+  function stop(){ if (timer) clearInterval(timer); }
 
-  // Auto‑Rotate alle 5 Sekunden
-  let timer = setInterval(()=>{ index++; applyTransform(); }, 5000);
+  setActive(0); start();
 
-  // Pause bei Hover (Desktop)
-  viewport.addEventListener("mouseenter", ()=> clearInterval(timer));
-  viewport.addEventListener("mouseleave", ()=>{
-    clearInterval(timer);
-    timer = setInterval(()=>{ index++; applyTransform(); }, 5000);
-  });
+  track.addEventListener('mouseenter', stop);
+  track.addEventListener('mouseleave', start);
+  dots.forEach((dot, di)=> dot.addEventListener('click', ()=>{ setActive(di); start(); }));
 
-  // Swipe (Mobile)
-  let startX = null;
-  viewport.addEventListener("touchstart",(e)=>{ startX = e.touches[0].clientX; }, {passive:true});
-  viewport.addEventListener("touchmove",(e)=>{
-    if(startX === null) return;
-    const dx = e.touches[0].clientX - startX;
-    if(Math.abs(dx) > 40){
-      if(dx < 0) index++; else index--;
-      applyTransform();
-      startX = null;
-    }
-  }, {passive:true});
-
-  // Initial
-  applyTransform();
-})();
-
-/* Dark Toggle (optional) */
-const darkToggle = $("#darkToggle");
-if(darkToggle){
-  let dark = true;
-  darkToggle.addEventListener("click", ()=>{
-    dark = !dark;
-    document.body.classList.toggle("bg-white", !dark);
-    document.body.classList.toggle("text-black", !dark);
-    darkToggle.textContent = dark ? "🌙" : "☀️";
-  });
-}
-
-/* Sticky CTA click scroll */
-stickyCta?.addEventListener("click", ()=> scrollToId("contact"));
+  window.addEventListener('resize', ()=> setActive(index));
+});
