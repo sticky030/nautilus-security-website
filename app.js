@@ -1,117 +1,205 @@
-// AOS
+/* ========= AOS Init ========= */
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.AOS) AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
+  if (window.AOS) AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
 });
 
-// Jahr im Footer
-document.getElementById("year").textContent = new Date().getFullYear();
+/* ========= Jahr im Footer ========= */
+document.addEventListener("DOMContentLoaded", () => {
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+});
 
-// Burger / Mobile
-const burger = document.getElementById("burger");
-const mobileMenu = document.getElementById("mobileMenu");
-const mobileOverlay = document.getElementById("mobileOverlay");
-if (burger) {
-  burger.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-    mobileOverlay.classList.toggle("hidden");
+/* ========= Burger-Menü Mobile ========= */
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.getElementById("burger");
+  const overlay = document.getElementById("mobileOverlay");
+  const menu = document.getElementById("mobileMenu");
+
+  const closeMenu = () => {
+    menu.classList.add("hidden");
+    overlay.classList.add("hidden");
+  };
+  const openMenu = () => {
+    menu.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+  };
+
+  burger && burger.addEventListener("click", () => {
+    if (menu.classList.contains("hidden")) openMenu(); else closeMenu();
   });
-}
-if (mobileOverlay) {
-  mobileOverlay.addEventListener("click", () => {
-    mobileMenu.classList.add("hidden");
-    mobileOverlay.classList.add("hidden");
+  overlay && overlay.addEventListener("click", closeMenu);
+
+  // Mobile Links scrollen + schließen
+  menu?.querySelectorAll(".mobile-link").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-target");
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+      closeMenu();
+    });
   });
-}
-document.querySelectorAll(".mobile-link").forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    const id = btn.getAttribute("data-target");
+});
+
+/* ========= Smooth Scroll für Desktop-Navigation & CTAs ========= */
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.getElementById("mainNav");
+  nav?.querySelectorAll(".nav-link").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-target");
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  document.querySelectorAll(".cta-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-target");
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  const stickyCta = document.getElementById("stickyCta");
+  stickyCta && stickyCta.addEventListener("click", () => {
+    const el = document.getElementById("contact");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+/* ========= Cookie-Bar & CTA-Abstand ========= */
+document.addEventListener("DOMContentLoaded", () => {
+  const bar = document.getElementById("cookieBar");
+  const ok = document.getElementById("cookieOk");
+  const cta = document.getElementById("stickyCta");
+
+  const setLift = (on) => {
+    if (!cta) return;
+    if (on) cta.classList.add("cta-lift");
+    else cta.classList.remove("cta-lift");
+  };
+
+  if (bar) {
+    setLift(true); // solange Cookie-Bar sichtbar ist
+    ok?.addEventListener("click", () => {
+      bar.style.display = "none";
+      setLift(false);
+    });
+  }
+});
+
+/* ========= Scrollspy (aktiver Menüpunkt wird gelb) ========= */
+document.addEventListener("DOMContentLoaded", () => {
+  const ids = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
+  const nav = document.getElementById("mainNav");
+  const links = nav ? Array.from(nav.querySelectorAll(".nav-link")) : [];
+
+  const setActive = (id) => {
+    links.forEach(l => l.classList.remove("active"));
+    const btn = links.find(b => b.getAttribute("data-target") === id);
+    if (btn) btn.classList.add("active");
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    // der, der am meisten im Viewport ist, gewinnt
+    let best = null, maxRatio = 0;
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > maxRatio) {
+        maxRatio = e.intersectionRatio;
+        best = e.target;
+      }
+    });
+    if (best && best.id) setActive(best.id);
+  }, { root: null, threshold: [0.25, 0.5, 0.75] });
+
+  ids.forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({behavior:"smooth"});
-    mobileMenu.classList.add("hidden");
-    mobileOverlay.classList.add("hidden");
+    if (el) observer.observe(el);
   });
 });
 
-// Smooth Scroll (Desktop Nav + CTA)
-function scrollToId(id){ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:"smooth"}); }
-document.querySelectorAll("#mainNav .nav-link, .cta-btn").forEach(btn=>{
-  btn.addEventListener("click", ()=> scrollToId(btn.getAttribute("data-target")));
-});
+/* ========= FAQ – sanftes Accordion ========= */
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".faq-item").forEach(item => {
+    const btn = item.querySelector(".faq-btn");
+    const panel = item.querySelector(".faq-panel");
+    const icon = item.querySelector(".faq-icon");
+    if (!btn || !panel) return;
 
-// Sticky CTA liften, wenn Cookiebar sichtbar
-const cookieBar = document.getElementById("cookieBar");
-const stickyCta = document.getElementById("stickyCta");
-const cookieOk = document.getElementById("cookieOk");
-function updateCtaLift(){
-  if (!cookieBar || !stickyCta) return;
-  const styles = getComputedStyle(cookieBar);
-  const isVisible = styles.display !== "none" && cookieBar.offsetHeight > 0;
-  stickyCta.classList.toggle("cta-lift", isVisible);
-}
-updateCtaLift();
-if (cookieOk) cookieOk.addEventListener("click", ()=>{
-  cookieBar.style.display = "none";
-  updateCtaLift();
-});
+    const close = () => {
+      item.classList.remove("open");
+      panel.style.maxHeight = "0px";
+      if (icon) icon.textContent = "+";
+    };
+    const open = () => {
+      item.classList.add("open");
+      panel.style.maxHeight = panel.scrollHeight + "px";
+      if (icon) icon.textContent = "–";
+    };
 
-// Active Section Highlight
-const sectionIds = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    const id = entry.target.id;
-    const link = document.querySelector(`#mainNav .nav-link[data-target="${id}"]`);
-    if (link) {
-      if (entry.isIntersecting) link.classList.add("active");
-      else link.classList.remove("active");
-    }
-  });
-},{ root:null, rootMargin:"-50% 0px -50% 0px", threshold:0 });
-sectionIds.forEach(id=>{ const el=document.getElementById(id); if(el) observer.observe(el); });
+    btn.addEventListener("click", () => {
+      if (item.classList.contains("open")) close(); else open();
+    });
 
-// FAQ Accordion
-document.querySelectorAll(".faq-item").forEach(item=>{
-  const q = item.querySelector(".faq-q");
-  q.addEventListener("click", ()=>{
-    item.classList.toggle("open");
+    // Start zu
+    close();
   });
 });
 
-// Testimonials – 3 Karten pro Slide, Auto alle 5s, smooth translate
-(function initTestimonials(){
+/* ========= Testimonials – 3 gleichzeitig, Auto-Slide alle 5s ========= */
+document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("tsTrack");
-  if(!track) return;
-  const totalCards = track.children.length; // 9
-  const perSlide = 3;
-  const slides = Math.ceil(totalCards / perSlide); // 3
-  let index = 0;
+  if (!track) return;
 
-  function apply() {
-    const gap = 24; // Tailwind gap-6 ≈ 24px
-    const cardWidth = track.children[0].getBoundingClientRect().width;
-    const viewportWidth = (cardWidth * perSlide) + (gap * (perSlide - 1));
-    track.style.transform = `translateX(-${index * (viewportWidth + gap)}px)`;
+  const slides = Array.from(track.querySelectorAll(".ts-slide"));
+  let current = 0;
+  const total = slides.length;
+
+  const go = (idx) => {
+    current = (idx + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+  };
+
+  // Auto alle 5 Sekunden
+  let timer = setInterval(() => go(current + 1), 5000);
+
+  // Bei Tab-Wechsel anhalten / fortsetzen
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { clearInterval(timer); }
+    else { timer = setInterval(() => go(current + 1), 5000); }
+  });
+
+  // Resize-Sicherheit (Layout bleibt prozentbasiert, aber wir resetten die Transform)
+  window.addEventListener("resize", () => go(current));
+});
+
+/* ========= (Optional) Form-Submit-Stub – falls EmailJS noch nicht konfiguriert ist ========= */
+document.addEventListener("DOMContentLoaded", () => {
+  const contact = document.getElementById("contactForm");
+  const contactStatus = document.getElementById("contactStatus");
+  if (contact) {
+    contact.addEventListener("submit", (e) => {
+      e.preventDefault();
+      // Hier könntest du EmailJS integrieren; wir zeigen Feedback:
+      if (contactStatus) {
+        contactStatus.textContent = "Vielen Dank! Wir melden uns zeitnah.";
+        contactStatus.style.color = "#f59e0b";
+      }
+      contact.reset();
+    });
   }
 
-  // Initial after layout
-  setTimeout(apply, 0);
-  window.addEventListener("resize", apply);
-
-  setInterval(()=>{
-    index = (index + 1) % slides;
-    apply();
-  }, 5000);
-})();
-
-// Kontakt & Karriere – (EmailJS ggf. später)
-document.getElementById("contactForm")?.addEventListener("submit", (e)=>{
-  e.preventDefault();
-  const status = document.getElementById("contactStatus");
-  status.textContent = "Danke! Wir melden uns kurzfristig.";
-  e.target.reset();
-});
-document.getElementById("careerForm")?.addEventListener("submit", (e)=>{
-  e.preventDefault();
-  const status = document.getElementById("careerStatus");
-  status.textContent = "Bewerbung gesendet. Wir melden uns zeitnah.";
-  e.target.reset();
+  const career = document.getElementById("careerForm");
+  const careerStatus = document.getElementById("careerStatus");
+  if (career) {
+    career.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (careerStatus) {
+        careerStatus.textContent = "Bewerbung gesendet! Wir melden uns zeitnah.";
+        careerStatus.style.color = "#f59e0b";
+      }
+      career.reset();
+      const file = document.getElementById("cvFile");
+      if (file) file.value = "";
+    });
+  }
 });
