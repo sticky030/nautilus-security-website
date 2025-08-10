@@ -4,192 +4,195 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nautilus Security – Sicherheit mit System</title>
-
-  <!-- Meta -->
-  <meta name="description" content="Nautilus Security – Sicherheitsdienst in Berlin & Brandenburg: Objektschutz, Baustellenbewachung, Eventschutz, Empfangs- und Revierdienste." />
-  <meta name="keywords" content="Sicherheitsdienst Berlin, Objektschutz, Eventschutz, Baustellenbewachung, Revierdienst, Doorman" />
-  <meta property="og:title" content="Nautilus Security – Sicherheit mit System" />
-  <meta property="og:description" content="Moderne, diskrete und effektive Sicherheitslösungen – maßgeschneidert für Ihr Projekt." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="./logo-gold-transparent.png" />
-
-  <!-- UI -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Nautilus Security – Sicherheitsdienst in Berlin & Brandenburg: Objektschutz, Baustellenbewachung, Eventschutz, Empfangsdienste, Beratung.">
+  <meta name="keywords" content="Sicherheitsdienst Berlin, Objektschutz, Eventschutz, Baustellenbewachung, Revierdienst, Doorman">
+  <meta property="og:title" content="Nautilus Security – Sicherheit mit System">
+  <meta property="og:description" content="Moderne, diskrete und effektive Sicherheitslösungen – maßgeschneidert für Ihr Projekt.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./logo-gold-transparent.png">
+  <link rel="icon" href="./logo-gold-transparent.png" type="image/png"/>
   <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-[#0a0f1c] text-white font-sans">
+<body class="min-h-screen font-sans bg-[#0a0f1c] text-white scroll-smooth">
 
-  <!-- Header -->
-  <header id="site-header" class="sticky top-0 z-50 bg-[#0a0f1c] border-b border-yellow-500">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <!-- NAV-Logo klein -->
-        <img src="./logo-gold-transparent.png" alt="Nautilus Security Logo" class="w-10 h-10" />
-        <span class="font-bold tracking-wide text-lg">Nautilus Security</span>
+  <!-- Header / Navigation -->
+  <header id="site-header" class="border-b border-yellow-500 bg-[#0a0f1c] p-4 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center relative">
+      <div class="flex items-center space-x-3">
+        <img src="./logo-gold-transparent.png" alt="Logo Nautilus Security" class="w-10 h-10" />
+        <h1 class="text-xl font-bold tracking-wide">Nautilus Security</h1>
       </div>
 
-      <nav id="mainNav" class="hidden md:flex gap-5 text-sm">
-        <button class="nav-link" data-target="home">Start</button>
-        <button class="nav-link" data-target="about">Über uns</button>
-        <button class="nav-link" data-target="services">Leistungen</button>
-        <button class="nav-link" data-target="why">Warum wir</button>
-        <button class="nav-link" data-target="values">Unsere Werte</button>
-        <button class="nav-link" data-target="team">Team</button>
-        <button class="nav-link" data-target="jobs">Karriere</button>
-        <button class="nav-link" data-target="faq">FAQ</button>
-        <button class="nav-link" data-target="testimonials">Kundenstimmen</button>
-        <button class="nav-link" data-target="contact">Kontakt</button>
+      <nav class="hidden md:flex space-x-4 text-sm" id="mainNav">
+        <button data-target="home" class="nav-link hover:text-yellow-500 transition">Start</button>
+        <button data-target="about" class="nav-link hover:text-yellow-500 transition">Über uns</button>
+        <button data-target="services" class="nav-link hover:text-yellow-500 transition">Leistungen</button>
+        <button data-target="why" class="nav-link hover:text-yellow-500 transition">Warum wir</button>
+        <button data-target="values" class="nav-link hover:text-yellow-500 transition">Unsere Werte</button>
+        <button data-target="team" class="nav-link hover:text-yellow-500 transition">Team</button>
+        <button data-target="jobs" class="nav-link hover:text-yellow-500 transition">Karriere</button>
+        <button data-target="faq" class="nav-link hover:text-yellow-500 transition">FAQ</button>
+        <button data-target="testimonials" class="nav-link hover:text-yellow-500 transition">Kundenstimmen</button>
+        <button data-target="contact" class="nav-link hover:text-yellow-500 transition">Kontakt</button>
       </nav>
 
-      <button id="burger" class="md:hidden text-yellow-500 text-2xl" aria-label="Navigation öffnen">☰</button>
-    </div>
+      <div class="md:hidden">
+        <button id="burger" class="text-yellow-500 text-2xl" aria-label="Navigation öffnen">☰</button>
+      </div>
 
-    <!-- Mobile -->
-    <div id="mobileMenu" class="hidden md:hidden border-t border-yellow-500">
-      <div class="px-4 py-3 flex flex-col gap-2">
-        <button class="mobile-link" data-target="home">Start</button>
-        <button class="mobile-link" data-target="about">Über uns</button>
-        <button class="mobile-link" data-target="services">Leistungen</button>
-        <button class="mobile-link" data-target="why">Warum wir</button>
-        <button class="mobile-link" data-target="values">Unsere Werte</button>
-        <button class="mobile-link" data-target="team">Team</button>
-        <button class="mobile-link" data-target="jobs">Karriere</button>
-        <button class="mobile-link" data-target="faq">FAQ</button>
-        <button class="mobile-link" data-target="testimonials">Kundenstimmen</button>
-        <button class="mobile-link" data-target="contact">Kontakt</button>
+      <!-- Mobile -->
+      <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-60 z-40"></div>
+      <div id="mobileMenu" class="hidden absolute top-16 left-0 w-full bg-[#0a0f1c] border-t border-yellow-500 md:hidden flex-col text-center py-4 z-50 animate-slide-down">
+        <button data-target="home" class="mobile-link py-2">Start</button>
+        <button data-target="about" class="mobile-link py-2">Über uns</button>
+        <button data-target="services" class="mobile-link py-2">Leistungen</button>
+        <button data-target="why" class="mobile-link py-2">Warum wir</button>
+        <button data-target="values" class="mobile-link py-2">Unsere Werte</button>
+        <button data-target="team" class="mobile-link py-2">Team</button>
+        <button data-target="jobs" class="mobile-link py-2">Karriere</button>
+        <button data-target="faq" class="mobile-link py-2">FAQ</button>
+        <button data-target="testimonials" class="mobile-link py-2">Kundenstimmen</button>
+        <button data-target="contact" class="mobile-link py-2">Kontakt</button>
       </div>
     </div>
   </header>
 
   <!-- Cookie-Bar -->
-  <div id="cookieBar" class="fixed bottom-0 left-0 w-full bg-black/85 text-sm px-6 py-4 z-50 flex items-center justify-between">
+  <div id="cookieBar" class="fixed bottom-0 left-0 w-full bg-black bg-opacity-90 text-sm text-white px-6 py-4 z-50 flex justify-between items-center">
     <p>Diese Website verwendet Cookies. Durch die Nutzung stimmen Sie der Datenschutzerklärung zu.</p>
-    <button id="cookieOk" class="btn-primary">Verstanden</button>
+    <button id="cookieOk" class="bg-yellow-500 text-black px-4 py-1 rounded hover:bg-yellow-400 ml-4">Verstanden</button>
   </div>
 
   <main>
-
     <!-- HERO -->
-    <section id="home" class="section text-center pt-20">
-      <!-- Großes, transparentes Logo -->
-      <img src="./logo-gold-transparent.png" alt="Nautilus Security Logo" class="hero-logo mx-auto" />
-      <h1 class="section-title mt-6">Ihre Sicherheit ist unsere Mission</h1>
-      <p class="muted max-w-xl mx-auto">
-        Nautilus Security steht für moderne, diskrete und effektive Sicherheitslösungen – maßgeschneidert auf Ihre Anforderungen.
-      </p>
-      <div class="mt-7">
-        <button class="btn-primary" data-target="contact">Jetzt Kontakt aufnehmen</button>
+    <section id="home" class="h-screen flex items-center justify-center text-center px-4 bg-gradient-to-b from-[#0b1222] via-[#0a0f1c] to-[#0a0f1c]">
+      <div>
+        <img src="./logo-gold-transparent.png" alt="Nautilus Security Logo" class="hero-logo mx-auto mb-6 drop-shadow-xl" />
+        <h2 class="text-4xl font-bold text-yellow-500 mb-4">Ihre Sicherheit ist unsere Mission</h2>
+        <p class="text-lg max-w-xl mx-auto">Moderne, diskrete und effektive Sicherheitslösungen – maßgeschneidert auf Ihre Anforderungen.</p>
+        <div class="mt-8">
+          <button data-target="contact" class="cta-btn bg-yellow-500 text-black px-6 py-3 rounded-full text-lg shadow-lg hover:bg-yellow-400 transition-transform transform hover:scale-105">
+            Jetzt Kontakt aufnehmen
+          </button>
+        </div>
       </div>
     </section>
 
-    <!-- ÜBER UNS -->
+    <!-- Über uns -->
     <section id="about" class="section">
       <h2 class="section-title">Über uns</h2>
+      <p class="muted mb-4">
+        Die Nautilus Security UG in Berlin ist Ihr Partner für professionelle Sicherheitsdienstleistungen – vom Objektschutz bis zu Events.
+      </p>
       <p class="muted">
-        Nautilus Security UG ist Ihr Partner für professionelle Sicherheitsdienstleistungen in Berlin & Brandenburg.
-        Wir entwickeln klare Schutzkonzepte für Unternehmen, Baustellen, Events und private Auftraggeber.
+        Unser Anspruch: zuverlässiger, respektvoller und vorausschauender Schutz. Qualifizierte Teams nach §34a GewO, regelmäßige Schulungen, digitale Dokumentation.
       </p>
     </section>
 
-    <!-- LEISTUNGEN -->
+    <!-- Leistungen -->
     <section id="services" class="section">
       <h2 class="section-title">Unsere Leistungen</h2>
-      <ul class="list-disc pl-6 space-y-2 text-slate-300">
+      <ul class="list-disc pl-6 space-y-3 text-gray-300">
         <li>Objektschutz & Baustellenbewachung</li>
-        <li>Revier- & Streifendienste (GPS‑dokumentiert)</li>
-        <li>Event- & Veranstaltungsschutz</li>
-        <li>Empfangs- und Doorman‑Services</li>
-        <li>Personenschutz</li>
-        <li>Sicherheitsberatung & Prävention</li>
+        <li>Revier- und Streifendienste (GPS‑Protokolle)</li>
+        <li>Event- und Veranstaltungsschutz</li>
+        <li>Empfangs- und Doorman-Services</li>
+        <li>Personenschutz (fallbezogen)</li>
+        <li>Sicherheitsberatung & präventive Maßnahmen</li>
       </ul>
     </section>
 
-    <!-- WARUM WIR -->
+    <!-- Warum wir -->
     <section id="why" class="section">
-      <h2 class="section-title">Warum Nautilus?</h2>
-      <ul class="space-y-3 text-slate-300">
-        <li>✅ Qualifiziertes Personal mit §34a‑Nachweis</li>
-        <li>✅ Klare Kommunikation & feste Ansprechpartner</li>
-        <li>✅ 24/7 einsatzbereit in Berlin & Brandenburg</li>
-        <li>✅ Digitale Protokolle & moderne Ausstattung</li>
-        <li>✅ Diskretion & Vertraulichkeit</li>
+      <h2 class="section-title">Warum wir</h2>
+      <ul class="space-y-3 text-gray-300">
+        <li>✅ Qualifiziertes Personal (§34a), feste Ansprechpartner</li>
+        <li>✅ 24/7 flexibel in Berlin & Brandenburg</li>
+        <li>✅ Digitale Berichte, klare Prozesse, Diskretion</li>
+        <li>✅ Zusatzzertifikate: Erste Hilfe, Brandschutzhelfer, ASG</li>
+        <li>✅ Mehrsprachige Teams auf Wunsch</li>
       </ul>
     </section>
 
-    <!-- WERTE -->
+    <!-- Werte -->
     <section id="values" class="section">
       <h2 class="section-title text-center">Unsere Werte</h2>
-      <div class="grid md:grid-cols-3 gap-6 text-center mt-6">
+      <div class="grid md:grid-cols-3 gap-6 text-center text-gray-300 mt-6">
         <div class="card">
-          <div class="text-4xl mb-2">🔒</div>
-          <h3 class="card-title">Vertrauen</h3>
-          <p class="muted">Diskret, loyal, zuverlässig – das Fundament jeder Zusammenarbeit.</p>
+          <div class="text-5xl mb-2">🔒</div>
+          <div class="card-title">Vertrauen</div>
+          <p>Verschwiegenheit, Loyalität und maximale Verlässlichkeit.</p>
         </div>
         <div class="card">
-          <div class="text-4xl mb-2">🎯</div>
-          <h3 class="card-title">Präzision</h3>
-          <p class="muted">Sorgfältige Planung, klare Abläufe und saubere Dokumentation.</p>
+          <div class="text-5xl mb-2">🎯</div>
+          <div class="card-title">Präzision</div>
+          <p>Geplante Einsätze, saubere Dokumentation, klare Übergaben.</p>
         </div>
         <div class="card">
-          <div class="text-4xl mb-2">⚡</div>
-          <h3 class="card-title">Reaktionsfähigkeit</h3>
-          <p class="muted">Schnell erreichbar und strukturiert – auch im Ernstfall.</p>
+          <div class="text-5xl mb-2">⚡</div>
+          <div class="card-title">Reaktionsfähigkeit</div>
+          <p>Schnell vor Ort, strukturiert im Handeln – im Alltag & Ernstfall.</p>
         </div>
       </div>
     </section>
 
-    <!-- TEAM -->
+    <!-- Team -->
     <section id="team" class="section">
       <h2 class="section-title text-center">Unser Team</h2>
       <div class="grid md:grid-cols-3 gap-6 text-center mt-8">
         <div class="card">
           <div class="avatar"></div>
-          <h3 class="card-title">Philipp D. B.</h3>
-          <p class="muted">Geschäftsführer. Verantwortet Strategie, Qualität & Kundenzufriedenheit.</p>
+          <div class="card-title">Philipp D. B.</div>
+          <p class="muted">Geschäftsführer</p>
         </div>
         <div class="card">
           <div class="avatar"></div>
-          <h3 class="card-title">Beatrix K.</h3>
-          <p class="muted">Assistentin der Geschäftsführung & Personalmanagement. Planung, Onboarding, Kommunikation.</p>
+          <div class="card-title">Beatrix K.</div>
+          <p class="muted">Assistentin der Geschäftsführung & Personalmanagement</p>
         </div>
         <div class="card">
           <div class="avatar"></div>
-          <h3 class="card-title">Justin G.</h3>
-          <p class="muted">Einsatzkoordinator. Schnittstelle zwischen Kunden, Disposition und Team.</p>
+          <div class="card-title">Justin G.</div>
+          <p class="muted">Einsatzkoordinator</p>
         </div>
       </div>
     </section>
 
-    <!-- KARRIERE -->
+    <!-- Karriere -->
     <section id="jobs" class="section">
       <h2 class="section-title text-center">Karriere bei Nautilus</h2>
-      <p class="muted text-center max-w-2xl mx-auto">
-        Du bist zuverlässig, souverän und teamorientiert? Dann bewirb dich jetzt.
-      </p>
-      <div class="text-center mt-6">
-        <button class="btn-primary" data-target="career-form">Jetzt bewerben</button>
+      <p class="muted text-center mb-6">Du hast Erfahrung im Sicherheitsdienst, bist zuverlässig und teamfähig? Bewirb dich jetzt.</p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-300 max-w-2xl mx-auto">
+        <li>§34a Sachkundeprüfung</li>
+        <li>Gepflegtes Auftreten & Deutschkenntnisse</li>
+        <li>Bereitschaft zu Nacht- & Wochenendschichten</li>
+        <li>Von Vorteil: Erste Hilfe, Brandschutzhelfer, ASG, Fremdsprachen</li>
+      </ul>
+      <div class="text-center mt-8">
+        <button data-target="career-form" class="btn-primary">Jetzt bewerben</button>
       </div>
     </section>
 
-    <!-- ONLINE-BEWERBUNG -->
+    <!-- Online-Bewerbung -->
     <section id="career-form" class="section">
-      <h3 class="section-title">Online‑Bewerbung</h3>
-      <form id="careerForm" class="grid gap-4 max-w-2xl">
+      <h3 class="section-title">Online-Bewerbung</h3>
+      <form id="careerForm" class="space-y-4 max-w-3xl">
         <div class="grid md:grid-cols-2 gap-4">
-          <input class="input" name="name" type="text" placeholder="Vollständiger Name" required />
-          <input class="input" name="email" type="email" placeholder="E‑Mail" required />
+          <input name="name" type="text" placeholder="Vollständiger Name" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+          <input name="email" type="email" placeholder="E-Mail" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
         </div>
         <div class="grid md:grid-cols-2 gap-4">
-          <input class="input" name="phone" type="tel" placeholder="Telefon (optional)" />
-          <input class="input" name="position" type="text" placeholder="Gewünschte Position / Bereich" required />
+          <input name="phone" type="tel" placeholder="Telefon (optional)" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" />
+          <input name="position" type="text" placeholder="Gewünschte Position / Bereich" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
         </div>
-        <textarea class="input" name="message" rows="4" placeholder="Kurz zu Ihrer Erfahrung..."></textarea>
+        <textarea name="message" placeholder="Kurz zu Ihrer Erfahrung..." rows="4" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white"></textarea>
         <div>
-          <label class="text-sm block mb-1">Lebenslauf (PDF, optional)</label>
-          <input id="cvFile" type="file" accept="application/pdf" class="text-sm text-slate-300" />
+          <label class="block text-sm mb-2">Lebenslauf (PDF, optional)</label>
+          <input id="cvFile" type="file" accept="application/pdf" class="w-full text-sm" />
         </div>
-        <button class="btn-primary" type="submit">Bewerbung senden</button>
-        <p id="careerStatus" class="text-sm muted"></p>
+        <button type="submit" class="btn-primary">Bewerbung senden</button>
+        <p id="careerStatus" class="text-sm mt-2"></p>
       </form>
     </section>
 
@@ -199,49 +202,59 @@
 
       <details class="faq mt-3">
         <summary>Welche Einsatzgebiete decken Sie ab?</summary>
-        <p>Berlin & Brandenburg – von Objektschutz bis Eventschutz.</p>
+        <p>Berlin & Brandenburg – Objekte, Baustellen, Revierfahrten, Events sowie Empfang/Doorman. Auf Anfrage prüfen wir weitere Standorte.</p>
       </details>
 
       <details class="faq mt-3">
         <summary>Wie schnell können Einsätze starten?</summary>
-        <p>Oft innerhalb von 24 Stunden. Einfach anfragen.</p>
+        <p>Oft innerhalb von 24 Stunden. Bei dringenden Fällen priorisieren wir die Disposition und liefern kurzfristig ein Einsatzkonzept.</p>
       </details>
 
       <details class="faq mt-3">
         <summary>Bieten Sie bewaffnete Dienste an?</summary>
-        <p>Auf Anfrage mit entsprechend qualifiziertem Personal.</p>
+        <p>Fallabhängig mit entsprechend qualifiziertem Personal nach §7 WaffG und vorheriger Gefährdungsanalyse.</p>
       </details>
 
       <details class="faq mt-3">
-        <summary>Begleiten Sie auch langfristige Projekte?</summary>
-        <p>Ja. Mit festen Ansprechpartnern und klaren Prozessen.</p>
+        <summary>Wie läuft die Einsatzplanung ab?</summary>
+        <p>Bedarfsanalyse → Sicherheitskonzept → Personal- & Schichtplanung → klare Kommunikationswege & digitale Übergaben.</p>
+      </details>
+
+      <details class="faq mt-3">
+        <summary>Wie wird die Qualität der Einsätze sichergestellt?</summary>
+        <p>Regelmäßige Kontrollen, digitale Berichte (optional mit Foto-/Zeitstempel), fester Ansprechpartner, schnelle Eskalationswege.</p>
       </details>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section id="testimonials" class="section">
+    <!-- Testimonials -->
+    <section id="testimonials" class="section bg-[#111827]">
       <h2 class="section-title text-center">Was unsere Kunden sagen</h2>
-
-      <div id="tsViewport" class="mt-6">
+      <div id="tsViewport" class="mt-8">
         <div id="tsTrack"></div>
       </div>
     </section>
 
-    <!-- KONTAKT -->
+    <!-- Kontakt -->
     <section id="contact" class="section">
       <h2 class="section-title">Kontakt aufnehmen</h2>
-      <form id="contactForm" class="grid gap-4 max-w-xl">
-        <input class="input" name="name" type="text" placeholder="Ihr Name" required />
-        <input class="input" name="email" type="email" placeholder="Ihre E‑Mail" required />
-        <textarea class="input" name="message" rows="5" placeholder="Ihre Nachricht..." required></textarea>
-        <button class="btn-primary" type="submit">Absenden</button>
-        <p id="contactStatus" class="text-sm muted"></p>
+      <form id="contactForm" class="space-y-4 max-w-2xl">
+        <input name="name" type="text" placeholder="Ihr Name" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+        <input name="email" type="email" placeholder="Ihre E-Mail" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+        <textarea name="message" placeholder="Ihre Nachricht..." rows="5" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required></textarea>
+        <button type="submit" class="btn-primary">Absenden</button>
+        <p id="contactStatus" class="text-sm mt-2"></p>
       </form>
     </section>
-
   </main>
 
-  <footer class="border-t border-yellow-500 py-4 text-center text-sm text-yellow-500">
+  <!-- Sticky CTA -->
+  <button id="stickyCta"
+    class="sticky-cta fixed bottom-6 right-6 bg-yellow-500 text-black px-5 py-3 rounded-full text-sm shadow-lg hover:bg-yellow-400 transition z-50 animate-bounce">
+    📞 Jetzt anfragen
+  </button>
+
+  <!-- Footer -->
+  <footer class="bg-[#0a0f1c] text-yellow-500 p-4 text-center text-sm border-t border-yellow-500">
     &copy; <span id="year"></span> Nautilus Security UG (haftungsbeschränkt)
     <div class="mt-2 space-x-4 text-yellow-400 text-xs">
       <a href="./impressum.html" class="hover:underline">Impressum</a>
@@ -249,6 +262,6 @@
     </div>
   </footer>
 
-  <script defer src="./app.js"></script>
+  <script src="./app.js" defer></script>
 </body>
 </html>
