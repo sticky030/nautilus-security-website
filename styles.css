@@ -160,3 +160,35 @@ body.bg-white.text-black li{ color:#333 }
 
 /* optional: saubere Kante beim Aufklappen */
 .faq-item.open { overflow: hidden; }
+/* --- FAQ: Trenner-Linie entfernen & sauberes Öffnen --- */
+.faq-item { 
+  overflow: hidden;                 /* verhindert, dass Ränder/Shadow „überstehen“ */
+}
+
+.faq-item .faq-a {
+  border: 0 !important;             /* alle Ränder weg */
+  border-top: 0 !important;         /* falls irgendwo explizit gesetzt */
+  box-shadow: none !important;      /* falls per Shadow ein Strich simuliert wird */
+}
+
+/* Falls ein pseudo-divider verwendet wurde */
+.faq-item::before,
+.faq-item::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Optional: etwas weicheres Ein-/Ausklappen */
+.faq-item .faq-a {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  transition: max-height .35s ease, opacity .25s ease, padding .25s ease;
+}
+.faq-item.open .faq-a {
+  max-height: 500px;   /* ausreichend groß für deine Antworten */
+  opacity: 1;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+}
