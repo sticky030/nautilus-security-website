@@ -147,3 +147,16 @@ body.bg-white.text-black li{ color:#333 }
 }
 
 .faq-a { margin-top: .5rem; }
+/* FAQ: Trenner unter der Frage entfernen, sobald geöffnet */
+.faq-item.open .faq-q {
+  border-bottom: 0 !important;
+}
+
+/* Falls der Trenner als ::after erzeugt wird, auch ausschalten */
+.faq-item.open .faq-q::after {
+  display: none !important;
+  border-bottom: 0 !important;
+}
+
+/* optional: saubere Kante beim Aufklappen */
+.faq-item.open { overflow: hidden; }
