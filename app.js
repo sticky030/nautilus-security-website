@@ -1,96 +1,95 @@
-// Jahr im Footer
-document.getElementById("year").textContent = new Date().getFullYear();
+/* kleine Utilitys */
+.sec-title{ @apply text-3xl font-bold text-yellow-500; }
+.inp{ @apply w-full p-3 rounded bg-gray-800 border border-gray-700 text-white; }
 
-// Smooth nav scroll
-document.querySelectorAll("[data-target]").forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    const id = btn.getAttribute("data-target");
-    const el = document.getElementById(id);
-    if(el){ el.scrollIntoView({behavior:"smooth", block:"start"}); }
-  });
-});
+/* Karten-Styles (entsprechen deinem Look) */
+.card{
+  background:#1f2937; /* slate-800 */
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 6px 20px rgba(0,0,0,.25);
+  border:1px solid rgba(255,215,0,.12);
+}
+.card-elev{ position:relative; transition:transform .25s ease, box-shadow .25s ease; }
+.card-elev:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,0,0,.35), 0 0 0 2px rgba(245,197,24,.18) inset; }
+.card-badge{
+  width:36px;height:36px; border-radius:10px;
+  display:grid;place-items:center;
+  background:rgba(245,197,24,.12); color:#facc15; /* yellow-400 */
+  margin-bottom:10px; font-size:18px;
+}
+.card-title{ font-weight:700; color:#fff; margin-bottom:6px; }
+.card-text{ color:#cbd5e1; line-height:1.5; }
 
-// Cookie Bar + CTA Lift
-(() => {
-  const bar = document.getElementById("cookieBar");
-  const ok  = document.getElementById("cookieOk");
-  const cta = document.getElementById("stickyCta");
-  const hide = () => { bar.style.display="none"; cta.classList.remove("cta-lift"); }
-  if(localStorage.getItem("cookieOk")) hide();
-  else cta.classList.add("cta-lift");
-  ok.addEventListener("click", ()=>{ localStorage.setItem("cookieOk","1"); hide(); });
-})();
+/* Werte-Icons */
+.icon-dot{
+  width:42px;height:42px;border-radius:9999px;
+  display:grid;place-items:center;
+  background:rgba(245,197,24,.12); color:#facc15;
+  margin:0 auto 10px auto; font-size:18px;
+}
 
-/* ===========================
-   FAQ – ganze Frage klickbar,
-   weiches Accordion, single-open
-=========================== */
-(function initFAQ(){
-  const items = [...document.querySelectorAll("#faqList .faq-item")];
-  if(!items.length) return;
+/* Sticky CTA safe-area */
+.sticky-cta{ bottom:calc(env(safe-area-inset-bottom) + 1.5rem); }
+.sticky-cta.cta-lift{ bottom:calc(env(safe-area-inset-bottom) + 6.5rem); }
+@media (max-width:640px){ .cta-lift{ bottom:6.5rem !important } }
 
-  const openItem = (item) => {
-    // single-open: alle anderen schließen
-    items.forEach(it=>{
-      if(it!==item){ it.classList.remove("open"); }
-    });
-    // toggle aktuellen
-    item.classList.toggle("open");
+/* ===== FAQ – komplett überarbeitet ===== */
+#faqList{ list-style:none; padding:0; margin:0; }
+.faq-item{
+  background:#1f2937;
+  border:1px solid rgba(245,197,24,.15);
+  border-radius:14px;
+  overflow:hidden; /* damit nichts herausragt */
+  transition:box-shadow .25s ease, border-color .25s ease, transform .25s ease;
+}
+.faq-item:hover{
+  box-shadow:0 10px 26px rgba(0,0,0,.35), 0 0 0 2px rgba(245,197,24,.18) inset;
+  transform:translateY(-1px);
+}
+.faq-q{
+  width:100%;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px;
+  background:transparent;
+  border:0; outline:0;
+  text-align:left;
+  padding:16px 18px;
+  font-weight:700;
+  color:#e5e7eb; /* gray-200 */
+  cursor:pointer;
+}
+.faq-q .chev{ color:#facc15; transition:transform .25s ease; }
+.faq-item.open .faq-q .chev{ transform:rotate(180deg); }
 
-    // Dynamische max-height (falls Antwort länger ist)
-    const a = item.querySelector(".faq-a");
-    if(!a) return;
-    if(item.classList.contains("open")){
-      a.style.maxHeight = a.scrollHeight + "px";
-    }else{
-      a.style.maxHeight = "0px";
-    }
-  };
+/* Antwort mit smooth height */
+.faq-a{
+  color:#cbd5e1;
+  padding:0 18px; /* Start ohne vertical padding */
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .32s ease, padding .25s ease;
+}
+.faq-item.open .faq-a{
+  padding:10px 18px 16px 18px;               /* weiches Ein-/Ausblenden */
+  max-height:400px; /* genug Platz für kurze Antworten */
+}
 
-  // initial: alle geschlossen
-  items.forEach(item=>{
-    const btn = item.querySelector(".faq-q");
-    // gesamte Karte klickbar: auch Klicks auf die Karte zulassen
-    item.addEventListener("click", (e)=>{
-      // Links in Antworten nicht abfangen
-      if(e.target.closest("a")) return;
-      openItem(item);
-    });
-    // zusätzlich: Button selbst
-    btn && btn.addEventListener("click", (e)=>{ e.preventDefault(); openItem(item); });
-  });
+/* Entfernt jede “Trennlinie”-Optik */
+.faq-q::after, .faq-a::before{ content:none !important; }
 
-  // Recalc height on resize (falls Text umbrechen)
-  window.addEventListener("resize", ()=>{
-    const open = document.querySelector("#faqList .faq-item.open .faq-a");
-    if(open){ open.style.maxHeight = open.scrollHeight + "px"; }
-  });
-})();
+/* Testimonials */
+.ts-card{
+  background:#1f2937; border:1px solid rgba(245,197,24,.12);
+  border-radius:14px; padding:18px; color:#e5e7eb;
+}
+.ts-card .quote{ font-style:italic; }
+.ts-card .author{ margin-top:10px; color:#fbbf24; font-weight:700; }
 
-/* ===========================
-   Testimonials – 3 gleichzeitig, Auto‑Slide alle 5s
-   (entspricht dem gewünschten Verhalten)
-=========================== */
-(function initTestimonials(){
-  const track = document.getElementById("tsTrack");
-  if(!track) return;
-
-  const cards = [...track.children];
-  const groupSize = 3;
-  let index = 0;
-
-  const render = () => {
-    cards.forEach((c,i)=>{
-      const page = Math.floor(i / groupSize);
-      c.style.display = (page === index) ? "block" : "none";
-    });
-  };
-
-  const pages = Math.ceil(cards.length / groupSize);
-  render();
-
-  setInterval(()=>{
-    index = (index + 1) % pages;
-    render();
-  }, 5000);
-})();
+/* Light theme readability fallback (falls du mal togglest) */
+body.bg-white.text-black{ color:#111 }
+body.bg-white.text-black h1, 
+body.bg-white.text-black h2, 
+body.bg-white.text-black h3{ color:#1a1a1a }
+body.bg-white.text-black p, 
+body.bg-white.text-black li{ color:#333 }
