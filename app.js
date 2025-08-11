@@ -77,15 +77,71 @@ const observer = new IntersectionObserver((entries)=>{
 sections.forEach(sec=>sec && observer.observe(sec));
 
 // FAQ smooth accordion
-document.querySelectorAll("#faqList .faq-item").forEach(item=>{
-  const q = item.querySelector(".faq-q");
-  q.addEventListener("click", ()=>{
-    const open = item.classList.contains("open");
-    // Single-open behavior
-    document.querySelectorAll("#faqList .faq-item.open").forEach(i=>i.classList.remove("open"));
-    if (!open) item.classList.add("open");
+/* =========================
+   FAQ – echtes Accordion
+   ========================= */
+(function initAccordion() {
+  const items = document.querySelectorAll(".faq-item");
+  const questions = document.querySelectorAll(".faq-question");
+
+  if (!items.length || !questions.length) return;
+
+  function closeAll(exceptIndex = -1) {
+    items.forEach((item, i) => {
+      if (i === exceptIndex) return;
+      const answer = item.querySelector(".faq-answer");
+      item.setAttribute("aria-expanded", "false");
+      answer.style.maxHeight = "0px";
+      answer.style.opacity = "0";
+    });
+  }
+
+  function toggle(index) {
+    const item = items[index];
+    const answer = item.querySelector(".faq-answer");
+    const isOpen = item.getAttribute("aria-expanded") === "true";
+
+    if (isOpen) {
+      // schließen
+      item.setAttribute("aria-expanded", "false");
+      answer.style.maxHeight = "0px";
+      answer.style.opacity = "0";
+    } else {
+      // erst alle anderen schließen, dann öffnen
+      closeAll(index);
+      item.setAttribute("aria-expanded", "true");
+      // für sanfte Animation zunächst Höhe messen
+      answer.style.maxHeight = answer.scrollHeight + "px";
+      answer.style.opacity = "1";
+    }
+  }
+
+  // Click + Tastatursteuerung
+  questions.forEach((q, i) => {
+    q.setAttribute("role", "button");
+    q.setAttribute("tabindex", "0");
+    q.addEventListener("click", () => toggle(i));
+    q.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle(i);
+      }
+    });
   });
-});
+
+  // Höhe neu berechnen, falls Fonts/Viewport sich ändern
+  window.addEventListener("resize", () => {
+    items.forEach((item) => {
+      if (item.getAttribute("aria-expanded") === "true") {
+        const answer = item.querySelector(".faq-answer");
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+    });
+  });
+
+  // Startzustand: alles zu
+  closeAll(-1);
+})();
 
 // Testimonials: 3-at-a-time slider with smooth slide every 5s
 (function initTestimonials(){
