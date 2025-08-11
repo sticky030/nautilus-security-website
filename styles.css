@@ -105,3 +105,45 @@ body.bg-white.text-black li{ color:#333 }
   margin-top: 0.5rem;
   line-height: 1.5;
 }
+/* FAQ – Card Glow & smoother look */
+.faq-item {
+  background: #0f1627;
+  border: 1px solid #2a3350;
+  transition: box-shadow 220ms ease, border-color 220ms ease, transform 180ms ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(255, 215, 0, 0.45);
+  box-shadow: 0 8px 18px rgba(255, 215, 0, 0.08), inset 0 0 0 1px rgba(255, 215, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.faq-item.open {
+  border-color: rgba(255, 215, 0, 0.55);
+  box-shadow: 0 10px 22px rgba(255, 215, 0, 0.12), inset 0 0 0 1px rgba(255, 215, 0, 0.20);
+}
+
+.faq-q {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  color: #fff;
+  padding-right: 1.75rem;
+}
+
+.faq-q::after {
+  content: "▼";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 280ms ease;
+  opacity: .9;
+}
+
+.faq-item.open .faq-q::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.faq-a { margin-top: .5rem; }
