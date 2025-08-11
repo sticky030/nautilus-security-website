@@ -76,58 +76,15 @@ const observer = new IntersectionObserver((entries)=>{
 },{ rootMargin:"-40% 0px -55% 0px", threshold:0.01 });
 sections.forEach(sec=>sec && observer.observe(sec));
 
-// FAQ smooth accordion (auto-upgrade markup, single-open, soft animation)
 // FAQ smooth accordion – buttery smooth, card glow on open/hover
 (function initFAQ(){
-  const faqSection = document.getElementById("faq");
-  if (!faqSection) return;
-
-  // 1) Container finden: #faqList oder das ursprüngliche .space-y-6
-  const container =
-    faqSection.querySelector("#faqList") ||
-    faqSection.querySelector(".space-y-6") ||
-    faqSection;
-
-  // 2) Items ermitteln (direkte Kinder-DIVs sind dein altes Muster)
-  const rawItems = Array.from(container.children).filter(el => el.tagName === "DIV");
-
-  rawItems.forEach(item => {
-    // Wenn bereits aufgerüstet, weiter
-    if (item.classList.contains("faq-item")) return;
-
-    // Heading (h1–h4) + Antwort (p oder div) finden
-    const heading = item.querySelector("h1, h2, h3, h4");
-    const answer  = item.querySelector("p, div:not(:has(h1,h2,h3,h4))");
-
-    if (!heading || !answer) return;
-
-    // Button aus der Überschrift bauen
-    const btn = document.createElement("button");
-    btn.className = "faq-q w-full text-left font-semibold text-white";
-    btn.innerHTML = heading.innerHTML;
-    heading.replaceWith(btn);
-
-    // Antwort-Wrapper
-    const ansWrap = document.createElement("div");
-    ansWrap.className = "faq-a text-gray-300";
-    ansWrap.innerHTML = answer.outerHTML;
-    answer.remove();
-
-    // Klassen & Struktur setzen
-    item.classList.add("faq-item", "border", "border-gray-700", "rounded-md", "p-4", "bg-[#0f1627]");
-    item.appendChild(ansWrap);
-  });
   const faq = document.getElementById("faq");
   if (!faq) return;
 
-  // 3) Jetzt alle FAQ-Items selektieren (egal ob neu oder schon vorhanden)
-  const items = faqSection.querySelectorAll("#faqList .faq-item, .space-y-6 .faq-item, .faq-item");
-  if (!items.length) return;
   // Container finden (passt zu deinem Markup)
   const list = faq.querySelector("#faqList") || faq.querySelector(".space-y-6") || faq;
   const items = Array.from(list.querySelectorAll(".faq-item, .border"));
 
-  // 4) Startzustand + weiche Transition setzen
   // Falls altes Markup (h3 + p) → sanft aufrüsten
   items.forEach(item => {
     if (!item.classList.contains("faq-item")) {
@@ -169,10 +126,6 @@ sections.forEach(sec=>sec && observer.observe(sec));
 
     a.style.overflow = "hidden";
     a.style.maxHeight = "0px";
-    a.style.opacity   = "0";
-    a.style.transition = "max-height 320ms ease, opacity 220ms ease";
-    q.setAttribute("aria-expanded", "false");
-    a.setAttribute("aria-hidden", "true");
     a.style.opacity = "0";
     a.style.willChange = "max-height, opacity";
     a.style.transition = "max-height 380ms cubic-bezier(.25,.8,.25,1), opacity 260ms ease";
@@ -210,22 +163,12 @@ sections.forEach(sec=>sec && observer.observe(sec));
       });
     };
 
-    // Klick-Handler
     q.addEventListener("click", () => {
       const isOpen = item.classList.contains("open");
 
-      // Single-open: alle anderen schließen
-      items.forEach(other => {
       // single-open: andere schließen
       entries.forEach(other => {
         if (other === item) return;
-        other.classList.remove("open");
-        const oa = other.querySelector(".faq-a");
-        const oq = other.querySelector(".faq-q");
-        if (oa) {
-          oa.style.maxHeight = "0px";
-          oa.style.opacity = "0";
-          oa.setAttribute("aria-hidden", "true");
         if (other.classList.contains("open")) {
           const oa = other.querySelector(".faq-a");
           const oq = other.querySelector(".faq-q");
@@ -241,33 +184,12 @@ sections.forEach(sec=>sec && observer.observe(sec));
             });
           }
         }
-        oq?.setAttribute("aria-expanded", "false");
       });
 
-      // aktuelles toggeln
-      if (!isOpen) {
-        item.classList.add("open");
-        a.style.maxHeight = a.scrollHeight + "px";
-        a.style.opacity = "1";
-        a.setAttribute("aria-hidden", "false");
-        q.setAttribute("aria-expanded", "true");
-      } else {
-        item.classList.remove("open");
-        a.style.maxHeight = "0px";
-        a.style.opacity = "0";
-        a.setAttribute("aria-hidden", "true");
-        q.setAttribute("aria-expanded", "false");
-      }
       isOpen ? close() : open();
     });
   });
 
-  // 5) Falls beim Laden schon .open gesetzt ist → korrekt ausklappen
-  faqSection.querySelectorAll(".faq-item.open .faq-a").forEach(a => {
-    a.style.maxHeight = a.scrollHeight + "px";
-    a.style.opacity = "1";
-    a.setAttribute("aria-hidden", "false");
-    a.parentElement.querySelector(".faq-q")?.setAttribute("aria-expanded", "true");
   // bereits offene markieren
   entries.filter(i=>i.classList.contains("open")).forEach(item=>{
     const a = item.querySelector(".faq-a");
