@@ -192,3 +192,48 @@ body.bg-white.text-black li{ color:#333 }
   padding-top: .75rem;
   padding-bottom: .75rem;
 }
+/* --- FAQ: JEDEN Trenner/Border im FAQ entfernen --- */
+#faq .faq-item,
+#faq .faq-q,
+#faq .faq-a {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* falls Tailwind "ring-*" oder "divide-*" aktiv ist */
+#faq .faq-item,
+#faq .faq-item * {
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-divide-x-reverse: 0 !important;
+  --tw-divide-y-reverse: 0 !important;
+  box-shadow: none !important;
+}
+
+/* hr-Elemente & pseudo-divider komplett deaktivieren */
+#faq hr,
+#faq .faq-item::before,
+#faq .faq-item::after,
+#faq .faq-q::before,
+#faq .faq-q::after,
+#faq .faq-a::before,
+#faq .faq-a::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Animation bleibt weich – keine „Balken“-Artefakte */
+#faq .faq-a {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: max-height .35s ease, opacity .25s ease, padding .25s ease;
+}
+#faq .faq-item.open .faq-a {
+  max-height: 500px;
+  opacity: 1;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+}
