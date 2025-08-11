@@ -76,73 +76,107 @@ const observer = new IntersectionObserver((entries)=>{
 },{ rootMargin:"-40% 0px -55% 0px", threshold:0.01 });
 sections.forEach(sec=>sec && observer.observe(sec));
 
-// FAQ smooth accordion
-/* =========================
-   FAQ – echtes Accordion
-   ========================= */
-(function initAccordion() {
-  const items = document.querySelectorAll(".faq-item");
-  const questions = document.querySelectorAll(".faq-question");
+// FAQ smooth accordion (auto-upgrade markup, single-open, soft animation)
+(function initFAQ(){
+  const faqSection = document.getElementById("faq");
+  if (!faqSection) return;
 
-  if (!items.length || !questions.length) return;
+  // 1) Container finden: #faqList oder das ursprüngliche .space-y-6
+  const container =
+    faqSection.querySelector("#faqList") ||
+    faqSection.querySelector(".space-y-6") ||
+    faqSection;
 
-  function closeAll(exceptIndex = -1) {
-    items.forEach((item, i) => {
-      if (i === exceptIndex) return;
-      const answer = item.querySelector(".faq-answer");
-      item.setAttribute("aria-expanded", "false");
-      answer.style.maxHeight = "0px";
-      answer.style.opacity = "0";
-    });
-  }
+  // 2) Items ermitteln (direkte Kinder-DIVs sind dein altes Muster)
+  const rawItems = Array.from(container.children).filter(el => el.tagName === "DIV");
 
-  function toggle(index) {
-    const item = items[index];
-    const answer = item.querySelector(".faq-answer");
-    const isOpen = item.getAttribute("aria-expanded") === "true";
+  rawItems.forEach(item => {
+    // Wenn bereits aufgerüstet, weiter
+    if (item.classList.contains("faq-item")) return;
 
-    if (isOpen) {
-      // schließen
-      item.setAttribute("aria-expanded", "false");
-      answer.style.maxHeight = "0px";
-      answer.style.opacity = "0";
-    } else {
-      // erst alle anderen schließen, dann öffnen
-      closeAll(index);
-      item.setAttribute("aria-expanded", "true");
-      // für sanfte Animation zunächst Höhe messen
-      answer.style.maxHeight = answer.scrollHeight + "px";
-      answer.style.opacity = "1";
-    }
-  }
+    // Heading (h1–h4) + Antwort (p oder div) finden
+    const heading = item.querySelector("h1, h2, h3, h4");
+    const answer  = item.querySelector("p, div:not(:has(h1,h2,h3,h4))");
 
-  // Click + Tastatursteuerung
-  questions.forEach((q, i) => {
-    q.setAttribute("role", "button");
-    q.setAttribute("tabindex", "0");
-    q.addEventListener("click", () => toggle(i));
-    q.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggle(i);
+    if (!heading || !answer) return;
+
+    // Button aus der Überschrift bauen
+    const btn = document.createElement("button");
+    btn.className = "faq-q w-full text-left font-semibold text-white";
+    btn.innerHTML = heading.innerHTML;
+    heading.replaceWith(btn);
+
+    // Antwort-Wrapper
+    const ansWrap = document.createElement("div");
+    ansWrap.className = "faq-a text-gray-300";
+    ansWrap.innerHTML = answer.outerHTML;
+    answer.remove();
+
+    // Klassen & Struktur setzen
+    item.classList.add("faq-item", "border", "border-gray-700", "rounded-md", "p-4", "bg-[#0f1627]");
+    item.appendChild(ansWrap);
+  });
+
+  // 3) Jetzt alle FAQ-Items selektieren (egal ob neu oder schon vorhanden)
+  const items = faqSection.querySelectorAll("#faqList .faq-item, .space-y-6 .faq-item, .faq-item");
+  if (!items.length) return;
+
+  // 4) Startzustand + weiche Transition setzen
+  items.forEach(item => {
+    const q = item.querySelector(".faq-q");
+    const a = item.querySelector(".faq-a");
+    if (!q || !a) return;
+
+    a.style.overflow = "hidden";
+    a.style.maxHeight = "0px";
+    a.style.opacity   = "0";
+    a.style.transition = "max-height 320ms ease, opacity 220ms ease";
+    q.setAttribute("aria-expanded", "false");
+    a.setAttribute("aria-hidden", "true");
+
+    // Klick-Handler
+    q.addEventListener("click", () => {
+      const isOpen = item.classList.contains("open");
+
+      // Single-open: alle anderen schließen
+      items.forEach(other => {
+        if (other === item) return;
+        other.classList.remove("open");
+        const oa = other.querySelector(".faq-a");
+        const oq = other.querySelector(".faq-q");
+        if (oa) {
+          oa.style.maxHeight = "0px";
+          oa.style.opacity = "0";
+          oa.setAttribute("aria-hidden", "true");
+        }
+        oq?.setAttribute("aria-expanded", "false");
+      });
+
+      // aktuelles toggeln
+      if (!isOpen) {
+        item.classList.add("open");
+        a.style.maxHeight = a.scrollHeight + "px";
+        a.style.opacity = "1";
+        a.setAttribute("aria-hidden", "false");
+        q.setAttribute("aria-expanded", "true");
+      } else {
+        item.classList.remove("open");
+        a.style.maxHeight = "0px";
+        a.style.opacity = "0";
+        a.setAttribute("aria-hidden", "true");
+        q.setAttribute("aria-expanded", "false");
       }
     });
   });
 
-  // Höhe neu berechnen, falls Fonts/Viewport sich ändern
-  window.addEventListener("resize", () => {
-    items.forEach((item) => {
-      if (item.getAttribute("aria-expanded") === "true") {
-        const answer = item.querySelector(".faq-answer");
-        answer.style.maxHeight = answer.scrollHeight + "px";
-      }
-    });
+  // 5) Falls beim Laden schon .open gesetzt ist → korrekt ausklappen
+  faqSection.querySelectorAll(".faq-item.open .faq-a").forEach(a => {
+    a.style.maxHeight = a.scrollHeight + "px";
+    a.style.opacity = "1";
+    a.setAttribute("aria-hidden", "false");
+    a.parentElement.querySelector(".faq-q")?.setAttribute("aria-expanded", "true");
   });
-
-  // Startzustand: alles zu
-  closeAll(-1);
 })();
-
 // Testimonials: 3-at-a-time slider with smooth slide every 5s
 (function initTestimonials(){
   const track = document.getElementById("tsTrack");
