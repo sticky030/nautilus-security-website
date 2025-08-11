@@ -74,3 +74,34 @@ body.bg-white.text-black li{ color:#333 }
 
 /* AOS small tweak for smoother feel on sections */
 [data-aos]{ will-change: transform, opacity; }
+/* FAQ Styling */
+.faq-q {
+  position: relative;
+  padding-right: 1.5rem;
+  cursor: pointer;
+  transition: color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.faq-q:hover {
+  color: #FFD700;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.faq-q::after {
+  content: "▼";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+.faq-item.open .faq-q::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Antwort-Bereich */
+.faq-a {
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
