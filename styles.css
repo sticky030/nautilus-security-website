@@ -1,251 +1,239 @@
-/* ==========================================================================
-   Nautilus Security – styles.css (stabil + Feinschliff)
-   ========================================================================== */
-
-/* --- Keyframes & kleine Helfer --- */
 @keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
 .animate-slide-down{ animation: slideDown 180ms ease-out both; }
 
-/* Sticky CTA safe-area & Cookie-Lift */
+/* Sticky CTA safe-area + Abstand zur Cookiebar */
 .sticky-cta { bottom: calc(env(safe-area-inset-bottom) + 1.5rem); }
 .sticky-cta.cta-lift { bottom: calc(env(safe-area-inset-bottom) + 6.5rem); }
 @media (max-width:640px){ .cta-lift{ bottom:6.5rem !important } }
 
-/* Light Mode Lesbarkeit (wird per Body-Classes gesetzt) */
+/* Light mode readability */
 body.bg-white.text-black{ color:#111 }
-body.bg-white.text-black h1,
-body.bg-white.text-black h2,
+body.bg-white.text-black h1, 
+body.bg-white.text-black h2, 
 body.bg-white.text-black h3{ color:#1a1a1a }
-body.bg-white.text-black p,
+body.bg-white.text-black p, 
 body.bg-white.text-black li{ color:#333 }
 
-/* ==========================================================================
-   Header / Navigation
-   ========================================================================== */
-#site-header .nav-link.active{
-  color:#eab308 !important;        /* Gold */
-  font-weight:700;
-  text-underline-offset: 6px;
-}
-#site-header .nav-link{
-  transition: color .2s ease, opacity .2s ease;
-}
-
-/* Mobile Overlay Menü kleine Verbesserung */
-#mobileMenu{ backdrop-filter: saturate(120%) blur(2px); }
-
-/* ==========================================================================
-   Hero / Start
-   ========================================================================== */
-.hero-logo{ max-width: 26rem; width: 100%; } /* falls eingesetzt */
-#home .cta-btn{ transition: transform .18s ease, background .18s ease; }
-
-/* ==========================================================================
-   Sektion: Leistungen – Karten-Stil wie „Werte“ (mit Gold-Icons)
-   ========================================================================== */
-/* Falls du .service-card an den Karten nutzt; sie bleiben defensiv auf #services gescoped */
-#services .service-card{
-  background: radial-gradient(1200px 400px at 20% -10%, rgba(234,179,8,0.06), transparent 60%),
-              rgba(17,24,39,0.85);
-  border:1px solid rgba(148,163,184,0.18);
-  border-radius:16px;
-  padding:1rem;
-  transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
-}
-#services .service-card:hover{
-  border-color: rgba(234,179,8,0.45);
-  box-shadow:
-    0 0 0 2px rgba(234,179,8,0.28),
-    0 12px 32px rgba(234,179,8,0.12);
-  transform: translateY(-2px);
-}
-#services .service-icon{
-  width:44px;height:44px; margin-bottom:.5rem;
-  color:#eab308; fill: currentColor; flex:0 0 auto;
-}
-#services .service-title{ color:#fff; font-weight:700; }
-#services .service-desc{ color:#cbd5e1; line-height:1.6; }
-
-/* Wenn du die bisherige UL behältst, helfe optisch mit goldenen Bullets */
-#services ul{ list-style:none; padding-left:0; }
-#services li{
-  position:relative; padding-left:1.25rem; color:#cbd5e1;
-}
-#services li::before{
-  content:""; position:absolute; left:0; top:.6rem;
-  width:6px; height:6px; border-radius:999px; background:#eab308;
-  box-shadow: 0 0 0 3px rgba(234,179,8,0.18);
-}
-
-/* ==========================================================================
-   Sektion: Warum wir – Karten + Glow (kein grüner Haken mehr)
-   ========================================================================== */
-#why .why-card{
-  background: rgba(17,24,39,0.85);
-  border:1px solid rgba(148,163,184,0.18);
-  border-radius:16px;
-  padding:1rem;
-  transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
-}
-#why .why-card:hover{
-  border-color: rgba(234,179,8,0.45);
-  box-shadow:
-    0 0 0 2px rgba(234,179,8,0.28),
-    0 12px 32px rgba(234,179,8,0.12);
-  transform: translateY(-2px);
-}
-/* Goldene Badge statt Haken */
-#why .why-badge{
-  display:inline-flex; align-items:center; gap:.5rem;
-  font-weight:700; color:#fff;
-}
-#why .why-badge::before{
-  content:""; width:18px; height:18px; border-radius:6px; background:#eab308;
-  box-shadow: 0 0 0 2px rgba(234,179,8,0.25), inset 0 0 0 2px rgba(0,0,0,0.15);
-}
-
-/* ==========================================================================
-   Sektion: Unsere Werte – 4 Karten mit goldenen Icons + Glow
-   ========================================================================== */
-#values .value-card{
-  background: rgba(17,24,39,0.85);
-  border:1px solid rgba(148,163,184,0.18);
-  border-radius:18px;
+/* Karten-Design (Leistungen, Warum wir, Werte) */
+.card{
+  background:#1f2937;
+  border-radius:0.75rem;
   padding:1.25rem;
-  text-align:center;
-  transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
+  box-shadow:0 10px 15px -3px rgb(0 0 0 / 0.3);
+  transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+  border:1px solid transparent;
 }
-#values .value-card:hover{
-  border-color: rgba(234,179,8,0.45);
-  box-shadow:
-    0 0 0 2px rgba(234,179,8,0.28),
-    0 12px 32px rgba(234,179,8,0.12);
-  transform: translateY(-2px);
+.card:hover{
+  box-shadow:0 10px 25px -5px rgba(234,179,8,.25);
+  transform:translateY(-2px);
+  border-color:rgba(234,179,8,.35);
 }
-#values .value-icon{
-  width:44px; height:44px; margin:0 auto .5rem auto;
-  color:#eab308; fill:currentColor; display:block;
+.card-title{
+  font-size:1.125rem;
+  font-weight:700;
+  color:white;
+  margin-bottom:.25rem;
 }
-#values .value-title{ color:#fff; font-weight:700; margin-bottom:.25rem; }
-#values .value-text{ color:#cbd5e1; }
+.card-text{
+  color:#d1d5db; /* gray-300 */
+}
+.icon-wrap{
+  width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;
+  border-radius:.75rem;border:1px solid rgba(234,179,8,.35);
+  background:linear-gradient(180deg, rgba(234,179,8,.10), rgba(234,179,8,.02));
+  margin-bottom:.75rem;
+}
+.icon-gold{ width:1.25rem;height:1.25rem;color:#eab308; }
 
-/* ==========================================================================
-   Sektion: Team – Rollentitel in Gold
-   ========================================================================== */
-#team .team-role{ color:#eab308; font-weight:600; }
-
-/* ==========================================================================
-   Sektion: Karriere – goldene Points
-   ========================================================================== */
-#jobs ul{ list-style:none; padding-left:0; }
-#jobs li{
-  position:relative; padding-left:1.25rem; color:#cbd5e1;
+/* FAQ Accordion smooth */
+.faq-item{
+  background:#1f2937;border:1px solid rgba(234,179,8,.2);border-radius:.75rem;overflow:hidden;
 }
-#jobs li::before{
-  content:""; position:absolute; left:0; top:.6rem;
-  width:6px; height:6px; border-radius:999px; background:#eab308;
-  box-shadow: 0 0 0 3px rgba(234,179,8,0.18);
+.faq-q{
+  width:100%;text-align:left;padding:1rem 1.25rem;color:white;font-weight:600;
+  display:flex;justify-content:space-between;align-items:center;gap:.75rem;
 }
-
-/* ==========================================================================
-   Sektion: Testimonials – weiches Slide (JS steuert Transform/Opacity)
-   ========================================================================== */
-#testimonials #tsTrack{
-  transition: transform .6s ease, opacity .6s ease;
-  will-change: transform, opacity;
+.faq-q::after{
+  content:"▾"; transition: transform .25s ease;
 }
-#testimonials .ts-card{
-  transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
-  border:1px solid rgba(148,163,184,0.18);
-  background: rgba(17,24,39,0.85);
-  border-radius:16px;
+.faq-item.open .faq-q::after{ transform: rotate(180deg); }
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height .35s ease, opacity .2s ease;
+  opacity:.0;color:#d1d5db;padding:0 1.25rem;
 }
-#testimonials .ts-card:hover{
-  border-color: rgba(234,179,8,0.45);
-  box-shadow:
-    0 0 0 2px rgba(234,179,8,0.28),
-    0 10px 28px rgba(234,179,8,0.10);
-  transform: translateY(-2px);
+.faq-item.open .faq-a{
+  padding:0.5rem 1.25rem 1rem 1.25rem;
+  opacity:1;max-height:220px;
 }
 
-/* ==========================================================================
-   FAQ – modern, ohne goldene Trennlinie, weiches Accordion, schöner Glow
-   ========================================================================== */
+/* Testimonials slider pages */
+#tsViewport{ overflow:hidden; }
+#tsTrack{ display:flex; gap:1.5rem; }
+.ts-page{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:1.5rem; min-width:100%; }
+.ts-card{ background:#1f2937; padding:1.5rem; border-radius:.75rem; box-shadow:0 10px 15px -3px rgb(0 0 0 / 0.3); }
 
-/* Evtl. Trennlinien/Divider im FAQ sicher entfernen */
+/* AOS small tweak for smoother feel on sections */
+[data-aos]{ will-change: transform, opacity; }
+/* FAQ Styling */
+.faq-q {
+  position: relative;
+  padding-right: 1.5rem;
+  cursor: pointer;
+  transition: color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.faq-q:hover {
+  color: #FFD700;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.faq-q::after {
+  content: "▼";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+.faq-item.open .faq-q::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Antwort-Bereich */
+.faq-a {
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+/* FAQ – Card Glow & smoother look */
+.faq-item {
+  background: #0f1627;
+  border: 1px solid #2a3350;
+  transition: box-shadow 220ms ease, border-color 220ms ease, transform 180ms ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(255, 215, 0, 0.45);
+  box-shadow: 0 8px 18px rgba(255, 215, 0, 0.08), inset 0 0 0 1px rgba(255, 215, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.faq-item.open {
+  border-color: rgba(255, 215, 0, 0.55);
+  box-shadow: 0 10px 22px rgba(255, 215, 0, 0.12), inset 0 0 0 1px rgba(255, 215, 0, 0.20);
+}
+
+.faq-q {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  color: #fff;
+  padding-right: 1.75rem;
+}
+
+.faq-q::after {
+  content: "▼";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 280ms ease;
+  opacity: .9;
+}
+
+.faq-item.open .faq-q::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.faq-a { margin-top: .5rem; }
+/* FAQ: Trenner unter der Frage entfernen, sobald geöffnet */
+.faq-item.open .faq-q {
+  border-bottom: 0 !important;
+}
+
+/* Falls der Trenner als ::after erzeugt wird, auch ausschalten */
+.faq-item.open .faq-q::after {
+  display: none !important;
+  border-bottom: 0 !important;
+}
+
+/* optional: saubere Kante beim Aufklappen */
+.faq-item.open { overflow: hidden; }
+/* --- FAQ: Trenner-Linie entfernen & sauberes Öffnen --- */
+.faq-item { 
+  overflow: hidden;                 /* verhindert, dass Ränder/Shadow „überstehen“ */
+}
+
+.faq-item .faq-a {
+  border: 0 !important;             /* alle Ränder weg */
+  border-top: 0 !important;         /* falls irgendwo explizit gesetzt */
+  box-shadow: none !important;      /* falls per Shadow ein Strich simuliert wird */
+}
+
+/* Falls ein pseudo-divider verwendet wurde */
+.faq-item::before,
+.faq-item::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Optional: etwas weicheres Ein-/Ausklappen */
+.faq-item .faq-a {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  transition: max-height .35s ease, opacity .25s ease, padding .25s ease;
+}
+.faq-item.open .faq-a {
+  max-height: 500px;   /* ausreichend groß für deine Antworten */
+  opacity: 1;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+}
+/* --- FAQ: JEDEN Trenner/Border im FAQ entfernen --- */
+#faq .faq-item,
+#faq .faq-q,
+#faq .faq-a {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* falls Tailwind "ring-*" oder "divide-*" aktiv ist */
+#faq .faq-item,
+#faq .faq-item * {
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-divide-x-reverse: 0 !important;
+  --tw-divide-y-reverse: 0 !important;
+  box-shadow: none !important;
+}
+
+/* hr-Elemente & pseudo-divider komplett deaktivieren */
 #faq hr,
-#faq .divide-y > * + *,
-#faq .border-b,
-#faq .border-t,
 #faq .faq-item::before,
-#faq .faq-item::after{
-  border:0 !important;
-  display:none !important;
+#faq .faq-item::after,
+#faq .faq-q::before,
+#faq .faq-q::after,
+#faq .faq-a::before,
+#faq .faq-a::after {
+  display: none !important;
+  content: none !important;
 }
 
-/* Karte je FAQ-Punkt */
-#faq .faq-item{
-  background: rgba(17,24,39,0.85);
-  border:1px solid rgba(148,163,184,0.18) !important;
-  border-radius:14px;
-  padding:.5rem .75rem;
-  transition: box-shadow .25s ease, border-color .25s ease, background .25s ease;
+/* Animation bleibt weich – keine „Balken“-Artefakte */
+#faq .faq-a {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: max-height .35s ease, opacity .25s ease, padding .25s ease;
 }
-
-/* Glow beim Hover & wenn geöffnet */
-#faq .faq-item:hover,
-#faq .faq-item.open{
-  border-color: rgba(234,179,8,0.45) !important;
-  box-shadow:
-    0 0 0 2px rgba(234,179,8,0.28),
-    0 10px 28px rgba(234,179,8,0.10);
+#faq .faq-item.open .faq-a {
+  max-height: 500px;
+  opacity: 1;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
 }
-
-/* Fragezeile */
-#faq .faq-q{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:.75rem; cursor:pointer; padding:.6rem 0; margin:0; color:#fff; font-weight:700; border:0 !important;
-}
-#faq .faq-q::after{
-  content:"▾"; opacity:.9; transform:rotate(0deg);
-  transition: transform .25s ease, opacity .25s ease;
-}
-#faq .faq-item.open .faq-q::after{ transform:rotate(-180deg); opacity:1; }
-
-/* Antwort: smoothes Auf-/Zuklappen (Grid-Trick) */
-#faq .faq-a{
-  display:grid; grid-template-rows:0fr; overflow:hidden;
-  transition: grid-template-rows .28s ease, opacity .28s ease;
-  opacity:.0; border:0 !important; margin:0; padding:0;
-}
-#faq .faq-a > *{ min-height:0; } /* wichtig für Grid-Accordion */
-#faq .faq-item.open .faq-a{ grid-template-rows:1fr; opacity:1; }
-
-/* etwas Abstand zwischen Einträgen */
-#faq .faq-list > * + *{ margin-top:.75rem; }
-
-/* ==========================================================================
-   Sonstiges / Feinheiten
-   ========================================================================== */
-/* AOS leicht smoother wirken lassen */
-[data-aos]{ transition-property: transform, opacity !important; }
-
-/* Gold-Link Hover */
-a:hover{ color:#eab308; }
-
-/* Footer Links */
-footer a{ color:#facc15; }
-footer a:hover{ text-decoration:underline; }
-
-/* Cookie-Bar Text leicht kleiner auf Mobile */
-@media (max-width:480px){
-  #cookieBar p{ font-size:.85rem; }
-}
-
-/* Hero Logo leichte Schattenhilfe auf sehr dunklem BG */
-#home img[alt*="Logo"]{ filter: drop-shadow(0 2px 16px rgba(0,0,0,.35)); }
-
-/* Services/Why/Values Karten-Grid vertikale Abstände */
-#services .grid > * + *,
-#why .grid > * + *,
-#values .grid > * + *{ margin-top:0; } /* Grid regelt bereits Gap */
