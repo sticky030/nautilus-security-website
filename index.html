@@ -4,12 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nautilus Security – Sicherheit mit System</title>
+
   <meta name="description" content="Nautilus Security – Sicherheitsdienst in Berlin: Objektschutz, Baustellenbewachung, Eventschutz, Empfangsdienste, Beratung.">
   <meta name="keywords" content="Sicherheitsdienst Berlin, Objektschutz, Eventschutz, Baustellenbewachung, Bewachung">
   <meta property="og:title" content="Nautilus Security – Sicherheit mit System">
   <meta property="og:description" content="Moderne, diskrete und effektive Sicherheitslösungen – maßgeschneidert für Ihr Projekt.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="./logo-gold.png">
+  <meta property="og:image" content="./logo-gold-transparent.png">
+
+  <link rel="icon" href="./logo-gold-transparent.png" type="image/png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
@@ -17,10 +20,11 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body class="min-h-screen font-sans bg-[#0a0f1c] text-white scroll-smooth">
+  <!-- Header -->
   <header id="site-header" class="border-b border-yellow-500 bg-[#0a0f1c] p-4 shadow-md sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center relative">
       <div class="flex items-center space-x-3">
-        <img src="./logo-gold.png" alt="Logo Nautilus Security" class="w-10 h-10" />
+        <img src="./logo-gold-transparent.png" alt="Logo Nautilus Security" class="w-10 h-10" />
         <h1 class="text-xl font-bold tracking-wide">Nautilus Security</h1>
       </div>
       <div class="flex items-center space-x-4">
@@ -57,17 +61,18 @@
     </div>
   </header>
 
+  <!-- Cookiebar -->
   <div id="cookieBar" class="fixed bottom-0 left-0 w-full bg-black bg-opacity-90 text-sm text-white px-6 py-4 z-50 flex justify-between items-center">
     <p>Diese Website verwendet Cookies. Durch die Nutzung stimmen Sie der Datenschutzerklärung zu.</p>
     <button id="cookieOk" class="bg-yellow-500 text-black px-4 py-1 rounded hover:bg-yellow-400 ml-4">Verstanden</button>
   </div>
 
   <main>
-    <!-- HERO -->
+    <!-- Hero -->
     <section id="home" class="h-screen flex items-center justify-center text-center px-4 bg-gradient-to-b from-[#0b1222] via-[#0a0f1c] to-[#0a0f1c]" data-aos="fade-up">
       <div>
-        <div class="mx-auto mb-6 w-48 md:w-56 lg:w-64 aspect-square rounded-full bg-[#0d1528] flex items-center justify-center shadow-2xl ring-2 ring-yellow-500/60 ring-offset-2 ring-offset-[#0a0f1c]">
-          <img src="./logo-gold.png" alt="Nautilus Security Logo" class="w-40 md:w-48 lg:w-56 drop-shadow-xl opacity-95" />
+        <div class="mx-auto mb-6 w-56 md:w-72 lg:w-80 aspect-square rounded-full bg-[#0d1528] flex items-center justify-center shadow-2xl ring-2 ring-yellow-500/60 ring-offset-2 ring-offset-[#0a0f1c]">
+          <img src="./logo-gold-transparent.png" alt="Nautilus Security Logo" class="w-48 md:w-64 lg:w-72 drop-shadow-xl opacity-95" />
         </div>
         <h2 class="text-4xl font-bold text-yellow-500 mb-4">Ihre Sicherheit ist unsere Mission</h2>
         <p class="text-lg max-w-xl mx-auto">Nautilus Security steht für moderne, diskrete und effektive Sicherheitslösungen – maßgeschneidert auf Ihre Anforderungen.</p>
@@ -77,7 +82,7 @@
       </div>
     </section>
 
-    <!-- ÜBER UNS -->
+    <!-- Über uns -->
     <section id="about" class="py-16 px-6 max-w-3xl mx-auto" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-4">Über uns</h2>
       <p class="text-gray-300 mb-4">
@@ -88,258 +93,171 @@
       </p>
     </section>
 
-    <!-- UNSERE LEISTUNGEN (NEUES LAYOUT WIE "WERTE") -->
-    <section id="services" class="py-16 px-6 max-w-6xl mx-auto" data-aos="fade-up">
-  <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Unsere Leistungen</h2>
-
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <!-- Karte 1 -->
-    <article class="service-card card-elevate rounded-xl bg-[#111827] p-6 border border-yellow-500/20">
-      <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-yellow-500/10 ring-1 ring-yellow-500/40">
-        <!-- Schild-Icon -->
-        <svg viewBox="0 0 24 24" class="w-6 h-6"><use href="#why-shield"/></svg>
-      </div>
-      <h3 class="text-white font-semibold mb-2">Objektschutz &amp; Baustellenbewachung</h3>
-      <p class="text-gray-300 text-sm">Sichtbare Präsenz, Zugriffsschutz, Prävention – Tag &amp; Nacht.</p>
-    </article>
-
-    <!-- Karte 2 -->
-    <article class="service-card card-elevate rounded-xl bg-[#111827] p-6 border border-yellow-500/20">
-      <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-yellow-500/10 ring-1 ring-yellow-500/40">
-        <!-- Route/Patrol -->
-        <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current text-yellow-500">
-          <path d="M9 2a2 2 0 110 4 2 2 0 010-4zm6 16a2 2 0 110 4 2 2 0 010-4zM4 7h8v2H6v6h9v2H4z"/>
-        </svg>
-      </div>
-      <h3 class="text-white font-semibold mb-2">Revier‑ &amp; Streifendienste</h3>
-      <p class="text-gray-300 text-sm">Mobile Kontrollen mit GPS‑Nachweis und Reportings.</p>
-    </article>
-
-    <!-- Karte 3 -->
-    <article class="service-card card-elevate rounded-xl bg-[#111827] p-6 border border-yellow-500/20">
-      <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-yellow-500/10 ring-1 ring-yellow-500/40">
-        <!-- Event -->
-        <svg viewBox="0 0 24 24" class="w-6 h-6 stroke-yellow-500" fill="none" stroke-width="1.5">
-          <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor"/>
-          <path d="M8 2v4M16 2v4M3 10h18" stroke="currentColor"/>
-        </svg>
-      </div>
-      <h3 class="text-white font-semibold mb-2">Event‑ &amp; Veranstaltungsschutz</h3>
-      <p class="text-gray-300 text-sm">Diskrete Präsenz, Zutrittssteuerung, sichere Abläufe.</p>
-    </article>
-
-    <!-- Karte 4 -->
-    <article class="service-card card-elevate rounded-xl bg-[#111827] p-6 border border-yellow-500/20">
-      <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-yellow-500/10 ring-1 ring-yellow-500/40">
-        <!-- Empfang -->
-        <svg viewBox="0 0 24 24" class="w-6 h-6 stroke-yellow-500" fill="none" stroke-width="1.5">
-          <path d="M4 20h16M6 18v-3a4 4 0 014-4h4a4 4 0 014 4v3" stroke="currentColor"/>
-          <circle cx="12" cy="7" r="3" stroke="currentColor"/>
-        </svg>
-      </div>
-      <h3 class="text-white font-semibold mb-2">Empfangs‑ &amp; Doorman‑Services</h3>
-      <p class="text-gray-300 text-sm">Die professionelle Visitenkarte Ihres Hauses.</p>
-    </article>
-
-    <!-- Karte 5 -->
-    <article class="service-card card-elevate rounded-xl bg-[#111827] p-6 border border-yellow-500/20">
-      <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-yellow-500/10 ring-1 ring-yellow-500/40">
-        <!-- Personenschutz -->
-        <svg viewBox="0 0 24 24" class="w-6 h-6 stroke-yellow-500" fill="none" stroke-width="1.5">
-          <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" stroke="currentColor"/>
-          <circle cx="12" cy="10" r="2.5" stroke="currentColor"/>
-        </svg>
-      </div>
-      <h3 class="text-white font-semibold mb-2">Personenschutz</h3>
-      <p class="text-gray-300 text-sm">Unauffälliger Begleit‑ und Objektschutz für exponierte Personen.</p>
-    </article>
-
-    <!-- Karte 6 -->
-    <article class="service-card card-elevate rounded-xl bg-[#111827] p-6 border border-yellow-500/20">
-      <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-yellow-500/10 ring-1 ring-yellow-500/40">
-        <!-- Beratung -->
-        <svg viewBox="0 0 24 24" class="w-6 h-6 stroke-yellow-500" fill="none" stroke-width="1.5">
-          <path d="M12 3v4M12 17v4M4 12h4M16 12h4M7 7l3 3M14 14l3 3M7 17l3-3M14 10l3-3" stroke="currentColor"/>
-        </svg>
-      </div>
-      <h3 class="text-white font-semibold mb-2">Sicherheitsberatung</h3>
-      <p class="text-gray-300 text-sm">Risikoanalyse, Konzepte, Maßnahmenkatalog – aus einer Hand.</p>
-    </article>
-  </div>
-</section>
-
-    <!-- WARUM WIR -->
-    <section id="why" class="py-16 px-6 max-w-4xl mx-auto" data-aos="fade-up">
-  <h2 class="text-3xl font-bold text-yellow-500 mb-8 text-center">Warum wir</h2>
-  <ul class="space-y-4">
-    <!-- Punkt 1 -->
-    <li class="flex items-start gap-3 why-item">
-      <span class="why-icon">
-        <svg viewBox="0 0 24 24" class="w-6 h-6">
-          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#fbbf24"/></linearGradient></defs>
-          <path fill="url(#g)" d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"/>
-          <path fill="#0a0f1c" d="M10.2 12.8l-2-2 1.4-1.4 0.6 0.6 1.3 1.3 3.9-3.9 1.4 1.4-5.3 5.3z"/>
-        </svg>
-      </span>
-      <div>
-        <h3 class="font-semibold text-white">Qualifiziertes Personal</h3>
-        <p class="text-gray-300">§34a‑Nachweis, regelmäßige Schulungen, einsatzerfahren.</p>
-      </div>
-    </li>
-
-    <!-- Punkt 2 -->
-    <li class="flex items-start gap-3 why-item">
-      <span class="why-icon">
-        <svg viewBox="0 0 24 24" class="w-6 h-6"><use href="#why-shield"/></svg>
-      </span>
-      <div>
-        <h3 class="font-semibold text-white">Feste Ansprechpartner</h3>
-        <p class="text-gray-300">Direkte Linien statt Hotline – schnelle Entscheidungen.</p>
-      </div>
-    </li>
-
-    <!-- Punkt 3 -->
-    <li class="flex items-start gap-3 why-item">
-      <span class="why-icon">
-        <svg viewBox="0 0 24 24" class="w-6 h-6"><use href="#why-shield"/></svg>
-      </span>
-      <div>
-        <h3 class="font-semibold text-white">24/7 Verfügbarkeit</h3>
-        <p class="text-gray-300">Kurzfristige Einsätze in Berlin &amp; Brandenburg.</p>
-      </div>
-    </li>
-
-    <!-- Punkt 4 -->
-    <li class="flex items-start gap-3 why-item">
-      <span class="why-icon">
-        <svg viewBox="0 0 24 24" class="w-6 h-6"><use href="#why-shield"/></svg>
-      </span>
-      <div>
-        <h3 class="font-semibold text-white">Digitale Protokolle</h3>
-        <p class="text-gray-300">GPS‑gestützte Revierfahrten, lückenlose Übergaben.</p>
-      </div>
-    </li>
-
-    <!-- Punkt 5 -->
-    <li class="flex items-start gap-3 why-item">
-      <span class="why-icon">
-        <svg viewBox="0 0 24 24" class="w-6 h-6"><use href="#why-shield"/></svg>
-      </span>
-      <div>
-        <h3 class="font-semibold text-white">Diskretion &amp; Loyalität</h3>
-        <p class="text-gray-300">Vertraulichkeit hat bei uns Priorität.</p>
-      </div>
-    </li>
-
-    <!-- Punkt 6 -->
-    <li class="flex items-start gap-3 why-item">
-      <span class="why-icon">
-        <svg viewBox="0 0 24 24" class="w-6 h-6"><use href="#why-shield"/></svg>
-      </span>
-      <div>
-        <h3 class="font-semibold text-white">Zusatzqualifikationen</h3>
-        <p class="text-gray-300">Erste Hilfe, ASG‑Träger, mehrsprachige Teams.</p>
-      </div>
-    </li>
-
-    <!-- Punkt 7 -->
-    <li class="flex items-start gap-3 why-item">
-      <span class="why-icon">
-        <svg viewBox="0 0 24 24" class="w-6 h-6"><use href="#why-shield"/></svg>
-      </span>
-      <div>
-        <h3 class="font-semibold text-white">Branchenspezifische Besetzung</h3>
-        <p class="text-gray-300">Hotel, Baustelle, Office – passgenaues Personal.</p>
-      </div>
-    </li>
-
-    <!-- Punkt 8 -->
-    <li class="flex items-start gap-3 why-item">
-      <span class="why-icon">
-        <svg viewBox="0 0 24 24" class="w-6 h-6"><use href="#why-shield"/></svg>
-      </span>
-      <div>
-        <h3 class="font-semibold text-white">Transparente Angebote</h3>
-        <p class="text-gray-300">Klare Leistungen, klare Preise, keine Überraschungen.</p>
-      </div>
-    </li>
-  </ul>
-
-  <!-- Defs einmalig im Abschnitt, damit alle <use> das gleiche goldene Schild ziehen -->
-  <svg width="0" height="0" style="position:absolute">
-    <defs>
-      <linearGradient id="gold-grad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#fbbf24"/>
-      </linearGradient>
-      <symbol id="why-shield" viewBox="0 0 24 24">
-        <path fill="url(#gold-grad)" d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"/>
-        <path fill="#0a0f1c" d="M10.2 12.8l-2-2 1.4-1.4 0.6 0.6 1.3 1.3 3.9-3.9 1.4 1.4-5.3 5.3z"/>
-      </symbol>
-    </defs>
-  </svg>
-</section>
-    <!-- UNSERE WERTE -->
-    <section id="values" class="max-w-5xl mx-auto py-16 px-6" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Unsere Werte</h2>
-      <div class="grid md:grid-cols-3 gap-10 text-center text-gray-300">
-        <div>
-          <div class="text-5xl mb-4">🔒</div>
-          <h3 class="text-xl font-semibold text-white mb-2">Vertrauen</h3>
-          <p>Unsere Kunden vertrauen auf Verschwiegenheit, Diskretion und Loyalität – das Fundament jeder Zusammenarbeit.</p>
-        </div>
-        <div>
-          <div class="text-5xl mb-4">🎯</div>
-          <h3 class="text-xl font-semibold text-white mb-2">Präzision</h3>
-          <p>Jeder Einsatz wird sorgfältig geplant, dokumentiert und mit höchster Genauigkeit ausgeführt.</p>
-        </div>
-        <div>
-          <div class="text-5xl mb-4">⚡</div>
-          <h3 class="text-xl font-semibold text-white mb-2">Reaktionsfähigkeit</h3>
-          <p>Ob im Alltag oder im Ernstfall – wir reagieren schnell, strukturiert und mit klarem Handlungsrahmen.</p>
-        </div>
+    <!-- Leistungen (alle Icons gold) -->
+    <section id="services" class="max-w-6xl mx-auto py-16 px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Unsere Leistungen</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Card -->
+        <article class="card group">
+          <div class="icon-wrap">
+            <!-- Schild -->
+            <svg class="icon-gold" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5l7-3z"/></svg>
+          </div>
+          <h3 class="card-title">Objektschutz & Baustellen</h3>
+          <p class="card-text">Präsenz zeigen, Risiken minimieren, Zugänge kontrollieren – dokumentiert & transparent.</p>
+        </article>
+        <article class="card group">
+          <div class="icon-wrap">
+            <!-- Route -->
+            <svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M4 6a2 2 0 114 0 2 2 0 01-4 0zm0 0v10a4 4 0 004 4h8a2 2 0 100-4H8a2 2 0 01-2-2V6m12-2a2 2 0 110 4 2 2 0 010-4z"/></svg>
+          </div>
+          <h3 class="card-title">Revier- & Streifendienst</h3>
+          <p class="card-text">Mobile Kontrollen mit GPS‑Protokoll, Schließdienste und Alarmverfolgung.</p>
+        </article>
+        <article class="card group">
+          <div class="icon-wrap">
+            <!-- Ticket/Event -->
+            <svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7h18v4a2 2 0 010 4v4H3v-4a2 2 0 010-4V7z"/></svg>
+          </div>
+          <h3 class="card-title">Event- & Veranstaltungsschutz</h3>
+          <p class="card-text">Zutrittskontrolle, Backstage‑Sicherung und reibungslose Gästeströme.</p>
+        </article>
+        <article class="card group">
+          <div class="icon-wrap">
+            <!-- Empfang -->
+            <svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9a7 7 0 0114 0H5z"/></svg>
+          </div>
+          <h3 class="card-title">Empfang & Doorman</h3>
+          <p class="card-text">Professionelle Visitenkarte Ihres Hauses: höflich, durchsetzungsfähig, diskret.</p>
+        </article>
+        <article class="card group">
+          <div class="icon-wrap">
+            <!-- Personenschutz -->
+            <svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l8 4v6c0 5-4 8-8 10-4-2-8-5-8-10V6l8-4z"/></svg>
+          </div>
+          <h3 class="card-title">Personenschutz</h3>
+          <p class="card-text">Unauffällige Begleitung, Routenplanung & Risikobewertung – stets vorausschauend.</p>
+        </article>
+        <article class="card group">
+          <div class="icon-wrap">
+            <!-- Beratung -->
+            <svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a9 9 0 100 18 9 9 0 000-18zm1 13h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+          </div>
+          <h3 class="card-title">Sicherheitsberatung</h3>
+          <p class="card-text">Analyse, Konzept & Maßnahmenplan – passgenau auf Objekt und Risiko.</p>
+        </article>
       </div>
     </section>
 
-    <!-- TEAM -->
+    <!-- Warum wir (jetzt als Karten mit Glow) -->
+    <section id="why" class="max-w-6xl mx-auto py-16 px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Warum wir</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="card">
+          <h3 class="card-title">Qualifiziertes Personal</h3>
+          <p class="card-text">§34a‑Nachweis, regelmäßige Schulungen, einsatzerprobte Teams.</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Feste Ansprechpartner</h3>
+          <p class="card-text">Direkte Kommunikation statt Hotline – schnell & verbindlich.</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Flexibel 24/7</h3>
+          <p class="card-text">Berlin & Brandenburg – kurzfristige Starts, stabile Abläufe.</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Digitale Protokolle</h3>
+          <p class="card-text">GPS‑Nachweise, Übergaben und Vorkommnisse dokumentiert.</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Vertraulich & diskret</h3>
+          <p class="card-text">Loyalität, Verschwiegenheit und respektvolles Auftreten.</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Zusatzqualifikationen</h3>
+          <p class="card-text">Erste Hilfe, ASG, Fremdsprachen; Spezialschulungen auf Wunsch.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Werte (4 Karten mit Icons/Glow wie gehabt) -->
+    <section id="values" class="max-w-6xl mx-auto py-16 px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Unsere Werte</h2>
+      <div class="grid md:grid-cols-4 gap-6">
+        <article class="card text-center">
+          <div class="icon-wrap mx-auto">
+            <svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5l7-3z"/></svg>
+          </div>
+          <h3 class="card-title">Vertrauen</h3>
+          <p class="card-text">Diskret, loyal, verlässlich – die Basis jeder Zusammenarbeit.</p>
+        </article>
+        <article class="card text-center">
+          <div class="icon-wrap mx-auto">
+            <svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M3 12h18M12 3v18"/></svg>
+          </div>
+          <h3 class="card-title">Präzision</h3>
+          <p class="card-text">Sorgfältige Planung und saubere Dokumentation jedes Einsatzes.</p>
+        </article>
+        <article class="card text-center">
+          <div class="icon-wrap mx-auto">
+            <svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M13 3l-1 9h9l-9 9 1-9H4l9-9z"/></svg>
+          </div>
+          <h3 class="card-title">Reaktionsstärke</h3>
+          <p class="card-text">Schnell, strukturiert, lösungsorientiert – im Alltag & im Ernstfall.</p>
+        </article>
+        <article class="card text-center">
+          <div class="icon-wrap mx-auto">
+            <svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M5 12h14M5 12a7 7 0 0014 0 7 7 0 00-14 0z"/></svg>
+          </div>
+          <h3 class="card-title">Respekt</h3>
+          <p class="card-text">Wertschätzung gegenüber Auftraggebern, Gästen und Team.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Team -->
     <section id="team" class="max-w-6xl mx-auto py-16 px-6" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 text-center mb-12">Unser Team</h2>
       <div class="grid md:grid-cols-3 gap-10 text-center">
-        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg">
+        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg hover:shadow-yellow-500/20 transition">
           <div class="w-24 h-24 rounded-full mx-auto bg-gray-600 mb-4"></div>
           <h3 class="text-xl font-semibold text-white">Philipp D. B.</h3>
-          <p class="text-gray-300">Geschäftsführer</p>
+          <p class="text-yellow-500">Geschäftsführer</p>
+          <p class="text-gray-300 mt-2">Verantwortet Strategie, Qualitätssicherung und Kundenerfolg – mit Fokus auf planbare, robuste Abläufe.</p>
         </div>
-        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg">
+        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg hover:shadow-yellow-500/20 transition">
           <div class="w-24 h-24 rounded-full mx-auto bg-gray-600 mb-4"></div>
           <h3 class="text-xl font-semibold text-white">Beatrix K.</h3>
-          <p class="text-gray-300">Assistentin der Geschäftsführung und Personalmanagement</p>
+          <p class="text-yellow-500">Assistentin der Geschäftsführung & Personalmanagement</p>
+          <p class="text-gray-300 mt-2">Steuert Disposition & Kommunikation, sorgt für reibungslose Schichtplanung und klare Prozesse.</p>
         </div>
-        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg">
+        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg hover:shadow-yellow-500/20 transition">
           <div class="w-24 h-24 rounded-full mx-auto bg-gray-600 mb-4"></div>
           <h3 class="text-xl font-semibold text-white">Justin G.</h3>
-          <p class="text-gray-300">Einsatzkoordinator</p>
+          <p class="text-yellow-500">Einsatzkoordinator</p>
+          <p class="text-gray-300 mt-2">Schnittstelle zwischen Kunde und Team: koordiniert Einsätze, priorisiert Meldungen und hält alle informiert.</p>
         </div>
       </div>
     </section>
 
-    <!-- KARRIERE -->
+    <!-- Karriere -->
     <section id="jobs" class="max-w-3xl mx-auto py-16 px-6" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-6 text-center">Karriere bei Nautilus</h2>
       <p class="text-gray-300 text-center mb-6">
         Du hast Erfahrung im Sicherheitsdienst, bist zuverlässig und teamfähig? Dann werde Teil von Nautilus Security.
       </p>
-      <ul class="list-disc pl-6 space-y-2 text-gray-300">
+      <ul class="list-[square] pl-6 space-y-2 text-gray-300 marker:text-yellow-500">
         <li>Gültige §34a-Sachkundeprüfung</li>
         <li>Gepflegtes Auftreten & Deutschkenntnisse</li>
         <li>Bereitschaft zu Nacht- & Wochenendschichten</li>
         <li>Zusatzqualifikationen wie Waffensachkunde, Erste Hilfe oder Fremdsprachen von Vorteil</li>
       </ul>
       <div class="text-center mt-8">
-        <button data-target="contact" class="cta-btn bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition">Jetzt bewerben</button>
+        <button data-target="career-form" class="cta-btn bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition">Jetzt bewerben</button>
       </div>
     </section>
 
-    <!-- ONLINE-BEWERBUNG -->
+    <!-- Online-Bewerbung -->
     <section id="career-form" class="max-w-3xl mx-auto pt-2 pb-16 px-6" data-aos="fade-up">
       <h3 class="text-2xl font-semibold text-yellow-500 mb-4">Online-Bewerbung</h3>
       <form id="careerForm" class="space-y-4">
@@ -361,82 +279,58 @@
       </form>
     </section>
 
-    <!-- FAQ -->
+    <!-- FAQ (Accordion) -->
     <section id="faq" class="max-w-3xl mx-auto py-16 px-6" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-6">Häufige Fragen (FAQ)</h2>
-      <div class="space-y-6 text-gray-300">
-        <div>
-          <h3 class="font-semibold text-white">Welche Einsatzgebiete deckt Nautilus Security ab?</h3>
-          <p>Wir sind in Berlin und Umgebung tätig und decken sämtliche Anforderungen vom Objektschutz bis zum Eventschutz ab.</p>
+      <div class="space-y-3" id="faqList">
+        <div class="faq-item">
+          <button class="faq-q">Welche Einsatzgebiete deckt Nautilus Security ab?</button>
+          <div class="faq-a">Berlin und Brandenburg – vom Objektschutz bis zum Eventschutz, flexibel und skalierbar.</div>
         </div>
-        <div>
-          <h3 class="font-semibold text-white">Wie kurzfristig sind Einsätze möglich?</h3>
-          <p>In vielen Fällen können wir bereits innerhalb von 24 Stunden Personal bereitstellen – kontaktieren Sie uns direkt!</p>
+        <div class="faq-item">
+          <button class="faq-q">Wie schnell können Einsätze starten?</button>
+          <div class="faq-a">In vielen Fällen innerhalb von 24 Stunden. Für Akutfälle sprechen Sie uns direkt an.</div>
         </div>
-        <div>
-          <h3 class="font-semibold text-white">Bieten Sie auch bewaffnete Sicherheitsdienste an?</h3>
-          <p>Ja, wir verfügen über Mitarbeiter mit Waffensachkunde nach §7 WaffG – bitte sprechen Sie uns für spezielle Anforderungen an.</p>
+        <div class="faq-item">
+          <button class="faq-q">Gibt es digitale Protokolle?</button>
+          <div class="faq-a">Ja. Revierfahrten, Übergaben und Vorkommnisse werden transparent dokumentiert.</div>
         </div>
-        <div>
-          <h3 class="font-semibold text-white">Ist eine langfristige Zusammenarbeit möglich?</h3>
-          <p>Ja, wir bieten sowohl kurzfristige als auch dauerhafte Sicherheitslösungen mit festen Ansprechpartnern.</p>
+        <div class="faq-item">
+          <button class="faq-q">Bieten Sie Personenschutz an?</button>
+          <div class="faq-a">Ja, mit unauffälliger Begleitung, Risikobewertung und abgestimmter Einsatzplanung.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Langfristige Zusammenarbeit möglich?</button>
+          <div class="faq-a">Ja. Von kurzfristigen Lösungen bis zu dauerhaften Rahmenverträgen – mit festen Ansprechpartnern.</div>
         </div>
       </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section id="testimonials" class="bg-[#111827] py-20 px-6" data-aos="fade-up">
+    <!-- Testimonials (3er-Slider) -->
+    <section id="testimonials" class="bg-[#111827] py-20 px-6 overflow-hidden" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 text-center mb-8">Was unsere Kunden sagen</h2>
-      <div class="max-w-6xl mx-auto relative">
-        <div class="flex justify-between items-center mb-6">
-          <button id="tsPrev" class="px-3 py-2 rounded bg-gray-800 hover:bg-gray-700 text-sm">← Zurück</button>
-          <div class="text-gray-400 text-sm">3 von 9 Bewertungen werden gleichzeitig angezeigt</div>
-          <button id="tsNext" class="px-3 py-2 rounded bg-gray-800 hover:bg-gray-700 text-sm">Weiter →</button>
-        </div>
-        <div id="tsTrack" class="grid md:grid-cols-3 gap-6">
-          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
-            <p class="text-gray-300 italic">„Diskret, pünktlich und immer lösungsorientiert. Unsere Nachtlogistik läuft seitdem ohne Zwischenfälle.“</p>
-            <p class="text-yellow-500 font-bold mt-3">– R. Stein, Logistikleiter</p>
-          </article>
-          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
-            <p class="text-gray-300 italic">„Kurzfristig Personal gestellt und direkt Struktur reingebracht. Top Koordination.“</p>
-            <p class="text-yellow-500 font-bold mt-3">– C. Werner, Bauprojektleitung</p>
-          </article>
-          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
-            <p class="text-gray-300 italic">„Angenehm unauffällig, aber präsent. Gäste fühlten sich sicher, Abläufe blieben entspannt.“</p>
-            <p class="text-yellow-500 font-bold mt-3">– M. Aziz, Veranstalter</p>
-          </article>
-          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
-            <p class="text-gray-300 italic">„Transparente Kommunikation, digitale Übergaben, keine leeren Versprechen – so muss es sein.“</p>
-            <p class="text-yellow-500 font-bold mt-3">– M. Reuter, Facility Manager</p>
-          </article>
-          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
-            <p class="text-gray-300 italic">„Endlich verlässliche Revierfahrten. Vorkommnisse sauber dokumentiert und zeitnah gemeldet.“</p>
-            <p class="text-yellow-500 font-bold mt-3">– M. Lenz, Immobilienverwaltung</p>
-          </article>
-          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
-            <p class="text-gray-300 italic">„Auch an Wochenenden schnell reagiert. Professionelles Auftreten am Empfang, sehr kundenorientiert.“</p>
-            <p class="text-yellow-500 font-bold mt-3">– M. Hahn, Office Management</p>
-          </article>
-          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
-            <p class="text-gray-300 italic">„Diebstähle auf der Baustelle aufgehört. Präsenz und Abstimmung mit der Polizei tadellos.“</p>
-            <p class="text-yellow-500 font-bold mt-3">– M. Ulrich, Bauherr</p>
-          </article>
-          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
-            <p class="text-gray-300 italic">„Mehrsprachige Teams waren für unser internationales Event Gold wert.“</p>
-            <p class="text-yellow-500 font-bold mt-3">– M. Pereira, Eventkoordination</p>
-          </article>
-          <article class="ts-card bg-[#1f2937] p-6 rounded-lg shadow-md">
-            <p class="text-gray-300 italic">„Schnell, ruhig, professionell. Genau die Art Sicherheitsdienst, die man selten findet.“</p>
-            <p class="text-yellow-500 font-bold mt-3">– L. Berger, Hoteldirektion</p>
-          </article>
+      <div class="max-w-6xl mx-auto">
+        <div id="tsViewport" class="relative overflow-hidden">
+          <div id="tsTrack" class="flex transition-transform duration-700 ease-in-out will-change-transform"></div>
         </div>
       </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="contact" class="max-w-2xl mx-auto py-16 px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-6">Kontakt aufnehmen</h2>
+      <form id="contactForm" class="space-y-4">
+        <input name="name" type="text" placeholder="Ihr Name" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+        <input name="email" type="email" placeholder="Ihre E-Mail" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+        <textarea name="message" placeholder="Ihre Nachricht..." rows="5" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required></textarea>
+        <button type="submit" class="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition-transform transform hover:scale-105">Absenden</button>
+        <p id="contactStatus" class="text-sm mt-2"></p>
+      </form>
     </section>
   </main>
 
   <!-- Sticky CTA -->
-  <button id="stickyCta" class="sticky-cta fixed bottom-6 right-6 bg-yellow-500 text-black px-5 py-3 rounded-full text-sm shadow-lg hover:bg-yellow-400 transition z-50 animate-bounce">📞 Jetzt anfragen</button>
+  <button id="stickyCta" class="sticky-cta fixed right-6 bg-yellow-500 text-black px-5 py-3 rounded-full text-sm shadow-lg hover:bg-yellow-400 transition z-50 animate-bounce">📞 Jetzt anfragen</button>
 
   <!-- Footer -->
   <footer class="bg-[#0a0f1c] text-yellow-500 p-4 text-center text-sm border-t border-yellow-500">
