@@ -1,95 +1,111 @@
-/* kleine Utilitys */
-.sec-title{ @apply text-3xl font-bold text-yellow-500; }
-.inp{ @apply w-full p-3 rounded bg-gray-800 border border-gray-700 text-white; }
+// Year
+document.getElementById('year').textContent = new Date().getFullYear();
 
-/* Karten-Styles (entsprechen deinem Look) */
-.card{
-  background:#1f2937; /* slate-800 */
-  border-radius:14px;
-  padding:18px;
-  box-shadow:0 6px 20px rgba(0,0,0,.25);
-  border:1px solid rgba(255,215,0,.12);
-}
-.card-elev{ position:relative; transition:transform .25s ease, box-shadow .25s ease; }
-.card-elev:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,0,0,.35), 0 0 0 2px rgba(245,197,24,.18) inset; }
-.card-badge{
-  width:36px;height:36px; border-radius:10px;
-  display:grid;place-items:center;
-  background:rgba(245,197,24,.12); color:#facc15; /* yellow-400 */
-  margin-bottom:10px; font-size:18px;
-}
-.card-title{ font-weight:700; color:#fff; margin-bottom:6px; }
-.card-text{ color:#cbd5e1; line-height:1.5; }
+// Smooth scroll for nav + sticky CTA
+document.querySelectorAll('[data-target]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const id = btn.getAttribute('data-target');
+    document.getElementById(id)?.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+document.getElementById('stickyCta').addEventListener('click', ()=> {
+  document.getElementById('contact')?.scrollIntoView({behavior:'smooth'});
+});
 
-/* Werte-Icons */
-.icon-dot{
-  width:42px;height:42px;border-radius:9999px;
-  display:grid;place-items:center;
-  background:rgba(245,197,24,.12); color:#facc15;
-  margin:0 auto 10px auto; font-size:18px;
-}
+// Nav highlight (IntersectionObserver)
+(function(){
+  const links = document.querySelectorAll(".nav-link");
+  const sections = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"].map(id=>document.getElementById(id)).filter(Boolean);
+  const map = {};
+  links.forEach(l=> map[l.getAttribute('data-target')] = l);
 
-/* Sticky CTA safe-area */
-.sticky-cta{ bottom:calc(env(safe-area-inset-bottom) + 1.5rem); }
-.sticky-cta.cta-lift{ bottom:calc(env(safe-area-inset-bottom) + 6.5rem); }
-@media (max-width:640px){ .cta-lift{ bottom:6.5rem !important } }
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const id = e.target.id;
+      links.forEach(l=> l.classList.toggle('active', l.getAttribute('data-target')===id));
+    });
+  },{rootMargin:"-45% 0px -55% 0px", threshold:0.01});
+  sections.forEach(s=>obs.observe(s));
+})();
 
-/* ===== FAQ – komplett überarbeitet ===== */
-#faqList{ list-style:none; padding:0; margin:0; }
-.faq-item{
-  background:#1f2937;
-  border:1px solid rgba(245,197,24,.15);
-  border-radius:14px;
-  overflow:hidden; /* damit nichts herausragt */
-  transition:box-shadow .25s ease, border-color .25s ease, transform .25s ease;
-}
-.faq-item:hover{
-  box-shadow:0 10px 26px rgba(0,0,0,.35), 0 0 0 2px rgba(245,197,24,.18) inset;
-  transform:translateY(-1px);
-}
-.faq-q{
-  width:100%;
-  display:flex; align-items:center; justify-content:space-between;
-  gap:16px;
-  background:transparent;
-  border:0; outline:0;
-  text-align:left;
-  padding:16px 18px;
-  font-weight:700;
-  color:#e5e7eb; /* gray-200 */
-  cursor:pointer;
-}
-.faq-q .chev{ color:#facc15; transition:transform .25s ease; }
-.faq-item.open .faq-q .chev{ transform:rotate(180deg); }
+// ===== FAQ: ganze Karte klickbar, weich, keine Linie =====
+(function(){
+  const items = document.querySelectorAll('#faqList .faq-item');
+  items.forEach(item=>{
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
 
-/* Antwort mit smooth height */
-.faq-a{
-  color:#cbd5e1;
-  padding:0 18px; /* Start ohne vertical padding */
-  max-height:0;
-  overflow:hidden;
-  transition:max-height .32s ease, padding .25s ease;
-}
-.faq-item.open .faq-a{
-  padding:10px 18px 16px 18px;               /* weiches Ein-/Ausblenden */
-  max-height:400px; /* genug Platz für kurze Antworten */
-}
+    // Start geschlossen
+    a.style.maxHeight = '0px';
 
-/* Entfernt jede “Trennlinie”-Optik */
-.faq-q::after, .faq-a::before{ content:none !important; }
+    const toggle = ()=>{
+      const open = item.classList.contains('open');
+      // Single-open: zuerst alle schließen
+      document.querySelectorAll('#faqList .faq-item.open').forEach(it=>{
+        if(it!==item){
+          it.classList.remove('open');
+          const aa = it.querySelector('.faq-a');
+          aa.style.maxHeight = '0px';
+        }
+      });
+      if(!open){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }else{
+        item.classList.remove('open');
+        a.style.maxHeight = '0px';
+      }
+    };
 
-/* Testimonials */
-.ts-card{
-  background:#1f2937; border:1px solid rgba(245,197,24,.12);
-  border-radius:14px; padding:18px; color:#e5e7eb;
-}
-.ts-card .quote{ font-style:italic; }
-.ts-card .author{ margin-top:10px; color:#fbbf24; font-weight:700; }
+    // ganze Karte klickbar
+    q.addEventListener('click', toggle);
+    item.addEventListener('click', (e)=>{
+      // nur wenn nicht auf Links/Buttons in der Antwort geklickt wird
+      if(e.target.closest('.faq-a a, .faq-a button')) return;
+      if(e.target.closest('.faq-q')) return; // schon oben behandelt
+      toggle();
+    });
 
-/* Light theme readability fallback (falls du mal togglest) */
-body.bg-white.text-black{ color:#111 }
-body.bg-white.text-black h1, 
-body.bg-white.text-black h2, 
-body.bg-white.text-black h3{ color:#1a1a1a }
-body.bg-white.text-black p, 
-body.bg-white.text-black li{ color:#333 }
+    // bei Resize Höhe neu setzen (offene Items)
+    window.addEventListener('resize', ()=>{
+      if(item.classList.contains('open')) a.style.maxHeight = a.scrollHeight + 'px';
+    });
+  });
+})();
+
+// ===== Testimonials: 3 gleichzeitig, Auto-Slide alle 5s =====
+(function(){
+  const track = document.getElementById('tsTrack');
+  if(!track) return;
+
+  const items = [
+    {t:"„Diskret, pünktlich und lösungsorientiert. Unsere Nachtlogistik läuft ohne Zwischenfälle.“", a:"– R. Stein, Logistikleiter"},
+    {t:"„Kurzfristig Personal gestellt und direkt Struktur reingebracht. Top Koordination.“", a:"– C. Werner, Bauprojektleitung"},
+    {t:"„Unauffällig, aber präsent. Gäste fühlten sich sicher, Abläufe blieben entspannt.“", a:"– M. Aziz, Veranstalter"},
+    {t:"„Transparente Kommunikation, digitale Übergaben – keine leeren Versprechen.“", a:"– M. Reuter, Facility Manager"},
+    {t:"„Verlässliche Revierfahrten. Vorkommnisse sauber dokumentiert und zeitnah gemeldet.“", a:"– M. Lenz, Immobilienverwaltung"},
+    {t:"„Wochenends schnell reagiert. Professionelles Auftreten am Empfang – sehr kundenorientiert.“", a:"– M. Hahn, Office Management"},
+    {t:"„Diebstähle auf der Baustelle aufgehört – starke Präsenz, gute Abstimmung mit der Polizei.“", a:"– M. Ulrich, Bauherr"},
+    {t:"„Mehrsprachige Teams – für unser internationales Event Gold wert.“", a:"– M. Pereira, Eventkoordination"},
+    {t:"„Schnell, ruhig, professionell. Genau die Art Sicherheitsdienst, die man selten findet.“", a:"– L. Berger, Hoteldirektion"}
+  ];
+
+  const render = (start)=>{
+    track.innerHTML = "";
+    const slice = [];
+    for(let i=0;i<3;i++){
+      slice.push(items[(start+i)%items.length]);
+    }
+    slice.forEach(({t,a})=>{
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.innerHTML = `<p class="italic text-gray-200">${t}</p><p class="mt-3 font-bold text-yellow-500">${a}</p>`;
+      track.appendChild(card);
+    });
+  };
+
+  let idx = 0;
+  render(idx);
+  setInterval(()=>{ idx = (idx+3)%items.length; track.style.opacity = 0; setTimeout(()=>{ render(idx); track.style.opacity = 1; }, 250); }, 5000);
+})();
