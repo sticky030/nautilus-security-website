@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Nautilus × ZÜBLIN – Kombi-Seite (Premium A4)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{ --navy:#0E2235; --navy2:#132a40; --gold:#C79A3A; --ink:#0e0e0e; --muted:#5b6168; --line:#e7e7e7; }
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Helvetica,Arial,sans-serif; line-height:1.55}
+.page{width:210mm; min-height:297mm; margin:0 auto; padding:0}
+.header{
+  background:linear-gradient(180deg,var(--navy),var(--navy2));
+  color:#fff; padding:18mm 16mm 12mm 16mm; position:relative;
+}
+.brand{display:flex; align-items:center; gap:12mm}
+.brand img{height:22mm; display:block; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));}
+.title{flex:1}
+.kicker{letter-spacing:.12em; text-transform:uppercase; opacity:.85; font-size:11pt}
+h1{margin:2mm 0 1mm; font-size:23pt; letter-spacing:.2px}
+.sub{font-size:12.5pt; opacity:.9}
+.ribbon{position:absolute; left:0; bottom:0; width:100%; height:3mm; background:var(--gold)}
+.main{padding:14mm 16mm}
+.grid{display:grid; grid-template-columns: 3fr 2fr; gap:12mm}
+.section h2{margin:0 0 4mm; font-size:13.5pt; color:var(--navy)}
+.section{margin:0 0 9mm}
+ul{margin:0; padding-left:5mm}
+li{margin:2mm 0}
+li::marker{color:var(--gold)}
+.card{border:1.6px solid var(--gold); border-radius:8px; padding:7mm; background:#fff}
+.card h3{margin:0 0 4mm; font-size:12.5pt; color:var(--navy)}
+.meta p{margin:2mm 0}
+.qr{margin-top:6mm; display:flex; align-items:center; gap:7mm}
+.qr img{width:36mm; height:36mm; border:1px solid var(--line); border-radius:6px}
+.qr small{color:var(--muted)}
+.footer{padding:8mm 16mm 12mm; border-top:1px solid var(--line); color:var(--navy); font-size:10pt}
+.small{color:var(--muted); font-size:9.5pt}
+
+.badge{display:inline-block; padding:2mm 3.5mm; border:1px solid var(--gold);
+  border-radius:999px; font-size:10pt; color:var(--gold); margin-top:2mm}
+
+@media print{
+  @page{size:A4; margin:8mm}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <div class="brand">
+      <img src="./logo-gold-transparent.png" alt="Nautilus Security">
+      <div class="title">
+        <div class="kicker">Nautilus Security UG (haftungsbeschränkt)</div>
+        <h1>Nautilus Security × ZÜBLIN</h1>
+        <div class="sub">Nachtwache 22:00–06:00 · Einsatzstart ≤ 72&nbsp;Stunden</div>
+        <div class="badge">72-h Pilot · Leistungsgarantie</div>
+      </div>
+    </div>
+    <div class="ribbon"></div>
+  </header>
+
+  <main class="main">
+    <section class="grid">
+      <div>
+        <div class="section">
+          <h2>Einsatzversprechen</h2>
+          <ul>
+            <li><strong>Präzise Präsenz</strong>: feste Teams, ruhiger, de-eskalierender Auftritt.</li>
+            <li><strong>Erreichbarkeit</strong>: Einsatzleitung 24/7, Reaktionszeit &lt; 5&nbsp;Min; Backup bei Ausfall ≤ 60&nbsp;Min.</li>
+            <li><strong>Qualität</strong>: wöchentliche Kurz-Audits (Zaun, Beleuchtung, Container, Aggregate).</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h2>Dokumentation</h2>
+          <ul>
+            <li><strong>Schichtberichte</strong> mit zeitgestempelten Fotobelegen je Takt (8-Takt-Rundgangmatrix).</li>
+            <li><strong>Ticket-ID & KPI-Kurzlage</strong> (5-Min-Read) zum Wochenstart.</li>
+            <li><strong>DSGVO-konform</strong>: keine Personen/Kennzeichen in Bilddokumentation.</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h2>Insider-Fokus</h2>
+          <ul>
+            <li>Priorisierte Takte im Hot-Spot-Fenster <strong>23:00–03:00</strong> (Metall, Kabel, Diesel).</li>
+            <li>Zusatzaugen auf Container, Schächte, Aggregate – in jedem Takt belegt.</li>
+          </ul>
+        </div>
+      </div>
+
+      <aside>
+        <div class="card meta">
+          <h3>Konditionen</h3>
+          <p><strong>Sicherheitsmitarbeiter:</strong> 34&nbsp;€/Std (Nacht/werktags)</p>
+          <p><strong>Feiertage/Kurzabrufe:</strong> Aufschläge gem. Bestätigung</p>
+          <p><strong>Start-SLA:</strong> ≤ 72&nbsp;h ab Freigabe</p>
+        </div>
+
+        <div class="card" style="margin-top:8mm">
+          <h3>Absicherung</h3>
+          <ul>
+            <li>Bewachungshaftpflicht <strong>10&nbsp;Mio. €</strong> pauschal</li>
+            <li>inkl. <strong>Schlüsselverlust</strong>, <strong>Obhuts-/Tätigkeits-</strong> & <strong>reine Vermögensschäden</strong></li>
+          </ul>
+          <div class="qr">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fsticky030.github.io%2Fnautilus-security-website%2Fzueblin.html%3Futm_source%3Dbox%26utm_medium%3Dqr%26utm_campaign%3Dzueblin_pilot" alt="QR zur ZÜBLIN-Seite">
+            <small>Landing öffnen · Begehung anfragen · Musterberichte & Deckungsbestätigung</small>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="section">
+      <h2>72-Stunden-Pilot mit Leistungsgarantie</h2>
+      <ul>
+        <li>Regel-Setup, vollständige Doku. Falls nicht überzeugt: <strong>Gutschrift der letzten Nacht</strong>.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="footer">
+    Nautilus Security UG (haftungsbeschränkt) · GF: Philipp De Boer · M: 0176&nbsp;2284&nbsp;4636 · E: Philipp.deboer97@yahoo.com
+    <div class="small">Deckungsbestätigung (BHV 10&nbsp;Mio.) beiliegt.</div>
+  </footer>
+</div>
+</body>
+</html>
