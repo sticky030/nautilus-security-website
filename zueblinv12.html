@@ -2,80 +2,40 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>Nautilus × ZÜBLIN – Kombi-Seite (Navy/Gold A4 v9c)</title>
+<title>Nautilus × ZÜBLIN – Kombi-Seite (Navy/Gold A4 v9d)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-:root{
-  --navy:#0E2235; --navy-2:#152b42; --gold:#C79A3A;
-  --text:#F4F6F8; --text-2:#CBD6E2; --line:rgba(199,154,58,.42);
-}
+:root{ --navy:#0E2235; --navy-2:#152b42; --gold:#C79A3A; --text:#F4F6F8; --text-2:#CBD6E2; --line:rgba(199,154,58,.42) }
 *{box-sizing:border-box}
-html,body{
-  margin:0; background:var(--navy); color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Helvetica,Arial,sans-serif;
-  line-height:1.6; letter-spacing:.01em;
-}
-.page{width:210mm; min-height:297mm; margin:0 auto; padding:14mm 12mm 16mm}
-
-/* Header */
-.header{display:flex; align-items:center; gap:12mm; margin-bottom:8mm}
-.logo img{height:40mm; display:block; filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
-.hgroup h1{margin:0; font-size:27pt; letter-spacing:.02em}
-.hgroup .sub{margin-top:3mm; font-size:12.5pt; color:var(--text-2); letter-spacing:.01em}
-.badge{
-  display:inline-block; margin-top:7mm; padding:3.2mm 8mm; border:1px solid var(--gold);
-  color:var(--gold); border-radius:999px; font-weight:600; font-size:10.5pt; letter-spacing:.02em
-}
-.rule{height:0; border:0; border-top:2px solid var(--gold); margin:7mm 0 0}
-
-/* Grid (linke Spalte breiter) */
-.grid{display:grid; grid-template-columns: 1.8fr 1fr; gap:10mm; margin-top:10mm}
-.section h2{margin:0 0 4mm; font-size:14.5pt; letter-spacing:.01em}
-.section{margin:0 0 9mm}
-ul{margin:0; padding-left:6mm; line-height:1.62}
-li{margin:2mm 0} li::marker{color:var(--gold)}
-
-/* Karten */
-.card{
-  background:var(--navy-2); border:1.3px solid var(--line); border-radius:12px; padding:8mm;
-  box-shadow:0 1px 0 rgba(0,0,0,.2); break-inside:avoid; page-break-inside:avoid;
-}
-.card h3{margin:0 0 4mm; font-size:13.2pt}
-.card p{margin:2mm 0; color:var(--text-2)}
-.card ul{padding-left:6mm}
-
-/* Verhindere unschöne PDF-Umbrüche */
-.section{break-inside:avoid; page-break-inside:avoid}
-
-/* QR – veredelt + Logo-Badge + Kurz-URL */
-.qr{margin-top:7mm; display:flex; align-items:center; gap:7mm; flex-wrap:wrap}
-.qr .box{
-  position:relative; background:#fff; padding:5mm; border-radius:10px;
-  border:2px solid var(--gold); box-shadow:0 3px 10px rgba(0,0,0,.25);
-}
-.qr .box::after{ content:""; position:absolute; inset:3.5mm; border-radius:6px; border:.6px solid #e6e6e6; }
-.qr img.qr-img{width:40mm; height:40mm; display:block; border-radius:4px;
-  image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges;}
-.qr .logo-badge{
-  position:absolute; inset:0; margin:auto; width:9.5mm; height:9.5mm;
-  background:#fff; border:2px solid var(--gold); border-radius:50%;
-  display:flex; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,.15)
-}
-.qr .logo-badge img{width:70%; height:auto; display:block}
-.qr small{color:var(--text-2)}
-.shorturl{font-size:8.5pt; color:var(--text-2); margin-top:2mm}
-
-/* Footer + Micro-Signatur + Kleingedrucktes */
-.footer{margin-top:14mm; padding-top:8mm; border-top:1px solid var(--line); color:var(--text-2); font-size:10pt}
-.footer strong{color:var(--text)}
-.signature{margin-top:3mm; font-size:9.5pt; color:var(--text-2)}
-.smallnote{margin-top:4mm; font-size:9pt; color:var(--text-2)}
-
-/* Print */
-@media print{
-  @page{ size:A4; margin:10mm }
-  body{ -webkit-print-color-adjust:exact; print-color-adjust:exact }
-}
+html,body{ margin:0; background:var(--navy); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Helvetica,Arial,sans-serif; line-height:1.6; letter-spacing:.01em }
+.page{ width:210mm; min-height:297mm; margin:0 auto; padding:14mm 12mm 16mm }
+.header{ display:flex; align-items:center; gap:12mm; margin-bottom:8mm }
+.logo img{ height:40mm; display:block; filter:drop-shadow(0 2px 6px rgba(0,0,0,.35)) }
+.hgroup h1{ margin:0; font-size:27pt; letter-spacing:.02em }
+.hgroup .sub{ margin-top:3mm; font-size:12.5pt; color:var(--text-2); letter-spacing:.01em }
+.badge{ display:inline-block; margin-top:7mm; padding:3.2mm 8mm; border:1px solid var(--gold); color:var(--gold); border-radius:999px; font-weight:600; font-size:10.5pt; letter-spacing:.02em }
+.rule{ height:0; border:0; border-top:2px solid var(--gold); margin:7mm 0 0 }
+.grid{ display:grid; grid-template-columns:1.8fr 1fr; gap:10mm; margin-top:10mm }
+.section h2{ margin:0 0 4mm; font-size:14.5pt; letter-spacing:.01em }
+.section{ margin:0 0 9mm; break-inside:avoid; page-break-inside:avoid }
+ul{ margin:0; padding-left:6mm; line-height:1.62 }
+li{ margin:2mm 0 } li::marker{ color:var(--gold) }
+.card{ background:var(--navy-2); border:1.3px solid var(--line); border-radius:12px; padding:8mm; box-shadow:0 1px 0 rgba(0,0,0,.2); break-inside:avoid; page-break-inside:avoid }
+.card h3{ margin:0 0 4mm; font-size:13.2pt }
+.card p{ margin:2mm 0; color:var(--text-2) }
+.qr{ margin-top:7mm; display:flex; align-items:center; gap:7mm; flex-wrap:wrap }
+.qr .box{ position:relative; background:#fff; padding:5mm; border-radius:10px; border:2px solid var(--gold); box-shadow:0 3px 10px rgba(0,0,0,.25) }
+.qr .box::after{ content:""; position:absolute; inset:3.5mm; border-radius:6px; border:.6px solid #e6e6e6 }
+.qr img.qr-img{ width:40mm; height:40mm; display:block; border-radius:4px; image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges }
+.qr .logo-badge{ position:absolute; inset:0; margin:auto; width:9.5mm; height:9.5mm; background:#fff; border:2px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,.15) }
+.qr .logo-badge img{ width:70%; height:auto; display:block }
+.qr small{ color:var(--text-2) }
+.shorturl{ font-size:8.5pt; color:var(--text-2); margin-top:2mm }
+.footer{ margin-top:14mm; padding-top:8mm; border-top:1px solid var(--line); color:var(--text-2); font-size:10pt }
+.footer strong{ color:var(--text) }
+.signature{ margin-top:3mm; font-size:9.5pt; color:var(--text-2) }
+.smallnote{ margin-top:4mm; font-size:9pt; color:var(--text-2) }
+@media print{ @page{ size:A4; margin:10mm } body{ -webkit-print-color-adjust:exact; print-color-adjust:exact } }
 </style>
 </head>
 <body>
@@ -85,7 +45,6 @@ li{margin:2mm 0} li::marker{color:var(--gold)}
     <div class="logo"><img src="./logo-gold-transparent.png" alt="Nautilus Security – Nautilus-Logo"></div>
     <div class="hgroup">
       <h1>Nautilus Security × ZÜBLIN</h1>
-      <!-- kurze, präzise Subline -->
       <div class="sub">Nachtwache 22:00–06:00 · Start ≤ 72&nbsp;h · <span style="opacity:.9">z. Hd. Herrn von&nbsp;Bülow</span></div>
       <div class="badge">72-h Pilot • Leistungsgarantie</div>
     </div>
@@ -93,7 +52,6 @@ li{margin:2mm 0} li::marker{color:var(--gold)}
   <hr class="rule">
 
   <main class="grid">
-    <!-- Linke Spalte (inkl. Absicherung) -->
     <section>
       <div class="section">
         <h2>Einsatzversprechen</h2>
@@ -135,7 +93,6 @@ li{margin:2mm 0} li::marker{color:var(--gold)}
       </div>
     </section>
 
-    <!-- Rechte Spalte (Funnel) -->
     <aside>
       <div class="card">
         <h3>Konditionen</h3>
@@ -151,8 +108,7 @@ li{margin:2mm 0} li::marker{color:var(--gold)}
           <li><strong>72-h Pilot Fr–So</strong>, <strong>Einsatzleitung vor Ort (60&nbsp;Min)</strong> am Startabend.</li>
           <li><strong>KPI-Kurzlage Mo 09:00</strong> an die Bauleitung.</li>
           <li><strong>Reaktionskette ≤&nbsp;2&nbsp;Min</strong>: Bauleitung · Polier · Einsatzleitung.</li>
-          <li><em>Optional:</em> Startabend mit Doppelbesetzung (2–4&nbsp;Std) auf Wunsch<br>
-              <span style="color:var(--text-2)">zzgl. 34&nbsp;€/Std; schriftliche Freigabe.</span></li>
+          <li><em>Optional:</em> Startabend mit Doppelbesetzung (2–4&nbsp;Std) auf Wunsch<br><span style="color:var(--text-2)">zzgl. 34&nbsp;€/Std; schriftliche Freigabe.</span></li>
           <li><em>Optional:</em> Neutraler Auftritt auf der Baustelle (ohne Branding) auf Wunsch möglich.</li>
         </ul>
         <p style="margin-top:4mm;"><strong>Output:</strong> Schichtbericht (PDF) + Fotobelege (IDs) <strong>spätestens 08:30</strong> am Folgetag.</p>
@@ -169,8 +125,9 @@ li{margin:2mm 0} li::marker{color:var(--gold)}
         </p>
         <div class="qr">
           <div class="box">
+            <!-- QR zeigt jetzt direkt auf die Landingpage -->
             <img class="qr-img"
-                 src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&ecc=H&margin=14&color=C79A3A&bgcolor=FFFFFF&format=png&data=https%3A%2F%2Fsticky030.github.io%2Fnautilus-security-website%2FZueblin.html%3Futm_source%3Dbox%26utm_medium%3Dqr%26utm_campaign%3Dzueblin_pilot%26utm_person%3Dvon_buelow"
+                 src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&ecc=H&margin=14&color=C79A3A&bgcolor=FFFFFF&format=png&data=https%3A%2F%2Fsticky030.github.io%2Fnautilus-security-website%2Fzueblin-landing.html%3Futm_source%3Dbox%26utm_medium%3Dqr%26utm_campaign%3Dzueblin_pilot%26utm_person%3Dvon_buelow"
                  alt="ZÜBLIN-Landing öffnen: Begehung buchen oder 72-h Pilot freigeben">
             <div class="logo-badge">
               <img src="./logo-gold-transparent.png" alt="Nautilus-Logo im QR-Mittelpunkt">
