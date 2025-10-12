@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Kreditoren-Stammdaten · Nautilus Security</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--navy:#0E2235;--navy2:#152b42;--gold:#C79A3A;--text:#F4F6F8;--text2:#CBD6E2;--line:rgba(199,154,58,.42)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Helvetica,Arial,sans-serif}
+.page{width:210mm;min-height:297mm;margin:0 auto;padding:14mm 12mm}
+.header{display:flex;align-items:center;gap:10mm;margin-bottom:6mm}
+.logo img{height:26mm;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+.hgroup h1{margin:0;font-size:18pt}
+hr{border:0;border-top:2px solid var(--gold);margin:6mm 0 8mm}
+.section{background:var(--navy2);border:1px solid var(--line);border-radius:12px;padding:7mm;margin-bottom:7mm}
+.section h2{margin:0 0 4mm;font-size:12.5pt}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+label{display:block;font-size:10pt;color:var(--text2);margin-bottom:2mm}
+input{width:100%;background:#0b1a2b;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:8px 10px;color:#fff;font-size:11pt}
+.full{grid-column:1/-1}
+.note{font-size:9.5pt;color:var(--text2);margin-top:2mm}
+@media print{@page{size:A4;margin:8mm} body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="logo"><img src="./logo-gold-transparent.png" alt="Nautilus-Logo"></div>
+    <div class="hgroup"><h1>Kreditoren-Stammdaten · Nautilus Security UG (haftungsbeschränkt)</h1></div>
+  </div>
+  <hr>
+
+  <div class="section">
+    <h2>Firmendaten</h2>
+    <div class="grid">
+      <div><label>Firma</label><input value="Nautilus Security UG (haftungsbeschränkt)"></div>
+      <div><label>Sitz</label><input value="Berlin"></div>
+      <div><label>GF</label><input value="Philipp De Boer"></div>
+      <div><label>HRB</label><input placeholder="wird nachgereicht"></div>
+      <div><label>USt-IdNr. / St-Nr.</label><input placeholder="wird nachgereicht"></div>
+      <div><label>VBG Betriebs-Nr.</label><input placeholder="wird nachgereicht"></div>
+      <div class="full"><label>Geschäftsadresse</label><input placeholder="Kollwitzstraße 76, 10435 Berlin (ab 01.01.2026)"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Bank & Abrechnung</h2>
+    <div class="grid">
+      <div><label>Bank</label><input placeholder="Commerzbank (beantragt)"></div>
+      <div><label>IBAN</label><input placeholder="wird nachgereicht"></div>
+      <div><label>Zahlungsziel</label><input value="30 Tage netto"></div>
+      <div><label>Rechnungsformat</label><input value="XRechnung / ZUGFeRD 2.2"></div>
+      <div class="full"><label>Rechnung per</label><input value="E-Mail (PDF/ZUGFeRD) oder Portal – nach Vorgabe ZÜBLIN"></div>
+    </div>
+    <div class="note">Bitte Bestell-/Auftrags-Nr. mitteilen – wir referenzieren diese auf der Rechnung.</div>
+  </div>
+
+  <div class="section">
+    <h2>Kontakte</h2>
+    <div class="grid">
+      <div><label>Abrechnung</label><input value="kontakt@nautilus-security.de · 030 985 57 615"></div>
+      <div><label>Einsatzleitung (24/7)</label><input value="0176 2284 4636"></div>
+      <div class="full"><label>Post für Belege</label><input value="digital bevorzugt; postalisch nach Absprache"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Compliance & Versicherung</h2>
+    <div class="grid">
+      <div class="full"><label>Bewachungshaftpflicht</label><input value="10 Mio. € pauschal – Deckungsnote liegt bei"></div>
+      <div><label>§34a GewO</label><input value="Erlaubnis – wird nach Bescheid eingereicht (Dez)"></div>
+      <div><label>DSGVO</label><input value="Fotodoku ohne Personen/Kennzeichen; Datenminimierung"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
