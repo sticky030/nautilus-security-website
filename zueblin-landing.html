@@ -22,22 +22,16 @@ html,body{margin:0;background:var(--navy);color:var(--text);font-family:-apple-s
 .hgroup .sub{margin:6px 0 0;color:var(--text-2);letter-spacing:.01em}
 .badge{display:inline-block;margin-top:10px;padding:6px 12px;border:1px solid var(--gold);color:var(--gold);border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.02em}
 .rule{border:0;border-top:2px solid var(--gold);margin:16px 0 0}
-
-/* Grid & Cards wie Kombi-Seite */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
 @media (max-width:860px){.grid{grid-template-columns:1fr}}
 .card{background:var(--navy-2);border:1.3px solid var(--line);border-radius:12px;padding:18px;box-shadow:0 1px 0 rgba(0,0,0,.2)}
 .card h2{margin:0 0 8px;font-size:18px}
 .card p{margin:6px 0;color:var(--text-2)}
-
-/* Form */
 label{display:block;font-size:13px;margin:10px 0 4px}
 input,textarea,select{width:100%;background:#0b1a2b;color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 12px;font-size:14px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:680px){.row{grid-template-columns:1fr}}
 .help{font-size:12px;color:var(--text-2);margin-top:4px}
-
-/* Actions */
 .actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
 button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;border-radius:999px;padding:10px 16px;font-weight:700}
 .ghost{background:transparent;color:var(--gold);border:1px solid var(--gold);text-decoration:none;display:inline-flex;align-items:center}
@@ -66,7 +60,7 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
     <!-- A) 30-Min-Begehung -->
     <div class="card">
       <h2>Begehung (30&nbsp;Min) buchen</h2>
-      <p>Wunschtermin <strong>frei wählbar</strong> – wir bestätigen werktags in ≤ 60&nbsp;Min. Bei Terminen &lt; 24&nbsp;h bitte zusätzlich kurz anrufen.</p>
+      <p>Wunschtermin <strong>frei wählbar</strong>. Bestätigung werktags in ≤ 60&nbsp;Min. Bei Terminen unter 24&nbsp;h bitte kurz anrufen – wir priorisieren.</p>
 
       <form id="form-begehung" action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST">
         <input type="hidden" name="form_name" value="begehung">
@@ -128,7 +122,7 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
     <!-- B) 72-h Pilot freigeben -->
     <div class="card">
       <h2>72-h Pilot freigeben</h2>
-      <p>Start Fr–So, Einsatzleitung 60&nbsp;Min am Startabend vor Ort. Output: PDF-Schichtbericht + Foto-IDs bis 08:30.</p>
+      <p>Start innerhalb von ≤ 72&nbsp;h. Einsatzleitung 60&nbsp;Min am Startabend vor Ort. Output: Schichtbericht (PDF) &amp; Foto-IDs bis 08:30.</p>
 
       <form id="form-pilot" action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST">
         <input type="hidden" name="form_name" value="pilot72h">
@@ -176,7 +170,7 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
       </form>
 
       <div class="vendor">
-        <strong>Vendor-Pack:</strong>
+        <strong>Unterlagen für den Einkauf:</strong>
         <div><a href="Digitale_Deckungsnote.pdf" target="_blank" rel="noopener">Deckungsnote BHV 10&nbsp;Mio.&nbsp;€ (PDF)</a></div>
         <div><a href="Muster_Schichtbericht.pdf" target="_blank" rel="noopener">Muster Schichtbericht (PDF)</a></div>
         <div><a href="Muster_KPI_Kurzlage.pdf" target="_blank" rel="noopener">Muster KPI-Kurzlage (PDF)</a></div>
@@ -188,6 +182,7 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
     <strong>Nautilus Security UG (haftungsbeschränkt)</strong> · GF: Philipp De Boer ·
     T: 030&nbsp;985&nbsp;57&nbsp;615 · E: kontakt@nautilus-security.de
     <div style="margin-top:6px">Vertraulichkeit: Diese Seite ist ausschließlich für die ZÜBLIN-Direktion Nord-Ost bestimmt.</div>
+    <div style="margin-top:6px">DSGVO-Hinweis: Daten werden ausschließlich zur Terminabstimmung genutzt und nicht an Dritte weitergegeben.</div>
   </footer>
 </div>
 
