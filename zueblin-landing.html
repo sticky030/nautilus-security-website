@@ -7,31 +7,37 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0E2235">
 <meta property="og:title" content="ZÜBLIN · Begehung buchen oder 72-h Pilot freigeben">
-<meta property="og:description" content="Nachtruhe statt Überraschungen. Nachtwache 22:00–06:00 · Start ≤ 72 h · Einsatzleitung am Startabend vor Ort.">
+<meta property="og:description" content="Nachtwache 22:00–06:00 · Start ≤ 72 h · Einsatzleitung am Startabend vor Ort.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="logo-gold-transparent.png">
 <meta property="og:site_name" content="Nautilus Security">
 <style>
 :root{--navy:#0E2235;--navy-2:#152b42;--gold:#C79A3A;--text:#F4F6F8;--text-2:#CBD6E2;--line:rgba(199,154,58,.42)}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Helvetica,Arial,sans-serif;line-height:1.6}
+html,body{margin:0;background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Helvetica,Arial,sans-serif;line-height:1.6;letter-spacing:.01em}
 .page{max-width:1000px;margin:0 auto;padding:28px 18px 60px}
-.header{display:flex;align-items:center;gap:20px}
+.header{display:flex;align-items:center;gap:20px;margin-bottom:8px}
 .logo img{height:72px;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
 .hgroup h1{margin:0;font-size:28px;letter-spacing:.02em}
-.hgroup .sub{margin:6px 0 0;color:var(--text-2)}
+.hgroup .sub{margin:6px 0 0;color:var(--text-2);letter-spacing:.01em}
 .badge{display:inline-block;margin-top:10px;padding:6px 12px;border:1px solid var(--gold);color:var(--gold);border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.02em}
 .rule{border:0;border-top:2px solid var(--gold);margin:16px 0 0}
+
+/* Grid & Cards wie Kombi-Seite */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
 @media (max-width:860px){.grid{grid-template-columns:1fr}}
-.card{background:var(--navy-2);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:0 1px 0 rgba(0,0,0,.2)}
+.card{background:var(--navy-2);border:1.3px solid var(--line);border-radius:12px;padding:18px;box-shadow:0 1px 0 rgba(0,0,0,.2)}
 .card h2{margin:0 0 8px;font-size:18px}
 .card p{margin:6px 0;color:var(--text-2)}
+
+/* Form */
 label{display:block;font-size:13px;margin:10px 0 4px}
 input,textarea,select{width:100%;background:#0b1a2b;color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 12px;font-size:14px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:680px){.row{grid-template-columns:1fr}}
 .help{font-size:12px;color:var(--text-2);margin-top:4px}
+
+/* Actions */
 .actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
 button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;border-radius:999px;padding:10px 16px;font-weight:700}
 .ghost{background:transparent;color:var(--gold);border:1px solid var(--gold);text-decoration:none;display:inline-flex;align-items:center}
@@ -41,7 +47,6 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
 .footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--text-2)}
 .footer strong{color:#fff}
 .ok{color:#9be69b}
-.hidden{display:none}
 </style>
 </head>
 <body>
@@ -61,7 +66,7 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
     <!-- A) 30-Min-Begehung -->
     <div class="card">
       <h2>Begehung (30&nbsp;Min) buchen</h2>
-      <p>Wir kommen vor Ort, stimmen Hotspots &amp; Zugang ab und bereiten den 72-h Pilot vor.</p>
+      <p>Wunschtermin <strong>frei wählbar</strong> – wir bestätigen werktags in ≤ 60&nbsp;Min. Bei Terminen &lt; 24&nbsp;h bitte zusätzlich kurz anrufen.</p>
 
       <form id="form-begehung" action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST">
         <input type="hidden" name="form_name" value="begehung">
@@ -70,6 +75,7 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
         <input type="hidden" name="utm_campaign" id="utm_campaign">
         <input type="hidden" name="utm_person" id="utm_person">
         <input type="hidden" name="page_url" id="page_url">
+
         <div class="row">
           <div>
             <label for="b_name">Ihr Name</label>
@@ -90,17 +96,20 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
             <input id="b_phone" name="phone" autocomplete="tel">
           </div>
         </div>
+
         <label for="b_site">Baustellen-Adresse</label>
         <input id="b_site" name="site" placeholder="Straße, Nr., PLZ Ort" required>
 
         <div class="row">
           <div>
-            <label for="b_date">Wunschtermin</label>
-            <input id="b_date" type="date" name="date">
+            <label for="b_date">Wunschtermin (Datum)</label>
+            <input id="b_date" type="date" name="date" required>
+            <div class="help">Standard: nächster Werktag (änderbar)</div>
           </div>
           <div>
             <label for="b_time">Uhrzeit</label>
-            <input id="b_time" type="time" name="time">
+            <input id="b_time" type="time" name="time" required>
+            <div class="help">Beliebig wählbar (z. B. 10:00)</div>
           </div>
         </div>
 
@@ -109,6 +118,7 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
 
         <div class="actions">
           <button type="submit">Begehung anfragen</button>
+          <a class="ghost" id="b_ics" href="#" download>Kalendereintrag (.ics)</a>
           <a class="ghost" id="b_mailto" href="#">oder per E-Mail senden</a>
         </div>
         <div class="small">Antwort binnen <span class="ok">≤ 60&nbsp;Min</span> (werktags, 08–18&nbsp;Uhr).</div>
@@ -167,7 +177,6 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
 
       <div class="vendor">
         <strong>Vendor-Pack:</strong>
-        <!-- Diese Dateien bitte in dein Repo legen und hier verlinken -->
         <div><a href="Digitale_Deckungsnote.pdf" target="_blank" rel="noopener">Deckungsnote BHV 10&nbsp;Mio.&nbsp;€ (PDF)</a></div>
         <div><a href="Muster_Schichtbericht.pdf" target="_blank" rel="noopener">Muster Schichtbericht (PDF)</a></div>
         <div><a href="Muster_KPI_Kurzlage.pdf" target="_blank" rel="noopener">Muster KPI-Kurzlage (PDF)</a></div>
@@ -178,56 +187,65 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
   <footer class="footer">
     <strong>Nautilus Security UG (haftungsbeschränkt)</strong> · GF: Philipp De Boer ·
     T: 030&nbsp;985&nbsp;57&nbsp;615 · E: kontakt@nautilus-security.de
-    <div style="margin-top:6px">
-      Vertraulichkeit: Diese Seite ist ausschließlich für die ZÜBLIN-Direktion Nord-Ost bestimmt.
-    </div>
+    <div style="margin-top:6px">Vertraulichkeit: Diese Seite ist ausschließlich für die ZÜBLIN-Direktion Nord-Ost bestimmt.</div>
   </footer>
 </div>
 
 <script>
 (function(){
-  // UTM aus URL in Hidden-Felder schreiben
+  // UTM in Hidden-Felder
   const params = new URLSearchParams(location.search);
-  const utms = ["utm_source","utm_medium","utm_campaign","utm_person"];
-  const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.value = val||""; };
+  const utms=["utm_source","utm_medium","utm_campaign","utm_person"];
+  const set=(id,val)=>{ const el=document.getElementById(id); if(el) el.value=val||""; };
+  utms.forEach(k=>{ set(k,params.get(k)); set(k+"2",params.get(k)); });
+  const url=location.href; ["page_url","page_url2"].forEach(id=>set(id,url));
 
-  utms.forEach(k=>{
-    set(k, params.get(k));
-    set(k+"2", params.get(k));
-  });
-  const url = location.href;
-  ["page_url","page_url2"].forEach(id=>set(id,url));
+  // Default: nächster Werktag 10:00
+  function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+  function isWorkday(d){ const wd=d.getDay(); return wd>=1 && wd<=5; }
+  const bDate=document.getElementById("b_date"), bTime=document.getElementById("b_time");
+  let d=new Date(); if(!isWorkday(d)) d=addDays(d,1); while(!isWorkday(d)) d=addDays(d,1);
+  bDate.value=d.toISOString().slice(0,10); bTime.value="10:00";
 
-  // Mailto-Fallbacks bauen
-  function buildMailto(form, type){
-    const data = new FormData(form);
-    const kv = [];
-    data.forEach((v,k)=>{ if(String(v).trim()) kv.push(k+": "+v); });
-    const subject = (type==="begehung")
-      ? "Begehung 30 Min – ZÜBLIN"
-      : "72-h Pilot freigeben – ZÜBLIN";
-    const body = kv.join("%0A");
-    return "mailto:kontakt@nautilus-security.de?subject="+encodeURIComponent(subject)+"&body="+body;
+  // Mailto-Fallbacks (wenn kein Endpoint)
+  function noEndpoint(u){ return !u || u.includes("YOUR_FORMSPREE_ENDPOINT_HERE"); }
+  function buildMailto(form, subject){
+    const fd=new FormData(form); const kv=[]; fd.forEach((v,k)=>{ if(String(v).trim()) kv.push(k+": "+v); });
+    const body=encodeURIComponent(kv.join("\n"));
+    return `mailto:kontakt@nautilus-security.de?subject=${encodeURIComponent(subject)}&body=${body}`;
   }
+  const bForm=document.getElementById("form-begehung");
+  const pForm=document.getElementById("form-pilot");
+  const bMail=document.getElementById("b_mailto");
+  const pMail=document.getElementById("p_mailto");
 
-  const bForm = document.getElementById("form-begehung");
-  const pForm = document.getElementById("form-pilot");
+  if(bMail) bMail.addEventListener("click",(e)=>{ e.preventDefault(); location.href=buildMailto(bForm,"Begehung 30 Min – ZÜBLIN"); });
+  if(pMail) pMail.addEventListener("click",(e)=>{ e.preventDefault(); location.href=buildMailto(pForm,"72-h Pilot freigeben – ZÜBLIN"); });
+  if(bForm) bForm.addEventListener("submit",(e)=>{ if(noEndpoint(bForm.action)){ e.preventDefault(); location.href=buildMailto(bForm,"Begehung 30 Min – ZÜBLIN"); }});
+  if(pForm) pForm.addEventListener("submit",(e)=>{ if(noEndpoint(pForm.action)){ e.preventDefault(); location.href=buildMailto(pForm,"72-h Pilot freigeben – ZÜBLIN"); }});
 
-  // Wenn kein Forms-Endpoint gesetzt ist, nutze Mailto direkt onsubmit
-  const noEndpoint = (url)=>!url || url.includes("YOUR_FORMSPREE_ENDPOINT_HERE");
-
-  if (bForm){
-    const bMail = document.getElementById("b_mailto");
-    bMail.addEventListener("click", (e)=>{ e.preventDefault(); location.href = buildMailto(bForm,"begehung"); });
-    bForm.addEventListener("submit", function(e){
-      if(noEndpoint(bForm.action)){ e.preventDefault(); location.href = buildMailto(bForm,"begehung"); }
-    });
+  // .ics-Download für Begehung
+  function pad(n){ return String(n).padStart(2,"0"); }
+  function toICSDate(dt){ return dt.getUTCFullYear()+pad(dt.getUTCMonth()+1)+pad(dt.getUTCDate())+"T"+pad(dt.getUTCHours())+pad(dt.getUTCMinutes())+"00Z"; }
+  function downloadICS(summary, desc, locationStr, startLocalISO, durationMin){
+    const start=new Date(startLocalISO); const end=new Date(start.getTime()+durationMin*60000);
+    const dtStart=toICSDate(start); const dtEnd=toICSDate(end); const dtStamp=toICSDate(new Date());
+    const uid="nautilus-"+Date.now()+"@nautilus-security.de"; const esc=s=>String(s||"").replace(/([,;])/g,"\\$1").replace(/\n/g,"\\n");
+    const ics=[
+      "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Nautilus Security//Zueblin//DE","BEGIN:VEVENT",
+      "UID:"+uid,"DTSTAMP:"+dtStamp,"DTSTART:"+dtStart,"DTEND:"+dtEnd,"SUMMARY:"+esc(summary),
+      "DESCRIPTION:"+esc(desc),"LOCATION:"+esc(locationStr),"END:VEVENT","END:VCALENDAR"
+    ].join("\r\n");
+    const blob=new Blob([ics],{type:"text/calendar;charset=utf-8"}); const link=URL.createObjectURL(blob); return link;
   }
-  if (pForm){
-    const pMail = document.getElementById("p_mailto");
-    pMail.addEventListener("click", (e)=>{ e.preventDefault(); location.href = buildMailto(pForm,"pilot"); });
-    pForm.addEventListener("submit", function(e){
-      if(noEndpoint(pForm.action)){ e.preventDefault(); location.href = buildMailto(pForm,"pilot"); }
+  const bICS=document.getElementById("b_ics");
+  if(bICS){
+    bICS.addEventListener("click",(e)=>{
+      e.preventDefault();
+      const site=document.getElementById("b_site").value||""; const date=document.getElementById("b_date").value; const time=document.getElementById("b_time").value||"10:00";
+      if(!date){ alert("Bitte Datum wählen."); return; }
+      const url=downloadICS("Begehung (30 Min) – Nautilus × ZÜBLIN","Vor-Ort-Begehung zur Nachtwache (Hotspots, Zugang, Start 72-h Pilot).",site, date+"T"+time+":00",30);
+      bICS.href=url; bICS.download="Begehung_Nautilus_Zueblin.ics"; bICS.click(); setTimeout(()=>URL.revokeObjectURL(url),5000);
     });
   }
 })();
