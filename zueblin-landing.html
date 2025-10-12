@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>ZÜBLIN · Begehung buchen oder 72-h Pilot freigeben · Nautilus Security</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0E2235">
+<meta property="og:title" content="ZÜBLIN · Begehung buchen oder 72-h Pilot freigeben">
+<meta property="og:description" content="Nachtruhe statt Überraschungen. Nachtwache 22:00–06:00 · Start ≤ 72 h · Einsatzleitung am Startabend vor Ort.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="logo-gold-transparent.png">
+<meta property="og:site_name" content="Nautilus Security">
+<style>
+:root{--navy:#0E2235;--navy-2:#152b42;--gold:#C79A3A;--text:#F4F6F8;--text-2:#CBD6E2;--line:rgba(199,154,58,.42)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Helvetica,Arial,sans-serif;line-height:1.6}
+.page{max-width:1000px;margin:0 auto;padding:28px 18px 60px}
+.header{display:flex;align-items:center;gap:20px}
+.logo img{height:72px;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+.hgroup h1{margin:0;font-size:28px;letter-spacing:.02em}
+.hgroup .sub{margin:6px 0 0;color:var(--text-2)}
+.badge{display:inline-block;margin-top:10px;padding:6px 12px;border:1px solid var(--gold);color:var(--gold);border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.02em}
+.rule{border:0;border-top:2px solid var(--gold);margin:16px 0 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--navy-2);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:0 1px 0 rgba(0,0,0,.2)}
+.card h2{margin:0 0 8px;font-size:18px}
+.card p{margin:6px 0;color:var(--text-2)}
+label{display:block;font-size:13px;margin:10px 0 4px}
+input,textarea,select{width:100%;background:#0b1a2b;color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 12px;font-size:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:680px){.row{grid-template-columns:1fr}}
+.help{font-size:12px;color:var(--text-2);margin-top:4px}
+.actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;border-radius:999px;padding:10px 16px;font-weight:700}
+.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold);text-decoration:none;display:inline-flex;align-items:center}
+.small{font-size:12px;color:var(--text-2);margin-top:8px}
+.vendor{margin-top:24px;padding-top:14px;border-top:1px solid var(--line);font-size:14px}
+.vendor a{color:var(--text);text-underline-offset:2px}
+.footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--text-2)}
+.footer strong{color:#fff}
+.ok{color:#9be69b}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="logo"><img src="logo-gold-transparent.png" alt="Nautilus Security Logo"></div>
+    <div class="hgroup">
+      <h1>Nachtruhe statt Überraschungen.</h1>
+      <div class="sub">Nachtwache 22:00–06:00 · Start ≤ 72&nbsp;h · z. Hd. Herrn von&nbsp;Bülow</div>
+      <div class="badge">72-h Pilot • Leistungsgarantie</div>
+    </div>
+  </header>
+  <hr class="rule">
+
+  <section class="grid">
+    <!-- A) 30-Min-Begehung -->
+    <div class="card">
+      <h2>Begehung (30&nbsp;Min) buchen</h2>
+      <p>Wir kommen vor Ort, stimmen Hotspots &amp; Zugang ab und bereiten den 72-h Pilot vor.</p>
+
+      <form id="form-begehung" action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST">
+        <input type="hidden" name="form_name" value="begehung">
+        <input type="hidden" name="utm_source" id="utm_source">
+        <input type="hidden" name="utm_medium" id="utm_medium">
+        <input type="hidden" name="utm_campaign" id="utm_campaign">
+        <input type="hidden" name="utm_person" id="utm_person">
+        <input type="hidden" name="page_url" id="page_url">
+        <div class="row">
+          <div>
+            <label for="b_name">Ihr Name</label>
+            <input id="b_name" name="name" autocomplete="name" required>
+          </div>
+          <div>
+            <label for="b_role">Rolle</label>
+            <input id="b_role" name="role" placeholder="Bauleitung / Polier / Einkauf">
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="b_email">E-Mail</label>
+            <input id="b_email" type="email" name="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label for="b_phone">Telefon</label>
+            <input id="b_phone" name="phone" autocomplete="tel">
+          </div>
+        </div>
+        <label for="b_site">Baustellen-Adresse</label>
+        <input id="b_site" name="site" placeholder="Straße, Nr., PLZ Ort" required>
+
+        <div class="row">
+          <div>
+            <label for="b_date">Wunschtermin</label>
+            <input id="b_date" type="date" name="date">
+          </div>
+          <div>
+            <label for="b_time">Uhrzeit</label>
+            <input id="b_time" type="time" name="time">
+          </div>
+        </div>
+
+        <label for="b_notes">Hinweise (optional)</label>
+        <textarea id="b_notes" name="notes" rows="3" placeholder="Zugang/Schlüssel, Sperrzonen, Ansprechpartner vor Ort …"></textarea>
+
+        <div class="actions">
+          <button type="submit">Begehung anfragen</button>
+          <a class="ghost" id="b_mailto" href="#">oder per E-Mail senden</a>
+        </div>
+        <div class="small">Antwort binnen <span class="ok">≤ 60&nbsp;Min</span> (werktags, 08–18&nbsp;Uhr).</div>
+      </form>
+    </div>
+
+    <!-- B) 72-h Pilot freigeben -->
+    <div class="card">
+      <h2>72-h Pilot freigeben</h2>
+      <p>Start Fr–So, Einsatzleitung 60&nbsp;Min am Startabend vor Ort. Output: PDF-Schichtbericht + Foto-IDs bis 08:30.</p>
+
+      <form id="form-pilot" action="YOUR_FORMSPREE_ENDPOINT_HERE" method="POST">
+        <input type="hidden" name="form_name" value="pilot72h">
+        <input type="hidden" name="utm_source" id="utm_source2">
+        <input type="hidden" name="utm_medium" id="utm_medium2">
+        <input type="hidden" name="utm_campaign" id="utm_campaign2">
+        <input type="hidden" name="utm_person" id="utm_person2">
+        <input type="hidden" name="page_url" id="page_url2">
+
+        <label for="p_site">Baustellen-Adresse</label>
+        <input id="p_site" name="site" placeholder="Straße, Nr., PLZ Ort" required>
+
+        <div class="row">
+          <div>
+            <label for="p_start">Startdatum</label>
+            <input id="p_start" type="date" name="start" required>
+          </div>
+          <div>
+            <label for="p_nights">Nächte</label>
+            <select id="p_nights" name="nights">
+              <option>1 Nacht</option><option selected>2 Nächte</option><option>3 Nächte</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="p_keys">Zutritt/Schlüssel</label>
+            <select id="p_keys" name="keys"><option>Ja</option><option>Nein</option></select>
+          </div>
+          <div>
+            <label for="p_contact">Kontakt vor Ort</label>
+            <input id="p_contact" name="contact" placeholder="Name/Telefon">
+          </div>
+        </div>
+
+        <label for="p_notes">Besonderheiten (optional)</label>
+        <textarea id="p_notes" name="notes" rows="3" placeholder="Hotspots (Kabel/Diesel), Sperrzonen, Lieferfenster …"></textarea>
+
+        <div class="actions">
+          <button type="submit">72-h Pilot freigeben</button>
+          <a class="ghost" id="p_mailto" href="#">oder per E-Mail freigeben</a>
+        </div>
+        <div class="small">Abrechnung: 30 Tage netto · E-Rechnung (XRechnung/ZUGFeRD&nbsp;2.2) · Feiertage +25&nbsp;% · Kurzabruf &lt;24&nbsp;h +10&nbsp;%</div>
+      </form>
+
+      <div class="vendor">
+        <strong>Vendor-Pack:</strong>
+        <!-- Diese Dateien bitte in dein Repo legen und hier verlinken -->
+        <div><a href="Digitale_Deckungsnote.pdf" target="_blank" rel="noopener">Deckungsnote BHV 10&nbsp;Mio.&nbsp;€ (PDF)</a></div>
+        <div><a href="Muster_Schichtbericht.pdf" target="_blank" rel="noopener">Muster Schichtbericht (PDF)</a></div>
+        <div><a href="Muster_KPI_Kurzlage.pdf" target="_blank" rel="noopener">Muster KPI-Kurzlage (PDF)</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <strong>Nautilus Security UG (haftungsbeschränkt)</strong> · GF: Philipp De Boer ·
+    T: 030&nbsp;985&nbsp;57&nbsp;615 · E: kontakt@nautilus-security.de
+    <div style="margin-top:6px">
+      Vertraulichkeit: Diese Seite ist ausschließlich für die ZÜBLIN-Direktion Nord-Ost bestimmt.
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  // UTM aus URL in Hidden-Felder schreiben
+  const params = new URLSearchParams(location.search);
+  const utms = ["utm_source","utm_medium","utm_campaign","utm_person"];
+  const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.value = val||""; };
+
+  utms.forEach(k=>{
+    set(k, params.get(k));
+    set(k+"2", params.get(k));
+  });
+  const url = location.href;
+  ["page_url","page_url2"].forEach(id=>set(id,url));
+
+  // Mailto-Fallbacks bauen
+  function buildMailto(form, type){
+    const data = new FormData(form);
+    const kv = [];
+    data.forEach((v,k)=>{ if(String(v).trim()) kv.push(k+": "+v); });
+    const subject = (type==="begehung")
+      ? "Begehung 30 Min – ZÜBLIN"
+      : "72-h Pilot freigeben – ZÜBLIN";
+    const body = kv.join("%0A");
+    return "mailto:kontakt@nautilus-security.de?subject="+encodeURIComponent(subject)+"&body="+body;
+  }
+
+  const bForm = document.getElementById("form-begehung");
+  const pForm = document.getElementById("form-pilot");
+
+  // Wenn kein Forms-Endpoint gesetzt ist, nutze Mailto direkt onsubmit
+  const noEndpoint = (url)=>!url || url.includes("YOUR_FORMSPREE_ENDPOINT_HERE");
+
+  if (bForm){
+    const bMail = document.getElementById("b_mailto");
+    bMail.addEventListener("click", (e)=>{ e.preventDefault(); location.href = buildMailto(bForm,"begehung"); });
+    bForm.addEventListener("submit", function(e){
+      if(noEndpoint(bForm.action)){ e.preventDefault(); location.href = buildMailto(bForm,"begehung"); }
+    });
+  }
+  if (pForm){
+    const pMail = document.getElementById("p_mailto");
+    pMail.addEventListener("click", (e)=>{ e.preventDefault(); location.href = buildMailto(pForm,"pilot"); });
+    pForm.addEventListener("submit", function(e){
+      if(noEndpoint(pForm.action)){ e.preventDefault(); location.href = buildMailto(pForm,"pilot"); }
+    });
+  }
+})();
+</script>
+</body>
+</html>
