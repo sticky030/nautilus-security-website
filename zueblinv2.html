@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Nautilus × ZÜBLIN – Kombi-Seite (Navy/Gold A4 v9d)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --navy:#0E2235; --navy-2:#152b42; --gold:#C79A3A;
+  --text:#F4F6F8; --text-2:#CBD6E2; --line:rgba(199,154,58,.42);
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0; background:var(--navy); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Helvetica,Arial,sans-serif;
+  line-height:1.6; letter-spacing:.01em;
+}
+.page{width:210mm; min-height:297mm; margin:0 auto; padding:14mm 12mm 16mm}
+
+/* Header */
+.header{display:flex; align-items:center; gap:12mm; margin-bottom:8mm}
+.logo img{height:40mm; display:block; filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+.hgroup h1{margin:0; font-size:27pt; letter-spacing:.02em}
+.hgroup .sub{margin-top:3mm; font-size:12.5pt; color:var(--text-2); letter-spacing:.01em}
+.badge{
+  display:inline-block; margin-top:7mm; padding:3.2mm 8mm; border:1px solid var(--gold);
+  color:var(--gold); border-radius:999px; font-weight:600; font-size:10.5pt; letter-spacing:.02em
+}
+/* (8) Mehr Luft unter der Goldlinie */
+.rule{height:0; border:0; border-top:2px solid var(--gold); margin:9mm 0 0}
+
+/* Grid (linke Spalte breiter) */
+.grid{display:grid; grid-template-columns: 1.8fr 1fr; gap:10mm; margin-top:10mm}
+.section h2{margin:0 0 4mm; font-size:14.5pt; letter-spacing:.01em}
+.section{margin:0 0 9mm}
+ul{margin:0; padding-left:6mm; line-height:1.62}
+li{margin:2mm 0} li::marker{color:var(--gold)}
+
+/* Karten */
+.card{
+  background:var(--navy-2); border:1.3px solid var(--line); border-radius:12px; padding:8mm;
+  box-shadow:0 1px 0 rgba(0,0,0,.2); break-inside:avoid; page-break-inside:avoid;
+}
+.card h3{margin:0 0 4mm; font-size:13.2pt}
+.card p{margin:2mm 0; color:var(--text-2)}
+.card ul{padding-left:6mm}
+
+/* Verhindere unschöne PDF-Umbrüche */
+.section{break-inside:avoid; page-break-inside:avoid}
+
+/* QR – veredelt + Logo-Badge + Kurz-URL */
+.qr{margin-top:7mm; display:flex; align-items:center; gap:7mm; flex-wrap:wrap}
+.qr .box{
+  position:relative; background:#fff; padding:5mm; border-radius:10px;
+  border:2px solid var(--gold); box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+.qr .box::after{ content:""; position:absolute; inset:3.5mm; border-radius:6px; border:.6px solid #e6e6e6; }
+.qr img.qr-img{width:40mm; height:40mm; display:block; border-radius:4px;
+  image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges;}
+.qr .logo-badge{
+  position:absolute; inset:0; margin:auto; width:9.5mm; height:9.5mm;
+  background:#fff; border:2px solid var(--gold); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,.15)
+}
+.qr .logo-badge img{width:70%; height:auto; display:block}
+.qr small{color:var(--text-2)}
+.shorturl{font-size:8.5pt; color:var(--text-2); margin-top:2mm}
+
+/* Footer + Micro-Signatur + Kleingedrucktes */
+.footer{margin-top:14mm; padding-top:8mm; border-top:1px solid var(--line); color:var(--text-2); font-size:10pt}
+.footer strong{color:var(--text)}
+.signature{margin-top:3mm; font-size:9.5pt; color:var(--text-2)}
+.smallnote{margin-top:4mm; font-size:9pt; color:var(--text-2)}
+
+/* Print */
+@media print{
+  @page{ size:A4; margin:10mm }
+  body{ -webkit-print-color-adjust:exact; print-color-adjust:exact }
+  /* (3) Logo-Shadow im Druck entfernen */
+  .logo img{ filter:none !important; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="logo"><img src="./logo-gold-transparent.png" alt="Nautilus Security – Nautilus-Logo"></div>
+    <div class="hgroup">
+      <h1>Nautilus Security × ZÜBLIN</h1>
+      <div class="sub">Nachtwache 22–06 · Start ≤ 72&nbsp;h · <span style="opacity:.9">z. Hd. Herrn von&nbsp;Bülow</span></div>
+      <div class="badge">72-h Pilot • Leistungsgarantie</div>
+    </div>
+  </header>
+  <hr class="rule">
+
+  <main class="grid">
+    <!-- Linke Spalte (inkl. Absicherung) -->
+    <section>
+      <div class="section">
+        <h2>Einsatzversprechen</h2>
+        <ul>
+          <li><strong>Präzise Präsenz:</strong> feste Teams, ruhiger, de-eskalierender Auftritt.</li>
+          <li><strong>Erreichbarkeit:</strong> Einsatzleitung 24/7; Backup ≤ 60&nbsp;Min.</li>
+          <li><strong>Qualität:</strong> wöchentliche Kurz-Audits (Zaun, Beleuchtung, Container, Aggregate).</li>
+        </ul>
+        <p style="margin:6mm 0 0; color:var(--text-2)"><strong>Kennzahlen:</strong> Erstreaktion EL ≤ 5&nbsp;Min · Backup ≤ 60&nbsp;Min · Start ≤ 72&nbsp;h</p>
+      </div>
+
+      <div class="section">
+        <h2>Dokumentation</h2>
+        <ul>
+          <li><strong>Schichtberichte</strong> mit zeitgestempelten Fotobelegen je Takt (8-Takt-Matrix).</li>
+          <li><strong>Nachverfolgbare Vorgangsnummer</strong> &amp; KPI-Kurzlage (5-Min-Read) zum Wochenstart.</li><!-- (5) Ticket-ID wording -->
+          <li><strong>Belegfluss:</strong> Schichtbericht → KPI-Kurzlage (Mo 09:00) → Wochenarchiv.</li>
+          <li><strong>DSGVO-konform:</strong> keine Personen/Kennzeichen in Bilddokumentation.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Insider-Fokus</h2>
+        <ul>
+          <li><strong>Hot-Spot 23–03:</strong> Kupfer/Kabel, Diesel · priorisierte Takte mit Fotobeleg.</li>
+          <li><strong>Container &amp; Materiallager:</strong> Takte 2/4/6 · Plomben/Schlösser · Zugangsspur prüfen.</li>
+          <li><strong>Aggregate/Tankdeckel:</strong> Peilstäbe/Kappen · Foto-Check 00:30 und 03:00.</li>
+          <li><strong>Zaun/Tor &amp; Zugang/Schlüssel:</strong> Schleusen + „Mauslöcher“ · Abgleich 00:00/03:00.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-top:8mm">
+        <h3>Absicherung</h3>
+        <ul>
+          <li>Bewachungshaftpflicht <strong>10&nbsp;Mio.&nbsp;€</strong> pauschal</li>
+          <li>inkl. <strong>Schlüsselverlust</strong>, <strong>Obhuts-/Tätigkeits-</strong> &amp; <strong>reine Vermögensschäden</strong></li>
+        </ul>
+        <p style="margin:3mm 0 0; color:var(--text-2)">Deckungsbestätigung 10&nbsp;Mio. BHV liegt bei.</p>
+      </div>
+    </section>
+
+    <!-- Rechte Spalte (Funnel) -->
+    <aside>
+      <div class="card">
+        <h3>Konditionen</h3>
+        <p><strong>Sicherheitsmitarbeiter:</strong> 34&nbsp;€/Std (Nacht/werktags)</p>
+        <!-- (4) konkret statt "gem. Bestätigung" -->
+        <p><strong>Feiertage:</strong> +25&nbsp;% &middot; <strong>Kurzabruf &lt;24&nbsp;h:</strong> +10&nbsp;%</p>
+        <p><strong>Start-SLA:</strong> ≤ 72&nbsp;h ab Freigabe</p>
+      </div>
+
+      <div class="card" style="margin-top:10mm">
+        <h3>Für ZÜBLIN · Direktion Nord-Ost</h3>
+        <ul>
+          <li><strong>72-h Pilot Fr–So</strong>, <strong>Einsatzleitung vor Ort (60&nbsp;Min)</strong> am Startabend.</li>
+          <li><strong>KPI-Kurzlage Mo 09:00</strong> an die Bauleitung.</li>
+          <li><strong>Reaktionskette ≤ 2&nbsp;Min</strong>: Bauleitung · Polier · Einsatzleitung.</li>
+          <li><em>Optional:</em> Startabend mit Doppelbesetzung (2–4 Std) auf Wunsch<br>
+              <span style="color:var(--text-2)">zzgl. 34&nbsp;€/Std; schriftliche Freigabe.</span></li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-top:10mm">
+        <h3>Kontakt &amp; QR</h3>
+        <p>
+          <strong><a href="mailto:kontakt@nautilus-security.de?subject=Begehung%2030%20Min%20%E2%80%93%20Z%C3%9CBLIN&body=Vorschlag:%20Do%2010:00%20oder%2014:30.%20Alternativ%20Ihre%20Wunschzeit."
+            style="color:inherit;text-decoration:none">Begehung terminieren (30&nbsp;Min)</a></strong>
+           ·
+          <strong><a href="mailto:kontakt@nautilus-security.de?subject=72-h%20Pilot%20freigeben%20%E2%80%93%20Z%C3%9CBLIN&body=Start:%20Fr%E2%80%93So,%20EL%2060%20Min%20am%20Startabend."
+            style="color:inherit;text-decoration:none">72-h Pilot freigeben</a></strong>
+        </p>
+        <div class="qr">
+          <div class="box">
+            <!-- (1) Ziel-URL auf 'Zueblin.html' (Groß-Z) + UTM | (2) Schwarz/Weiß, ECC=H, größer -->
+            <img class="qr-img"
+                 src="https://api.qrserver.com/v1/create-qr-code/?size=1200x1200&ecc=H&margin=20&color=000000&bgcolor=FFFFFF&format=png&data=https%3A%2F%2Fsticky030.github.io%2Fnautilus-security-website%2FZueblin.html%3Futm_source%3Dbox%26utm_medium%3Dqr%26utm_campaign%3Dzueblin_pilot%26utm_person%3Dvon_buelow"
+                 alt="ZÜBLIN-Landing öffnen: Begehung buchen oder 72-h Pilot freigeben">
+            <div class="logo-badge">
+              <img src="./logo-gold-transparent.png" alt="Nautilus-Logo im QR-Mittelpunkt">
+            </div>
+          </div>
+          <!-- (8) Caption zweizeilig für sauberen Umbruch -->
+          <small>Landing öffnen · Begehung anfragen<br>Musterberichte &amp; Deckungsbestätigung</small>
+        </div>
+        <p style="margin-top:2mm; color:var(--text-2)">
+          T: <a href="tel:+493098557615" style="color:inherit;text-decoration:none">+49 (0)30&nbsp;985&nbsp;57&nbsp;615</a>
+           ·
+          E: <a href="mailto:kontakt@nautilus-security.de" style="color:inherit;text-decoration:none">kontakt@nautilus-security.de</a>
+        </p>
+        <div class="shorturl">nautilus-security.de/zueblin</div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <strong>Nautilus Security UG (haftungsbeschränkt)</strong>
+    · GF: Philipp De Boer
+    · T: <a href="tel:+493098557615" style="color:inherit;text-decoration:none;">+49 (0)30 985 57 615</a>
+    · E: <a href="mailto:kontakt@nautilus-security.de" style="color:inherit;text-decoration:none;">kontakt@nautilus-security.de</a>
+    <div class="signature">Philipp De Boer · Geschäftsführung · Mobil <a href="tel:+4917622844636" style="color:inherit;text-decoration:none;">0176&nbsp;2284&nbsp;4636</a></div>
+    <div class="smallnote">*Leistungsgarantie gilt ausschließlich für den 72-h-Pilot, maximal 1 Nacht, bei unterschriebener Einsatzfreigabe und vollständiger Mitwirkung (Briefing/Begehung/Schlüssel).*</div>
+  </footer>
+</div>
+</body>
+</html>
