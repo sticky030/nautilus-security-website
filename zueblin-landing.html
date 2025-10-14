@@ -33,14 +33,24 @@ input,textarea,select{width:100%;background:#0b1a2b;color:#fff;border:1px solid 
 @media (max-width:680px){.row{grid-template-columns:1fr}}
 .help{font-size:12px;color:var(--text-2);margin-top:4px}
 .actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;border-radius:999px;padding:10px 16px;font-weight:700}
-.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold);text-decoration:none;display:inline-flex;align-items:center}
+button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;border-radius:999px;padding:10px 16px;font-weight:700;text-decoration:none}
+.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold);display:inline-flex;align-items:center}
 .small{font-size:12px;color:var(--text-2);margin-top:8px}
 .vendor{margin-top:24px;padding-top:14px;border-top:1px solid var(--line);font-size:14px}
 .vendor a{color:var(--text);text-underline-offset:2px}
 .footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--text-2)}
 .footer strong{color:#fff}
 .ok{color:#9be69b}
+
+/* >>> Downloads-Grid (neu, minimal) <<< */
+#downloads{margin-top:24px}
+#downloads h2{margin:0 0 8px;font-size:18px}
+.dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:860px){.dl-grid{grid-template-columns:1fr}}
+.dl-item{background:var(--navy-2);border:1.3px solid var(--line);border-radius:12px;padding:14px}
+.dl-item h3{margin:0 0 4px;font-size:16px}
+.dl-item p{margin:4px 0 10px;color:var(--text-2)}
+.dl-actions{display:flex;gap:10px;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -171,9 +181,78 @@ button,.ghost{cursor:pointer;background:var(--gold);color:#0b1a2b;border:0;borde
 
       <div class="vendor">
         <strong>Unterlagen für den Einkauf:</strong>
-        <div><a href="Digitale_Deckungsnote.pdf" target="_blank" rel="noopener">Deckungsnote BHV 10&nbsp;Mio.&nbsp;€ (PDF)</a></div>
-        <div><a href="Muster_Schichtbericht.pdf" target="_blank" rel="noopener">Muster Schichtbericht (PDF)</a></div>
-        <div><a href="Muster_KPI_Kurzlage.pdf" target="_blank" rel="noopener">Muster KPI-Kurzlage (PDF)</a></div>
+        <div><a href="Digitale_Deckungsnote.pdf" target="_blank" rel="noopener" download>Deckungsnote BHV 10&nbsp;Mio.&nbsp;€ (PDF)</a></div>
+        <div><a href="Muster_Schichtbericht.pdf" target="_blank" rel="noopener" download>Muster Schichtbericht (PDF)</a></div>
+        <div><a href="Muster_KPI_Kurzlage.pdf" target="_blank" rel="noopener" download>Muster KPI-Kurzlage (PDF)</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- >>> NEU: Download-Karte mit allen PDFs <<< -->
+  <section id="downloads" class="card">
+    <h2>Downloads (PDF)</h2>
+    <div class="dl-grid">
+      <div class="dl-item">
+        <h3>Pilot-Abruf Equalizer</h3>
+        <p>Einseitiges Formular · SLA/Konditionen · unterschriftsreif</p>
+        <div class="dl-actions">
+          <a class="ghost" href="pilot-abruf-equalizer.pdf" target="_blank" rel="noopener">Ansehen</a>
+          <a class="ghost" href="pilot-abruf-equalizer.pdf" download>Download</a>
+        </div>
+      </div>
+
+      <div class="dl-item">
+        <h3>Detailkonzept Equalizer</h3>
+        <p>Hotspots · 8-Takt-Route · Foto-IDs · Log-Tabellen</p>
+        <div class="dl-actions">
+          <a class="ghost" href="equalizer-detail.pdf" target="_blank" rel="noopener">Ansehen</a>
+          <a class="ghost" href="equalizer-detail.pdf" download>Download</a>
+        </div>
+      </div>
+
+      <div class="dl-item">
+        <h3>Ratecard Nacht (netto)</h3>
+        <p>SM 34 €/Std · EL im Pilot 60′ inkl. · Zuschläge · E-Rechnung</p>
+        <div class="dl-actions">
+          <a class="ghost" href="ratecard-nacht.pdf" target="_blank" rel="noopener">Ansehen</a>
+          <a class="ghost" href="ratecard-nacht.pdf" download>Download</a>
+        </div>
+      </div>
+
+      <div class="dl-item">
+        <h3>Backup-Roster (Matrix)</h3>
+        <p>Primär · Stellvertreter · Backup ≤60′ · Erreichbarkeit zentral</p>
+        <div class="dl-actions">
+          <a class="ghost" href="roster-matrix.pdf" target="_blank" rel="noopener">Ansehen</a>
+          <a class="ghost" href="roster-matrix.pdf" download>Download</a>
+        </div>
+      </div>
+
+      <div class="dl-item">
+        <h3>Muster Schichtbericht</h3>
+        <p>8-Takt-Matrix · Foto-ID-Platzhalter · Unterschriftenfeld</p>
+        <div class="dl-actions">
+          <a class="ghost" href="Muster_Schichtbericht.pdf" target="_blank" rel="noopener">Ansehen</a>
+          <a class="ghost" href="Muster_Schichtbericht.pdf" download>Download</a>
+        </div>
+      </div>
+
+      <div class="dl-item">
+        <h3>Muster KPI-Kurzlage</h3>
+        <p>5-Min-Read · wöchentlich Mo 09:00 · kompakt</p>
+        <div class="dl-actions">
+          <a class="ghost" href="Muster_KPI_Kurzlage.pdf" target="_blank" rel="noopener">Ansehen</a>
+          <a class="ghost" href="Muster_KPI_Kurzlage.pdf" download>Download</a>
+        </div>
+      </div>
+
+      <div class="dl-item">
+        <h3>Deckungsnote BHV 10 Mio €</h3>
+        <p>Bewachungshaftpflicht · Rahmenvertrag Sicherheitsbranche</p>
+        <div class="dl-actions">
+          <a class="ghost" href="Digitale_Deckungsnote.pdf" target="_blank" rel="noopener">Ansehen</a>
+          <a class="ghost" href="Digitale_Deckungsnote.pdf" download>Download</a>
+        </div>
       </div>
     </div>
   </section>
