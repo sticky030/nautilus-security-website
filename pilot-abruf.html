@@ -8,55 +8,86 @@
 <style>
 :root{
   --navy:#0E2235; --gold:#C79A3A; --line:#1f3b56; --ink:#10161f; --muted:#42566b;
-  --r:12px; --s1:8px; --s2:12px; --s3:16px; --s4:22px; --fz:16px;
+  --r:12px; --s1:6px; --s2:10px; --s3:14px; --s4:18px; --fz:15.5px;
 }
-*{box-sizing:border-box} html,body{margin:0;padding:0;background:#fff;color:var(--ink);
-  font:var(--fz)/1.55 Inter,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif}
-a{color:var(--navy)} .wrapper{max-width:900px;margin:0 auto;padding:28px 18px 40px}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);font:var(--fz)/1.5 Inter,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif}
+a{color:var(--navy);text-decoration:none}
+.wrapper{max-width:900px;margin:0 auto;padding:24px 16px 28px}
+
+/* Header */
 .header{display:flex;gap:12px;align-items:flex-start}
-.logo{width:26mm;height:26mm} .logo img{width:100%;height:100%;object-fit:contain}
-.hgroup h1{margin:0 0 4px;font-size:22px;color:var(--navy);letter-spacing:.01em}
-.sub{color:var(--muted);margin-top:2px}
-.rule{border:0;border-top:2px solid var(--gold);margin:12px 0 16px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px} @media (max-width:920px){.grid{grid-template-columns:1fr}}
+.logo{width:24mm;height:24mm}
+.logo img{width:100%;height:100%;object-fit:contain}
+.hgroup h1{margin:0 0 2px;font-size:21px;color:var(--navy);letter-spacing:.01em}
+.sub{color:var(--muted);margin-top:2px;font-size:14px}
+.rule{border:0;border-top:2px solid var(--gold);margin:10px 0 14px}
+
+/* Layout helpers */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.no-break{break-inside:avoid;page-break-inside:avoid;-webkit-region-break-inside:avoid}
+
+/* Boxes */
 .box{border:1px solid var(--line);border-radius:12px;padding:12px}
-.box h2{margin:0 0 8px;font-size:15px;color:var(--navy)}
-.tbl{width:100%;border-collapse:collapse;font-size:14px}
-.tbl th,.tbl td{border:1px solid #cbd6e2;padding:8px 10px;vertical-align:top}
+.box h2{margin:0 0 6px;font-size:15.5px;color:var(--navy)}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;table-layout:fixed}
+.tbl th,.tbl td{border:1px solid #cbd6e2;padding:8px 10px;vertical-align:top;word-break:break-word}
 .tbl th{background:#f4f7fb;color:#0E2235;text-align:left}
+
+/* Sig rows */
+.siggrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.sigbox{border:1px solid var(--line);border-radius:12px;padding:12px}
+.sigbox strong{display:block;margin-bottom:6px;color:#0E2235}
+.sigrow{display:grid;grid-template-columns:110px 1fr;gap:8px;margin-top:6px}
+
+/* Text */
+ul{margin:6px 0 6px 18px;padding:0}
+li{margin:4px 0}
 .note{color:var(--muted);font-size:13px}
-.lined{border:1px solid var(--line);border-radius:12px;padding:12px}
-ul{margin:6px 0 8px 18px;padding:0} li{margin:4px 0}
-.sign{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:18px}
-.sigbox{border:1px solid var(--line);border-radius:12px;padding:12px;height:140px}
-.sigrow{display:grid;grid-template-columns:120px 1fr;gap:8px;margin-top:6px}
-.footer{border-top:1px solid var(--line);margin-top:18px;padding-top:10px;color:#3a4b60;font-size:13px}
-@media print{@page{size:A4;margin:14mm 14mm 16mm 14mm} a[href]:after{content:""}}
+
+/* Footer */
+.footer{border-top:1px solid var(--line);margin-top:14px;padding-top:8px;color:#3a4b60;font-size:12.8px}
+
+/* Print */
+@media print{
+  @page{size:A4; margin:12mm 12mm 14mm 12mm}
+  html,body{background:#fff}
+  .wrapper{max-width:none;padding:0}
+  .grid,.box,.tbl,.siggrid,.sigbox{break-inside:avoid;page-break-inside:avoid}
+  a[href]:after{content:""}
+}
 .badge{display:inline-block;border:1px solid var(--gold);color:#000;background:linear-gradient(#fdf3dc,#f6e2b9);
-  font-weight:700;border-radius:999px;padding:4px 10px;font-size:12px}
+  font-weight:700;border-radius:999px;padding:3px 9px;font-size:12px}
 </style>
 </head>
 <body>
 <div class="wrapper">
+
+  <!-- Header -->
   <header class="header">
     <div class="logo"><img src="logo-gold-transparent.png" alt="Nautilus Security"></div>
     <div class="hgroup">
       <h1>Pilot-Abruf (72-h) – Equalizer</h1>
-      <div class="sub">Nachtruhe statt Überraschungen. Nachtwache 22:00–06:00 · Start ≤ 72 h</div>
+      <div class="sub">Nachtwache 22:00–06:00 · Start ≤ 72 h · Einsatzleitung am Startabend vor Ort</div>
       <div style="margin-top:6px"><span class="badge">Leistungsgarantie • Backup ≤ 60 Min</span></div>
     </div>
   </header>
   <hr class="rule">
 
-  <section class="grid">
-    <div class="box">
+  <!-- Beauftragung + Leistungsbild -->
+  <section class="grid no-break">
+    <div class="box no-break">
       <h2>Beauftragung</h2>
       <div class="sigrow"><div>Auftraggeber</div><div><strong>Firma/BA:</strong> __________________________________________</div></div>
       <div class="sigrow"><div>Baustelle</div><div>________________________________ Straße/Nr., PLZ Ort</div></div>
       <div class="sigrow"><div>Start</div><div>____ / ____ / ______ (≤ 72 h) · 22:00–06:00 (±30)</div></div>
       <div class="sigrow"><div>Kontakt</div><div>_______________________________ · Tel ______________________</div></div>
     </div>
-    <div class="box">
+
+    <div class="box no-break">
       <h2>Leistungsbild (Kurz)</h2>
       <ul>
         <li>Nachtwache/Objektschutz <strong>22:00–06:00</strong> inkl. Equalizer-Route (Hotspots, 8-Takt).</li>
@@ -67,19 +98,20 @@ ul{margin:6px 0 8px 18px;padding:0} li{margin:4px 0}
     </div>
   </section>
 
-  <section style="margin-top:14px" class="lined">
-    <h2 style="margin:0 0 8px;color:#0E2235">Preise & Bedingungen (netto, Berlin)</h2>
-    <table class="tbl">
-      <thead><tr><th>Position</th><th>Einheit</th><th>Preis</th></tr></thead>
+  <!-- Preise & Bedingungen -->
+  <section class="box no-break" style="margin-top:12px">
+    <h2>Preise & Bedingungen (netto, Berlin)</h2>
+    <table class="tbl no-break">
+      <thead><tr><th style="width:55%">Position</th><th style="width:15%">Einheit</th><th style="width:30%">Preis</th></tr></thead>
       <tbody>
-        <tr><td>Nachtwache / Sicherheitsmitarbeiter (SM)</td><td>pro Std</td><td><strong>34,00 €</strong></td></tr>
+        <tr><td><strong>Nachtwache / Sicherheitsmitarbeiter (SM)</strong></td><td>pro Std</td><td><strong>34,00 €</strong></td></tr>
         <tr><td>Einsatzleitung (nach 60 Min inkl.)</td><td>pro Std</td><td><strong>42,00 €</strong></td></tr>
         <tr><td>Doppelstart (2. SM am Startabend)</td><td>bis 4 Std</td><td>zu 34,00 €/Std</td></tr>
         <tr><td>Zuschlag Feiertag</td><td>pro Std</td><td>+25 %</td></tr>
         <tr><td>Zuschlag Kurzabruf &lt; 24 h</td><td>pro Std</td><td>+10 %</td></tr>
       </tbody>
     </table>
-    <ul style="margin-top:10px">
+    <ul style="margin-top:8px">
       <li><strong>72-h Pilot:</strong> Start ≤ 72 h · <strong>Cancel-anytime</strong> bis 12:00 Folgetag.</li>
       <li><strong>Service-Credit:</strong> 1 Std Gutschrift bei KPI/EL-Abweichung.</li>
       <li><strong>Abrechnung:</strong> 30 T netto · E-Rechnung (XRechnung/ZUGFeRD 2.2).</li>
@@ -87,15 +119,16 @@ ul{margin:6px 0 8px 18px;padding:0} li{margin:4px 0}
     </ul>
   </section>
 
-  <section class="sign">
-    <div class="sigbox">
+  <!-- Signaturen -->
+  <section class="siggrid no-break">
+    <div class="sigbox no-break">
       <strong>Auftraggeber</strong>
       <div class="sigrow"><div>Ort/Datum</div><div>__________________________________________</div></div>
       <div class="sigrow"><div>Name/Funktion</div><div>__________________________________________</div></div>
       <div class="sigrow"><div>Unterschrift</div><div>__________________________________________</div></div>
       <div class="sigrow"><div>Stempel</div><div>__________________________________________</div></div>
     </div>
-    <div class="sigbox">
+    <div class="sigbox no-break">
       <strong>Nautilus Security UG (haftungsbeschränkt)</strong>
       <div class="sigrow"><div>GF</div><div>Philipp De Boer</div></div>
       <div class="sigrow"><div>Kontakt</div><div>T 030 985 57 615 · M 0176 2284 4636 · kontakt@nautilus-security.de</div></div>
