@@ -7,17 +7,19 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0E2235">
 <style>
-/* ===== Nautilus v12 · Compact Spacing Tune (Navy/Gold) ===== */
+/* ===== Nautilus v12 · Compact Spacing (Navy/Gold) ===== */
 :root{
   --navy:#0E2235; --gold:#C79A3A; --bg:#0E2235;
   --navy-2:#0b1a2b; --navy-3:#0c1b2a;
   --text:#ffffff; --muted:#9fb3c8; --line:#1f3b56;
-  --r:12px;                 /* base radius */
-  --s1:8px; --s2:12px; --s3:16px; --s4:20px; --s5:28px; /* spacing scale */
+  --r:12px;
+  --s1:8px; --s2:12px; --s3:16px; --s4:20px; --s5:28px;
   --fz:16px; --fz-sm:13px; --fz-xs:12px; --fz-h2:18px; --fz-h1:26px;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:var(--fz)/1.55 Inter,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+  font:var(--fz)/1.55 Inter,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 a{color:var(--gold);text-decoration:none}
 a:hover{text-decoration:underline}
 
@@ -27,25 +29,27 @@ a:hover{text-decoration:underline}
 .logo img{width:46px;height:46px}
 .hgroup h1{margin:0;font-size:var(--fz-h1);letter-spacing:.01em}
 .hgroup .sub{margin:6px 0 0;color:var(--muted);letter-spacing:.01em}
-.badge{display:inline-block;margin-top:8px;padding:5px 10px;border:1px solid var(--gold);color:var(--gold);border-radius:999px;font-weight:600;font-size:var(--fz-xs);letter-spacing:.02em}
+.badge{display:inline-block;margin-top:8px;padding:5px 10px;border:1px solid var(--gold);
+  color:var(--gold);border-radius:999px;font-weight:600;font-size:var(--fz-xs);letter-spacing:.02em}
 .rule{border:0;border-top:1.5px solid var(--gold);margin:var(--s3) 0 0}
 
 /* Cards & Layout */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-top:var(--s4)}
 @media (max-width:860px){.grid{grid-template-columns:1fr}}
-.card{background:var(--navy-2);border:1.2px solid var(--line);border-radius:var(--r);padding:var(--s3);box-shadow:0 1px 0 rgba(0,0,0,.18)}
+.card{background:var(--navy-2);border:1.2px solid var(--line);border-radius:var(--r);
+  padding:var(--s3);box-shadow:0 1px 0 rgba(0,0,0,.18)}
 .card h2{margin:0 0 var(--s1);font-size:var(--fz-h2)}
 .card p{margin:4px 0 var(--s1);color:var(--muted)}
 
-/* Form – compact & aligned */
+/* Form – compact */
 label{display:block;font-size:var(--fz-sm);margin:6px 0 4px}
-input,textarea,select{width:100%;background:var(--navy-3);color:#fff;border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:10px 12px;font-size:14px;line-height:1.3;transition:border .15s, box-shadow .15s}
+input,textarea,select{width:100%;background:var(--navy-3);color:#fff;border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;padding:10px 12px;font-size:14px;line-height:1.3;transition:border .15s, box-shadow .15s}
 input:focus,textarea:focus,select:focus{border-color:#275278;outline:none;box-shadow:0 0 0 3px rgba(199,154,58,.16)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2)}
 @media (max-width:680px){.row{grid-template-columns:1fr}}
-.help{font-size:var(--fz-xs);color:var(--muted);margin-top:4px}
+details.help{font-size:var(--fz-xs);color:var(--muted);margin-top:4px}
 details.help > summary{cursor:pointer;color:#d9e3ef}
-details.help[open]{margin-top:var(--s1)}
 
 /* Actions */
 .actions{display:flex;gap:10px;margin-top:var(--s2);flex-wrap:wrap}
@@ -179,7 +183,7 @@ button:active,.ghost:active{transform:translateY(0.5px)}
     </div>
   </section>
 
-  <!-- Downloads (nur Equalizer-Detail) -->
+  <!-- Downloads (nur Equalizer-Detail als PDF) -->
   <section id="downloads" class="card">
     <h2>Downloads (PDF)</h2>
     <div class="dl-grid">
@@ -188,7 +192,7 @@ button:active,.ghost:active{transform:translateY(0.5px)}
         <p>Hotspots · 8-Takt-Route · Foto-IDs · Log-Tabellen</p>
         <div class="dl-actions">
           <a class="ghost" href="https://sticky030.github.io/nautilus-security-website/equalizer-detail.pdf" target="_blank" rel="noopener">Ansehen</a>
-          <a class="ghost" href="https://sticky030.github.io/nautilus-security-website/equalizer-detail.pdf" download>Download</a>
+          <a class="ghost" href="https://sticky030.github.io/nautilus-security-website/equalizer-detail.pdf" download>Download (PDF)</a>
         </div>
       </div>
     </div>
@@ -207,7 +211,7 @@ button:active,.ghost:active{transform:translateY(0.5px)}
   const set=(id,val)=>{ const el=document.getElementById(id); if(el) el.value=val||""; };
   ["utm_source","utm_medium","utm_campaign","utm_person"].forEach(k=>set(k,params.get(k)));
   set("page_url",location.href);
-  ["utm_source2","utm_medium2","utm_campaign2","utm_person2"].forEach((k,i)=>set(k,params.get(k.replace(/2$/,""))));
+  ["utm_source2","utm_medium2","utm_campaign2","utm_person2"].forEach((k)=>set(k,params.get(k.replace(/2$/,""))));
   set("page_url2",location.href);
 
   // Mailto-Fallbacks
@@ -223,7 +227,7 @@ button:active,.ghost:active{transform:translateY(0.5px)}
   if(bMail) bMail.addEventListener("click",(e)=>{ e.preventDefault(); location.href=buildMailto(bForm,"Begehung 30 Min – ZÜBLIN"); });
   if(pMail) pMail.addEventListener("click",(e)=>{ e.preventDefault(); location.href=buildMailto(pForm,"72-h Pilot freigeben – ZÜBLIN"); });
 
-  // If no endpoint configured, fallback to mailto on submit
+  // Fallback zu mailto, wenn kein Endpoint konfiguriert
   function noEndpoint(u){ return !u || u.includes("YOUR_FORMSPREE_ENDPOINT_HERE"); }
   if(bForm) bForm.addEventListener("submit",(e)=>{ if(noEndpoint(bForm.action)){ e.preventDefault(); location.href=buildMailto(bForm,"Begehung 30 Min – ZÜBLIN"); }});
   if(pForm) pForm.addEventListener("submit",(e)=>{ if(noEndpoint(pForm.action)){ e.preventDefault(); location.href=buildMailto(pForm,"72-h Pilot freigeben – ZÜBLIN"); }});
