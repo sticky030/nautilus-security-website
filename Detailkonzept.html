@@ -7,58 +7,63 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0E2235">
 <style>
-/* ===== Nautilus Equalizer Detail · A4 Print (Navy/Gold) ===== */
+/* ===== Nautilus v12 Dark · Equalizer Detail (Navy/Gold) ===== */
 :root{
-  --navy:#0E2235; --gold:#C79A3A; --line:#1f3b56;
-  --ink:#10161f; --muted:#5f7a95; --bg:#ffffff;
-  --r:12px; --s1:8px; --s2:12px; --s3:16px; --s4:20px;
-  --fz:16px; --fz-sm:13px; --fz-xs:12px;
+  --navy:#0E2235; --gold:#C79A3A; --bg:#0E2235;
+  --card:#12283e; --muted:#9fb3c8; --line:#1f3b56; --ink:#fff;
+  --r:12px; --s1:8px; --s2:12px; --s3:16px; --s4:20px; --s5:28px;
+  --fz:16px; --fz-sm:13px; --fz-xs:12px; --fz-h2:18px; --fz-h1:24px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
-  font:var(--fz)/1.55 Inter,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif}
-a{color:var(--navy);text-decoration:none}
-.wrapper{max-width:900px;margin:0 auto;padding:24px 18px 40px}
+  font:var(--fz)/1.55 Inter,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrapper{max-width:980px;margin:0 auto;padding:var(--s5) var(--s3) 60px}
 
 /* Header */
-.header{display:flex;gap:12px;align-items:flex-start;margin-bottom:8px}
-.logo{width:28mm;height:28mm;flex:0 0 auto}
-.logo img{width:100%;height:100%;object-fit:contain}
-.hgroup h1{margin:0;font-size:22px;letter-spacing:.01em;color:var(--navy)}
-.rule{border:0;border-top:2px solid var(--gold);margin:10px 0 14px}
+.header{display:flex;gap:var(--s2);align-items:flex-start;margin-bottom:var(--s2)}
+.logo img{width:46px;height:46px}
+.hgroup h1{margin:0;font-size:var(--fz-h1);letter-spacing:.01em}
+.hgroup .sub{margin:6px 0 0;color:var(--muted);letter-spacing:.01em}
+.rule{border:0;border-top:1.5px solid var(--gold);margin:var(--s3) 0 var(--s3)}
 
-/* Info strip */
-.infobox{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
-.infobox .row{display:grid;grid-template-columns:160px 1fr}
-.infobox .row > div{padding:8px 10px}
-.infobox .row .k{background:#f5f7fa;color:#0f2235;font-weight:600}
-.infobox .row + .row{border-top:1px solid #d9e1ea}
+/* Cards */
+.card{background:var(--card);border:1.2px solid var(--line);border-radius:var(--r);
+  padding:var(--s3);box-shadow:0 1px 0 rgba(0,0,0,.2);margin:var(--s3) 0}
+.card h2{margin:0 0 var(--s1);font-size:var(--fz-h2)}
+.card p{margin:4px 0 var(--s1);color:var(--muted)}
 
-/* Section */
-section{margin-top:14px}
-h2{margin:0 0 6px;font-size:15px;color:var(--navy)}
-p{margin:0 0 8px;color:#233143}
-ul{margin:6px 0 8px 18px;padding:0}
-li{margin:4px 0}
+/* Grids */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
+@media (max-width:860px){.grid-2{grid-template-columns:1fr}}
 
-/* Two-column tables */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media (max-width:900px){.grid{grid-template-columns:1fr}}
+/* Info rows */
+.info-row{display:grid;grid-template-columns:160px 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.info-row + .info-row{margin-top:10px}
+.info-row .k{background:#0c1b2a;color:#d7e3f0;font-weight:600;padding:8px 10px}
+.info-row .v{padding:8px 10px;background:#0b1f32}
 
+/* Tables */
 .table{width:100%;border-collapse:collapse;font-size:14px}
-.table th,.table td{border:1px solid #b8c6d6;padding:8px 10px;vertical-align:middle}
+.table th,.table td{border:1px solid #1f3b56;padding:8px 10px;vertical-align:middle}
 .table th{background:var(--navy);color:#fff;font-weight:700}
 .table th.gold{background:var(--gold);color:var(--navy)}
-.table small{color:#4a627c}
+.table td{color:#e3edf7}
+.table small{color:#b9cbe0}
+
+/* Lists */
+ul{margin:6px 0 8px 18px;padding:0;color:#d7e3f0}
+li{margin:4px 0}
 
 /* Footer */
-.footer{border-top:1px solid var(--line);margin-top:16px;padding-top:10px;font-size:13px;color:#3a4b60}
-.footer b{color:#0a1b2b}
+.footer{margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-size:var(--fz-sm);color:var(--muted)}
+.footer a{color:var(--gold)}
 
 /* Print */
 @media print{
   @page{size:A4; margin:14mm 14mm 16mm 14mm}
-  html,body{background:#fff}
+  html,body{background:#0E2235;color:#ffffff;-webkit-print-color-adjust:exact; print-color-adjust:exact}
   .wrapper{max-width:none;padding:0}
   a[href]:after{content:""}
 }
@@ -67,36 +72,33 @@ li{margin:4px 0}
 <body>
 <div class="wrapper">
 
-  <!-- Header -->
   <header class="header">
-    <div class="logo"><img src="logo-gold-transparent.png" alt="Nautilus Security"></div>
+    <div class="logo"><img src="logo-gold-transparent.png" alt="Nautilus Security Logo"></div>
     <div class="hgroup">
-      <h1>Equalizer – Detailkonzept · Nachtwache Baustelle (Premium)</h1>
-      <div style="color:#4a627c;font-size:14px;margin-top:4px">
-        Desk-Review mit Insider-Fokus – Abgleich & Fixierung bei Begehung vor Ort.
-      </div>
+      <h1>Equalizer – Detailkonzept · Nachtwache Baustelle</h1>
+      <div class="sub">Desk-Review mit Insider-Fokus · Abgleich & Fixierung bei Begehung vor Ort</div>
     </div>
   </header>
   <hr class="rule">
 
   <!-- Info strip -->
-  <div class="infobox">
-    <div class="row">
+  <section class="card" id="info">
+    <div class="info-row">
       <div class="k">Insider-Fokus</div>
-      <div>City-West · Landgrafenstraße 3–4 (Beispielstand)</div>
+      <div class="v">City-West · Landgrafenstraße 3–4 (Beispielstand)</div>
     </div>
-    <div class="row">
+    <div class="info-row">
       <div class="k">Fenster</div>
-      <div>22:00–06:00 (±30) · Start ≤ 72 h · Übergabe 06:30</div>
+      <div class="v">22:00–06:00 (±30) · Start ≤ 72 h · Übergabe 06:30</div>
     </div>
-    <div class="row">
+    <div class="info-row">
       <div class="k">Zielbild</div>
-      <div>Diebstahl/Vandalismus verhindern; Übergabefähigkeit morgens sicherstellen (Kabel, Diesel, Geräte).</div>
+      <div class="v">Diebstahl/Vandalismus verhindern; Übergabefähigkeit morgens sicherstellen (Kabel, Diesel, Geräte).</div>
     </div>
-  </div>
+  </section>
 
-  <!-- Top-3 Risks -->
-  <section>
+  <!-- Top Risks -->
+  <section class="card" id="risks">
     <h2>Top-3 Risiken (objekttypisch)</h2>
     <ul>
       <li><b>Kabel / NE-Metalle (Container, Trommeln)</b> – leise, schneller Abtransport.</li>
@@ -106,44 +108,46 @@ li{margin:4px 0}
   </section>
 
   <!-- Hotspots + 8-Takt -->
-  <section class="grid">
-    <div>
-      <h2>Hotspots & Schutzgüter</h2>
-      <table class="table">
-        <thead>
-          <tr><th>Hotspot</th><th>Schwerpunkt</th><th>Hinweis</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Haupttor Landgrafenstraße</td><td>Zutritt/Zufahrt</td><td>Torstatus 22:30 / 01:30 / 05:30 dokumentieren</td></tr>
-          <tr><td>Container / Kabellager</td><td>NE-Metalle</td><td>Reste & Zuschnitte besonders prüfen (Sichtung/Foto)</td></tr>
-          <tr><td>Aggregat / Diesel-IBC</td><td>Füllstand/Plombe</td><td>00:00 & 04:30 Wert + Foto, Plomben-Nr. Baseline</td></tr>
-          <tr><td>Scaffolding / Fassade</td><td>Aufstiegspunkte</td><td>Lose Teile, Werkzeugebenen, unbefugte Nutzung</td></tr>
-          <tr><td>Kranbasis / Bedienstand</td><td>Zugang/Schlüssel</td><td>Sicherung vorhanden, keine Ablage von Werkzeug</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div>
-      <h2>8-Takt-Route (Beispiel)</h2>
-      <table class="table">
-        <thead>
-          <tr><th class="gold">Takt</th><th class="gold">Zeit</th><th class="gold">Abschnitt / Auftrag</th><th class="gold">Foto-ID / Notiz</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>T1</td><td>22:30</td><td>Grundrunde Perimeter, Torstatus</td><td>Perimeter_2230 · Tor_2230</td></tr>
-          <tr><td>T2</td><td>23:15</td><td>Kabellager/Container prüfen</td><td>Kabel_2315</td></tr>
-          <tr><td>T3</td><td>00:00</td><td>Diesel/Aggregat Füllstand + Plombe</td><td>Diesel_0000 (Wert + Foto)</td></tr>
-          <tr><td>T4</td><td>00:45</td><td>Scaffolding – Aufstiegspunkte</td><td>Scaf_0045</td></tr>
-          <tr><td>T5</td><td>01:30</td><td>Perimeter/Tor Re-Check</td><td>Tor_0130</td></tr>
-          <tr><td>T6</td><td>02:15</td><td>Kabellager/Diesel Re-Check</td><td>Kabel_0215 · Diesel_0215</td></tr>
-          <tr><td>T7</td><td>03:30</td><td>Kurzrunde neuralgische Punkte</td><td>Kurz_0330</td></tr>
-          <tr><td>T8</td><td>04:30</td><td>Kurzrunde + Diesel Endwert</td><td>Kurz_0430 · Diesel_0430 (Wert)</td></tr>
-        </tbody>
-      </table>
+  <section class="card" id="hotspots-route">
+    <div class="grid-2">
+      <div>
+        <h2>Hotspots & Schutzgüter</h2>
+        <table class="table">
+          <thead>
+            <tr><th>Hotspot</th><th>Schwerpunkt</th><th>Hinweis</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Haupttor Landgrafenstraße</td><td>Zutritt/Zufahrt</td><td>Torstatus 22:30 / 01:30 / 05:30 dokumentieren</td></tr>
+            <tr><td>Container / Kabellager</td><td>NE-Metalle</td><td>Reste & Zuschnitte besonders prüfen (Sichtung/Foto)</td></tr>
+            <tr><td>Aggregat / Diesel-IBC</td><td>Füllstand/Plombe</td><td>00:00 & 04:30 Wert + Foto, Plomben-Nr. Baseline</td></tr>
+            <tr><td>Scaffolding / Fassade</td><td>Aufstiegspunkte</td><td>Lose Teile, Werkzeugebenen, unbefugte Nutzung</td></tr>
+            <tr><td>Kranbasis / Bedienstand</td><td>Zugang/Schlüssel</td><td>Sicherung vorhanden, keine Ablage von Werkzeug</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h2>8-Takt-Route (Beispiel)</h2>
+        <table class="table">
+          <thead>
+            <tr><th class="gold">Takt</th><th class="gold">Zeit</th><th class="gold">Abschnitt / Auftrag</th><th class="gold">Foto-ID / Notiz</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>T1</td><td>22:30</td><td>Grundrunde Perimeter, Torstatus</td><td>Perimeter_2230 · Tor_2230</td></tr>
+            <tr><td>T2</td><td>23:15</td><td>Kabellager/Container prüfen</td><td>Kabel_2315</td></tr>
+            <tr><td>T3</td><td>00:00</td><td>Diesel/Aggregat Füllstand + Plombe</td><td>Diesel_0000 (Wert + Foto)</td></tr>
+            <tr><td>T4</td><td>00:45</td><td>Scaffolding – Aufstiegspunkte</td><td>Scaf_0045</td></tr>
+            <tr><td>T5</td><td>01:30</td><td>Perimeter/Tor Re-Check</td><td>Tor_0130</td></tr>
+            <tr><td>T6</td><td>02:15</td><td>Kabellager/Diesel Re-Check</td><td>Kabel_0215 · Diesel_0215</td></tr>
+            <tr><td>T7</td><td>03:30</td><td>Kurzrunde neuralgische Punkte</td><td>Kurz_0330</td></tr>
+            <tr><td>T8</td><td>04:30</td><td>Kurzrunde + Diesel Endwert</td><td>Kurz_0430 · Diesel_0430 (Wert)</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
   <!-- Messpunkte & Baseline -->
-  <section>
+  <section class="card" id="metrics">
     <h2>Messpunkte & Baseline</h2>
     <table class="table">
       <thead>
@@ -159,7 +163,7 @@ li{margin:4px 0}
   </section>
 
   <!-- Startabend T0 – Feldnotizen -->
-  <section>
+  <section class="card" id="t0">
     <h2>Startabend T0 – Feldnotizen (Desk-Review, Abgleich bei Begehung)</h2>
     <ul>
       <li>Zufahrt/Anfahrt: Landgrafenstraße (City-West) – Parkbucht für Einsatzleitung nahe Haupttor vorgesehen.</li>
@@ -171,20 +175,19 @@ li{margin:4px 0}
   </section>
 
   <!-- Sicherheit & Dokumentation -->
-  <section>
+  <section class="card" id="safety">
     <h2>Sicherheit & Dokumentation</h2>
     <ul>
-      <li>Alleinarbeitsschutz/Totmann aktiv; PSA: Warnkleidung Kl. 2/3, S3, Witterungsschutz.</li>
+      <li>Alleinarbeitsschutz/„Totmann“ aktiv; PSA: Warnkleidung Kl. 2/3, S3, Witterungsschutz.</li>
       <li>Erstmeldung ≤ 2 Min; Eskalationsstufen S0–S3 (110/112).</li>
       <li>Foto-IDs ohne Personen/Kfz-Kennzeichen; Schichtbericht ≤ 08:30; KPI-Kurzlage Mo 09:00.</li>
     </ul>
   </section>
 
-  <!-- Footer -->
-  <div class="footer">
-    <div><b>Einsatzleitung (24/7):</b> 0176 2284 4636 · <b>T:</b> 030 985 57 615 · <b>E:</b> kontakt@nautilus-security.de</div>
-    <div>Nautilus Security UG (haftungsbeschränkt) – in Gründung · GF: Philipp De Boer · Korrespondenz: Vincent-van-Gogh-Str. 14, 13057 Berlin</div>
-  </div>
+  <footer class="footer">
+    <div><strong>Einsatzleitung (24/7):</strong> 0176 2284 4636 · <strong>T:</strong> 030 985 57 615 · <strong>E:</strong> <a href="mailto:kontakt@nautilus-security.de">kontakt@nautilus-security.de</a></div>
+    <div>Nautilus Security UG (haftungsbeschränkt) – in Gründung · GF: Philipp De Boer</div>
+  </footer>
 
 </div>
 </body>
