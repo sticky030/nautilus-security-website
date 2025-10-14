@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Equalizer – Detailkonzept · Nachtwache Baustelle · Nautilus Security</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0E2235">
+<style>
+/* ===== Nautilus Equalizer Detail · A4 Print (Navy/Gold) ===== */
+:root{
+  --navy:#0E2235; --gold:#C79A3A; --line:#1f3b56;
+  --ink:#10161f; --muted:#5f7a95; --bg:#ffffff;
+  --r:12px; --s1:8px; --s2:12px; --s3:16px; --s4:20px;
+  --fz:16px; --fz-sm:13px; --fz-xs:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font:var(--fz)/1.55 Inter,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif}
+a{color:var(--navy);text-decoration:none}
+.wrapper{max-width:900px;margin:0 auto;padding:24px 18px 40px}
+
+/* Header */
+.header{display:flex;gap:12px;align-items:flex-start;margin-bottom:8px}
+.logo{width:28mm;height:28mm;flex:0 0 auto}
+.logo img{width:100%;height:100%;object-fit:contain}
+.hgroup h1{margin:0;font-size:22px;letter-spacing:.01em;color:var(--navy)}
+.rule{border:0;border-top:2px solid var(--gold);margin:10px 0 14px}
+
+/* Info strip */
+.infobox{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.infobox .row{display:grid;grid-template-columns:160px 1fr}
+.infobox .row > div{padding:8px 10px}
+.infobox .row .k{background:#f5f7fa;color:#0f2235;font-weight:600}
+.infobox .row + .row{border-top:1px solid #d9e1ea}
+
+/* Section */
+section{margin-top:14px}
+h2{margin:0 0 6px;font-size:15px;color:var(--navy)}
+p{margin:0 0 8px;color:#233143}
+ul{margin:6px 0 8px 18px;padding:0}
+li{margin:4px 0}
+
+/* Two-column tables */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+
+.table{width:100%;border-collapse:collapse;font-size:14px}
+.table th,.table td{border:1px solid #b8c6d6;padding:8px 10px;vertical-align:middle}
+.table th{background:var(--navy);color:#fff;font-weight:700}
+.table th.gold{background:var(--gold);color:var(--navy)}
+.table small{color:#4a627c}
+
+/* Footer */
+.footer{border-top:1px solid var(--line);margin-top:16px;padding-top:10px;font-size:13px;color:#3a4b60}
+.footer b{color:#0a1b2b}
+
+/* Print */
+@media print{
+  @page{size:A4; margin:14mm 14mm 16mm 14mm}
+  html,body{background:#fff}
+  .wrapper{max-width:none;padding:0}
+  a[href]:after{content:""}
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo"><img src="logo-gold-transparent.png" alt="Nautilus Security"></div>
+    <div class="hgroup">
+      <h1>Equalizer – Detailkonzept · Nachtwache Baustelle (Premium)</h1>
+      <div style="color:#4a627c;font-size:14px;margin-top:4px">
+        Desk-Review mit Insider-Fokus – Abgleich & Fixierung bei Begehung vor Ort.
+      </div>
+    </div>
+  </header>
+  <hr class="rule">
+
+  <!-- Info strip -->
+  <div class="infobox">
+    <div class="row">
+      <div class="k">Insider-Fokus</div>
+      <div>City-West · Landgrafenstraße 3–4 (Beispielstand)</div>
+    </div>
+    <div class="row">
+      <div class="k">Fenster</div>
+      <div>22:00–06:00 (±30) · Start ≤ 72 h · Übergabe 06:30</div>
+    </div>
+    <div class="row">
+      <div class="k">Zielbild</div>
+      <div>Diebstahl/Vandalismus verhindern; Übergabefähigkeit morgens sicherstellen (Kabel, Diesel, Geräte).</div>
+    </div>
+  </div>
+
+  <!-- Top-3 Risks -->
+  <section>
+    <h2>Top-3 Risiken (objekttypisch)</h2>
+    <ul>
+      <li><b>Kabel / NE-Metalle (Container, Trommeln)</b> – leise, schneller Abtransport.</li>
+      <li><b>Diesel / IBC / Aggregate</b> – Abzapfen; Plomben/Schlösser Ziel von Manipulation.</li>
+      <li><b>Scaffolding / Zugänge</b> – unbefugter Aufstieg, Kleinteile/Elektrowerkzeug.</li>
+    </ul>
+  </section>
+
+  <!-- Hotspots + 8-Takt -->
+  <section class="grid">
+    <div>
+      <h2>Hotspots & Schutzgüter</h2>
+      <table class="table">
+        <thead>
+          <tr><th>Hotspot</th><th>Schwerpunkt</th><th>Hinweis</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Haupttor Landgrafenstraße</td><td>Zutritt/Zufahrt</td><td>Torstatus 22:30 / 01:30 / 05:30 dokumentieren</td></tr>
+          <tr><td>Container / Kabellager</td><td>NE-Metalle</td><td>Reste & Zuschnitte besonders prüfen (Sichtung/Foto)</td></tr>
+          <tr><td>Aggregat / Diesel-IBC</td><td>Füllstand/Plombe</td><td>00:00 & 04:30 Wert + Foto, Plomben-Nr. Baseline</td></tr>
+          <tr><td>Scaffolding / Fassade</td><td>Aufstiegspunkte</td><td>Lose Teile, Werkzeugebenen, unbefugte Nutzung</td></tr>
+          <tr><td>Kranbasis / Bedienstand</td><td>Zugang/Schlüssel</td><td>Sicherung vorhanden, keine Ablage von Werkzeug</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h2>8-Takt-Route (Beispiel)</h2>
+      <table class="table">
+        <thead>
+          <tr><th class="gold">Takt</th><th class="gold">Zeit</th><th class="gold">Abschnitt / Auftrag</th><th class="gold">Foto-ID / Notiz</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>T1</td><td>22:30</td><td>Grundrunde Perimeter, Torstatus</td><td>Perimeter_2230 · Tor_2230</td></tr>
+          <tr><td>T2</td><td>23:15</td><td>Kabellager/Container prüfen</td><td>Kabel_2315</td></tr>
+          <tr><td>T3</td><td>00:00</td><td>Diesel/Aggregat Füllstand + Plombe</td><td>Diesel_0000 (Wert + Foto)</td></tr>
+          <tr><td>T4</td><td>00:45</td><td>Scaffolding – Aufstiegspunkte</td><td>Scaf_0045</td></tr>
+          <tr><td>T5</td><td>01:30</td><td>Perimeter/Tor Re-Check</td><td>Tor_0130</td></tr>
+          <tr><td>T6</td><td>02:15</td><td>Kabellager/Diesel Re-Check</td><td>Kabel_0215 · Diesel_0215</td></tr>
+          <tr><td>T7</td><td>03:30</td><td>Kurzrunde neuralgische Punkte</td><td>Kurz_0330</td></tr>
+          <tr><td>T8</td><td>04:30</td><td>Kurzrunde + Diesel Endwert</td><td>Kurz_0430 · Diesel_0430 (Wert)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Messpunkte & Baseline -->
+  <section>
+    <h2>Messpunkte & Baseline</h2>
+    <table class="table">
+      <thead>
+        <tr><th>Zeit</th><th>Messpunkt</th><th>Wert/Status</th><th>Abweichung/CAPA</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>00:00</td><td>Diesel Füllstand</td><td></td><td></td></tr>
+        <tr><td>04:30</td><td>Diesel Füllstand</td><td></td><td></td></tr>
+        <tr><td>22:30 / 01:30 / 05:30</td><td>Torstatus (Foto)</td><td>offen/zu</td><td></td></tr>
+        <tr><td>T1–T8</td><td>Plomben/Schlösser</td><td>ok/abweichend (Delta zu T0)</td><td></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Startabend T0 – Feldnotizen -->
+  <section>
+    <h2>Startabend T0 – Feldnotizen (Desk-Review, Abgleich bei Begehung)</h2>
+    <ul>
+      <li>Zufahrt/Anfahrt: Landgrafenstraße (City-West) – Parkbucht für Einsatzleitung nahe Haupttor vorgesehen.</li>
+      <li>Licht & Sicht: neuralgische Punkte gezielt beleuchten (Tor, Kabellager, Diesel-IBC, Scaffolding-Antritt).</li>
+      <li>Sammelpunkt: außerhalb Perimeter – genaue Lage mit Bauleitung bei Begehung fixieren.</li>
+      <li>Schlüssel/Transponder: Übergabeprotokoll, Verlustkontakt, Anzahl dokumentieren.</li>
+      <li>Kommunikation: Parallelwahl Bauleitung/Polier + Einsatzleitung; Funk/Telefon-Redundanz testen.</li>
+    </ul>
+  </section>
+
+  <!-- Sicherheit & Dokumentation -->
+  <section>
+    <h2>Sicherheit & Dokumentation</h2>
+    <ul>
+      <li>Alleinarbeitsschutz/Totmann aktiv; PSA: Warnkleidung Kl. 2/3, S3, Witterungsschutz.</li>
+      <li>Erstmeldung ≤ 2 Min; Eskalationsstufen S0–S3 (110/112).</li>
+      <li>Foto-IDs ohne Personen/Kfz-Kennzeichen; Schichtbericht ≤ 08:30; KPI-Kurzlage Mo 09:00.</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div><b>Einsatzleitung (24/7):</b> 0176 2284 4636 · <b>T:</b> 030 985 57 615 · <b>E:</b> kontakt@nautilus-security.de</div>
+    <div>Nautilus Security UG (haftungsbeschränkt) – in Gründung · GF: Philipp De Boer · Korrespondenz: Vincent-van-Gogh-Str. 14, 13057 Berlin</div>
+  </div>
+
+</div>
+</body>
+</html>
