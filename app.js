@@ -50,7 +50,7 @@ const observer = new IntersectionObserver((entries)=>{
         const active = l.getAttribute("data-target")===id;
         l.classList.toggle("text-yellow-500", active);
         l.classList.toggle("font-bold", active);
-        l.classList.toggle("nav-active", active); // Linie unten
+        l.classList.toggle("nav-active", active);
       });
     }
   });
@@ -97,10 +97,11 @@ sections.forEach(sec=>sec && observer.observe(sec));
   });
 })();
 
-// Testimonials Slider – neue Zitate
+// Testimonials Slider – immer 3 sichtbar (pro Seite), Auto-Wechsel
 (function initTestimonials(){
   const track = document.getElementById("tsTrack");
   if (!track) return;
+
   const items = [
     { t:"Kurzfristig startklar, Übergaben sauber – Betrieb lief durch.", a:"Bauprojektleitung, Berlin" },
     { t:"Präsenz ruhig, Abläufe klar. Keine Reibung mit der Nachtlogistik.", a:"Logistikleitung, Potsdam" },
@@ -112,6 +113,8 @@ sections.forEach(sec=>sec && observer.observe(sec));
     { t:"Dokumentation auditfähig. Übergaben nachvollziehbar.", a:"Geschäftsführung, Berlin" },
     { t:"Mehrsprachige Teams, klare Funkdisziplin. Gäste fühlten sich sicher.", a:"Veranstalter, Mitte" }
   ];
+
+  // Seiten à 3 Items bauen
   const pages = [];
   for (let i=0;i<items.length;i+=3){
     const page = document.createElement("div");
@@ -124,20 +127,30 @@ sections.forEach(sec=>sec && observer.observe(sec));
     });
     pages.push(page);
   }
+
+  // In Track einfügen + erste Seite klonen (für Loop)
   pages.forEach(p=>track.appendChild(p));
-  track.appendChild(pages[0].cloneNode(true));
-  let idx = 0; const total = pages.length;
+  if (pages.length > 0) track.appendChild(pages[0].cloneNode(true));
+
+  // Slider Logik
+  let idx = 0; 
+  const total = pages.length;
+  const duration = 5200; // ms
   const go = () => {
-    idx++; track.style.transform = `translateX(-${idx*100}%)`;
+    idx++;
+    track.style.transform = `translateX(-${idx*100}%)`;
     if (idx === total){
       setTimeout(()=>{
-        track.style.transition = "none"; track.style.transform = "translateX(0%)"; idx = 0;
-        void track.offsetWidth; track.style.transition = "transform 700ms ease-in-out";
+        track.style.transition = "none";
+        track.style.transform = "translateX(0%)";
+        idx = 0;
+        void track.offsetWidth; // reflow
+        track.style.transition = "transform 700ms ease-in-out";
       }, 720);
     }
   };
   track.style.transition = "transform 700ms ease-in-out";
-  setInterval(go, 5000);
+  setInterval(go, duration);
 })();
 
 // Forms: Formspree optional, sonst Mailto-Fallback
@@ -168,7 +181,7 @@ function handleForm(formId, endpoint, subject){
         const fd = new FormData(form);
         const res = await fetch(endpoint, { method:"POST", body: fd, headers: { "Accept":"application/json" } });
         if (res.ok){
-          if (status){ status.textContent = "Vielen Dank. Wir melden uns werktags binnen 60 Minuten."; status.style.color = "#C79A3A"; }
+          if (status){ status.textContent = "Vielen Dank. Wir melden uns werktags zeitnah."; status.style.color = "#C79A3A"; }
           form.reset();
           return;
         }
@@ -189,7 +202,7 @@ function handleForm(formId, endpoint, subject){
 handleForm("contactForm", FORMSPREE_CONTACT, "Kontaktanfrage – Nautilus Security");
 handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
 
-// Sticky CTA Sichtbarkeit: erst nach ~40% Scroll, vor Footer ausblenden
+// Sticky CTA: erst nach ~40% Scroll sichtbar
 (function stickyCtaVisibility(){
   const cta = document.getElementById("stickyCta");
   if(!cta) return;
@@ -215,6 +228,5 @@ handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
   window.addEventListener("resize", onScroll);
   onScroll();
 
-  // Scroll-to-contact
   cta.addEventListener("click", ()=>document.getElementById("contact")?.scrollIntoView({behavior:"smooth"}));
 })();
