@@ -1,329 +1,320 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nautilus Security – Sicherheit mit Struktur</title>
-  <meta name="description" content="Nautilus Security – Nachtwache, Objektschutz, Eventschutz. Strukturierte Abläufe, klare Kommunikation, auditfähige Dokumentation.">
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nautilus Security – Sicherheit mit Struktur.</title>
+  <meta name="description" content="Nautilus Security: Nachtwache, Objektschutz, Eventschutz. Strukturierte Abläufe, feste Ansprechpartner, auditfähige Dokumentation.">
+  <meta name="theme-color" content="#0E2235">
+  <link rel="canonical" href="https://sticky030.github.io/nautilus-security-website/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Nautilus Security – Sicherheit mit Struktur.">
+  <meta property="og:description" content="Präsenz vor Ort, klare Routinen, nachvollziehbare Berichte.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://sticky030.github.io/nautilus-security-website/logo-gold-transparent.png">
+  <meta property="og:locale" content="de_DE">
+
+  <link rel="icon" href="./logo-gold-transparent.png" type="image/png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <link rel="stylesheet" href="./styles.css" />
 </head>
-<body>
+<body class="min-h-screen font-sans bg-[#0a0f1c] text-white scroll-smooth">
   <!-- Header -->
-  <header class="header">
-    <div class="container header-inner">
-      <div class="brand">
-        <img src="logo-gold-transparent.png" alt="Nautilus Security Logo" class="brand-logo" />
-        <span class="brand-name">Nautilus Security</span>
+  <header id="site-header" class="border-b border-yellow-500 bg-[#0a0f1c] p-4 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center relative">
+      <div class="flex items-center space-x-3">
+        <img src="./logo-gold-transparent.png" alt="Logo Nautilus Security" width="40" height="40" class="w-10 h-10" />
+        <h1 class="text-xl font-bold tracking-wide">Nautilus Security</h1>
       </div>
-      <nav class="nav">
-        <button class="nav-toggle" id="navToggle" aria-label="Navigation öffnen">☰</button>
-        <ul class="nav-list" id="navList" role="menubar" aria-label="Hauptnavigation">
-          <li><a href="#home" role="menuitem">Start</a></li>
-          <li><a href="#about" role="menuitem">Über uns</a></li>
-          <li><a href="#services" role="menuitem">Leistungen</a></li>
-          <li><a href="#why" role="menuitem">Warum wir</a></li>
-          <li><a href="#values" role="menuitem">Werte</a></li>
-          <li><a href="#team" role="menuitem">Team</a></li>
-          <li><a href="#jobs" role="menuitem">Karriere</a></li>
-          <li><a href="#faq" role="menuitem">FAQ</a></li>
-          <li><a href="#contact" role="menuitem">Kontakt</a></li>
-        </ul>
+      <div class="flex items-center space-x-4">
+        <button id="darkToggle" class="text-sm border px-2 py-1 rounded hover:opacity-70" aria-label="Farbschema umschalten">🌙</button>
+        <div class="md:hidden">
+          <button id="burger" class="text-yellow-500 text-2xl" aria-label="Navigation öffnen">☰</button>
+        </div>
+      </div>
+      <nav class="hidden md:flex space-x-4 text-sm" id="mainNav" aria-label="Hauptnavigation">
+        <button data-target="home" class="nav-link hover:text-yellow-500 transition">Start</button>
+        <button data-target="about" class="nav-link hover:text-yellow-500 transition">Über uns</button>
+        <button data-target="services" class="nav-link hover:text-yellow-500 transition">Leistungen</button>
+        <button data-target="why" class="nav-link hover:text-yellow-500 transition">Warum wir</button>
+        <button data-target="values" class="nav-link hover:text-yellow-500 transition">Unsere Werte</button>
+        <button data-target="team" class="nav-link hover:text-yellow-500 transition">Team</button>
+        <button data-target="jobs" class="nav-link hover:text-yellow-500 transition">Karriere</button>
+        <button data-target="faq" class="nav-link hover:text-yellow-500 transition">FAQ</button>
+        <button data-target="testimonials" class="nav-link hover:text-yellow-500 transition">Kundenstimmen</button>
+        <button data-target="contact" class="nav-link hover:text-yellow-500 transition">Kontakt</button>
       </nav>
+      <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-60 z-40" aria-hidden="true"></div>
+      <div id="mobileMenu" class="hidden absolute top-16 left-0 w-full bg-[#0a0f1c] border-t border-yellow-500 md:hidden flex-col text-center py-4 z-50 animate-slide-down" role="dialog" aria-modal="true" aria-label="Mobiles Menü">
+        <button data-target="home" class="mobile-link py-2">Start</button>
+        <button data-target="about" class="mobile-link py-2">Über uns</button>
+        <button data-target="services" class="mobile-link py-2">Leistungen</button>
+        <button data-target="why" class="mobile-link py-2">Warum wir</button>
+        <button data-target="values" class="mobile-link py-2">Unsere Werte</button>
+        <button data-target="team" class="mobile-link py-2">Team</button>
+        <button data-target="jobs" class="mobile-link py-2">Karriere</button>
+        <button data-target="faq" class="mobile-link py-2">FAQ</button>
+        <button data-target="testimonials" class="mobile-link py-2">Kundenstimmen</button>
+        <button data-target="contact" class="mobile-link py-2">Kontakt</button>
+      </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="container hero-inner">
-      <div class="hero-logo-wrap">
-        <img src="logo-gold-transparent.png" alt="Nautilus Security" class="hero-logo" />
+  <main>
+    <!-- Hero -->
+    <section id="home" class="hero-relaxed flex items-center justify-center text-center px-4 bg-gradient-to-b from-[#0b1222] via-[#0a0f1c] to-[#0a0f1c]" data-aos="fade-up">
+      <div>
+        <div class="mx-auto mb-6 w-52 md:w-64 lg:w-72 aspect-square rounded-full bg-[#0d1528] flex items-center justify-center shadow-2xl ring-2 ring-yellow-500/60 ring-offset-2 ring-offset-[#0a0f1c]">
+          <img src="./logo-gold-transparent.png" alt="Nautilus Security Logo" class="w-48 md:w-64 lg:w-72 drop-shadow-xl opacity-95" width="256" height="256" />
+        </div>
+        <h2 class="text-4xl font-bold text-yellow-500 mb-4">Sicherheit mit Struktur.</h2>
+        <div class="mt-8">
+          <button data-target="contact" class="cta-btn bg-yellow-500 text-black px-6 py-3 rounded-full text-lg shadow-lg hover:bg-yellow-400 transition-transform transform hover:scale-105">Jetzt Kontakt aufnehmen</button>
+        </div>
       </div>
-      <h1 class="hero-title">Sicherheit mit Struktur.</h1>
-      <p class="hero-subtitle">
-        Präsenz vor Ort, klare Routinen, nachvollziehbare Berichte – zuverlässig, diskret, auditfähig.
-      </p>
-      <a href="#contact" class="btn btn-primary">Jetzt Kontakt aufnehmen</a>
-    </div>
-  </section>
+    </section>
 
-  <!-- Über uns -->
-  <section id="about" class="section">
-    <div class="container narrow">
-      <h2 class="section-title">Über uns</h2>
-      <p class="text">
+    <!-- Über uns -->
+    <section id="about" class="px-6 max-w-3xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-4">Über uns</h2>
+      <p class="text-gray-300 mb-4">
         Nautilus Security UG (Berlin) plant und liefert Nachtwache, Objektschutz und Eventschutz. Wir arbeiten nach Taktplänen, klaren Eskalationen und auditfähiger Dokumentation.
       </p>
-      <p class="text">
+      <p class="text-gray-300">
         Basis jedes Einsatzes: Lagebild, Ziele, Revierlogik, Meldeketten. Präsenz vor Ort, nachvollziehbare Protokolle (GPS, Schichtberichte, Kurzlagen) und feste Ansprechpartner.
       </p>
-    </div>
-  </section>
+    </section>
 
-  <!-- Leistungen -->
-  <section id="services" class="section">
-    <div class="container">
-      <h2 class="section-title center">Unsere Leistungen</h2>
-      <div class="grid grid-3">
-        <article class="card">
+    <!-- Leistungen (kompakt) -->
+    <section id="services" class="max-w-6xl mx-auto px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Unsere Leistungen</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="card group">
+          <div class="icon-wrap"><svg class="icon-gold" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5l7-3z"/></svg></div>
           <h3 class="card-title">Objektschutz & Baustellen</h3>
           <p class="card-text">Zugänge, Perimeter, Hotspots – nach Taktplan kontrolliert und protokolliert.</p>
         </article>
-        <article class="card">
+        <article class="card group">
+          <div class="icon-wrap"><svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M4 6a2 2 0 114 0 2 2 0 01-4 0zm0 0v10a4 4 0 004 4h8a2 2 0 100-4H8a2 2 0 01-2-2V6m12-2a2 2 0 110 4 2 2 0 010-4z"/></svg></div>
           <h3 class="card-title">Revier- & Streifendienst</h3>
           <p class="card-text">Mobile Kontrollen mit GPS-Nachweis; Schließ- und Alarmdienste nach Checkliste.</p>
         </article>
-        <article class="card">
+        <article class="card group">
+          <div class="icon-wrap"><svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M3 7h18v4a2 2 0 010 4v4H3v-4a2 2 0 010-4V7z"/></svg></div>
           <h3 class="card-title">Eventschutz</h3>
           <p class="card-text">Zutrittslogik, Gästeströme, Backstage – unauffällig geführt, sauber dokumentiert.</p>
         </article>
-        <article class="card">
+        <article class="card group">
+          <div class="icon-wrap"><svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9a7 7 0 0114 0H5z"/></svg></div>
           <h3 class="card-title">Empfang & Doorman</h3>
           <p class="card-text">Höflich und durchsetzungsfähig; Besuchermanagement & Meldungen nach Vorgabe.</p>
         </article>
-        <article class="card">
+        <article class="card group">
+          <div class="icon-wrap"><svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l8 4v6c0 5-4 8-8 10-4-2-8-5-8-10V6l8-4z"/></svg></div>
           <h3 class="card-title">Personenschutz</h3>
           <p class="card-text">Unauffällige Begleitung mit Planung, Routen und klaren Kommunikationswegen.</p>
         </article>
-        <article class="card">
+        <article class="card group">
+          <div class="icon-wrap"><svg class="icon-gold" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a9 9 0 100 18 9 9 0 000-18zm1 13h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg></div>
           <h3 class="card-title">Beratung</h3>
           <p class="card-text">Analyse, Schutzkonzept, Maßnahmenplan mit Prioritäten – auf Wunsch Pilotbetrieb.</p>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Warum wir -->
-  <section id="why" class="section">
-    <div class="container">
-      <h2 class="section-title center">Warum wir</h2>
-      <div class="grid grid-3">
-        <article class="card">
-          <h3 class="card-title">Verbindlich</h3>
-          <p class="card-text">Feste Ansprechpartner, 24/7 erreichbar; Zusagen und Rückmeldungen fristgerecht.</p>
-        </article>
-        <article class="card">
-          <h3 class="card-title">Strukturiert</h3>
-          <p class="card-text">Taktpläne, Checklisten; Übergaben mit Prüfpfad – planbar und überprüfbar.</p>
-        </article>
-        <article class="card">
-          <h3 class="card-title">Schnell startklar</h3>
-          <p class="card-text">Einarbeitung, Startabend mit Einsatzleitung; hinterlegte Backup-Mechanik.</p>
-        </article>
-        <article class="card">
-          <h3 class="card-title">Qualifiziert</h3>
-          <p class="card-text">§34a, Ersthelfer, einsatzerprobt. Verbindliche Einsatz-Briefings; regelmäßige Auffrischungen mit Nachweis.</p>
-        </article>
-        <article class="card">
-          <h3 class="card-title">Diskret</h3>
-          <p class="card-text">Unauffälliger Auftritt; strikt vertrauliche Kommunikation.</p>
-        </article>
-        <article class="card">
-          <h3 class="card-title">Transparent</h3>
-          <p class="card-text">GPS-Nachweise, Schichtberichte, Kurzlagen; Abweichungen mit Maßnahmen.</p>
-        </article>
+    <!-- Warum wir (kompakt) -->
+    <section id="why" class="max-w-6xl mx-auto px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Warum wir</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="card"><h3 class="card-title">Verbindlich</h3><p class="card-text">Feste Ansprechpartner, 24/7 erreichbar; Zusagen und Rückmeldungen mit Termin.</p></article>
+        <article class="card"><h3 class="card-title">Strukturiert</h3><p class="card-text">Taktpläne, Checklisten; Übergaben mit Prüfpfad – planbar und überprüfbar.</p></article>
+        <article class="card"><h3 class="card-title">Schnell startklar</h3><p class="card-text">Einarbeitung, Startabend mit Einsatzleitung; hinterlegte Backup-Mechanik.</p></article>
+        <article class="card"><h3 class="card-title">Qualifiziert</h3><p class="card-text">§34a, Ersthelfer, einsatzerprobt. Verbindliche Briefings; regelmäßige Auffrischungen mit Nachweis.</p></article>
+        <article class="card"><h3 class="card-title">Diskret</h3><p class="card-text">Unauffälliger Auftritt; strikt vertrauliche Kommunikation.</p></article>
+        <article class="card"><h3 class="card-title">Transparent</h3><p class="card-text">GPS-Nachweise, Schichtberichte, Kurzlagen; Abweichungen mit Maßnahmen.</p></article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Werte -->
-  <section id="values" class="section">
-    <div class="container">
-      <h2 class="section-title center">Unsere Werte</h2>
-      <div class="grid grid-4">
-        <div class="value-card">
-          <div class="value-icon">✓</div>
-          <h3 class="value-title">Vertrauen</h3>
-          <p class="value-text">Loyal, verschwiegen, zuverlässig – mit nachweisbarer Verantwortung.</p>
+    <!-- Werte (kompakt) -->
+    <section id="values" class="max-w-5xl mx-auto px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Unsere Werte</h2>
+      <div class="grid md:grid-cols-4 gap-6 text-center">
+        <div class="bg-[#1f2937] rounded-2xl p-6 ring-1 ring-white/5 hover:ring-yellow-500/50 shadow-md hover:shadow-yellow-500/20 transition transform hover:-translate-y-1">
+          <div class="mx-auto mb-4 w-12 h-12 flex items-center justify-center rounded-full bg-yellow-500/10">
+            <svg class="w-7 h-7 text-yellow-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l7 3v6c0 5-3.4 9.7-7 11-3.6-1.3-7-6-7-11V5l7-3zm-1 12l-3-3 1.4-1.4L11 11.2l4.6-4.6L17 8l-6 6z"/></svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Vertrauen</h3>
+          <p class="text-gray-300">Loyal, verschwiegen, zuverlässig – mit nachweisbarer Verantwortung.</p>
         </div>
-        <div class="value-card">
-          <div class="value-icon">⏱</div>
-          <h3 class="value-title">Präzision</h3>
-          <p class="value-text">Sorgfältige Vorbereitung, klare Sprache, saubere Berichte.</p>
+        <div class="bg-[#1f2937] rounded-2xl p-6 ring-1 ring-white/5 hover:ring-yellow-500/50 shadow-md hover:shadow-yellow-500/20 transition transform hover:-translate-y-1">
+          <div class="mx-auto mb-4 w-12 h-12 flex items-center justify-center rounded-full bg-yellow-500/10">
+            <svg class="w-7 h-7 text-yellow-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 3a7 7 0 110 14 7 7 0 010-14zm0 3a4 4 0 100 8 4 4 0 000-8zm.75-2h-1.5v3.25L8.3 11.2l.9 1.4 3.55-2.13V6z"/></svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Präzision</h3>
+          <p class="text-gray-300">Sorgfältige Vorbereitung, klare Sprache, saubere Berichte.</p>
         </div>
-        <div class="value-card">
-          <div class="value-icon">⚡</div>
-          <h3 class="value-title">Reaktionsfähigkeit</h3>
-          <p class="value-text">Ruhig und strukturiert – auch unter Druck.</p>
+        <div class="bg-[#1f2937] rounded-2xl p-6 ring-1 ring-white/5 hover:ring-yellow-500/50 shadow-md hover:shadow-yellow-500/20 transition transform hover:-translate-y-1">
+          <div class="mx-auto mb-4 w-12 h-12 flex items-center justify-center rounded-full bg-yellow-500/10">
+            <svg class="w-7 h-7 text-yellow-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Reaktionsfähigkeit</h3>
+          <p class="text-gray-300">Ruhig und strukturiert – auch unter Druck.</p>
         </div>
-        <div class="value-card">
-          <div class="value-icon">✔</div>
-          <h3 class="value-title">Verlässlichkeit</h3>
-          <p class="value-text">Planbare Takte, eingehaltene Zusagen, realistische Versprechen.</p>
+        <div class="bg-[#1f2937] rounded-2xl p-6 ring-1 ring-white/5 hover:ring-yellow-500/50 shadow-md hover:shadow-yellow-500/20 transition transform hover:-translate-y-1">
+          <div class="mx-auto mb-4 w-12 h-12 flex items-center justify-center rounded-full bg-yellow-500/10">
+            <svg class="w-7 h-7 text-yellow-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1 14l-4-4 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 7z"/></svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">Verlässlichkeit</h3>
+          <p class="text-gray-300">Planbare Takte, eingehaltene Zusagen, realistische Versprechen.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Team -->
-  <section id="team" class="section">
-    <div class="container">
-      <h2 class="section-title center">Unser Team</h2>
-      <div class="grid grid-3">
-        <div class="team-card">
-          <h3 class="team-name">Philipp D. B.</h3>
-          <div class="team-role">Geschäftsführer</div>
-          <p class="team-text">Strategie, Qualität, Kundenerfolg. Ziele in Taktpläne übersetzt, Eskalationswege gesichert.</p>
+    <!-- Team -->
+    <section id="team" class="max-w-6xl mx-auto px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 text-center mb-12">Unser Team</h2>
+      <div class="grid md:grid-cols-3 gap-10 text-center">
+        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg hover:shadow-yellow-500/20 transition">
+          <h3 class="text-xl font-semibold text-white">Philipp D. B.</h3>
+          <p class="text-yellow-500">Geschäftsführer</p>
+          <p class="text-gray-300 mt-2">Strategie, Qualität, Kundenerfolg. Ziele in Taktpläne übersetzt, Eskalationswege gesichert.</p>
         </div>
-        <div class="team-card">
-          <h3 class="team-name">Beatrix K.</h3>
-          <div class="team-role">Assistenz & Personalmanagement</div>
-          <p class="team-text">Disposition, Kommunikation, Schichtplanung – passgenaue Besetzungen, klare Übergaben.</p>
+        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg hover:shadow-yellow-500/20 transition">
+          <h3 class="text-xl font-semibold text-white">Beatrix K.</h3>
+          <p class="text-yellow-500">Assistenz & Personalmanagement</p>
+          <p class="text-gray-300 mt-2">Disposition, Kommunikation, Schichtplanung – passgenaue Besetzungen, klare Übergaben.</p>
         </div>
-        <div class="team-card">
-          <h3 class="team-name">Justin G.</h3>
-          <div class="team-role">Einsatzkoordination</div>
-          <p class="team-text">Priorisiert Meldungen, hält Lageüberblick – Präsenz vor Ort mit sauberem Reporting.</p>
+        <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg hover:shadow-yellow-500/20 transition">
+          <h3 class="text-xl font-semibold text-white">Justin G.</h3>
+          <p class="text-yellow-500">Einsatzkoordination</p>
+          <p class="text-gray-300 mt-2">Priorisiert Meldungen, hält Lageüberblick – Präsenz vor Ort mit sauberem Reporting.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Karriere -->
-  <section id="jobs" class="section">
-    <div class="container narrow center">
-      <h2 class="section-title">Karriere bei Nautilus</h2>
-      <p class="text">
+    <!-- Karriere -->
+    <section id="jobs" class="max-w-3xl mx-auto px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-6 text-center">Karriere bei Nautilus</h2>
+      <p class="text-gray-300 text-center mb-6">
         Wir suchen Profis mit Haltung. §34a, gepflegtes Auftreten, Deutsch; Bereitschaft für Nacht/Wochenende.
       </p>
-      <ul class="list">
+      <ul class="list-[square] pl-6 space-y-2 text-gray-300 marker:text-yellow-500">
         <li>Zuverlässigkeit, Teamfähigkeit, Kommunikationsstärke</li>
         <li>Zusatzqualifikationen (Erste Hilfe, Fremdsprachen, Spezialschulungen) von Vorteil</li>
       </ul>
-      <a href="#career-form" class="btn btn-primary">Jetzt bewerben</a>
-    </div>
-  </section>
+      <div class="text-center mt-8">
+        <button data-target="career-form" class="cta-btn bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition">Jetzt bewerben</button>
+      </div>
+    </section>
 
-  <!-- Online-Bewerbung -->
-  <section id="career-form" class="section">
-    <div class="container narrow">
-      <h3 class="section-subtitle">Online-Bewerbung</h3>
-      <form id="careerForm" class="form" novalidate>
-        <div class="hp">
-          <label for="cf_company">Firma (nicht ausfüllen)</label>
-          <input id="cf_company" name="company" type="text" tabindex="-1" autocomplete="off" />
+    <!-- Online-Bewerbung -->
+    <section id="career-form" class="max-w-3xl mx-auto pt-2 pb-16 px-6" data-aos="fade-up">
+      <h3 class="text-2xl font-semibold text-yellow-500 mb-4">Online-Bewerbung</h3>
+      <form id="careerForm" class="space-y-4" novalidate>
+        <div class="grid md:grid-cols-2 gap-4">
+          <label class="sr-only" for="cf_name">Vollständiger Name</label>
+          <input id="cf_name" name="name" type="text" placeholder="Vollständiger Name" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+          <label class="sr-only" for="cf_email">E-Mail</label>
+          <input id="cf_email" name="email" type="email" placeholder="E-Mail" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
         </div>
-        <div class="grid grid-2 form-grid">
-          <div class="form-field">
-            <label for="cf_name">Vollständiger Name</label>
-            <input id="cf_name" name="name" type="text" required />
-          </div>
-          <div class="form-field">
-            <label for="cf_email">E-Mail</label>
-            <input id="cf_email" name="email" type="email" required />
-          </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <label class="sr-only" for="cf_phone">Telefon</label>
+          <input id="cf_phone" name="phone" type="tel" placeholder="Telefon (optional)" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" />
+          <label class="sr-only" for="cf_pos">Position</label>
+          <input id="cf_pos" name="position" type="text" placeholder="Gewünschte Position / Bereich" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
         </div>
-        <div class="grid grid-2 form-grid">
-          <div class="form-field">
-            <label for="cf_phone">Telefon (optional)</label>
-            <input id="cf_phone" name="phone" type="tel" />
-          </div>
-          <div class="form-field">
-            <label for="cf_pos">Gewünschte Position / Bereich</label>
-            <input id="cf_pos" name="position" type="text" required />
-          </div>
+        <label class="sr-only" for="cf_msg">Nachricht</label>
+        <textarea id="cf_msg" name="message" placeholder="Kurz zu Ihrer Erfahrung..." rows="4" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white"></textarea>
+        <div>
+          <label class="block text-sm mb-2" for="cvFile">Lebenslauf (PDF, optional)</label>
+          <input id="cvFile" type="file" accept="application/pdf" class="w-full text-sm" />
         </div>
-        <div class="form-field">
-          <label for="cf_msg">Kurz zu Ihrer Erfahrung</label>
-          <textarea id="cf_msg" name="message" rows="4"></textarea>
-        </div>
-        <div class="form-field">
-          <label for="cvFile">Lebenslauf (PDF, optional)</label>
-          <input id="cvFile" type="file" accept="application/pdf" />
-        </div>
-        <button type="submit" class="btn btn-primary">Bewerbung senden</button>
-        <p id="careerStatus" class="form-status"></p>
+        <button type="submit" class="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition-transform transform hover:scale-105">Bewerbung senden</button>
+        <p id="careerStatus" class="text-sm mt-2"></p>
       </form>
-    </div>
-  </section>
+    </section>
 
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="container narrow">
-      <h2 class="section-title">Häufige Fragen (FAQ)</h2>
-      <div class="faq">
-        <div class="faq-item">
-          <button class="faq-q">Welche Einsatzgebiete deckt Nautilus Security ab?</button>
-          <div class="faq-a">Berlin/Brandenburg. Weitere Standorte nach Absprache, sofern Struktur und Qualität gesichert sind.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Wie schnell können Einsätze starten?</button>
-          <div class="faq-a">Kurzfristige Starts möglich. Einarbeitung und Übergabe werden geplant und dokumentiert.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Gibt es digitale Protokolle?</button>
-          <div class="faq-a">Ja – Revier-GPS, Schichtberichte, Kurzlagen. Abweichungen sind belegt und mit Maßnahmen hinterlegt.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Bieten Sie Personenschutz an?</button>
-          <div class="faq-a">Ja – unauffällig und abgestimmt. Planung, Routen und Kommunikationsregeln sind vorab fixiert.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Bieten Sie langfristige Zusammenarbeit?</button>
-          <div class="faq-a">Vom kurzfristigen Einsatz bis zum Rahmenvertrag – mit festen Ansprechpartnern und auditfähigem Reporting.</div>
+    <!-- FAQ -->
+    <section id="faq" class="max-w-3xl mx-auto px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-6">Häufige Fragen (FAQ)</h2>
+      <div class="space-y-3" id="faqList">
+        <div class="faq-item"><button class="faq-q">Welche Einsatzgebiete deckt Nautilus Security ab?</button><div class="faq-a">Berlin/Brandenburg. Weitere Standorte nach Absprache, sofern Struktur und Qualität gesichert sind.</div></div>
+        <div class="faq-item"><button class="faq-q">Wie schnell können Einsätze starten?</button><div class="faq-a">Kurzfristige Starts möglich. Einarbeitung und Übergabe werden geplant und dokumentiert.</div></div>
+        <div class="faq-item"><button class="faq-q">Gibt es digitale Protokolle?</button><div class="faq-a">Ja – Revier-GPS, Schichtberichte, Kurzlagen. Abweichungen sind belegt und mit Maßnahmen hinterlegt.</div></div>
+        <div class="faq-item"><button class="faq-q">Bieten Sie Personenschutz an?</button><div class="faq-a">Ja – unauffällig und abgestimmt. Planung, Routen und Kommunikationsregeln sind vorab fixiert.</div></div>
+        <div class="faq-item"><button class="faq-q">Bieten Sie langfristige Zusammenarbeit?</button><div class="faq-a">Vom kurzfristigen Einsatz bis zum Rahmenvertrag – mit festen Ansprechpartnern und auditfähigem Reporting.</div></div>
+      </div>
+    </section>
+
+    <!-- Kundenstimmen (immer 3 sichtbar, auto-wechsel) -->
+    <section id="testimonials" class="bg-[#111827] py-20 px-6 overflow-hidden" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 text-center mb-8">Was unsere Kunden sagen</h2>
+      <div class="max-w-6xl mx-auto">
+        <div id="tsViewport" class="relative overflow-hidden">
+          <div id="tsTrack" class="flex transition-transform duration-700 ease-in-out will-change-transform"></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Testimonials -->
-  <section id="testimonials" class="section section-dark">
-    <div class="container">
-      <h2 class="section-title center">Was unsere Kunden sagen</h2>
-      <div class="testimonials">
-        <div class="ts-viewport">
-          <div id="tsTrack" class="ts-track"></div>
-        </div>
-        <div class="ts-controls">
-          <button id="tsPause" class="btn btn-small">Pause</button>
-          <button id="tsPlay" class="btn btn-small hidden">Weiter</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Kontakt -->
-  <section id="contact" class="section">
-    <div class="container narrow">
-      <h2 class="section-title">Kontakt aufnehmen</h2>
-      <form id="contactForm" class="form" novalidate>
-        <div class="hp">
-          <label for="ct_company">Firma (nicht ausfüllen)</label>
-          <input id="ct_company" name="company" type="text" tabindex="-1" autocomplete="off" />
-        </div>
-        <div class="form-field">
-          <label for="ct_name">Ihr Name</label>
-          <input id="ct_name" name="name" type="text" required />
-        </div>
-        <div class="form-field">
-          <label for="ct_email">Ihre E-Mail</label>
-          <input id="ct_email" name="email" type="email" required />
-        </div>
-        <div class="form-field">
-          <label for="ct_msg">Ihre Nachricht</label>
-          <textarea id="ct_msg" name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Absenden</button>
-        <p id="contactStatus" class="form-status"></p>
+    <!-- Kontakt -->
+    <section id="contact" class="max-w-2xl mx-auto px-6" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-yellow-500 mb-6">Kontakt aufnehmen</h2>
+      <form id="contactForm" class="space-y-4" novalidate>
+        <label class="sr-only" for="ct_name">Ihr Name</label>
+        <input id="ct_name" name="name" type="text" placeholder="Ihr Name" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+        <label class="sr-only" for="ct_email">Ihre E-Mail</label>
+        <input id="ct_email" name="email" type="email" placeholder="Ihre E-Mail" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
+        <label class="sr-only" for="ct_msg">Ihre Nachricht</label>
+        <textarea id="ct_msg" name="message" placeholder="Ihre Nachricht..." rows="5" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required></textarea>
+        <button type="submit" class="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition-transform transform hover:scale-105">Absenden</button>
+        <p id="contactStatus" class="text-sm mt-2"></p>
       </form>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Sticky CTA -->
-  <button id="stickyCta" class="sticky-cta">📞 Jetzt anfragen</button>
+  <button id="stickyCta" class="fixed right-6 bg-yellow-500 text-black px-5 py-3 rounded-full text-sm shadow-lg hover:bg-yellow-400 transition z-50">📞 Jetzt anfragen</button>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      &copy; <span id="year"></span> Nautilus Security UG (haftungsbeschränkt)
-      <span class="footer-links">
-        <a href="impressum.html">Impressum</a> ·
-        <a href="datenschutz.html">Datenschutz</a>
-      </span>
+  <footer class="bg-[#0a0f1c] text-yellow-500 p-4 text-center text-sm border-t border-yellow-500">
+    &copy; <span id="year"></span> Nautilus Security UG (haftungsbeschränkt)
+    <div class="mt-2 space-x-4 text-yellow-400 text-xs">
+      <a href="./impressum.html" class="hover:underline">Impressum</a>
+      <a href="./datenschutz.html" class="hover:underline">Datenschutz</a>
     </div>
   </footer>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Nautilus Security UG (haftungsbeschränkt)",
+    "url":"https://sticky030.github.io/nautilus-security-website/",
+    "logo":"https://sticky030.github.io/nautilus-security-website/logo-gold-transparent.png",
+    "email":"kontakt@nautilus-security.de",
+    "telephone":"+49-30-98557615",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"Vincent-van-Gogh-Str. 14",
+      "postalCode":"13057",
+      "addressLocality":"Berlin",
+      "addressCountry":"DE"
+    },
+    "contactPoint":[{
+      "@type":"ContactPoint",
+      "telephone":"+49-176-22844636",
+      "contactType":"customer service",
+      "areaServed":"DE",
+      "availableLanguage":["de","en"]
+    }]
+  }
+  </script>
+
+  <script defer src="./app.js"></script>
 </body>
 </html>
