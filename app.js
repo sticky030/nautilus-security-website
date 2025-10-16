@@ -39,7 +39,7 @@ document.querySelectorAll(".mobile-link, .nav-link, .cta-btn").forEach(btn=>{
   });
 });
 
-// Scrollspy (aktiviert Gold-Linie)
+// Scrollspy
 const links = document.querySelectorAll(".nav-link");
 const sections = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"].map(id=>document.getElementById(id));
 const observer = new IntersectionObserver((entries)=>{
@@ -97,7 +97,7 @@ sections.forEach(sec=>sec && observer.observe(sec));
   });
 })();
 
-// Testimonials Slider – immer 3 sichtbar (pro Seite), Auto-Wechsel
+// Testimonials Slider – 3 sichtbar, Auto-Wechsel, PRM + Pause/Play
 (function initTestimonials(){
   const track = document.getElementById("tsTrack");
   if (!track) return;
@@ -127,33 +127,54 @@ sections.forEach(sec=>sec && observer.observe(sec));
     });
     pages.push(page);
   }
-
-  // In Track einfügen + erste Seite klonen (für Loop)
   pages.forEach(p=>track.appendChild(p));
   if (pages.length > 0) track.appendChild(pages[0].cloneNode(true));
 
-  // Slider Logik
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const pauseBtn = document.getElementById("tsPause");
+  const playBtn  = document.getElementById("tsPlay");
+
   let idx = 0; 
-  const total = pages.length;
-  const duration = 5200; // ms
+  let total = pages.length;
+  let timer = null;
+  const stepMs = 5200;
+
   const go = () => {
-    idx++;
-    track.style.transform = `translateX(-${idx*100}%)`;
+    idx++; track.style.transform = `translateX(-${idx*100}%)`;
     if (idx === total){
       setTimeout(()=>{
         track.style.transition = "none";
         track.style.transform = "translateX(0%)";
         idx = 0;
-        void track.offsetWidth; // reflow
+        void track.offsetWidth;
         track.style.transition = "transform 700ms ease-in-out";
       }, 720);
     }
   };
-  track.style.transition = "transform 700ms ease-in-out";
-  setInterval(go, duration);
+
+  const start = () => {
+    if (timer) return;
+    timer = setInterval(go, stepMs);
+    pauseBtn?.classList.remove("hidden");
+    playBtn?.classList.add("hidden");
+    pauseBtn?.setAttribute("aria-pressed","false");
+    playBtn?.setAttribute("aria-pressed","false");
+  };
+  const stop = () => {
+    if (!timer) return;
+    clearInterval(timer); timer = null;
+    pauseBtn?.classList.add("hidden");
+    playBtn?.classList.remove("hidden");
+  };
+
+  pauseBtn?.addEventListener("click", stop);
+  playBtn?.addEventListener("click", start);
+
+  // Auto nur starten, wenn PRM nicht aktiv
+  if (!prefersReducedMotion) start();
 })();
 
-// Forms: Formspree optional, sonst Mailto-Fallback
+// Forms: Formspree optional, sonst Mailto-Fallback + Honeypot + Time-Gate
 const FORMSPREE_CONTACT = "";  // z.B. https://formspree.io/f/xxxxxx
 const FORMSPREE_CAREER  = "";
 
@@ -162,9 +183,25 @@ function handleForm(formId, endpoint, subject){
   const status = document.getElementById(formId === "contactForm" ? "contactStatus" : "careerStatus");
   if (!form) return;
 
+  // Time-Gate: Startzeit merken
+  const startTs = Date.now();
+
   form.addEventListener("submit", async (e)=>{
     e.preventDefault();
     if (status) { status.textContent = ""; status.style.color = ""; }
+
+    // Honeypot: wenn gefüllt -> blocken
+    const hp = form.querySelector('input[name="company"]');
+    if (hp && hp.value && hp.value.trim() !== ""){
+      if (status){ status.textContent = "Übermittlung fehlgeschlagen."; status.style.color = "#f87171"; }
+      return;
+    }
+
+    // Time-Gate: min. 2 Sekunden
+    if (Date.now() - startTs < 2000){
+      if (status){ status.textContent = "Bitte erneut senden."; status.style.color = "#f87171"; }
+      return;
+    }
 
     // simple required check
     const requireds = form.querySelectorAll("[required]");
@@ -182,8 +219,7 @@ function handleForm(formId, endpoint, subject){
         const res = await fetch(endpoint, { method:"POST", body: fd, headers: { "Accept":"application/json" } });
         if (res.ok){
           if (status){ status.textContent = "Vielen Dank. Wir melden uns werktags zeitnah."; status.style.color = "#C79A3A"; }
-          form.reset();
-          return;
+          form.reset(); return;
         }
         throw new Error("Fehler");
       }catch{
