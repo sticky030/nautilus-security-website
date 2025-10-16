@@ -97,20 +97,20 @@ sections.forEach(sec=>sec && observer.observe(sec));
   });
 })();
 
-// Testimonials Slider
+// Testimonials Slider – neue Zitate
 (function initTestimonials(){
   const track = document.getElementById("tsTrack");
   if (!track) return;
   const items = [
-    { t:"Diskret, pünktlich und lösungsorientiert. Unsere Nachtlogistik läuft ohne Zwischenfälle.", a:"R. Stein, Logistikleiter" },
-    { t:"Kurzfristig Personal gestellt und direkt Struktur reingebracht. Top Koordination.", a:"C. Werner, Bauprojektleitung" },
-    { t:"Unauffällig, aber präsent. Gäste fühlten sich sicher, Abläufe blieben entspannt.", a:"M. Aziz, Veranstalter" },
-    { t:"Transparente Kommunikation und digitale Übergaben – so muss es sein.", a:"T. Reuter, Facility Manager" },
-    { t:"Verlässliche Revierfahrten. Vorkommnisse sauber dokumentiert.", a:"L. Lenz, Immobilienverwaltung" },
-    { t:"Auch am Wochenende schnell reagiert. Professionelles Auftreten am Empfang.", a:"S. Hahn, Office Management" },
-    { t:"Diebstähle auf der Baustelle aufgehört. Präsenz tadellos.", a:"D. Ulrich, Bauherr" },
-    { t:"Mehrsprachige Teams waren für unser Event Gold wert.", a:"A. Pereira, Eventkoordination" },
-    { t:"Schnell, ruhig, professionell. Genau so stellt man sich Sicherheit vor.", a:"L. Berger, Hoteldirektion" }
+    { t:"Kurzfristig startklar, Übergaben sauber – Betrieb lief durch.", a:"Bauprojektleitung, Berlin" },
+    { t:"Präsenz ruhig, Abläufe klar. Keine Reibung mit der Nachtlogistik.", a:"Logistikleitung, Potsdam" },
+    { t:"Unauffällig am Gast, deutlich im Ergebnis. Zutritt & Backstage im Griff.", a:"Eventkoordination, Berlin" },
+    { t:"Revierfahrten mit GPS, Meldungen mit Maßnahmen. So funktioniert Reporting.", a:"Immobilienverwaltung, Berlin" },
+    { t:"Empfang professionell, Auftreten höflich und durchsetzungsfähig.", a:"Office Management, Charlottenburg" },
+    { t:"Alarmfolge strukturiert, Kommunikation ruhig. Risiken sauber priorisiert.", a:"Facility Management, Berlin" },
+    { t:"Aufbau, Briefing, Startabend – man merkt die Routine.", a:"Projektsteuerung, Brandenburg" },
+    { t:"Dokumentation auditfähig. Übergaben nachvollziehbar.", a:"Geschäftsführung, Berlin" },
+    { t:"Mehrsprachige Teams, klare Funkdisziplin. Gäste fühlten sich sicher.", a:"Veranstalter, Mitte" }
   ];
   const pages = [];
   for (let i=0;i<items.length;i+=3){
@@ -151,14 +151,13 @@ function handleForm(formId, endpoint, subject){
 
   form.addEventListener("submit", async (e)=>{
     e.preventDefault();
-    status.textContent = "";
+    if (status) { status.textContent = ""; status.style.color = ""; }
 
     // simple required check
     const requireds = form.querySelectorAll("[required]");
     for (const el of requireds){
       if (!el.value || !String(el.value).trim()){
-        status.textContent = "Bitte Pflichtfelder ausfüllen.";
-        status.style.color = "#f87171";
+        if (status){ status.textContent = "Bitte Pflichtfelder ausfüllen."; status.style.color = "#f87171"; }
         return;
       }
     }
@@ -169,15 +168,13 @@ function handleForm(formId, endpoint, subject){
         const fd = new FormData(form);
         const res = await fetch(endpoint, { method:"POST", body: fd, headers: { "Accept":"application/json" } });
         if (res.ok){
-          status.textContent = "Vielen Dank. Wir melden uns werktags ≤ 60 Min.";
-          status.style.color = "#C79A3A";
+          if (status){ status.textContent = "Vielen Dank. Wir melden uns werktags binnen 60 Minuten."; status.style.color = "#C79A3A"; }
           form.reset();
           return;
         }
         throw new Error("Fehler");
       }catch{
-        status.textContent = "Übermittlung fehlgeschlagen. Bitte per E-Mail senden.";
-        status.style.color = "#f87171";
+        if (status){ status.textContent = "Übermittlung fehlgeschlagen. Bitte per E-Mail senden."; status.style.color = "#f87171"; }
       }
     }
 
