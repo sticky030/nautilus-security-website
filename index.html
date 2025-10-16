@@ -3,31 +3,59 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Nautilus Security – Sicherheit mit Struktur.</title>
   <meta name="description" content="Nautilus Security: Nachtwache, Objektschutz, Eventschutz. Strukturierte Abläufe, feste Ansprechpartner, auditfähige Dokumentation.">
   <meta name="theme-color" content="#0E2235">
   <link rel="canonical" href="https://sticky030.github.io/nautilus-security-website/">
 
-  <!-- Open Graph -->
+  <!-- Content Security Policy (light, kompatibel mit JSON-LD & externen CDNs) -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 img-src 'self' data: https:;
+                 script-src 'self' https://cdn.tailwindcss.com https://unpkg.com 'unsafe-inline';
+                 style-src 'self' 'unsafe-inline' https://unpkg.com;
+                 connect-src 'self';
+                 font-src 'self' data:;
+                 object-src 'none';
+                 base-uri 'self';
+                 frame-ancestors 'none';
+                 upgrade-insecure-requests">
+
+  <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Nautilus Security – Sicherheit mit Struktur.">
   <meta property="og:description" content="Präsenz vor Ort, klare Routinen, nachvollziehbare Berichte.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://sticky030.github.io/nautilus-security-website/logo-gold-transparent.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="./logo-gold-transparent.png" type="image/png" />
+
+  <!-- Tailwind (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS (pinned, via unpkg). SRI optional falls gewünscht; CSP schützt bereits. -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body class="min-h-screen font-sans bg-[#0a0f1c] text-white scroll-smooth">
+
+  <!-- Skip-Link (A11y) -->
+  <a class="skip-link" href="#home">Zum Inhalt springen</a>
+
   <!-- Header -->
   <header id="site-header" class="border-b border-yellow-500 bg-[#0a0f1c] p-4 shadow-md sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center relative">
       <div class="flex items-center space-x-3">
-        <img src="./logo-gold-transparent.png" alt="Logo Nautilus Security" width="40" height="40" class="w-10 h-10" />
+        <picture>
+          <source srcset="./logo-gold-transparent.webp" type="image/webp" />
+          <img src="./logo-gold-transparent.png" alt="Logo Nautilus Security" width="40" height="40" class="w-10 h-10" />
+        </picture>
         <h1 class="text-xl font-bold tracking-wide">Nautilus Security</h1>
       </div>
       <div class="flex items-center space-x-4">
@@ -69,7 +97,10 @@
     <section id="home" class="hero-relaxed flex items-center justify-center text-center px-4 bg-gradient-to-b from-[#0b1222] via-[#0a0f1c] to-[#0a0f1c]" data-aos="fade-up">
       <div>
         <div class="mx-auto mb-6 w-52 md:w-64 lg:w-72 aspect-square rounded-full bg-[#0d1528] flex items-center justify-center shadow-2xl ring-2 ring-yellow-500/60 ring-offset-2 ring-offset-[#0a0f1c]">
-          <img src="./logo-gold-transparent.png" alt="Nautilus Security Logo" class="w-48 md:w-64 lg:w-72 drop-shadow-xl opacity-95" width="256" height="256" />
+          <picture>
+            <source srcset="./logo-gold-transparent.webp" type="image/webp" />
+            <img src="./logo-gold-transparent.png" alt="Nautilus Security Logo" class="w-48 md:w-64 lg:w-72 drop-shadow-xl opacity-95" width="256" height="256" />
+          </picture>
         </div>
         <h2 class="text-4xl font-bold text-yellow-500 mb-4">Sicherheit mit Struktur.</h2>
         <div class="mt-8">
@@ -130,10 +161,10 @@
     <section id="why" class="max-w-6xl mx-auto px-6" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Warum wir</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <article class="card"><h3 class="card-title">Verbindlich</h3><p class="card-text">Feste Ansprechpartner, 24/7 erreichbar; Zusagen und Rückmeldungen mit Termin.</p></article>
+        <article class="card"><h3 class="card-title">Verbindlich</h3><p class="card-text">Feste Ansprechpartner, 24/7 erreichbar; Zusagen und Rückmeldungen fristgerecht.</p></article>
         <article class="card"><h3 class="card-title">Strukturiert</h3><p class="card-text">Taktpläne, Checklisten; Übergaben mit Prüfpfad – planbar und überprüfbar.</p></article>
         <article class="card"><h3 class="card-title">Schnell startklar</h3><p class="card-text">Einarbeitung, Startabend mit Einsatzleitung; hinterlegte Backup-Mechanik.</p></article>
-        <article class="card"><h3 class="card-title">Qualifiziert</h3><p class="card-text">§34a, Ersthelfer, einsatzerprobt. Verbindliche Briefings; regelmäßige Auffrischungen mit Nachweis.</p></article>
+        <article class="card"><h3 class="card-title">Qualifiziert</h3><p class="card-text">§34a, Ersthelfer, einsatzerprobt. Verbindliche Einsatz-Briefings; regelmäßige Auffrischungen mit Nachweis.</p></article>
         <article class="card"><h3 class="card-title">Diskret</h3><p class="card-text">Unauffälliger Auftritt; strikt vertrauliche Kommunikation.</p></article>
         <article class="card"><h3 class="card-title">Transparent</h3><p class="card-text">GPS-Nachweise, Schichtberichte, Kurzlagen; Abweichungen mit Maßnahmen.</p></article>
       </div>
@@ -215,6 +246,12 @@
     <section id="career-form" class="max-w-3xl mx-auto pt-2 pb-16 px-6" data-aos="fade-up">
       <h3 class="text-2xl font-semibold text-yellow-500 mb-4">Online-Bewerbung</h3>
       <form id="careerForm" class="space-y-4" novalidate>
+        <!-- Honeypot -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="cf_company">Firma (nicht ausfüllen)</label>
+          <input id="cf_company" name="company" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
         <div class="grid md:grid-cols-2 gap-4">
           <label class="sr-only" for="cf_name">Vollständiger Name</label>
           <input id="cf_name" name="name" type="text" placeholder="Vollständiger Name" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
@@ -250,12 +287,16 @@
       </div>
     </section>
 
-    <!-- Kundenstimmen (immer 3 sichtbar, auto-wechsel) -->
+    <!-- Kundenstimmen (immer 3 sichtbar, Auto-Wechsel, Pause/Play & reduced motion) -->
     <section id="testimonials" class="bg-[#111827] py-20 px-6 overflow-hidden" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 text-center mb-8">Was unsere Kunden sagen</h2>
       <div class="max-w-6xl mx-auto">
         <div id="tsViewport" class="relative overflow-hidden">
           <div id="tsTrack" class="flex transition-transform duration-700 ease-in-out will-change-transform"></div>
+        </div>
+        <div class="mt-4 flex justify-center gap-3">
+          <button id="tsPause" class="ts-ctrl" aria-pressed="false" aria-label="Automatisches Abspielen pausieren">Pause</button>
+          <button id="tsPlay" class="ts-ctrl hidden" aria-pressed="false" aria-label="Automatisches Abspielen fortsetzen">Weiter</button>
         </div>
       </div>
     </section>
@@ -264,6 +305,12 @@
     <section id="contact" class="max-w-2xl mx-auto px-6" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-6">Kontakt aufnehmen</h2>
       <form id="contactForm" class="space-y-4" novalidate>
+        <!-- Honeypot -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="ct_company">Firma (nicht ausfüllen)</label>
+          <input id="ct_company" name="company" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
         <label class="sr-only" for="ct_name">Ihr Name</label>
         <input id="ct_name" name="name" type="text" placeholder="Ihr Name" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
         <label class="sr-only" for="ct_email">Ihre E-Mail</label>
@@ -288,16 +335,17 @@
     </div>
   </footer>
 
-  <!-- JSON-LD -->
+  <!-- JSON-LD (Organization/ProfessionalService) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"Organization",
+    "@type":"ProfessionalService",
     "name":"Nautilus Security UG (haftungsbeschränkt)",
     "url":"https://sticky030.github.io/nautilus-security-website/",
     "logo":"https://sticky030.github.io/nautilus-security-website/logo-gold-transparent.png",
     "email":"kontakt@nautilus-security.de",
     "telephone":"+49-30-98557615",
+    "areaServed":"DE-BE, DE-BB",
     "address":{
       "@type":"PostalAddress",
       "streetAddress":"Vincent-van-Gogh-Str. 14",
@@ -305,13 +353,42 @@
       "addressLocality":"Berlin",
       "addressCountry":"DE"
     },
-    "contactPoint":[{
-      "@type":"ContactPoint",
-      "telephone":"+49-176-22844636",
-      "contactType":"customer service",
-      "areaServed":"DE",
-      "availableLanguage":["de","en"]
-    }]
+    "sameAs":[]
+  }
+  </script>
+
+  <!-- JSON-LD (FAQPage) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Welche Einsatzgebiete deckt Nautilus Security ab?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Berlin/Brandenburg. Weitere Standorte nach Absprache, sofern Struktur und Qualität gesichert sind." }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie schnell können Einsätze starten?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Kurzfristige Starts möglich. Einarbeitung und Übergabe werden geplant und dokumentiert." }
+      },
+      {
+        "@type": "Question",
+        "name": "Gibt es digitale Protokolle?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja – Revier-GPS, Schichtberichte, Kurzlagen. Abweichungen sind belegt und mit Maßnahmen hinterlegt." }
+      },
+      {
+        "@type": "Question",
+        "name": "Bieten Sie Personenschutz an?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja – unauffällig und abgestimmt. Planung, Routen und Kommunikationsregeln sind vorab fixiert." }
+      },
+      {
+        "@type": "Question",
+        "name": "Bieten Sie langfristige Zusammenarbeit?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Vom kurzfristigen Einsatz bis zum Rahmenvertrag – mit festen Ansprechpartnern und auditfähigem Reporting." }
+      }
+    ]
   }
   </script>
 
