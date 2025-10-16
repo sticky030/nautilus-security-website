@@ -1,172 +1,232 @@
-// Year
-document.addEventListener('DOMContentLoaded', () => {
-  const y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear();
+// AOS init
+document.addEventListener("DOMContentLoaded", () => {
+  AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
 });
 
-// Nav toggle
-const navToggle = document.getElementById('navToggle');
-const navList = document.getElementById('navList');
-if (navToggle && navList) {
-  navToggle.addEventListener('click', () => {
-    navList.classList.toggle('open');
-  });
-  // Close on click
-  navList.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => navList.classList.remove('open'));
-  });
-}
+// Year
+document.getElementById("year").textContent = new Date().getFullYear();
 
-// Smooth scroll for hash links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', (e) => {
-    const id = a.getAttribute('href').substring(1);
-    const target = document.getElementById(id);
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
+// Dark mode toggle
+const darkToggle = document.getElementById("darkToggle");
+darkToggle?.addEventListener("click", () => {
+  const body = document.body;
+  if (body.classList.contains("bg-[#0a0f1c]")) {
+    body.classList.remove("bg-[#0a0f1c]", "text-white");
+    body.classList.add("bg-white", "text-black");
+  } else {
+    body.classList.remove("bg-white", "text-black");
+    body.classList.add("bg-[#0a0f1c]", "text-white");
+  }
+});
+
+// Burger Menu
+const burger = document.getElementById("burger");
+const mobileMenu = document.getElementById("mobileMenu");
+const mobileOverlay = document.getElementById("mobileOverlay");
+const toggleMobile = (s) => {
+  if (s === "open") { mobileMenu.classList.remove("hidden"); mobileOverlay.classList.remove("hidden"); }
+  else { mobileMenu.classList.add("hidden"); mobileOverlay.classList.add("hidden"); }
+};
+burger?.addEventListener("click", () => toggleMobile("open"));
+mobileOverlay?.addEventListener("click", () => toggleMobile("close"));
+document.querySelectorAll(".mobile-link, .nav-link, .cta-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const id = btn.getAttribute("data-target");
+    if (id){
+      document.getElementById(id)?.scrollIntoView({behavior:"smooth"});
+      toggleMobile("close");
     }
   });
 });
 
-// Sticky CTA visibility
-(function stickyCTA() {
-  const cta = document.getElementById('stickyCta');
-  if (!cta) return;
-  const hero = document.getElementById('home');
-  function update() {
-    const y = window.scrollY || window.pageYOffset;
-    const docH = document.documentElement.scrollHeight;
-    const vpH = window.innerHeight;
-    const fromBottom = docH - (y + vpH);
-    const heroH = hero ? hero.offsetHeight : 600;
-    const visible = y > heroH * 0.4 && fromBottom > 320;
-    cta.classList.toggle('show', visible);
-  }
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
-  cta.addEventListener('click', () => {
-    const target = document.getElementById('contact');
-    target && target.scrollIntoView({ behavior: 'smooth' });
-  });
-})();
-
-// FAQ accordion
-document.querySelectorAll('.faq-item').forEach(item => {
-  const q = item.querySelector('.faq-q');
-  const a = item.querySelector('.faq-a');
-  if (!q || !a) return;
-  q.addEventListener('click', () => {
-    const open = item.classList.toggle('open');
-    if (open) {
-      a.style.maxHeight = a.scrollHeight + 'px';
-      a.style.opacity = '1';
-      setTimeout(() => (a.style.maxHeight = '300px'), 350);
-    } else {
-      a.style.maxHeight = a.scrollHeight + 'px';
-      requestAnimationFrame(() => {
-        a.style.maxHeight = '0px';
-        a.style.opacity = '0';
+// Scrollspy (aktiviert Gold-Linie)
+const links = document.querySelectorAll(".nav-link");
+const sections = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"].map(id=>document.getElementById(id));
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if (entry.isIntersecting){
+      const id = entry.target.id;
+      links.forEach(l=>{
+        const active = l.getAttribute("data-target")===id;
+        l.classList.toggle("text-yellow-500", active);
+        l.classList.toggle("font-bold", active);
+        l.classList.toggle("nav-active", active);
       });
     }
   });
-});
+},{ rootMargin:"-40% 0px -55% 0px", threshold:0.01 });
+sections.forEach(sec=>sec && observer.observe(sec));
 
-// Testimonials slider – 3 pro Seite, Auto, Pause/Play
-(function testimonials() {
-  const track = document.getElementById('tsTrack');
+// FAQ accordion
+(function initFAQ(){
+  const list = document.getElementById("faqList");
+  if (!list) return;
+  list.querySelectorAll(".faq-item").forEach(item => {
+    const q = item.querySelector(".faq-q");
+    const a = item.querySelector(".faq-a");
+    if (!q || !a) return;
+    a.style.overflow = "hidden";
+    a.style.maxHeight = "0px";
+    a.style.opacity = "0";
+    a.style.transition = "max-height 380ms cubic-bezier(.25,.8,.25,1), opacity 260ms ease";
+    q.setAttribute("aria-expanded","false");
+    a.setAttribute("aria-hidden","true");
+    q.addEventListener("click", ()=>{
+      const open = item.classList.toggle("open");
+      if (open){
+        a.style.maxHeight = a.scrollHeight + "px";
+        a.style.opacity = "1";
+        q.setAttribute("aria-expanded","true");
+        a.setAttribute("aria-hidden","false");
+        a.addEventListener("transitionend", function onEnd(ev){
+          if (ev.propertyName!=="max-height") return;
+          a.style.maxHeight = "none";
+          a.removeEventListener("transitionend", onEnd);
+        });
+      } else {
+        const h = a.scrollHeight;
+        a.style.maxHeight = h + "px";
+        requestAnimationFrame(()=>{
+          a.style.maxHeight = "0px";
+          a.style.opacity = "0";
+          q.setAttribute("aria-expanded","false");
+          a.setAttribute("aria-hidden","true");
+        });
+      }
+    });
+  });
+})();
+
+// Testimonials Slider – immer 3 sichtbar (pro Seite), Auto-Wechsel
+(function initTestimonials(){
+  const track = document.getElementById("tsTrack");
   if (!track) return;
 
   const items = [
-    { t: "Kurzfristig startklar, Übergaben sauber – Betrieb lief durch.", a: "Bauprojektleitung, Berlin" },
-    { t: "Präsenz ruhig, Abläufe klar. Keine Reibung mit der Nachtlogistik.", a: "Logistikleitung, Potsdam" },
-    { t: "Unauffällig am Gast, deutlich im Ergebnis. Zutritt & Backstage im Griff.", a: "Eventkoordination, Berlin" },
-    { t: "Revierfahrten mit GPS, Meldungen mit Maßnahmen. So funktioniert Reporting.", a: "Immobilienverwaltung, Berlin" },
-    { t: "Empfang professionell, Auftreten höflich und durchsetzungsfähig.", a: "Office Management, Charlottenburg" },
-    { t: "Alarmfolge strukturiert, Kommunikation ruhig. Risiken sauber priorisiert.", a: "Facility Management, Berlin" },
-    { t: "Aufbau, Briefing, Startabend – man merkt die Routine.", a: "Projektsteuerung, Brandenburg" },
-    { t: "Dokumentation auditfähig. Übergaben nachvollziehbar.", a: "Geschäftsführung, Berlin" },
-    { t: "Mehrsprachige Teams, klare Funkdisziplin. Gäste fühlten sich sicher.", a: "Veranstalter, Mitte" }
+    { t:"Kurzfristig startklar, Übergaben sauber – Betrieb lief durch.", a:"Bauprojektleitung, Berlin" },
+    { t:"Präsenz ruhig, Abläufe klar. Keine Reibung mit der Nachtlogistik.", a:"Logistikleitung, Potsdam" },
+    { t:"Unauffällig am Gast, deutlich im Ergebnis. Zutritt & Backstage im Griff.", a:"Eventkoordination, Berlin" },
+    { t:"Revierfahrten mit GPS, Meldungen mit Maßnahmen. So funktioniert Reporting.", a:"Immobilienverwaltung, Berlin" },
+    { t:"Empfang professionell, Auftreten höflich und durchsetzungsfähig.", a:"Office Management, Charlottenburg" },
+    { t:"Alarmfolge strukturiert, Kommunikation ruhig. Risiken sauber priorisiert.", a:"Facility Management, Berlin" },
+    { t:"Aufbau, Briefing, Startabend – man merkt die Routine.", a:"Projektsteuerung, Brandenburg" },
+    { t:"Dokumentation auditfähig. Übergaben nachvollziehbar.", a:"Geschäftsführung, Berlin" },
+    { t:"Mehrsprachige Teams, klare Funkdisziplin. Gäste fühlten sich sicher.", a:"Veranstalter, Mitte" }
   ];
 
+  // Seiten à 3 Items bauen
   const pages = [];
-  for (let i = 0; i < items.length; i += 3) {
-    const page = document.createElement('div');
-    page.className = 'ts-page';
-    items.slice(i, i + 3).forEach(x => {
-      const card = document.createElement('div');
-      card.className = 'ts-card';
-      card.innerHTML = `<p style="color:#d1d5db;font-style:italic">„${x.t}“</p><p style="color:#C79A3A;font-weight:700;margin-top:8px">– ${x.a}</p>`;
-      page.appendChild(card);
+  for (let i=0;i<items.length;i+=3){
+    const page = document.createElement("div");
+    page.className = "ts-page";
+    items.slice(i,i+3).forEach(x=>{
+      const art = document.createElement("article");
+      art.className = "ts-card";
+      art.innerHTML = `<p class="text-gray-300 italic">„${x.t}“</p><p class="text-yellow-500 font-bold mt-3">– ${x.a}</p>`;
+      page.appendChild(art);
     });
     pages.push(page);
   }
-  pages.forEach(p => track.appendChild(p));
+
+  // In Track einfügen + erste Seite klonen (für Loop)
+  pages.forEach(p=>track.appendChild(p));
   if (pages.length > 0) track.appendChild(pages[0].cloneNode(true));
 
-  let idx = 0, timer = null, step = 5200;
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  function go() {
-    idx++; track.style.transform = `translateX(-${idx * 100}%)`;
-    if (idx === pages.length) {
-      setTimeout(() => {
-        track.style.transition = 'none';
-        track.style.transform = 'translateX(0)';
-        idx = 0; void track.offsetWidth;
-        track.style.transition = 'transform .7s ease';
-      }, 700);
+  // Slider Logik
+  let idx = 0; 
+  const total = pages.length;
+  const duration = 5200; // ms
+  const go = () => {
+    idx++;
+    track.style.transform = `translateX(-${idx*100}%)`;
+    if (idx === total){
+      setTimeout(()=>{
+        track.style.transition = "none";
+        track.style.transform = "translateX(0%)";
+        idx = 0;
+        void track.offsetWidth; // reflow
+        track.style.transition = "transform 700ms ease-in-out";
+      }, 720);
     }
-  }
-
-  const pauseBtn = document.getElementById('tsPause');
-  const playBtn = document.getElementById('tsPlay');
-  function start() { if (timer) return; timer = setInterval(go, step); pauseBtn?.classList.remove('hidden'); playBtn?.classList.add('hidden'); }
-  function stop() { if (!timer) return; clearInterval(timer); timer = null; pauseBtn?.classList.add('hidden'); playBtn?.classList.remove('hidden'); }
-  pauseBtn?.addEventListener('click', stop);
-  playBtn?.addEventListener('click', start);
-
-  if (!prefersReduced) start();
+  };
+  track.style.transition = "transform 700ms ease-in-out";
+  setInterval(go, duration);
 })();
 
-// Forms: Honeypot + Time-Gate + Mailto fallback
-function handleForm(formId, subject) {
+// Forms: Formspree optional, sonst Mailto-Fallback
+const FORMSPREE_CONTACT = "";  // z.B. https://formspree.io/f/xxxxxx
+const FORMSPREE_CAREER  = "";
+
+function handleForm(formId, endpoint, subject){
   const form = document.getElementById(formId);
+  const status = document.getElementById(formId === "contactForm" ? "contactStatus" : "careerStatus");
   if (!form) return;
-  const status = form.querySelector('.form-status');
-  const start = Date.now();
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener("submit", async (e)=>{
     e.preventDefault();
-    if (status) { status.textContent = ''; status.style.color = ''; }
+    if (status) { status.textContent = ""; status.style.color = ""; }
 
-    // Honeypot
-    const hp = form.querySelector('input[name="company"]');
-    if (hp && hp.value && hp.value.trim() !== '') {
-      if (status) { status.textContent = 'Übermittlung fehlgeschlagen.'; status.style.color = '#f87171'; }
-      return;
-    }
-    // Time gate (≥ 1.2s)
-    if (Date.now() - start < 1200) {
-      if (status) { status.textContent = 'Bitte erneut senden.'; status.style.color = '#f87171'; }
-      return;
-    }
-    // Required fields
-    const req = form.querySelectorAll('[required]');
-    for (const el of req) {
-      if (!el.value || !String(el.value).trim()) {
-        if (status) { status.textContent = 'Bitte Pflichtfelder ausfüllen.'; status.style.color = '#f87171'; }
+    // simple required check
+    const requireds = form.querySelectorAll("[required]");
+    for (const el of requireds){
+      if (!el.value || !String(el.value).trim()){
+        if (status){ status.textContent = "Bitte Pflichtfelder ausfüllen."; status.style.color = "#f87171"; }
         return;
       }
     }
-    // Mailto fallback
+
+    // Endpoint → Formspree
+    if (endpoint){
+      try{
+        const fd = new FormData(form);
+        const res = await fetch(endpoint, { method:"POST", body: fd, headers: { "Accept":"application/json" } });
+        if (res.ok){
+          if (status){ status.textContent = "Vielen Dank. Wir melden uns werktags zeitnah."; status.style.color = "#C79A3A"; }
+          form.reset();
+          return;
+        }
+        throw new Error("Fehler");
+      }catch{
+        if (status){ status.textContent = "Übermittlung fehlgeschlagen. Bitte per E-Mail senden."; status.style.color = "#f87171"; }
+      }
+    }
+
+    // Fallback → Mailto
     const fd = new FormData(form);
-    const kv = [];
-    fd.forEach((v,k)=>{ if (String(v).trim()) kv.push(`${k}: ${v}`) });
-    const body = encodeURIComponent(kv.join('\n'));
+    const kv = []; fd.forEach((v,k)=>{ if(String(v).trim()) kv.push(`${k}: ${v}`); });
+    const body = encodeURIComponent(kv.join("\n"));
     location.href = `mailto:kontakt@nautilus-security.de?subject=${encodeURIComponent(subject)}&body=${body}`;
   });
 }
-handleForm('contactForm', 'Kontaktanfrage – Nautilus Security');
-handleForm('careerForm', 'Bewerbung – Nautilus Security');
+
+handleForm("contactForm", FORMSPREE_CONTACT, "Kontaktanfrage – Nautilus Security");
+handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
+
+// Sticky CTA: erst nach ~40% Scroll sichtbar
+(function stickyCtaVisibility(){
+  const cta = document.getElementById("stickyCta");
+  if(!cta) return;
+  const hero = document.getElementById("home");
+  const showAfter = () => (hero ? hero.offsetHeight * 0.4 : window.innerHeight * 0.4);
+  const hideBeforeBottomPx = 320;
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(()=>{
+      const y = window.scrollY || window.pageYOffset;
+      const docH = document.documentElement.scrollHeight;
+      const vpH  = window.innerHeight;
+      const fromBottom = docH - (y + vpH);
+      const visible = y > showAfter() && fromBottom > hideBeforeBottomPx;
+      cta.classList.toggle("is-visible", visible);
+      ticking = false;
+    });
+  };
+  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  cta.addEventListener("click", ()=>document.getElementById("contact")?.scrollIntoView({behavior:"smooth"}));
+})();
