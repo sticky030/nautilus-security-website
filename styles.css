@@ -1,4 +1,7 @@
-/* --- Ergänzung: Skip-Link (A11y) --- */
+/* --- Safety-Net, falls Tailwind blockiert ist --- */
+body { background:#0a0f1c; color:#fff; }              /* verhindert „weißer Text auf weißem Grund“ */
+#mobileMenu, #mobileOverlay { display:none !important; }  /* mobile Menü standardmäßig unsichtbar */
+.hidden { display:none !important; }                   /* Tailwind-Fallback für .hidden *//* --- Ergänzung: Skip-Link (A11y) --- */
 .skip-link{
   position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
 }
