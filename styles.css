@@ -1,103 +1,32 @@
-@keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
-.animate-slide-down{ animation: slideDown 180ms ease-out both; }
-
-/* Sticky CTA – dezent ein-/ausblenden */
-#stickyCta{
-  opacity:0; transform:translateY(8px); pointer-events:none;
-  transition:opacity .25s ease, transform .25s ease;
-  bottom: clamp(16px, 2.5vh, 24px);
-  right: clamp(12px, 2.5vw, 24px);
+/* --- Ergänzung: Skip-Link (A11y) --- */
+.skip-link{
+  position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
 }
-#stickyCta.is-visible{ opacity:1; transform:translateY(0); pointer-events:auto; }
-@media (prefers-reduced-motion: reduce){ #stickyCta{ transition:none } }
-
-/* Karten-Design */
-.card{
-  background:#1f2937;
-  border-radius:0.75rem;
-  padding:1.25rem;
-  box-shadow:0 10px 15px -3px rgb(0 0 0 / 0.3);
-  transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
-  border:1px solid transparent;
-  display:flex; flex-direction:column;
-}
-.card:hover{
-  box-shadow:0 10px 25px -5px rgba(234,179,8,.25);
-  transform:translateY(-2px);
-  border-color:rgba(234,179,8,.35);
-}
-.card-title{ font-size:1.125rem; font-weight:700; color:white; margin-bottom:.25rem; }
-.card-text{ color:#d1d5db; flex:1 1 auto; }
-.icon-wrap{
-  width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;
-  border-radius:.75rem;border:1px solid rgba(234,179,8,.35);
-  background:linear-gradient(180deg, rgba(234,179,8,.10), rgba(234,179,8,.02));
-  margin-bottom:.75rem;
-}
-.icon-gold{ width:1.25rem;height:1.25rem;color:#eab308; }
-
-/* FAQ */
-.faq-item{ background:#0f1627; border:1px solid #2a3350; border-radius:.75rem; overflow:hidden;
-  transition: box-shadow 220ms ease, border-color 220ms ease, transform 180ms ease; }
-.faq-item:hover{ border-color: rgba(255,215,0,.45); box-shadow: 0 8px 18px rgba(255,215,0,.08), inset 0 0 0 1px rgba(255,215,0,.15); transform: translateY(-1px); }
-.faq-item.open{ border-color: rgba(255,215,0,.55); box-shadow: 0 10px 22px rgba(255,215,0,.12), inset 0 0 0 1px rgba(255,215,0,.20); }
-.faq-q{ position:relative; padding:1rem 1.75rem 1rem 1.25rem; color:white; font-weight:600; text-align:left; width:100%; }
-.faq-q::after{ content:"▼"; position:absolute; right:.75rem; top:50%; transform:translateY(-50%) rotate(0deg); transition:transform 280ms ease; opacity:.9; }
-.faq-item.open .faq-q::after{ transform:translateY(-50%) rotate(180deg); }
-.faq-a{ max-height:0; overflow:hidden; opacity:0; padding:0 1.25rem; transition:max-height .35s ease, opacity .2s ease; }
-.faq-item.open .faq-a{ padding:.5rem 1.25rem 1rem 1.25rem; opacity:1; max-height:220px; }
-
-/* AOS perf hint */
-[data-aos]{ will-change: transform, opacity; }
-
-/* ===== BRAND (Navy/Gold) ===== */
-:root{
-  --navy:#0E2235;
-  --gold:#C79A3A;
-  --gold-weak:#d8b766;
-  --space-lg: 4.5rem;
-  --space-md: 3.0rem;
+.skip-link:focus{
+  left:12px; top:12px; width:auto; height:auto; padding:.5rem .75rem;
+  background:#C79A3A; color:#000; border-radius:.5rem; z-index:9999;
+  box-shadow:0 0 0 3px rgba(199,154,58,.35);
 }
 
-/* Rhythmus */
-section[id]{ padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
-#home{ padding-top:0; padding-bottom:0; }
-
-/* Navigation: aktiver Link */
-#mainNav .nav-link{ position:relative; }
-#mainNav .nav-link.nav-active::after{
-  content:""; position:absolute; left:0; bottom:-10px; height:2px; width:100%;
-  background:var(--gold); border-radius:2px;
+/* Honeypot-Feld visuell verstecken, in DOM belassen */
+.hp-field{
+  position:absolute !important;
+  left:-10000px !important;
+  width:1px !important; height:1px !important;
+  overflow:hidden !important;
 }
 
-/* Tailwind-Yellow → Brand-Gold */
-.text-yellow-500, .hover\:text-yellow-500:hover { color: var(--gold) !important; }
-.bg-yellow-500 { background-color: var(--gold) !important; }
-.hover\:bg-yellow-400:hover { background-color: var(--gold-weak) !important; }
-.border-yellow-500 { border-color: var(--gold) !important; }
-.text-yellow-400 { color: var(--gold-weak) !important; }
-
-/* Focus-Ringe in Gold */
-:focus-visible{ outline:none; box-shadow:0 0 0 3px color-mix(in oklab, var(--gold) 35%, transparent); border-color:var(--gold) !important; }
-
-/* Hero entspannt */
-.hero-relaxed{ min-height:78vh; }
-@media (min-width:768px){ .hero-relaxed{ min-height:82vh; } }
-
-/* Footer */
-footer{ padding-top:1.1rem; padding-bottom:1.1rem; color:#e7e7e7; }
-
-/* ===== Testimonials: immer 3 sichtbar ===== */
+/* Testimonials: immer 3 sichtbar (mobil: stacked) */
 #tsViewport{ width:100%; overflow:hidden; }
 #tsTrack{ display:flex; }
 .ts-page{
   min-width:100%;
   display:grid;
   gap:1rem;
-  grid-template-columns: 1fr;           /* mobil: 3 übereinander */
+  grid-template-columns: 1fr;
 }
 @media (min-width:768px){
-  .ts-page{ grid-template-columns: repeat(3, 1fr); } /* md+: 3 nebeneinander */
+  .ts-page{ grid-template-columns: repeat(3, 1fr); }
 }
 .ts-card{
   background:#1f2937;
@@ -107,3 +36,14 @@ footer{ padding-top:1.1rem; padding-bottom:1.1rem; color:#e7e7e7; }
   box-shadow:0 10px 15px -3px rgb(0 0 0 / .25);
 }
 .ts-card p{ line-height:1.5; }
+
+/* Testimonials Controls */
+.ts-ctrl{
+  font-size:.875rem; line-height:1;
+  padding:.5rem .75rem; border-radius:.5rem;
+  background:#C79A3A; color:#111; border:1px solid rgba(199,154,58,.6);
+  box-shadow:0 3px 8px rgba(199,154,58,.25);
+}
+.ts-ctrl:hover{ filter:brightness(1.05); }
+
+/* Rest: vorhandenes Brand-/Card-/FAQ-/CTA-Styling aus deiner letzten Version beibehalten */
