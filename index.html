@@ -9,9 +9,6 @@
   <meta name="theme-color" content="#0E2235">
   <link rel="canonical" href="https://sticky030.github.io/nautilus-security-website/">
 
-  <!-- Content Security Policy (light, kompatibel mit JSON-LD & externen CDNs) -->
-  
-
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Nautilus Security – Sicherheit mit Struktur.">
   <meta property="og:description" content="Präsenz vor Ort, klare Routinen, nachvollziehbare Berichte.">
@@ -24,15 +21,35 @@
 
   <link rel="icon" href="./logo-gold-transparent.png" type="image/png" />
 
-  <!-- Tailwind (CDN) -->
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- AOS (pinned, via unpkg). SRI optional falls gewünscht; CSP schützt bereits. -->
+  <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-  <link rel="stylesheet" href="./styles.css" />
+  <!-- Deine CSS mit Cache-Bust -->
+  <link rel="stylesheet" href="./styles.css?v=20251016b" />
+
+  <!-- Minimaler Safety-Fallback, falls Tailwind/CSS kurz nicht lädt -->
+  <style>
+    /* Menü/Overlay sicher ausblenden, falls Klassen nicht greifen */
+    #mobileMenu, #mobileOverlay { display:none !important; }
+    .hidden { display:none !important; }
+    body { background:#0a0f1c; color:#fff; }
+
+    /* Skip-Link sichtbar bei Fokus, auch ohne externe CSS */
+    .skip-link{
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip-link:focus{
+      left:12px; top:12px; width:auto; height:auto; padding:.5rem .75rem;
+      background:#C79A3A; color:#000; border-radius:.5rem; z-index:9999;
+      box-shadow:0 0 0 3px rgba(199,154,58,.35);
+    }
+  </style>
 </head>
+
 <body class="min-h-screen font-sans bg-[#0a0f1c] text-white scroll-smooth">
 
   <!-- Skip-Link (A11y) -->
@@ -277,7 +294,7 @@
       </div>
     </section>
 
-    <!-- Kundenstimmen (immer 3 sichtbar, Auto-Wechsel, Pause/Play & reduced motion) -->
+    <!-- Kundenstimmen (3 sichtbar, Auto-Wechsel, Pause/Play & reduced motion) -->
     <section id="testimonials" class="bg-[#111827] py-20 px-6 overflow-hidden" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 text-center mb-8">Was unsere Kunden sagen</h2>
       <div class="max-w-6xl mx-auto">
@@ -347,7 +364,7 @@
   }
   </script>
 
-  <!-- JSON-LD (FAQPage) -->
+  <!-- JSON-LD (FAQPage – nur Markup, keine eigene Seite) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -382,6 +399,7 @@
   }
   </script>
 
-  <script defer src="./app.js"></script>
+  <!-- App JS -->
+  <script defer src="./app.js?v=20251016b"></script>
 </body>
 </html>
