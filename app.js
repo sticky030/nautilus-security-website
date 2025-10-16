@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Year
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Dark mode toggle (optional: persist)
+// Dark mode toggle
 const darkToggle = document.getElementById("darkToggle");
 darkToggle?.addEventListener("click", () => {
   const body = document.body;
@@ -24,18 +24,13 @@ const burger = document.getElementById("burger");
 const mobileMenu = document.getElementById("mobileMenu");
 const mobileOverlay = document.getElementById("mobileOverlay");
 const toggleMobile = (s) => {
-  if (s === "open") {
-    mobileMenu.classList.remove("hidden");
-    mobileOverlay.classList.remove("hidden");
-  } else {
-    mobileMenu.classList.add("hidden");
-    mobileOverlay.classList.add("hidden");
-  }
+  if (s === "open") { mobileMenu.classList.remove("hidden"); mobileOverlay.classList.remove("hidden"); }
+  else { mobileMenu.classList.add("hidden"); mobileOverlay.classList.add("hidden"); }
 };
 burger?.addEventListener("click", () => toggleMobile("open"));
 mobileOverlay?.addEventListener("click", () => toggleMobile("close"));
 document.querySelectorAll(".mobile-link, .nav-link, .cta-btn").forEach(btn=>{
-  btn.addEventListener("click", (e)=>{
+  btn.addEventListener("click", ()=>{
     const id = btn.getAttribute("data-target");
     if (id){
       document.getElementById(id)?.scrollIntoView({behavior:"smooth"});
@@ -44,23 +39,7 @@ document.querySelectorAll(".mobile-link, .nav-link, .cta-btn").forEach(btn=>{
   });
 });
 
-// Cookiebar + CTA lift
-const cookieBar = document.getElementById("cookieBar");
-const cookieOk = document.getElementById("cookieOk");
-const stickyCta = document.getElementById("stickyCta");
-const liftCTA = () => {
-  if (!cookieBar) return;
-  const visible = window.getComputedStyle(cookieBar).display !== "none";
-  if (visible) stickyCta?.classList.add("cta-lift");
-  else stickyCta?.classList.remove("cta-lift");
-};
-cookieOk?.addEventListener("click", ()=>{
-  cookieBar.style.display = "none";
-  liftCTA();
-});
-liftCTA();
-
-// Scrollspy
+// Scrollspy (aktiviert Gold-Linie)
 const links = document.querySelectorAll(".nav-link");
 const sections = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"].map(id=>document.getElementById(id));
 const observer = new IntersectionObserver((entries)=>{
@@ -68,141 +47,60 @@ const observer = new IntersectionObserver((entries)=>{
     if (entry.isIntersecting){
       const id = entry.target.id;
       links.forEach(l=>{
-        l.classList.toggle("text-yellow-500", l.getAttribute("data-target")===id);
-        l.classList.toggle("font-bold", l.getAttribute("data-target")===id);
+        const active = l.getAttribute("data-target")===id;
+        l.classList.toggle("text-yellow-500", active);
+        l.classList.toggle("font-bold", active);
+        l.classList.toggle("nav-active", active); // Linie unten
       });
     }
   });
 },{ rootMargin:"-40% 0px -55% 0px", threshold:0.01 });
 sections.forEach(sec=>sec && observer.observe(sec));
 
-// FAQ smooth accordion – buttery smooth, card glow on open/hover
+// FAQ accordion
 (function initFAQ(){
-  const faq = document.getElementById("faq");
-  if (!faq) return;
-
-  // Container finden (passt zu deinem Markup)
-  const list = faq.querySelector("#faqList") || faq.querySelector(".space-y-6") || faq;
-  const items = Array.from(list.querySelectorAll(".faq-item, .border"));
-
-  // Falls altes Markup (h3 + p) → sanft aufrüsten
-  items.forEach(item => {
-    if (!item.classList.contains("faq-item")) {
-      item.classList.add("faq-item","rounded-md","p-4","bg-[#0f1627]","border","border-gray-700");
-    }
-    let q = item.querySelector(".faq-q");
-    let a = item.querySelector(".faq-a");
-
-    // auto-upgrade
-    if (!q) {
-      const h = item.querySelector("h1,h2,h3,h4");
-      if (!h) return;
-      q = document.createElement("button");
-      q.className = "faq-q w-full text-left font-semibold text-white";
-      q.innerHTML = h.innerHTML;
-      h.replaceWith(q);
-    }
-    if (!a) {
-      // nimm das erste p/div nach der Frage als Antwort
-      const after = q.nextElementSibling;
-      if (after) {
-        a = document.createElement("div");
-        a.className = "faq-a text-gray-300";
-        a.innerHTML = after.outerHTML;
-        after.remove();
-        q.after(a);
-      }
-    }
-  });
-
-  const entries = Array.from(list.querySelectorAll(".faq-item"));
-  if (!entries.length) return;
-
-  // Animation-Setup
-  entries.forEach(item => {
+  const list = document.getElementById("faqList");
+  if (!list) return;
+  list.querySelectorAll(".faq-item").forEach(item => {
     const q = item.querySelector(".faq-q");
     const a = item.querySelector(".faq-a");
     if (!q || !a) return;
-
     a.style.overflow = "hidden";
     a.style.maxHeight = "0px";
     a.style.opacity = "0";
-    a.style.willChange = "max-height, opacity";
     a.style.transition = "max-height 380ms cubic-bezier(.25,.8,.25,1), opacity 260ms ease";
     q.setAttribute("aria-expanded","false");
     a.setAttribute("aria-hidden","true");
-
-    const open = () => {
-      item.classList.add("open");
-      // von 0 → scrollHeight
-      a.style.maxHeight = a.scrollHeight + "px";
-      a.style.opacity = "1";
-      a.setAttribute("aria-hidden","false");
-      q.setAttribute("aria-expanded","true");
-
-      // Nach Ende: auf 'none' fixen, damit Inhalte mitwachsen ohne Ruckler
-      const onEnd = (ev) => {
-        if (ev.propertyName !== "max-height") return;
-        a.style.maxHeight = "none";
-        a.removeEventListener("transitionend", onEnd);
-      };
-      a.addEventListener("transitionend", onEnd);
-    };
-
-    const close = () => {
-      // von aktueller Höhe zurück nach 0 (für saubere Transition)
-      const current = a.scrollHeight;
-      a.style.maxHeight = current + "px";
-      // nächster Frame → 0
-      requestAnimationFrame(() => {
-        item.classList.remove("open");
-        a.style.opacity = "0";
-        a.style.maxHeight = "0px";
-        a.setAttribute("aria-hidden","true");
-        q.setAttribute("aria-expanded","false");
-      });
-    };
-
-    q.addEventListener("click", () => {
-      const isOpen = item.classList.contains("open");
-
-      // single-open: andere schließen
-      entries.forEach(other => {
-        if (other === item) return;
-        if (other.classList.contains("open")) {
-          const oa = other.querySelector(".faq-a");
-          const oq = other.querySelector(".faq-q");
-          if (oa && oq) {
-            const h = oa.scrollHeight;
-            oa.style.maxHeight = h + "px";
-            requestAnimationFrame(() => {
-              other.classList.remove("open");
-              oa.style.opacity = "0";
-              oa.style.maxHeight = "0px";
-              oa.setAttribute("aria-hidden","true");
-              oq.setAttribute("aria-expanded","false");
-            });
-          }
-        }
-      });
-
-      isOpen ? close() : open();
+    q.addEventListener("click", ()=>{
+      const open = item.classList.toggle("open");
+      if (open){
+        a.style.maxHeight = a.scrollHeight + "px";
+        a.style.opacity = "1";
+        q.setAttribute("aria-expanded","true");
+        a.setAttribute("aria-hidden","false");
+        a.addEventListener("transitionend", function onEnd(ev){
+          if (ev.propertyName!=="max-height") return;
+          a.style.maxHeight = "none";
+          a.removeEventListener("transitionend", onEnd);
+        });
+      } else {
+        const h = a.scrollHeight;
+        a.style.maxHeight = h + "px";
+        requestAnimationFrame(()=>{
+          a.style.maxHeight = "0px";
+          a.style.opacity = "0";
+          q.setAttribute("aria-expanded","false");
+          a.setAttribute("aria-hidden","true");
+        });
+      }
     });
   });
-
-  // bereits offene markieren
-  entries.filter(i=>i.classList.contains("open")).forEach(item=>{
-    const a = item.querySelector(".faq-a");
-    if (a) { a.style.maxHeight = "none"; a.style.opacity="1"; }
-    item.querySelector(".faq-q")?.setAttribute("aria-expanded","true");
-  });
 })();
-// Testimonials: 3-at-a-time slider with smooth slide every 5s
+
+// Testimonials Slider
 (function initTestimonials(){
   const track = document.getElementById("tsTrack");
   if (!track) return;
-
-  // Original testimonials (texts + authors) – stabil & deutsch, nicht alle mit "M."
   const items = [
     { t:"Diskret, pünktlich und lösungsorientiert. Unsere Nachtlogistik läuft ohne Zwischenfälle.", a:"R. Stein, Logistikleiter" },
     { t:"Kurzfristig Personal gestellt und direkt Struktur reingebracht. Top Koordination.", a:"C. Werner, Bauprojektleitung" },
@@ -214,8 +112,6 @@ sections.forEach(sec=>sec && observer.observe(sec));
     { t:"Mehrsprachige Teams waren für unser Event Gold wert.", a:"A. Pereira, Eventkoordination" },
     { t:"Schnell, ruhig, professionell. Genau so stellt man sich Sicherheit vor.", a:"L. Berger, Hoteldirektion" }
   ];
-
-  // Build pages (3 per page)
   const pages = [];
   for (let i=0;i<items.length;i+=3){
     const page = document.createElement("div");
@@ -228,32 +124,100 @@ sections.forEach(sec=>sec && observer.observe(sec));
     });
     pages.push(page);
   }
-  // Looping: clone first page to tail for smooth wrap
   pages.forEach(p=>track.appendChild(p));
   track.appendChild(pages[0].cloneNode(true));
-
-  let idx = 0;
-  const total = pages.length;
+  let idx = 0; const total = pages.length;
   const go = () => {
-    idx++;
-    track.style.transform = `translateX(-${idx*100}%)`;
+    idx++; track.style.transform = `translateX(-${idx*100}%)`;
     if (idx === total){
-      // after animation end, jump back to 0 without flicker
       setTimeout(()=>{
-        track.style.transition = "none";
-        track.style.transform = "translateX(0%)";
-        idx = 0;
-        // force reflow then restore transition
-        void track.offsetWidth;
-        track.style.transition = "transform 700ms ease-in-out";
+        track.style.transition = "none"; track.style.transform = "translateX(0%)"; idx = 0;
+        void track.offsetWidth; track.style.transition = "transform 700ms ease-in-out";
       }, 720);
     }
   };
-  // Initial CSS transition
   track.style.transition = "transform 700ms ease-in-out";
-  // Auto-advance every 5s
   setInterval(go, 5000);
 })();
 
-// Sticky CTA scroll to contact
-stickyCta?.addEventListener("click", ()=>document.getElementById("contact")?.scrollIntoView({behavior:"smooth"}));
+// Forms: Formspree optional, sonst Mailto-Fallback
+const FORMSPREE_CONTACT = "";  // z.B. https://formspree.io/f/xxxxxx
+const FORMSPREE_CAREER  = "";
+
+function handleForm(formId, endpoint, subject){
+  const form = document.getElementById(formId);
+  const status = document.getElementById(formId === "contactForm" ? "contactStatus" : "careerStatus");
+  if (!form) return;
+
+  form.addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    status.textContent = "";
+
+    // simple required check
+    const requireds = form.querySelectorAll("[required]");
+    for (const el of requireds){
+      if (!el.value || !String(el.value).trim()){
+        status.textContent = "Bitte Pflichtfelder ausfüllen.";
+        status.style.color = "#f87171";
+        return;
+      }
+    }
+
+    // Endpoint → Formspree
+    if (endpoint){
+      try{
+        const fd = new FormData(form);
+        const res = await fetch(endpoint, { method:"POST", body: fd, headers: { "Accept":"application/json" } });
+        if (res.ok){
+          status.textContent = "Vielen Dank. Wir melden uns werktags ≤ 60 Min.";
+          status.style.color = "#C79A3A";
+          form.reset();
+          return;
+        }
+        throw new Error("Fehler");
+      }catch{
+        status.textContent = "Übermittlung fehlgeschlagen. Bitte per E-Mail senden.";
+        status.style.color = "#f87171";
+      }
+    }
+
+    // Fallback → Mailto
+    const fd = new FormData(form);
+    const kv = []; fd.forEach((v,k)=>{ if(String(v).trim()) kv.push(`${k}: ${v}`); });
+    const body = encodeURIComponent(kv.join("\n"));
+    location.href = `mailto:kontakt@nautilus-security.de?subject=${encodeURIComponent(subject)}&body=${body}`;
+  });
+}
+
+handleForm("contactForm", FORMSPREE_CONTACT, "Kontaktanfrage – Nautilus Security");
+handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
+
+// Sticky CTA Sichtbarkeit: erst nach ~40% Scroll, vor Footer ausblenden
+(function stickyCtaVisibility(){
+  const cta = document.getElementById("stickyCta");
+  if(!cta) return;
+  const hero = document.getElementById("home");
+  const showAfter = () => (hero ? hero.offsetHeight * 0.4 : window.innerHeight * 0.4);
+  const hideBeforeBottomPx = 320;
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(()=>{
+      const y = window.scrollY || window.pageYOffset;
+      const docH = document.documentElement.scrollHeight;
+      const vpH  = window.innerHeight;
+      const fromBottom = docH - (y + vpH);
+      const visible = y > showAfter() && fromBottom > hideBeforeBottomPx;
+      cta.classList.toggle("is-visible", visible);
+      ticking = false;
+    });
+  };
+  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  // Scroll-to-contact
+  cta.addEventListener("click", ()=>document.getElementById("contact")?.scrollIntoView({behavior:"smooth"}));
+})();
