@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sticky030.github.io/nautilus-security-website/sitemap.xml
