@@ -1,0 +1,80 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8">
+<title>Schichtbericht – Nautilus Security</title>
+<style>
+:root{--navy:#0E2235;--ink:#233040;--gold:#C79A3A;--muted:#5b6a7c;--line:#cfd6df;--bg:#fafbfc}
+*{box-sizing:border-box}html,body{margin:0;background:#fff;color:var(--ink);font:12.5px/1.55 Inter,Helvetica,Arial,sans-serif}
+.page{max-width:860px;margin:0 auto;padding:22px 28px}
+.header{display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--gold);padding-bottom:10px;margin-bottom:10px}
+.header img{height:44px}h1{margin:0;font-size:16px;color:var(--navy)}
+h2{font-size:13.5px;color:var(--navy);margin:12px 0 8px}
+.small{font-size:11px;color:var(--muted)}
+.box{border:1px solid #e6eaf0;border-radius:10px;padding:10px 12px;background:var(--bg);margin:10px 0}
+.row{display:grid;grid-template-columns:160px 1fr 120px 1fr;gap:10px;margin:6px 0}
+.fill{border-bottom:1px dotted var(--line);min-height:20px;padding:2px 0}
+table{width:100%;border-collapse:collapse;margin:6px 0;background:#fff}
+th,td{border:1px solid #e6eaf0;padding:7px 8px;font-size:12px;vertical-align:top}
+th{background:#f6f8fb;color:var(--navy);text-align:left}
+@media print{@page{size:A4;margin:10mm 10mm 12mm 10mm} body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body><div class="page">
+  <div class="header">
+    <img src="logo-gold-transparent.png" alt="">
+    <div><h1>Schichtbericht</h1>
+      <div class="small">Objektbezogene Dokumentation · vollständig & lesbar ausfüllen</div></div>
+  </div>
+
+  <div class="box">
+    <div class="row">
+      <div>Objekt</div><div class="fill" contenteditable></div>
+      <div>Datum</div><div class="fill" contenteditable></div>
+    </div>
+    <div class="row">
+      <div>Dienstzeit</div><div class="fill" contenteditable>von __:__ bis __:__</div>
+      <div>Posten</div><div class="fill" contenteditable>z. B. Tor 1 / Rundgang</div>
+    </div>
+    <div class="row">
+      <div>Mitarbeiter</div><div class="fill" contenteditable></div>
+      <div>Bewacher-ID</div><div class="fill" contenteditable></div>
+    </div>
+    <div class="row">
+      <div>EL / Notfall</div><div class="fill" contenteditable>EL: … · 110/112</div>
+      <div>Wetter</div><div class="fill" contenteditable></div>
+    </div>
+  </div>
+
+  <h2>Rundgänge / Kontrollen</h2>
+  <table>
+    <tr><th style="width:90px">Zeit</th><th>Route / Punkte</th><th>Feststellungen</th><th style="width:110px">Initialen</th></tr>
+    <tr><td style="height:34px"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:34px"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:34px"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:34px"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:34px"></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2>Besucher / Lieferungen</h2>
+  <table>
+    <tr><th style="width:90px">Zeit</th><th>Name/Firma</th><th>Grund/Ziel</th><th style="width:110px">Ausweis/PO</th></tr>
+    <tr><td style="height:34px"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:34px"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:34px"></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2>Vorkommnisse / Maßnahmen</h2>
+  <table>
+    <tr><th style="width:90px">Zeit</th><th>Vorkommnis (kurz)</th><th>Maßnahme / Meldung</th><th style="width:110px">Initialen</th></tr>
+    <tr><td style="height:46px"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:46px"></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:46px"></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <h2>Übergabe an Folgeschicht</h2>
+  <table>
+    <tr><th>Wesentliche Hinweise (offene Punkte, Schlüssel, Technik, Sperrungen)</th></tr>
+    <tr><td style="height:90px"></td></tr>
+  </table>
+
+  <table style="margin-top:8px">
+    <tr><th>Unterschrift Mitarbeiter</th><th>Unterschrift Folgeschicht/AG (falls vorhanden)</th><th>Ort/Datum</th></tr>
+    <tr><td style="height:70px"></td><td></td><td></td></tr>
+  </table>
+</div></body></html>
