@@ -1,0 +1,170 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8">
+<title>Dienstanweisung (Master) · Nautilus Security</title>
+<meta name="color-scheme" content="light">
+<style>
+:root{
+  --navy:#0E2235; --ink:#233040; --gold:#C79A3A; --muted:#5b6a7c;
+  --line:#cfd6df; --bg:#fafbfc; --soft:#f6f8fb
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font:12.5px/1.6 Inter,Helvetica,Arial,sans-serif}
+.page{max-width:900px;margin:0 auto;padding:22px 28px}
+.header{display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--gold);padding-bottom:10px;margin-bottom:14px}
+.header img{height:44px}
+h1{margin:0;font-size:16px;color:var(--navy)}
+h2{font-size:13.8px;color:var(--navy);margin:14px 0 8px}
+h3{font-size:12.8px;color:var(--navy);margin:12px 0 6px}
+.small{font-size:11px;color:var(--muted)}
+.section{margin:10px 0;border:1px solid #e6eaf0;border-radius:10px;background:var(--bg)}
+.section .inner{padding:12px}
+.row{display:grid;grid-template-columns:220px 1fr;gap:10px;margin:6px 0}
+.fill{border-bottom:1px dotted var(--line);min-height:20px;padding:2px 0}
+table{width:100%;border-collapse:collapse;background:#fff}
+th,td{border:1px solid #e6eaf0;padding:8px 9px;vertical-align:top}
+th{background:var(--soft);color:var(--navy);text-align:left}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--soft);border:1px solid #e6eaf0;color:var(--navy);font-size:11px}
+.note{border:1px dashed var(--line);border-radius:8px;padding:8px;background:#fff}
+.hint{font-size:11.5px;color:var(--muted)}
+.break{break-before:page; page-break-before:always}
+@media print{
+  @page{size:A4;margin:10mm}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{padding:0 4mm}
+}
+[contenteditable]:focus{outline:2px solid rgba(199,154,58,.25);background:#fff}
+</style></head><body>
+<div class="page">
+  <div class="header">
+    <img src="logo-gold-transparent.png" alt="">
+    <div>
+      <h1>Dienstanweisung – Master (Baustelle / 24/7)</h1>
+      <div class="small">Nautilus Security UG (haftungsbeschränkt) · Gültig ab: <span contenteditable>TT.MM.JJJJ</span> · Version: <span contenteditable>V1.0</span></div>
+    </div>
+  </div>
+
+  <div class="section"><div class="inner">
+    <h2>1. Allgemeines</h2>
+    <div class="row"><div>Objekt / Projekt</div><div class="fill" contenteditable></div></div>
+    <div class="row"><div>Adresse / Zugang</div><div class="fill" contenteditable></div></div>
+    <div class="row"><div>AG / Ansprechperson</div><div class="fill" contenteditable></div></div>
+    <div class="row"><div>Nautilus Einsatzleitung</div><div class="fill" contenteditable>24/7 erreichbar · Tel. … · E-Mail …</div></div>
+    <div class="row"><div>Dienste / Besetzung</div><div class="fill" contenteditable>z. B. 24/7 Pforte + Nacht-Rundgang; Ersatz ≤ 60 Min</div></div>
+    <div class="hint">Zweck der Dienstanweisung: Aufgaben, Meldekette, Sicherheit & Compliance klar und prüffähig festlegen.</div>
+  </div></div>
+
+  <div class="section"><div class="inner">
+    <h2>2. Geltungsbereich & Postenplan</h2>
+    <table>
+      <tr><th style="width:28%">Posten</th><th>Aufgabe / Bereich</th><th style="width:20%">Zeitfenster</th><th style="width:18%">Besetzung</th></tr>
+      <tr><td contenteditable>Pforte / Tor 1</td><td contenteditable>Einlasskontrolle, Besucherverwaltung, Telefonschaltstelle</td><td contenteditable>24/7</td><td contenteditable>1</td></tr>
+      <tr><td contenteditable>Rundgang</td><td contenteditable>Perimeter, Materiallager, Kran/Schacht, Aggregate</td><td contenteditable>22:00–06:00</td><td contenteditable>1</td></tr>
+      <tr><td contenteditable>Reserve</td><td contenteditable>Springer/Vertretung, Alarm-Intervention</td><td contenteditable>n. V.</td><td contenteditable>—</td></tr>
+    </table>
+  </div></div>
+
+  <div class="section"><div class="inner">
+    <h2>3. Aufgaben & Rundgänge</h2>
+    <table>
+      <tr><th style="width:24%">Bereich</th><th>Kontrollpunkte / Prüfumfang</th><th style="width:22%">Intervall</th><th style="width:16%">Doku</th></tr>
+      <tr><td contenteditable>Perimeter</td><td contenteditable>Zäune/Tore geschlossen, Beschädigungen, unbefugte Personen</td><td contenteditable>30–60 Min</td><td>Schichtbericht</td></tr>
+      <tr><td contenteditable>Materiallager</td><td contenteditable>Verschluss, Plomben, Hochwertgüter</td><td contenteditable>60 Min</td><td>Schichtbericht</td></tr>
+      <tr><td contenteditable>Technik</td><td contenteditable>Beleuchtung, Aggregate, Kabel/Provisorien</td><td contenteditable>60 Min</td><td>Schichtbericht</td></tr>
+      <tr><td contenteditable>Besucher</td><td contenteditable>Erfassen, Ausweise/PO, Ziele</td><td contenteditable>anlassbezogen</td><td>Liste</td></tr>
+    </table>
+    <div class="note" contenteditable>Rundgangstartzeiten (Beispiel): 22:15 · 23:15 · 00:15 · 01:15 · 02:15 · 03:15 · 04:15 · 05:15</div>
+  </div></div>
+
+  <div class="section"><div class="inner">
+    <h2>4. Zutritt & Schlüsselverwaltung</h2>
+    <ul>
+      <li><span class="badge">Einlass</span> Nur berechtigte Personen/Unternehmen; Abgleich laut Liste/Anmeldung.</li>
+      <li><span class="badge">Schlüssel/Medien</span> Ausgabe/Rücknahme mit Nachweis (Schlüsselbuch); Verlustmeldung sofort an EL/AG.</li>
+      <li><span class="badge">Sperrzonen</span> Kernbereiche & Gefahrenzonen ausschließlich für autorisierte Gewerke.</li>
+    </ul>
+    <div class="row"><div>Besucher-/Lieferliste</div><div class="fill" contenteditable>Ort der Liste/Software</div></div>
+    <div class="row"><div>Schlüsselbuch</div><div class="fill" contenteditable>Ablageort / Verantwortliche Person</div></div>
+  </div></div>
+
+  <div class="section"><div class="inner">
+    <h2>5. Technik & Kommunikation</h2>
+    <div class="kv">
+      <div class="note" contenteditable>
+        <b>Kommunikation</b><br>
+        Funk/Telefon: … · Intervallmeldungen: alle <u>30–60 Min</u><br>
+        Bei Funk-/Telefon-Ausfall: Mobil-Backup / Vor-Ort-Meldung an Pforte
+      </div>
+      <div class="note" contenteditable>
+        <b>BMZ/EMA (falls vorhanden)</b><br>
+        Bedienberechtigung, Alarmwege, Abschalt-/Rückstellhinweise, Dienstleisterkontakte
+      </div>
+    </div>
+    <div class="row" style="margin-top:8px"><div>Störung/IT/Technik</div><div class="fill" contenteditable>Kontakt & Zeiten</div></div>
+  </div></div>
+
+  <div class="section"><div class="inner">
+    <h2>6. Meldedisziplin & Eskalation</h2>
+    <ul>
+      <li><b>Intervallmeldung</b> an Einsatzleitung: alle 30–60 Min (Uhrzeit + „OK“).</li>
+      <li><b>Nichtmeldung</b> > 10 Min ⇒ Rückruf; bei Ausbleiben: Vor-Ort-Check; <b>Stufe 2</b> (EL).</li>
+      <li><b>Vorfall</b> ⇒ Sofortmeldung (5-W-Schema), Kurzlage an EL; Polizei/Feuerwehr bei Gefahr zuerst.</li>
+    </ul>
+    <div class="row"><div>Eskalationsmatrix</div><div class="fill" contenteditable>siehe Matrix, Version/Ort der Ablage</div></div>
+  </div></div>
+
+  <div class="section"><div class="inner">
+    <h2>7. Notfallabläufe (Kurz)</h2>
+    <table>
+      <tr><th style="width:22%">Ereignis</th><th>Ablauf / Sofortmaßnahmen</th><th style="width:22%">Hinweis</th></tr>
+      <tr><td>Brand / Rauch</td><td contenteditable>112 · Räumen, Absperren, Sammelpunkt · EL/AG informieren</td><td>Feuerlöscher/Brandschutzordnung</td></tr>
+      <tr><td>Medizinisch</td><td contenteditable>112 · Ersthilfe · Unfallmeldung</td><td>Erste Hilfe Material</td></tr>
+      <tr><td>Einbruch/Vandalismus</td><td contenteditable>110 · Bereich sichern · Doku (ohne Personenfotos)</td><td>Kein Alleingang</td></tr>
+      <tr><td>Wetter/Unwetter</td><td contenteditable>Gefahrenbereich meiden · Absperren · EL/AG</td><td>PSA</td></tr>
+    </table>
+  </div></div>
+
+  <div class="section"><div class="inner">
+    <h2>8. Arbeitsschutz & PSA (DGUV/ArbSchG)</h2>
+    <ul>
+      <li>PSA: Warnkleidung, S3-Schuhe, Handschuhe, wetterfest; Lampe, Telefon/Funk.</li>
+      <li>Rückzugsbereich definiert; keine riskanten Alleingänge; Wege/Beleuchtung prüfen.</li>
+      <li>Gefährdungsbeurteilung liegt vor (Objekt); Unterweisung dokumentiert.</li>
+    </ul>
+  </div></div>
+
+  <div class="section"><div class="inner">
+    <h2>9. Dokumentation & Datenschutz</h2>
+    <ul>
+      <li>Schichtbericht (Rundgänge, Besucher, Vorkommnisse, Übergabe) – vollständig, lesbar.</li>
+      <li>Kurzlage bei Vorfällen – 5-W-Schema, sachlich, ohne Personenbezug.</li>
+      <li>Fotos nur objektbezogen (kein Personenbezug); Lösch-/Aufbewahrungsfristen beachten.</li>
+    </ul>
+  </div></div>
+
+  <div class="section"><div class="inner">
+    <h2>10. Übergabe / Freigaben</h2>
+    <div class="row"><div>Übergabe an Folgeschicht</div><div class="fill" contenteditable>Offene Punkte, Schlüssel, Sperrungen, Technik</div></div>
+    <div class="row"><div>Abweichung von DA</div><div class="fill" contenteditable>Nur mit Freigabe EL/AG</div></div>
+  </div></div>
+
+  <div class="section"><div class="inner">
+    <h3>Freigabe</h3>
+    <table>
+      <tr><th>Auftraggeber (Name/Unterschrift)</th><th>Nautilus Einsatzleitung</th><th>Datum/Ort</th></tr>
+      <tr><td style="height:70px"></td><td></td><td></td></tr>
+    </table>
+    <div class="hint">Diese Dienstanweisung ist objektspezifisch zu versionieren und bei Änderungen neu freizugeben.</div>
+  </div></div>
+
+  <div class="break"></div>
+
+  <div class="section"><div class="inner">
+    <h2>Anlagen (optional)</h2>
+    <ul>
+      <li>Lageplan / Flucht- & Rettungsplan</li>
+      <li>Schlüsselplan / Medienliste</li>
+      <li>Kontaktliste Auftraggeber/Dienstleister</li>
+    </ul>
+  </div></div>
+</div>
+</body></html>
