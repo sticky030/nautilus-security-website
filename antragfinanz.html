@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<title>Antrag Bescheinigung in Steuersachen – Person</title>
+<style>
+  :root{
+    --navy:#0E2235; --gold:#C79A3A; --ink:#233040; --line:#e6eaf0; --muted:#6b7785;
+  }
+  @page { size: A4; margin: 14mm; }
+  *{ box-sizing:border-box; }
+  body{ font: 11pt/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--ink); }
+  header{ margin-bottom: 14mm; }
+  .goldbar{ height:3mm; background:var(--gold); margin:-8mm -14mm 10mm; }
+  .headgrid{ display:grid; grid-template-columns: 1fr auto; gap:8mm; align-items:flex-end; }
+  .brand h1{ margin:.5rem 0 0; color:var(--navy); font-size:14pt; }
+  .meta{ text-align:right; color:var(--ink); font-size:10pt; }
+  .logo{ width:120px; height:28px; background:#f5f7fa; color:#8a94a3; display:flex; align-items:center; justify-content:center; border:1px dashed #cfd6df; border-radius:6px;}
+  .recip{ margin-bottom:10mm; }
+  h2{ color:var(--navy); font-size:12.5pt; margin:0 0 4mm; }
+  .box{ border:1px solid var(--line); background:#fafbfc; border-radius:6px; padding:6mm; margin:6mm 0 8mm;}
+  .row{ display:flex; gap:6mm; flex-wrap:wrap; }
+  label{ font-size:10.5pt; color:var(--navy); display:block; margin-bottom:2mm; }
+  .fill{ width:100%; padding:6px 8px; border:none; border-bottom:1.5px solid #cfd6df; outline:none; font: inherit; color:var(--ink); background:#fff; }
+  .hint{ color:var(--muted); font-size:9.5pt; }
+  .sig{ margin-top:16mm; }
+  .line{ border-bottom:1px solid #cfd6df; width:70mm; height:0; margin:10mm 0 2mm; }
+  footer{ position:fixed; bottom:10mm; left:0; right:0; color:var(--muted); font-size:9pt; }
+  @media print{
+    .logo{ border:none; color:transparent; }
+    a[href]{ text-decoration:none; color:inherit; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="goldbar"></div>
+  <div class="headgrid">
+    <div class="brand">
+      <div class="logo">Logo</div>
+      <h1>Antrag: Bescheinigung in Steuersachen (natürliche Person)</h1>
+      <div class="hint">Nautilus Security UG (haftungsbeschränkt), i. Gr. · Vincent-van-Gogh-Str. 14, 13057 Berlin · kontakt@nautilus-security.de · 030 985 57 615</div>
+    </div>
+    <div class="meta">Berlin, den <span id="today"></span></div>
+  </div>
+</header>
+
+<section class="recip">
+  <div>Finanzamt Berlin-Lichtenberg</div>
+  <div>Josef-Orlopp-Straße 62</div>
+  <div>10365 Berlin</div>
+</section>
+
+<h2>Betreff: Antrag auf Erteilung einer Bescheinigung in Steuersachen</h2>
+<p>Sehr geehrte Damen und Herren, hiermit beantrage ich die Ausstellung einer <strong>Bescheinigung in Steuersachen</strong>.</p>
+
+<div class="box">
+  <label>Daten Antragsteller</label>
+  <div class="row">
+    <div style="flex:1 1 100%;">
+      <div><strong>Name:</strong> Philipp Pascal De Boer</div>
+      <div><strong>Anschrift:</strong> Vincent-van-Gogh-Str. 14, 13057 Berlin</div>
+      <div><strong>Kontakt:</strong> philipp.deboer97@yahoo.com · 030 985 57 615 · 0176 2284 4636</div>
+    </div>
+    <div style="flex:1 1 260px;">
+      <label for="idnr">IdNr 95831776208</label>
+      <input id="idnr" class="fill" placeholder="Bitte IdNr eintragen" />
+    </div>
+  </div>
+</div>
+
+<p><strong>Zweck der Bescheinigung:</strong> Vorlage beim Ordnungsamt Berlin (Erlaubnis nach § 34a GewO) sowie bei Auftraggebern.</p>
+<p><strong>Anzahl der Ausfertigungen:</strong> 2</p>
+<p><strong>Versand:</strong> Bitte postalisch an die oben genannte Anschrift.</p>
+<p><strong>Hinweis:</strong> Die anfallende Gebühr begleiche ich umgehend nach Rechnung.</p>
+
+<div class="sig">
+  <div class="line"></div>
+  <div class="hint">Unterschrift Antragsteller/in</div>
+</div>
+
+<footer>Anlage: Kopie Personalausweis (Vorderseite)</footer>
+<script>
+  const d = new Date(); 
+  const z = n => String(n).padStart(2,"0");
+  document.getElementById("today").textContent = `${z(d.getDate())}.${z(d.getMonth()+1)}.${d.getFullYear()}`;
+</script>
+</body>
+</html>
