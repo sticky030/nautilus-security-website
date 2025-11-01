@@ -321,3 +321,67 @@
     if (r.top < vh * 0.92 && r.bottom > vh * 0.08) s.classList.add('is-inview');
   });
 })();
+/* === Smooth Section Reveal (JS-only, keine CSS-Änderung nötig) === */
+(() => {
+  // Alle Sections holen
+  const sections = Array.from(document.querySelectorAll('section'));
+  if (!sections.length) return;
+
+  // Hero sofort sichtbar lassen
+  const hero = document.getElementById('home');
+  const rest = sections.filter(s => s !== hero);
+
+  // Anfangszustand NUR per Inline-Style (kein Layout-/CSS-Eingriff)
+  rest.forEach(s => {
+    s.style.opacity = '0';
+    s.style.transform = 'translateY(12px)';
+    s.style.transition = 'opacity 500ms ease, transform 500ms ease';
+    s.style.willChange = 'opacity, transform';
+  });
+  if (hero) {
+    hero.style.opacity = '1';
+    hero.style.transform = 'none';
+  }
+
+  // Barrierefreiheit: Bewegung reduzieren → alles direkt sichtbar
+  const prefersReduced =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    rest.forEach(s => { s.style.opacity = '1'; s.style.transform = 'none'; });
+    return;
+  }
+
+  // Fallback: Wenn kein IntersectionObserver → alles einblenden
+  if (!('IntersectionObserver' in window)) {
+    setTimeout(() => {
+      rest.forEach(s => { s.style.opacity = '1'; s.style.transform = 'none'; });
+    }, 120);
+    return;
+  }
+
+  // Observer: früh triggern, damit es "smooth" wirkt
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        requestAnimationFrame(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px 25% 0px' });
+
+  rest.forEach(el => io.observe(el));
+
+  // Direkt beim Laden schon sichtbare Bereiche auch einblenden
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  rest.forEach(s => {
+    const r = s.getBoundingClientRect();
+    if (r.top < vh * 0.92 && r.bottom > vh * 0.08) {
+      s.style.opacity = '1';
+      s.style.transform = 'none';
+    }
+  });
+})();
