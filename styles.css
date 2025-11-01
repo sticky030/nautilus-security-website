@@ -202,3 +202,17 @@ html{ scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce){
   .card:hover, .card:focus-within{ transform: none; }
 }
+/* Reveal-Fallback (wenn AOS fehlt) */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .6s ease, transform .6s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Optional: noch etwas sanfter für sektionale Blöcke */
+section.reveal { transition-duration: .7s; }
