@@ -1,4 +1,4 @@
-// © Nautilus Security – App JS (clean reveal + stable testimonials)
+// © Nautilus Security – App JS (smooth reveal + stable testimonials)
 
 // Jahr im Footer
 (() => {
@@ -33,7 +33,7 @@
   });
 })();
 
-// Scrollspy
+// Scrollspy (aktiver Link)
 (() => {
   const links = document.querySelectorAll(".nav-link");
   const ids = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
@@ -56,7 +56,7 @@
   sections.forEach(sec => io.observe(sec));
 })();
 
-// FAQ
+// FAQ Akkordeon
 (() => {
   const list = document.getElementById("faqList");
   if (!list) return;
@@ -128,44 +128,70 @@
   cta.addEventListener("click", () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }));
 })();
 
-// Einheitlicher Scroll-Reveal – „Über uns“ NICHT beim Laden zeigen
+/* ========= Smooth Reveal – robust ========= */
 (() => {
-  // allen Sections die Reveal-Klasse geben
-  document.querySelectorAll("section").forEach(s => s.classList.add("reveal"));
+  // Hinweis an CSS: Reveal aktiv
+  document.documentElement.classList.add('has-reveal');
+
+  // Klassen vorbereiten
+  const sections = Array.from(document.querySelectorAll("section"));
+  sections.forEach(s => s.classList.add("reveal"));
 
   const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const all = Array.from(document.querySelectorAll(".reveal"));
   const about = document.getElementById("about");
-  const normals = all.filter(el => el !== about);
 
-  if (prefersReduced) {
-    all.forEach(el => el.classList.add("is-inview"));
-    return;
+  const observeSet = new Set();
+
+  function isInViewport(el, marginFactor = 0.10) {
+    const r = el.getBoundingClientRect();
+    const h = window.innerHeight || document.documentElement.clientHeight;
+    const m = h * marginFactor;
+    return r.top <= h - m && r.bottom >= m;
   }
 
-  // Früh triggern: threshold sehr klein, rootMargin +25% unten
+  // IO – sehr früher Trigger, stabil
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add("is-inview");
         io.unobserve(e.target);
+        observeSet.delete(e.target);
       }
     });
   }, {
-    threshold: 0.04,
-    rootMargin: "0px 0px 25% 0px"
+    threshold: 0.06,              // früh
+    rootMargin: "0px 0px 30% 0px" // +30% unten
   });
 
-  // normale Sektionen sofort beobachten
-  normals.forEach(el => io.observe(el));
+  function observe(el){ io.observe(el); observeSet.add(el); }
 
-  // „Über uns“ erst beobachten, wenn Nutzer wirklich scrollt
-  if (about) {
-    const activateAbout = () => { io.observe(about); };
-    window.addEventListener("scroll", activateAbout, { once:true, passive:true });
-    window.addEventListener("wheel",  activateAbout, { once:true, passive:true });
-    window.addEventListener("touchstart", activateAbout, { once:true, passive:true });
+  // Standard: alle außer ABOUT sofort beobachten
+  sections.forEach(s => { if (s !== about) observe(s); });
+
+  // ABOUT erst nach erster Nutzeraktion
+  const activateAbout = () => { if (about){ observe(about); } cleanup(); };
+  function cleanup(){
+    window.removeEventListener("scroll", activateAbout);
+    window.removeEventListener("wheel", activateAbout);
+    window.removeEventListener("touchstart", activateAbout);
+    window.removeEventListener("keydown", activateAbout);
   }
+  window.addEventListener("scroll", activateAbout, { once:true, passive:true });
+  window.addEventListener("wheel",  activateAbout, { once:true, passive:true });
+  window.addEventListener("touchstart", activateAbout, { once:true, passive:true });
+  window.addEventListener("keydown", activateAbout, { once:true });
+
+  // Sofortiger Initial-Check (falls bereits im Viewport)
+  function initialPass(){
+    sections.forEach(s => {
+      if (prefersReduced || isInViewport(s, 0.20)) { // 20% Puffer
+        s.classList.add("is-inview");
+        if (observeSet.has(s)){ io.unobserve(s); observeSet.delete(s); }
+      }
+    });
+  }
+  initialPass();
+  window.addEventListener("resize", initialPass);
 })();
 
 // Form-Handler
@@ -217,7 +243,7 @@
   handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
 })();
 
-// Testimonials – 3 pro Seite (mobil 1), ohne Glow
+// Testimonials – 3 pro Seite (mobil 1), ohne Glow, mit Goldrand
 (() => {
   const track = document.getElementById("tsTrack");
   if (!track) return;
