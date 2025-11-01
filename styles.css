@@ -47,9 +47,9 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
   border-color:var(--gold) !important;
 }
 
-/* Hero */
+/* Hero – höher, damit „Über uns“ nicht im ersten Viewport landet */
 .hero{
-  min-height: 92vh;           /* sorgt dafür, dass „Über uns“ nicht im ersten Viewport steht */
+  min-height: 92vh;
   display:flex; align-items:center; justify-content:center;
   background:
     radial-gradient(120% 100% at 110% -10%, rgba(199,154,58,.12), transparent),
@@ -119,33 +119,33 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
 .faq-a{ max-height:0; overflow:hidden; opacity:0; padding:0 1.25rem; transition:max-height .35s ease, opacity .2s ease; }
 .faq-item.open .faq-a{ padding:.5rem 1.25rem 1rem 1.25rem; opacity:1; max-height:220px; }
 
-/* Testimonials: 3 pro Seite (mobil 1) – KEIN Glow, aber permanenter Goldrand */
+/* Testimonials – KEIN Glow, permanenter Goldrand */
 #tsViewport{ width:100%; overflow:hidden; }
 #tsTrack{ display:flex; transition: transform 700ms ease-in-out; will-change: transform; }
 .ts-page{
   min-width:100%;
   display:grid; gap:1.25rem;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* mobil 1 */
 }
 @media (min-width:768px){
   .ts-page{ grid-template-columns: repeat(3, minmax(0,1fr)); }
 }
 .ts-card{
   padding:1rem 1.25rem;
-  border:1px solid rgba(199,154,58,.50) !important;   /* feiner Rand dauerhaft */
-  box-shadow:none !important;                          /* kein Glow */
+  border:1px solid rgba(199,154,58,.50) !important;
+  box-shadow:none !important;
   background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
   transform:none !important;
 }
 .ts-card:hover, .ts-card:focus-within{
-  border-color: rgba(199,154,58,.70) !important;       /* nur leichte Betonung */
+  border-color: rgba(199,154,58,.70) !important;
   box-shadow:none !important;
   transform:none !important;
 }
 
-/* Scroll-Reveal */
-.reveal{ opacity:0; transform:translateY(14px); }
-.reveal.is-inview{ opacity:1; transform:none; transition: opacity .6s ease, transform .6s ease; }
+/* Scroll-Reveal – snappier & früher */
+.reveal{ opacity:0; transform:translateY(8px); }
+.reveal.is-inview{ opacity:1; transform:none; transition: opacity .5s ease, transform .5s ease; }
 @media (prefers-reduced-motion: reduce){
   .reveal, .reveal.is-inview{ opacity:1 !important; transform:none !important; transition:none !important; }
 }
