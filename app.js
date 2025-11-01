@@ -385,3 +385,33 @@
     }
   });
 })();
+/* === Smooth Reveal (Observer) – HTML & Texte bleiben unberührt === */
+(() => {
+  // Accessibility: wenn Nutzer Motion reduziert, keine Animation
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const sections = Array.from(document.querySelectorAll('section')).filter(s => s.id !== 'home');
+  if (!sections.length) return;
+
+  // Früh triggern, damit es "smooth" wirkt
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add('ns-in');
+        io.unobserve(e.target);
+      }
+    }
+  }, { threshold: 0.06, rootMargin: '0px 0px 28% 0px' });
+
+  sections.forEach(s => io.observe(s));
+
+  // Bereits sichtbare Sektionen beim Laden sanft zeigen
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  sections.forEach(s => {
+    const r = s.getBoundingClientRect();
+    if (r.top < vh * 0.92 && r.bottom > vh * 0.08) {
+      s.classList.add('ns-in');
+      io.unobserve(s);
+    }
+  });
+})();
