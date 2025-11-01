@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
-  <!-- JS-Gate: sorgt dafür, dass Sections vor dem ersten Render versteckt sind -->
-  <script>document.documentElement.classList.add('js');</script>
+  <!-- JS-Gate: verhindert „Aufblitzen“, bevor Reveal aktiv ist -->
+  <script>document.documentElement.classList.replace('no-js','js');</script>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,75 +16,81 @@
 
   <!-- Header -->
   <header class="site-header">
-    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#home" class="flex items-center gap-3 nav-brand nav-link" data-target="home" aria-label="Startseite">
+    <div class="container row between center py-12">
+      <a href="#home" class="brand row center gap-10 nav-link" data-target="home" aria-label="Startseite">
         <img src="logo-gold-transparent.png" alt="Nautilus Security" width="36" height="36">
-        <strong>Nautilus Security</strong>
+        <strong class="brand-name">Nautilus Security</strong>
       </a>
 
-      <nav id="mainNav" class="hidden md:flex items-center gap-6">
-        <button class="nav-link" data-target="about">Über uns</button>
-        <button class="nav-link" data-target="services">Unsere Leistung</button>
-        <button class="nav-link" data-target="why">Warum wir</button>
-        <button class="nav-link" data-target="values">Werte</button>
-        <button class="nav-link" data-target="team">Team</button>
-        <button class="nav-link" data-target="jobs">Jobs</button>
-        <button class="nav-link" data-target="faq">FAQ</button>
-        <button class="nav-link" data-target="testimonials">Kunden</button>
-        <button class="cta-btn btn--gold" data-target="contact">Kontakt</button>
+      <nav id="mainNav" class="nav hide-md-down row center gap-24">
+        <button class="nav-link" data-target="about"       type="button">Über uns</button>
+        <button class="nav-link" data-target="services"    type="button">Unsere Leistung</button>
+        <button class="nav-link" data-target="why"         type="button">Warum wir</button>
+        <button class="nav-link" data-target="values"      type="button">Werte</button>
+        <button class="nav-link" data-target="team"        type="button">Team</button>
+        <button class="nav-link" data-target="jobs"        type="button">Jobs</button>
+        <button class="nav-link" data-target="faq"         type="button">FAQ</button>
+        <button class="nav-link" data-target="testimonials"type="button">Kunden</button>
+        <button class="btn btn--gold cta-btn" data-target="contact" type="button">Kontakt</button>
       </nav>
 
-      <button id="burger" class="md:hidden" aria-label="Menü öffnen">☰</button>
+      <button id="burger" class="burger hide-md-up" aria-label="Menü öffnen">☰</button>
     </div>
 
     <!-- Mobile -->
-    <div id="mobileOverlay" class="hidden fixed inset-0 bg-black/50"></div>
-    <div id="mobileMenu" class="hidden fixed top-0 right-0 w-[76%] max-w-sm h-full bg-[#0E2235] p-6 z-[1001]">
-      <div class="flex justify-between items-center mb-6">
-        <div class="flex items-center gap-3">
+    <div id="mobileOverlay" class="overlay hidden"></div>
+    <aside id="mobileMenu" class="drawer hidden" aria-label="Mobilmenü">
+      <div class="row between center mb-16">
+        <div class="row center gap-10">
           <img src="logo-gold-transparent.png" alt="Nautilus Security" width="28" height="28">
           <strong>Nautilus Security</strong>
         </div>
         <button class="mobile-link" data-target="home" aria-label="Menü schließen">×</button>
       </div>
-      <nav class="grid gap-4">
-        <button class="mobile-link" data-target="about">Über uns</button>
-        <button class="mobile-link" data-target="services">Unsere Leistung</button>
-        <button class="mobile-link" data-target="why">Warum wir</button>
-        <button class="mobile-link" data-target="values">Werte</button>
-        <button class="mobile-link" data-target="team">Team</button>
-        <button class="mobile-link" data-target="jobs">Jobs</button>
-        <button class="mobile-link" data-target="faq">FAQ</button>
-        <button class="mobile-link" data-target="testimonials">Kunden</button>
-        <button class="cta-btn btn--gold mobile-link" data-target="contact">Kontakt</button>
+      <nav class="col gap-12">
+        <button class="mobile-link" data-target="about"        type="button">Über uns</button>
+        <button class="mobile-link" data-target="services"     type="button">Unsere Leistung</button>
+        <button class="mobile-link" data-target="why"          type="button">Warum wir</button>
+        <button class="mobile-link" data-target="values"       type="button">Werte</button>
+        <button class="mobile-link" data-target="team"         type="button">Team</button>
+        <button class="mobile-link" data-target="jobs"         type="button">Jobs</button>
+        <button class="mobile-link" data-target="faq"          type="button">FAQ</button>
+        <button class="mobile-link" data-target="testimonials" type="button">Kunden</button>
+        <button class="btn btn--gold mobile-link" data-target="contact" type="button">Kontakt</button>
       </nav>
-    </div>
+    </aside>
   </header>
 
   <!-- Hero -->
   <section id="home" class="hero">
-    <div class="container mx-auto px-4 py-16 text-center">
-      <img src="logo-gold-transparent.png" alt="" width="72" height="72" class="mx-auto mb-6" />
-      <h1 class="text-4xl md:text-5xl font-bold mb-3">Sicherheit mit Struktur.</h1>
-      <p class="text-lg md:text-xl text-gray-300 mb-8">Nachtwache · 24/7 Objektschutz · Events — Navy/Gold, auditfähig, verbindlich.</p>
-      <div class="flex items-center justify-center gap-3">
-        <button class="btn--gold cta-btn" data-target="contact">Kontakt aufnehmen</button>
-        <button class="nav-link" data-target="services">Leistungen ansehen</button>
+    <div class="container center col text-center py-48">
+      <img src="logo-gold-transparent.png" alt="" width="72" height="72" class="mb-16">
+      <h1 class="h1 mb-8">Sicherheit mit Struktur.</h1>
+      <p class="lead mb-20">Nachtwache · 24/7 Objektschutz · Events — dokumentiert, verbindlich, auditfähig.</p>
+      <div class="row center gap-12">
+        <button class="btn btn--gold cta-btn" data-target="contact" type="button">Kontakt aufnehmen</button>
+        <button class="btn btn--ghost nav-link" data-target="services" type="button">Leistungen ansehen</button>
       </div>
     </div>
   </section>
 
   <!-- Über uns -->
   <section id="about">
-    <div class="container mx-auto px-4">
-      <div class="grid md:grid-cols-2 gap-6">
-        <article class="card p-5">
-          <h2 class="card-title">Über uns</h2>
-          <p class="card-text">Berlin-basiert. Fokus Nacht & 24/7-Objekte. Klare Prozesse, dokumentierte Übergaben, feste Ansprechpartner. Startfähig ab 01.01.2026 (nach §34a-Erlaubnis).</p>
+    <div class="container">
+      <div class="grid grid-2 gap-16">
+        <article class="card p-20">
+          <h2 class="h2 mb-8">Über uns</h2>
+          <p class="muted">
+            Berlin-basiert. Fokus Nacht & 24/7-Objekte. Klare Prozesse, dokumentierte Übergaben,
+            feste Ansprechpartner. Startfähig ab 01.01.2026 (nach §34a-Erlaubnis).
+          </p>
         </article>
-        <article class="card p-5">
-          <h3 class="card-title">Kennzahlen</h3>
-          <p class="card-text">Schichtberichte, KPI-Kurzlagen, GPS-Nachweise optional, revisionsfest abrufbar. Servicefenster werktags 08–18 Uhr, Einsatzleitung erreichbar.</p>
+        <article class="card p-20">
+          <h3 class="h3 mb-8">Kennzahlen</h3>
+          <p class="muted">
+            Schichtberichte, KPI-Kurzlagen, optional GPS-Nachweise. Servicefenster werktags 08–18 Uhr,
+            Einsatzleitung erreichbar, Eskalationswege definiert.
+          </p>
         </article>
       </div>
     </div>
@@ -92,23 +98,23 @@
 
   <!-- Leistungen -->
   <section id="services">
-    <div class="container mx-auto px-4">
-      <h2 class="card-title mb-4">Unsere Leistung</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="card p-5">
-          <div class="icon-wrap mb-4"><span class="icon-gold">★</span></div>
-          <h3 class="card-title">Nachtwache / Baustelle</h3>
-          <p class="card-text">22:00–06:00, Hotspots, Schlüssel & Tor, Rundgänge, Protokoll. Ersatz binnen 60 Min gesichert.</p>
+    <div class="container">
+      <h2 class="h2 mb-16">Unsere Leistung</h2>
+      <div class="grid grid-3 gap-16">
+        <article class="card p-20">
+          <div class="icon mb-12">★</div>
+          <h3 class="h3 mb-6">Nachtwache / Baustelle</h3>
+          <p class="muted">22:00–06:00, Hotspots, Schlüssel & Tor, Rundgänge, Protokoll. Ersatz ≤ 60 Min gesichert.</p>
         </article>
-        <article class="card p-5">
-          <div class="icon-wrap mb-4"><span class="icon-gold">★</span></div>
-          <h3 class="card-title">24/7 Objektschutz</h3>
-          <p class="card-text">Pforte, Zutritt, Besucher, Alarme, Übergaben mit Checklisten. Auditfähige Dokumentation.</p>
+        <article class="card p-20">
+          <div class="icon mb-12">★</div>
+          <h3 class="h3 mb-6">24/7 Objektschutz</h3>
+          <p class="muted">Pforte, Zutritt, Besucher, Alarme, Übergaben mit Checklisten. Auditfähige Dokumentation.</p>
         </article>
-        <article class="card p-5">
-          <div class="icon-wrap mb-4"><span class="icon-gold">★</span></div>
-          <h3 class="card-title">Events</h3>
-          <p class="card-text">Einlass / Backstage / Perimeter. Funkdisziplin, ruhige Durchsetzung, klare Eskalationswege.</p>
+        <article class="card p-20">
+          <div class="icon mb-12">★</div>
+          <h3 class="h3 mb-6">Events</h3>
+          <p class="muted">Einlass / Backstage / Perimeter. Funkdisziplin, ruhige Durchsetzung, klare Eskalation.</p>
         </article>
       </div>
     </div>
@@ -116,20 +122,20 @@
 
   <!-- Warum wir -->
   <section id="why">
-    <div class="container mx-auto px-4">
-      <h2 class="card-title mb-4">Warum wir</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="card p-5">
-          <h3 class="card-title">Strukturiert</h3>
-          <p class="card-text">Briefingpflicht, feste Routinen, Schichtberichte, Nachweise. Keine Zufälle, klare Zuständigkeiten.</p>
+    <div class="container">
+      <h2 class="h2 mb-16">Warum wir</h2>
+      <div class="grid grid-3 gap-16">
+        <article class="card p-20">
+          <h3 class="h3 mb-6">Strukturiert</h3>
+          <p class="muted">Briefingpflicht, feste Routinen, Schichtberichte, Nachweise. Keine Zufälle, klare Zuständigkeiten.</p>
         </article>
-        <article class="card p-5">
-          <h3 class="card-title">Verbindlich</h3>
-          <p class="card-text">Startzusagen, Ersatz & Backup geregelt. Kommunikation im Zeitfenster, Eskalation transparent.</p>
+        <article class="card p-20">
+          <h3 class="h3 mb-6">Verbindlich</h3>
+          <p class="muted">Startzusagen, Ersatz & Backup geregelt. Kommunikation im Zeitfenster, Eskalation transparent.</p>
         </article>
-        <article class="card p-5">
-          <h3 class="card-title">Diskret</h3>
-          <p class="card-text">Professionelles, ruhiges Auftreten. Nur so viel Sichtbarkeit wie nötig, maximale Wirkung.</p>
+        <article class="card p-20">
+          <h3 class="h3 mb-6">Diskret</h3>
+          <p class="muted">Ruhiges, professionelles Auftreten. Nur so viel Sichtbarkeit wie nötig, maximale Wirkung.</p>
         </article>
       </div>
     </div>
@@ -137,42 +143,42 @@
 
   <!-- Werte -->
   <section id="values">
-    <div class="container mx-auto px-4">
-      <h2 class="card-title mb-4">Unsere Werte</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="card p-5"><h3 class="card-title">Respekt</h3><p class="card-text">Klare Sprache, sauberes Auftreten, Null Toleranz für Respektlosigkeit gegenüber Kunden & Team.</p></article>
-        <article class="card p-5"><h3 class="card-title">Ruhig bleiben</h3><p class="card-text">Deeskalation vor Durchsetzung. Maßnahmen verhältnismäßig und dokumentiert.</p></article>
-        <article class="card p-5"><h3 class="card-title">Verantwortung</h3><p class="card-text">Fehlerkultur mit Nachlernen: Abweichung → Maßnahme → Termin → Kontrolle.</p></article>
+    <div class="container">
+      <h2 class="h2 mb-16">Unsere Werte</h2>
+      <div class="grid grid-3 gap-16">
+        <article class="card p-20"><h3 class="h3 mb-6">Respekt</h3><p class="muted">Klare Sprache, sauberes Auftreten, Null Toleranz für Respektlosigkeit gegenüber Kunden & Team.</p></article>
+        <article class="card p-20"><h3 class="h3 mb-6">Ruhig bleiben</h3><p class="muted">Deeskalation vor Durchsetzung. Maßnahmen verhältnismäßig und dokumentiert.</p></article>
+        <article class="card p-20"><h3 class="h3 mb-6">Verantwortung</h3><p class="muted">Fehlerkultur mit Nachlernen: Abweichung → Maßnahme → Termin → Kontrolle.</p></article>
       </div>
     </div>
   </section>
 
   <!-- Team -->
   <section id="team">
-    <div class="container mx-auto px-4">
-      <h2 class="card-title mb-4">Unser Team</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="card p-5"><h3 class="card-title">Einsatzleitung</h3><p class="card-text">Planung, Briefings, Material, Nachweise. Erreichbar für Objektleitung & Auftraggeber.</p></article>
-        <article class="card p-5"><h3 class="card-title">Schichtführung</h3><p class="card-text">Übergaben, Rundgänge, Report. KPI-Fokus je Objekt.</p></article>
-        <article class="card p-5"><h3 class="card-title">Mitarbeitende</h3><p class="card-text">§34a, Ersthelfer; Schulungen nach Einsatzprofil. Auftreten verbindlich, ruhig.</p></article>
+    <div class="container">
+      <h2 class="h2 mb-16">Unser Team</h2>
+      <div class="grid grid-3 gap-16">
+        <article class="card p-20"><h3 class="h3 mb-6">Einsatzleitung</h3><p class="muted">Planung, Briefings, Material, Nachweise. Erreichbar für Objektleitung & Auftraggeber.</p></article>
+        <article class="card p-20"><h3 class="h3 mb-6">Schichtführung</h3><p class="muted">Übergaben, Rundgänge, Report. KPI-Fokus je Objekt.</p></article>
+        <article class="card p-20"><h3 class="h3 mb-6">Mitarbeitende</h3><p class="muted">§34a, Ersthelfer; Schulungen nach Einsatzprofil. Auftreten verbindlich, ruhig.</p></article>
       </div>
     </div>
   </section>
 
   <!-- Jobs -->
   <section id="jobs">
-    <div class="container mx-auto px-4">
-      <h2 class="card-title mb-4">Jobs</h2>
-      <div class="card p-5">
-        <p class="card-text mb-4">Wir bauen auf nachweisbare Verlässlichkeit, §34a, sichere Kommunikation und sauberes Auftreten.</p>
-        <form id="careerForm" class="grid md:grid-cols-2 gap-4">
+    <div class="container">
+      <h2 class="h2 mb-16">Jobs</h2>
+      <div class="card p-20">
+        <p class="muted mb-12">Wir bauen auf nachweisbare Verlässlichkeit, §34a, sichere Kommunikation und sauberes Auftreten.</p>
+        <form id="careerForm" class="grid grid-2 gap-12">
           <input name="Name" placeholder="Name*" required>
           <input name="E-Mail" type="email" placeholder="E-Mail*" required>
           <input name="Telefon" placeholder="Telefon">
           <input name="Verfügbarkeit" placeholder="Verfügbarkeit (ab wann?)">
-          <textarea name="Hinweis" placeholder="Kurzprofil / Erfahrung" class="md:col-span-2"></textarea>
-          <button class="btn--gold md:col-span-2" type="submit">Bewerbung senden</button>
-          <small id="careerStatus" class="md:col-span-2"></small>
+          <textarea name="Hinweis" placeholder="Kurzprofil / Erfahrung" class="span-2"></textarea>
+          <button class="btn btn--gold span-2" type="submit">Bewerbung senden</button>
+          <small id="careerStatus" class="span-2"></small>
         </form>
       </div>
     </div>
@@ -180,20 +186,20 @@
 
   <!-- FAQ -->
   <section id="faq">
-    <div class="container mx-auto px-4">
-      <h2 class="card-title mb-4">FAQ</h2>
-      <div id="faqList" class="grid gap-4">
+    <div class="container">
+      <h2 class="h2 mb-16">FAQ</h2>
+      <div id="faqList" class="col gap-12">
         <div class="faq-item">
-          <button class="faq-q">Wie schnell starten Sie?</button>
-          <div class="faq-a"><p class="card-text">Nach §34a-Erlaubnis planbar binnen weniger Tage. Briefing & Übergabe vor Ort.</p></div>
+          <button class="faq-q" type="button">Wie schnell starten Sie?</button>
+          <div class="faq-a"><p class="muted">Nach §34a-Erlaubnis planbar binnen weniger Tage. Briefing & Übergabe vor Ort.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Welche Nachweise liefern Sie?</button>
-          <div class="faq-a"><p class="card-text">Schichtberichte, KPI-Kurzlagen, auf Wunsch GPS-Belege/Foto. Revisionsfest.</p></div>
+          <button class="faq-q" type="button">Welche Nachweise liefern Sie?</button>
+          <div class="faq-a"><p class="muted">Schichtberichte, KPI-Kurzlagen, auf Wunsch GPS-/Fotobelege. Revisionsfest.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Wie läuft die Kommunikation?</button>
-          <div class="faq-a"><p class="card-text">Klare Zeitfenster, feste Ansprechpartner, Eskalationsstufen dokumentiert.</p></div>
+          <button class="faq-q" type="button">Wie läuft die Kommunikation?</button>
+          <div class="faq-a"><p class="muted">Klare Zeitfenster, feste Ansprechpartner, dokumentierte Eskalationsstufen.</p></div>
         </div>
       </div>
     </div>
@@ -201,9 +207,9 @@
 
   <!-- Testimonials -->
   <section id="testimonials">
-    <div class="container mx-auto px-4">
-      <h2 class="card-title mb-4">Was unsere Kunden sagen</h2>
-      <div id="tsViewport" class="card p-4">
+    <div class="container">
+      <h2 class="h2 mb-16">Was unsere Kunden sagen</h2>
+      <div id="tsViewport" class="card p-16">
         <div id="tsTrack"></div>
       </div>
     </div>
@@ -211,24 +217,24 @@
 
   <!-- Kontakt -->
   <section id="contact">
-    <div class="container mx-auto px-4">
-      <h2 class="card-title mb-4">Kontakt</h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        <article class="card p-5">
-          <p class="card-text">
+    <div class="container">
+      <h2 class="h2 mb-16">Kontakt</h2>
+      <div class="grid grid-2 gap-16">
+        <article class="card p-20">
+          <p class="muted">
             Nautilus Security UG (haftungsbeschränkt) — in Gründung<br>
             T 030 985 57 615 · M 0176 2284 4636<br>
             E kontakt@nautilus-security.de<br>
             Vincent-van-Gogh-Str. 14, 13057 Berlin
           </p>
         </article>
-        <article class="card p-5">
-          <form id="contactForm" class="grid gap-3">
+        <article class="card p-20">
+          <form id="contactForm" class="col gap-12">
             <input name="Name" placeholder="Name*" required>
             <input name="E-Mail" type="email" placeholder="E-Mail*" required>
             <input name="Telefon" placeholder="Telefon">
             <textarea name="Nachricht" placeholder="Ihr Anliegen*" required></textarea>
-            <button class="btn--gold" type="submit">Anfrage senden</button>
+            <button class="btn btn--gold" type="submit">Anfrage senden</button>
             <small id="contactStatus"></small>
           </form>
         </article>
@@ -237,16 +243,15 @@
   </section>
 
   <!-- Sticky CTA -->
-  <button id="stickyCta" class="btn--gold fixed z-[1000]">Kontakt</button>
+  <button id="stickyCta" class="btn btn--gold sticky-cta">Kontakt</button>
 
-  <footer class="border-t border-white/10 mt-8">
-    <div class="container mx-auto px-4 flex items-center justify-between">
+  <footer class="footer">
+    <div class="container row between center py-12">
       <p>© <span id="year"></span> Nautilus Security</p>
       <p><a class="nav-link" data-target="home">Nach oben</a></p>
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="app.js" defer></script>
 </body>
 </html>
