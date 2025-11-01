@@ -216,3 +216,18 @@ html{ scroll-behavior:smooth; }
 
 /* Optional: noch etwas sanfter für sektionale Blöcke */
 section.reveal { transition-duration: .7s; }
+/* Smooth-In Fallback (hohe Spezifität) */
+section.reveal { 
+  opacity: 0 !important; 
+  transform: translateY(14px) !important; 
+  transition: opacity .6s ease, transform .6s ease !important;
+}
+section.reveal.is-visible { 
+  opacity: 1 !important; 
+  transform: none !important; 
+}
+
+/* Optionale Feinheit: Testimonials-Track untermauern */
+#tsViewport { overflow: hidden; }
+#tsTrack { display: flex; justify-content: center; align-items: stretch; }
+#tsTrack .card { min-width: 280px; }
