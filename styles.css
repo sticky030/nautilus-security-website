@@ -174,3 +174,18 @@ footer{ padding-top:1.1rem; padding-bottom:1.1rem; color:#e7e7e7; }
     transition: none !important;
   }
 }
+/* === Smooth Reveal (ohne HTML-Änderung) === */
+@media (prefers-reduced-motion: no-preference){
+  section:not(#home){
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px);
+    will-change: opacity, transform;
+  }
+  section.ns-in{
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity .55s ease, transform .55s ease;
+  }
+}
