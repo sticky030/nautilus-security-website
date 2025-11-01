@@ -16,28 +16,29 @@
   <meta property="og:locale" content="de_DE">
 
   <link rel="icon" href="./logo-gold-transparent.png" type="image/png" />
+
+  <!-- Tailwind (wie gehabt) -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS (wie gehabt) -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
+  <!-- Eigene Styles -->
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body class="min-h-screen font-sans bg-[#0a0f1c] text-white scroll-smooth">
-  <!-- Header -->
+  <!-- Header (ohne Nacht/Tag-Schalter) -->
   <header id="site-header" class="header site-header border-b border-yellow-500 bg-[#0a0f1c] p-4 shadow-md sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center relative">
       <div class="flex items-center space-x-3">
         <img src="./logo-gold-transparent.png" alt="Logo Nautilus Security" width="40" height="40" class="w-10 h-10" />
         <h1 class="text-xl font-bold tracking-wide">Nautilus Security</h1>
       </div>
-      <div class="flex items-center space-x-4">
-        <button id="darkToggle" class="text-sm border px-2 py-1 rounded hover:opacity-70" aria-label="Farbschema umschalten">🌙</button>
-        <div class="md:hidden">
-          <button id="burger" class="text-yellow-500 text-2xl" aria-label="Navigation öffnen">☰</button>
-        </div>
-      </div>
+
+      <!-- Desktop-Navi -->
       <nav class="hidden md:flex space-x-4 text-sm nav" id="mainNav" aria-label="Hauptnavigation">
-        <button data-target="home" class="nav-link hover:text-yellow-500 transition">Start</button>
+        <button data-target="home" class="nav-link hover:text-yellow-500 transition" aria-current="page">Start</button>
         <button data-target="about" class="nav-link hover:text-yellow-500 transition">Über uns</button>
         <button data-target="services" class="nav-link hover:text-yellow-500 transition">Leistungen</button>
         <button data-target="why" class="nav-link hover:text-yellow-500 transition">Warum wir</button>
@@ -48,7 +49,12 @@
         <button data-target="testimonials" class="nav-link hover:text-yellow-500 transition">Kundenstimmen</button>
         <button data-target="contact" class="nav-link hover:text-yellow-500 transition">Kontakt</button>
       </nav>
-      <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-60 z-40" aria-hidden="true"></div>
+
+      <!-- Mobile -->
+      <div class="md:hidden">
+        <button id="burger" class="text-yellow-500 text-2xl" aria-label="Navigation öffnen">☰</button>
+      </div>
+      <div id="mobileOverlay" class="hidden fixed inset-0 bg-black/60 z-40" aria-hidden="true"></div>
       <div id="mobileMenu" class="hidden absolute top-16 left-0 w-full bg-[#0a0f1c] border-t border-yellow-500 md:hidden flex-col text-center py-4 z-50 animate-slide-down" role="dialog" aria-modal="true" aria-label="Mobiles Menü">
         <button data-target="home" class="mobile-link py-2">Start</button>
         <button data-target="about" class="mobile-link py-2">Über uns</button>
@@ -79,7 +85,7 @@
     </section>
 
     <!-- Über uns -->
-    <section id="about" class="px-6 max-w-3xl mx-auto" data-aos="fade-up">
+    <section id="about" class="px-6 max-w-3xl mx-auto reveal" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-4">Über uns</h2>
       <p class="text-gray-300 mb-4">
         Nautilus Security UG (Berlin) plant und liefert Nachtwache, Objektschutz und Eventschutz. Wir arbeiten nach Taktplänen, klaren Eskalationen und auditfähiger Dokumentation.
@@ -89,8 +95,8 @@
       </p>
     </section>
 
-    <!-- Leistungen (kompakt) -->
-    <section id="services" class="max-w-6xl mx-auto px-6" data-aos="fade-up">
+    <!-- Leistungen -->
+    <section id="services" class="max-w-6xl mx-auto px-6 reveal" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Unsere Leistungen</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <article class="card group">
@@ -126,8 +132,8 @@
       </div>
     </section>
 
-    <!-- Warum wir (kompakt) -->
-    <section id="why" class="max-w-6xl mx-auto px-6" data-aos="fade-up">
+    <!-- Warum wir -->
+    <section id="why" class="max-w-6xl mx-auto px-6 reveal" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Warum wir</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <article class="card"><h3 class="card-title">Verbindlich</h3><p class="card-text">Feste Ansprechpartner, 24/7 erreichbar; Zusagen und Rückmeldungen mit Termin.</p></article>
@@ -139,13 +145,13 @@
       </div>
     </section>
 
-    <!-- Werte (kompakt) -->
-    <section id="values" class="max-w-5xl mx-auto px-6" data-aos="fade-up">
+    <!-- Werte -->
+    <section id="values" class="max-w-5xl mx-auto px-6 reveal" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-10 text-center">Unsere Werte</h2>
       <div class="grid md:grid-cols-4 gap-6 text-center">
         <div class="bg-[#1f2937] rounded-2xl p-6 ring-1 ring-white/5 hover:ring-yellow-500/50 shadow-md hover:shadow-yellow-500/20 transition transform hover:-translate-y-1">
           <div class="mx-auto mb-4 w-12 h-12 flex items-center justify-center rounded-full bg-yellow-500/10">
-            <svg class="w-7 h-7 text-yellow-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l7 3v6c0 5-3.4 9.7-7 11-3.6-1.3-7-6-7-11V5l7-3zm-1 12l-3-3 1.4-1.4L11 11.2l4.6-4.6L17 8l-6 6z"/></svg>
+            <svg class="w-7 h-7 text-yellow-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l7 3v6c0 5-3.4 9.7-7 11-3.6-1.3-7-6-7-11V5l7-3zm-1 12l-4-4 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 7z"/></svg>
           </div>
           <h3 class="text-xl font-semibold text-white mb-2">Vertrauen</h3>
           <p class="text-gray-300">Loyal, verschwiegen, zuverlässig – mit nachweisbarer Verantwortung.</p>
@@ -175,7 +181,7 @@
     </section>
 
     <!-- Team -->
-    <section id="team" class="max-w-6xl mx-auto px-6" data-aos="fade-up">
+    <section id="team" class="max-w-6xl mx-auto px-6 reveal" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 text-center mb-12">Unser Team</h2>
       <div class="grid md:grid-cols-3 gap-10 text-center">
         <div class="bg-[#1f2937] p-6 rounded-lg shadow-lg hover:shadow-yellow-500/20 transition">
@@ -197,11 +203,9 @@
     </section>
 
     <!-- Karriere -->
-    <section id="jobs" class="max-w-3xl mx-auto px-6" data-aos="fade-up">
+    <section id="jobs" class="max-w-3xl mx-auto px-6 reveal" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-6 text-center">Karriere bei Nautilus</h2>
-      <p class="text-gray-300 text-center mb-6">
-        Wir suchen Profis mit Haltung. §34a, gepflegtes Auftreten, Deutsch; Bereitschaft für Nacht/Wochenende.
-      </p>
+      <p class="text-gray-300 text-center mb-6">Wir suchen Profis mit Haltung. §34a, gepflegtes Auftreten, Deutsch; Bereitschaft für Nacht/Wochenende.</p>
       <ul class="list-[square] pl-6 space-y-2 text-gray-300 marker:text-yellow-500">
         <li>Zuverlässigkeit, Teamfähigkeit, Kommunikationsstärke</li>
         <li>Zusatzqualifikationen (Erste Hilfe, Fremdsprachen, Spezialschulungen) von Vorteil</li>
@@ -212,7 +216,7 @@
     </section>
 
     <!-- Online-Bewerbung -->
-    <section id="career-form" class="max-w-3xl mx-auto pt-2 pb-16 px-6" data-aos="fade-up">
+    <section id="career-form" class="max-w-3xl mx-auto pt-2 pb-16 px-6 reveal" data-aos="fade-up">
       <h3 class="text-2xl font-semibold text-yellow-500 mb-4">Online-Bewerbung</h3>
       <form id="careerForm" class="space-y-4" novalidate>
         <div class="grid md:grid-cols-2 gap-4">
@@ -239,7 +243,7 @@
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="max-w-3xl mx-auto px-6" data-aos="fade-up">
+    <section id="faq" class="max-w-3xl mx-auto px-6 reveal" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-6">Häufige Fragen (FAQ)</h2>
       <div class="space-y-3" id="faqList">
         <div class="faq-item"><button class="faq-q">Welche Einsatzgebiete deckt Nautilus Security ab?</button><div class="faq-a">Berlin/Brandenburg. Weitere Standorte nach Absprache, sofern Struktur und Qualität gesichert sind.</div></div>
@@ -250,18 +254,18 @@
       </div>
     </section>
 
-    <!-- Kundenstimmen (immer 3 sichtbar, auto-wechsel) -->
-    <section id="testimonials" class="bg-[#111827] py-20 px-6 overflow-hidden" data-aos="fade-up">
+    <!-- Kundenstimmen -->
+    <section id="testimonials" class="bg-[#111827] py-20 px-6 overflow-hidden reveal" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 text-center mb-8">Was unsere Kunden sagen</h2>
       <div class="max-w-6xl mx-auto">
         <div id="tsViewport" class="relative overflow-hidden">
-          <div id="tsTrack" class="flex transition-transform duration-700 ease-in-out will-change-transform"></div>
+          <div id="tsTrack" class="testimonials flex transition-transform duration-700 ease-in-out will-change-transform"></div>
         </div>
       </div>
     </section>
 
     <!-- Kontakt -->
-    <section id="contact" class="max-w-2xl mx-auto px-6" data-aos="fade-up">
+    <section id="contact" class="max-w-2xl mx-auto px-6 reveal" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-yellow-500 mb-6">Kontakt aufnehmen</h2>
       <form id="contactForm" class="space-y-4" novalidate>
         <label class="sr-only" for="ct_name">Ihr Name</label>
@@ -315,6 +319,7 @@
   }
   </script>
 
+  <!-- App JS -->
   <script defer src="./app.js"></script>
 </body>
 </html>
