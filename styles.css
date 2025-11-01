@@ -180,3 +180,25 @@ html{ scroll-behavior:smooth; }
 /* Testimonials-Grid – Container mit Klasse .testimonials zeigt 3 Spalten (mobil 1) */
 .testimonials{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:1.25rem; }
 @media (max-width:900px){ .testimonials{ grid-template-columns:1fr; } }
+/* Premium Card + Gold Glow */
+.card{
+  position: relative;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.08);
+  transition: transform .20s ease, box-shadow .25s ease, border-color .20s ease;
+}
+.card:hover,
+.card:focus-within{
+  transform: translateY(-2px);
+  border-color: rgba(199,154,58,.35);
+  /* dezenter Außen-Glow in Gold */
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.12),
+    0 0 28px 6px rgba(199,154,58,.22);
+  outline: none;
+}
+@media (prefers-reduced-motion: reduce){
+  .card:hover, .card:focus-within{ transform: none; }
+}
