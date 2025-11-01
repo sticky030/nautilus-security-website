@@ -1,39 +1,38 @@
-// © Nautilus Security – App JS (robustes Smooth-Reveal + Rest)
+// © Nautilus Security – App JS (smooth reveal, mobile nav, faq, slider, sticky cta)
 
-// Jahr im Footer
+/* Jahr im Footer */
 (() => {
   const y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
 })();
 
-// Burger-Menü + Smooth Scroll
+/* Mobile-Menü & Smooth-Scroll */
 (() => {
   const burger = document.getElementById("burger");
   const mobileMenu = document.getElementById("mobileMenu");
   const mobileOverlay = document.getElementById("mobileOverlay");
-  const toggleMobile = (state) => {
+  const toggle = (open) => {
     if (!mobileMenu || !mobileOverlay) return;
-    const open = state === "open";
     mobileMenu.classList.toggle("hidden", !open);
     mobileOverlay.classList.toggle("hidden", !open);
   };
-  burger?.addEventListener("click", () => toggleMobile("open"));
-  mobileOverlay?.addEventListener("click", () => toggleMobile("close"));
+  burger?.addEventListener("click", () => toggle(true));
+  mobileOverlay?.addEventListener("click", () => toggle(false));
 
   document.querySelectorAll(".mobile-link, .nav-link, .cta-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-target");
       if (id) {
         const el = document.getElementById(id);
-        if (id === "about") el?.classList.add("is-inview"); // sichtbar bei Direktklick
+        if (id === "about") el?.classList.add("is-inview"); // sichtbar, wenn direkt angewählt
         el?.scrollIntoView({ behavior: "smooth" });
-        toggleMobile("close");
+        toggle(false);
       }
     });
   });
 })();
 
-// Scrollspy
+/* Scrollspy – aktiver Link */
 (() => {
   const links = document.querySelectorAll(".nav-link");
   const ids = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
@@ -46,9 +45,9 @@
       const id = entry.target.id;
       links.forEach(l => {
         const active = l.getAttribute("data-target") === id;
+        l.classList.toggle("nav-active", active);
         l.classList.toggle("text-yellow-500", active);
         l.classList.toggle("font-bold", active);
-        l.classList.toggle("nav-active", active);
       });
     });
   }, { rootMargin: "-42% 0px -52% 0px", threshold: 0.01 });
@@ -56,7 +55,7 @@
   sections.forEach(sec => io.observe(sec));
 })();
 
-// FAQ
+/* FAQ Akkordeon */
 (() => {
   const list = document.getElementById("faqList");
   if (!list) return;
@@ -98,7 +97,7 @@
   });
 })();
 
-// Sticky CTA
+/* Sticky CTA sichtbar machen */
 (() => {
   const cta = document.getElementById("stickyCta");
   const hero = document.getElementById("home");
@@ -125,10 +124,12 @@
   window.addEventListener("resize", onScroll);
   onScroll();
 
-  cta.addEventListener("click", () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }));
+  cta.addEventListener("click", () =>
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+  );
 })();
 
-/* ========= Smooth Reveal (JS-gated via <html class="js">) ========= */
+/* Smooth Reveal – robust & früh */
 (() => {
   const sections = Array.from(document.querySelectorAll("section[id]"));
   if (!sections.length) return;
@@ -144,8 +145,8 @@
       }
     });
   }, {
-    threshold: 0.08,              // früh triggern
-    rootMargin: "0px 0px 28% 0px" // +28% unten
+    threshold: 0.08,               // früh
+    rootMargin: "0px 0px 28% 0px"  // +28% unten
   });
 
   // alle außer #about sofort beobachten
@@ -164,7 +165,7 @@
   window.addEventListener("touchstart", activateAbout, { once:true, passive:true });
   window.addEventListener("keydown", activateAbout, { once:true });
 
-  // Initial-Check (falls schon im Viewport)
+  // Initial-Check (Reload mid-page)
   const vh = window.innerHeight || document.documentElement.clientHeight;
   normals.forEach(el => {
     const r = el.getBoundingClientRect();
@@ -172,9 +173,9 @@
   });
 })();
 
-// Forms (unchanged scaffolding)
+/* Form-Handler (mailto-Fallback; Formspree optional) */
 (() => {
-  const FORMSPREE_CONTACT = "";
+  const FORMSPREE_CONTACT = ""; // z.B. https://formspree.io/f/xxxxxx
   const FORMSPREE_CAREER  = "";
 
   function handleForm(formId, endpoint, subject) {
@@ -209,6 +210,7 @@
         }
       }
 
+      // Fallback: mailto
       const fd = new FormData(form);
       const kv = [];
       fd.forEach((v, k) => { if (String(v).trim()) kv.push(`${k}: ${v}`); });
@@ -219,4 +221,69 @@
 
   handleForm("contactForm", FORMSPREE_CONTACT, "Kontaktanfrage – Nautilus Security");
   handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
+})();
+
+/* Testimonials – 3 pro Seite (mobil 1), Endlos-Slider */
+(() => {
+  const track = document.getElementById("tsTrack");
+  if (!track) return;
+
+  const TESTIMONIALS = [
+    { q: "„Präsenz wie vereinbart, Berichte lückenlos. Übergaben funktionieren.“", a: "Objektleiter, Großbaustelle Berlin-City" },
+    { q: "„Start binnen weniger Tage, sauber organisiert und dokumentiert.“", a: "Projektleiter, Bauherr Berlin" },
+    { q: "„Ruhige Umsetzung, klare Eskalationen, kein Theater.“", a: "FM-Leitung, Gewerbepark" },
+    { q: "„Revierfahrten mit GPS und Fotobelegen – auditfähig.“", a: "Sicherheitsbeauftragter, Industrie" },
+    { q: "„Doorman dezent und verbindlich; Besucherprozesse liefen.“", a: "Center Manager, Office-Quartier" },
+    { q: "„Event: Einlassfluss stabil, Backstage geschützt, Funkdisziplin top.“", a: "Veranstaltungsleitung, Messe" },
+    { q: „Nachtschicht störungsfrei; Hotspots konsequent angelaufen.“", a: "Bauüberwachung, Innenstadt" },
+    { q: "„Schichtberichte präzise; Abweichungen mit Maßnahmen dokumentiert.“", a: "Technischer Leiter, Campus" },
+    { q: "„Kommunikation schnell, höflich, erreichbar.“", a: "Hausverwaltung, Bestand" },
+    { q: "„Kosten planbar, Leistung konstant.“", a: "Betreiber, Logistikstandort" },
+    { q: "„Kurzfristiger Ersatz pünktlich und eingearbeitet.“", a: "Objektleitung, Rechenzentrum" },
+    { q: "„Auftreten diskret; Wirkung nach außen professionell.“", a: "Eigentümervertretung, Neubauprojekt" }
+  ];
+
+  // Build pages (3 per page)
+  track.innerHTML = "";
+  const makeCard = (t) => {
+    const art = document.createElement("article");
+    art.className = "ts-card";
+    art.innerHTML = `<p class="muted" style="font-style:italic">${t.q}</p><p style="color:#C79A3A;margin-top:8px;font-size:14px">— ${t.a}</p>`;
+    return art;
+  };
+  const makePage = (slice) => {
+    const page = document.createElement("div");
+    page.className = "ts-page";
+    slice.forEach(x => page.appendChild(makeCard(x)));
+    return page;
+  };
+
+  const pages = [];
+  for (let i = 0; i < TESTIMONIALS.length; i += 3) {
+    pages.push(makePage(TESTIMONIALS.slice(i, i + 3)));
+  }
+  pages.forEach(p => track.appendChild(p));
+  if (pages.length) track.appendChild(pages[0].cloneNode(true)); // loop clone
+
+  let idx = 0;
+  const total = pages.length;
+
+  const step = () => {
+    idx++;
+    track.style.transition = "transform 700ms ease-in-out";
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    if (idx === total) {
+      setTimeout(() => {
+        track.style.transition = "none";
+        track.style.transform = "translateX(0%)";
+        idx = 0;
+        void track.offsetWidth; // reflow
+        track.style.transition = "transform 700ms ease-in-out";
+      }, 740);
+    }
+  };
+
+  let timer = setInterval(step, 5200);
+  track.addEventListener("mouseenter", () => { clearInterval(timer); });
+  track.addEventListener("mouseleave", () => { timer = setInterval(step, 5200); });
 })();
