@@ -12,6 +12,7 @@
 
 html{ scroll-behavior:smooth; }
 body{ background:#0a0f1c; color:#fff; }
+[id]{ scroll-margin-top: 90px; } /* sauberes Anscrollen */
 section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
 #home{ padding-top:0; padding-bottom:0; }
 
@@ -124,7 +125,7 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
 .ts-page{
   min-width:100%;
   display:grid; gap:1.25rem;
-  grid-template-columns: 1fr; /* mobil 1 */
+  grid-template-columns: 1fr;
 }
 @media (min-width:768px){
   .ts-page{ grid-template-columns: repeat(3, minmax(0,1fr)); }
@@ -142,24 +143,14 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
   transform:none !important;
 }
 
-/* ===== Smooth Reveal =====
-   Greift nur, wenn JS "has-reveal" auf <html> gesetzt hat. */
-.has-reveal section.reveal{ 
-  opacity:0; 
-  transform: translateY(10px); 
+/* ===== Smooth Reveal (funktioniert für jedes Element mit .reveal) ===== */
+.has-reveal .reveal{
+  opacity:0;
+  transform: translateY(14px);
+  will-change: opacity, transform;
 }
-.has-reveal section.reveal.is-inview{ 
-  opacity:1; 
-  transform:none; 
-  transition: opacity .55s ease, transform .55s ease; 
+.has-reveal .reveal.is-inview{
+  opacity:1;
+  transform:none;
+  transition: opacity .6s ease, transform .6s ease;
 }
-@media (prefers-reduced-motion: reduce){
-  .has-reveal section.reveal,
-  .has-reveal section.reveal.is-inview{ opacity:1 !important; transform:none !important; transition:none !important; }
-}
-
-/* Kleines Motion-Utility */
-@keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
-.animate-slide-down{ animation: slideDown 180ms ease-out both; }
-
-footer{ padding-top:1.1rem; padding-bottom:1.1rem; color:#e7e7e7; }
