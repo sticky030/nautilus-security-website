@@ -1,4 +1,4 @@
-// © Nautilus Security – App JS (smooth reveal + stable testimonials)
+// © Nautilus Security – App JS (robuster Smooth-Reveal + stabiler Slider + Rest)
 
 // Jahr im Footer
 (() => {
@@ -33,7 +33,7 @@
   });
 })();
 
-// Scrollspy (aktiver Link)
+// Scrollspy
 (() => {
   const links = document.querySelectorAll(".nav-link");
   const ids = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
@@ -56,7 +56,7 @@
   sections.forEach(sec => io.observe(sec));
 })();
 
-// FAQ Akkordeon
+// FAQ
 (() => {
   const list = document.getElementById("faqList");
   if (!list) return;
@@ -128,70 +128,78 @@
   cta.addEventListener("click", () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }));
 })();
 
-/* ========= Smooth Reveal – robust ========= */
+/* ========= Smooth Reveal – robust, unabhängig vom Tag (section/div) ========= */
 (() => {
-  // Hinweis an CSS: Reveal aktiv
-  document.documentElement.classList.add('has-reveal');
+  const TARGET_IDS = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
 
-  // Klassen vorbereiten
-  const sections = Array.from(document.querySelectorAll("section"));
-  sections.forEach(s => s.classList.add("reveal"));
-
-  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const about = document.getElementById("about");
-
-  const observeSet = new Set();
-
-  function isInViewport(el, marginFactor = 0.10) {
-    const r = el.getBoundingClientRect();
-    const h = window.innerHeight || document.documentElement.clientHeight;
-    const m = h * marginFactor;
-    return r.top <= h - m && r.bottom >= m;
-  }
-
-  // IO – sehr früher Trigger, stabil
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add("is-inview");
-        io.unobserve(e.target);
-        observeSet.delete(e.target);
-      }
+  function collectTargets() {
+    const els = [];
+    TARGET_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) els.push(el);
     });
-  }, {
-    threshold: 0.06,              // früh
-    rootMargin: "0px 0px 30% 0px" // +30% unten
-  });
-
-  function observe(el){ io.observe(el); observeSet.add(el); }
-
-  // Standard: alle außer ABOUT sofort beobachten
-  sections.forEach(s => { if (s !== about) observe(s); });
-
-  // ABOUT erst nach erster Nutzeraktion
-  const activateAbout = () => { if (about){ observe(about); } cleanup(); };
-  function cleanup(){
-    window.removeEventListener("scroll", activateAbout);
-    window.removeEventListener("wheel", activateAbout);
-    window.removeEventListener("touchstart", activateAbout);
-    window.removeEventListener("keydown", activateAbout);
+    // Fallback: zusätzlich alles mit [data-reveal]
+    document.querySelectorAll("[data-reveal]").forEach(el => els.includes(el) || els.push(el));
+    return els;
   }
-  window.addEventListener("scroll", activateAbout, { once:true, passive:true });
-  window.addEventListener("wheel",  activateAbout, { once:true, passive:true });
-  window.addEventListener("touchstart", activateAbout, { once:true, passive:true });
-  window.addEventListener("keydown", activateAbout, { once:true });
 
-  // Sofortiger Initial-Check (falls bereits im Viewport)
-  function initialPass(){
-    sections.forEach(s => {
-      if (prefersReduced || isInViewport(s, 0.20)) { // 20% Puffer
-        s.classList.add("is-inview");
-        if (observeSet.has(s)){ io.unobserve(s); observeSet.delete(s); }
-      }
+  function initReveal() {
+    document.documentElement.classList.add("has-reveal");
+
+    const targets = collectTargets();
+    if (!targets.length) return;
+
+    // Klassen setzen
+    targets.forEach(t => t.classList.add("reveal"));
+
+    const about = document.getElementById("about");
+    const normals = targets.filter(t => t !== about);
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-inview");
+          io.unobserve(e.target);
+        }
+      });
+    }, {
+      threshold: 0.08,             // früh
+      rootMargin: "0px 0px 28% 0px" // +28% unten
+    });
+
+    normals.forEach(el => io.observe(el));
+
+    // „Über uns“ erst nach erster User-Aktion
+    const activateAbout = () => { about && io.observe(about); cleanup(); };
+    function cleanup(){
+      window.removeEventListener("scroll", activateAbout);
+      window.removeEventListener("wheel", activateAbout);
+      window.removeEventListener("touchstart", activateAbout);
+      window.removeEventListener("keydown", activateAbout);
+    }
+    window.addEventListener("scroll", activateAbout, { once:true, passive:true });
+    window.addEventListener("wheel",  activateAbout, { once:true, passive:true });
+    window.addEventListener("touchstart", activateAbout, { once:true, passive:true });
+    window.addEventListener("keydown", activateAbout, { once:true });
+
+    // Initial-Check (sofort smooth, falls schon im Viewport)
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    normals.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.92 && r.bottom > vh * 0.08) el.classList.add("is-inview");
     });
   }
-  initialPass();
-  window.addEventListener("resize", initialPass);
+
+  // DOM ready + Fallback kurz danach
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initReveal);
+  } else {
+    initReveal();
+  }
+  setTimeout(() => {
+    // falls Script sehr früh geladen wurde
+    if (!document.documentElement.classList.contains("has-reveal")) initReveal();
+  }, 120);
 })();
 
 // Form-Handler
