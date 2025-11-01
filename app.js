@@ -259,3 +259,41 @@ handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
     if (s !== groupSize){ groupSize = s; index = 0; show(); }
   });
 })();
+// AOS sauber initialisieren (nach DOM & Script-Load)
+document.addEventListener('DOMContentLoaded', function () {
+  if (window.AOS) {
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80,
+      mirror: false
+    });
+  }
+
+  // Fallback für .reveal, falls AOS nicht lädt
+  try {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return; // respektiere Nutzerpräferenz
+
+    const els = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && els.length) {
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        }
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(el => io.observe(el));
+    } else {
+      // einfacher Fallback ohne IO
+      els.forEach(el => el.classList.add('is-visible'));
+    }
+  } catch (err) { /* no-op */ }
+});
+
+// Reflow-Trigger (z. B. nach Bild-Load, Hash-Navigation, Menüaktionen)
+window.addEventListener('load', () => { if (window.AOS) AOS.refreshHard(); });
+window.addEventListener('hashchange', () => { if (window.AOS) AOS.refresh(); });
