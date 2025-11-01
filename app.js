@@ -25,7 +25,7 @@
       const id = btn.getAttribute("data-target");
       if (id) {
         const el = document.getElementById(id);
-        if (id === "about") el?.classList.add("is-inview"); // sicher sichtbar, wenn direkt angewählt
+        if (id === "about") el?.classList.add("is-inview"); // sichtbar, wenn direkt angewählt
         el?.scrollIntoView({ behavior: "smooth" });
         toggleMobile("close");
       }
@@ -143,6 +143,7 @@
     return;
   }
 
+  // Früh triggern: threshold sehr klein, rootMargin +25% unten
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -150,21 +151,19 @@
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.14, rootMargin: "-5% 0px -60% 0px" });
+  }, {
+    threshold: 0.04,
+    rootMargin: "0px 0px 25% 0px"
+  });
 
-  // Normale Sektionen direkt beobachten
+  // normale Sektionen sofort beobachten
   normals.forEach(el => io.observe(el));
 
-  // „Über uns“ erst beobachten, wenn der Nutzer wirklich scrollt
+  // „Über uns“ erst beobachten, wenn Nutzer wirklich scrollt
   if (about) {
-    const activateAbout = () => {
-      io.observe(about);
-      window.removeEventListener("scroll", activateAbout);
-      window.removeEventListener("wheel", activateAbout);
-      window.removeEventListener("touchstart", activateAbout);
-    };
+    const activateAbout = () => { io.observe(about); };
     window.addEventListener("scroll", activateAbout, { once:true, passive:true });
-    window.addEventListener("wheel", activateAbout, { once:true, passive:true });
+    window.addEventListener("wheel",  activateAbout, { once:true, passive:true });
     window.addEventListener("touchstart", activateAbout, { once:true, passive:true });
   }
 })();
