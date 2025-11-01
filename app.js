@@ -1,4 +1,4 @@
-// © Nautilus Security – App JS (robuster Smooth-Reveal + stabiler Slider + Rest)
+// © Nautilus Security – App JS (robustes Smooth-Reveal + Rest)
 
 // Jahr im Footer
 (() => {
@@ -25,7 +25,7 @@
       const id = btn.getAttribute("data-target");
       if (id) {
         const el = document.getElementById(id);
-        if (id === "about") el?.classList.add("is-inview"); // sichtbar, wenn direkt angewählt
+        if (id === "about") el?.classList.add("is-inview"); // sichtbar bei Direktklick
         el?.scrollIntoView({ behavior: "smooth" });
         toggleMobile("close");
       }
@@ -128,83 +128,53 @@
   cta.addEventListener("click", () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }));
 })();
 
-/* ========= Smooth Reveal – robust, unabhängig vom Tag (section/div) ========= */
+/* ========= Smooth Reveal (JS-gated via <html class="js">) ========= */
 (() => {
-  const TARGET_IDS = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
+  const sections = Array.from(document.querySelectorAll("section[id]"));
+  if (!sections.length) return;
 
-  function collectTargets() {
-    const els = [];
-    TARGET_IDS.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) els.push(el);
+  const about = document.getElementById("about");
+  const normals = sections.filter(s => s !== about);
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("is-inview");
+        io.unobserve(e.target);
+      }
     });
-    // Fallback: zusätzlich alles mit [data-reveal]
-    document.querySelectorAll("[data-reveal]").forEach(el => els.includes(el) || els.push(el));
-    return els;
+  }, {
+    threshold: 0.08,              // früh triggern
+    rootMargin: "0px 0px 28% 0px" // +28% unten
+  });
+
+  // alle außer #about sofort beobachten
+  normals.forEach(el => io.observe(el));
+
+  // #about erst nach erster User-Aktion aktivieren
+  const activateAbout = () => { about && io.observe(about); cleanup(); };
+  function cleanup(){
+    window.removeEventListener("scroll", activateAbout);
+    window.removeEventListener("wheel", activateAbout);
+    window.removeEventListener("touchstart", activateAbout);
+    window.removeEventListener("keydown", activateAbout);
   }
+  window.addEventListener("scroll", activateAbout, { once:true, passive:true });
+  window.addEventListener("wheel",  activateAbout, { once:true, passive:true });
+  window.addEventListener("touchstart", activateAbout, { once:true, passive:true });
+  window.addEventListener("keydown", activateAbout, { once:true });
 
-  function initReveal() {
-    document.documentElement.classList.add("has-reveal");
-
-    const targets = collectTargets();
-    if (!targets.length) return;
-
-    // Klassen setzen
-    targets.forEach(t => t.classList.add("reveal"));
-
-    const about = document.getElementById("about");
-    const normals = targets.filter(t => t !== about);
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add("is-inview");
-          io.unobserve(e.target);
-        }
-      });
-    }, {
-      threshold: 0.08,             // früh
-      rootMargin: "0px 0px 28% 0px" // +28% unten
-    });
-
-    normals.forEach(el => io.observe(el));
-
-    // „Über uns“ erst nach erster User-Aktion
-    const activateAbout = () => { about && io.observe(about); cleanup(); };
-    function cleanup(){
-      window.removeEventListener("scroll", activateAbout);
-      window.removeEventListener("wheel", activateAbout);
-      window.removeEventListener("touchstart", activateAbout);
-      window.removeEventListener("keydown", activateAbout);
-    }
-    window.addEventListener("scroll", activateAbout, { once:true, passive:true });
-    window.addEventListener("wheel",  activateAbout, { once:true, passive:true });
-    window.addEventListener("touchstart", activateAbout, { once:true, passive:true });
-    window.addEventListener("keydown", activateAbout, { once:true });
-
-    // Initial-Check (sofort smooth, falls schon im Viewport)
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    normals.forEach(el => {
-      const r = el.getBoundingClientRect();
-      if (r.top < vh * 0.92 && r.bottom > vh * 0.08) el.classList.add("is-inview");
-    });
-  }
-
-  // DOM ready + Fallback kurz danach
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initReveal);
-  } else {
-    initReveal();
-  }
-  setTimeout(() => {
-    // falls Script sehr früh geladen wurde
-    if (!document.documentElement.classList.contains("has-reveal")) initReveal();
-  }, 120);
+  // Initial-Check (falls schon im Viewport)
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  normals.forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < vh * 0.92 && r.bottom > vh * 0.08) el.classList.add("is-inview");
+  });
 })();
 
-// Form-Handler
+// Forms (unchanged scaffolding)
 (() => {
-  const FORMSPREE_CONTACT = ""; // https://formspree.io/f/xxxxxx
+  const FORMSPREE_CONTACT = "";
   const FORMSPREE_CAREER  = "";
 
   function handleForm(formId, endpoint, subject) {
@@ -249,69 +219,4 @@
 
   handleForm("contactForm", FORMSPREE_CONTACT, "Kontaktanfrage – Nautilus Security");
   handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
-})();
-
-// Testimonials – 3 pro Seite (mobil 1), ohne Glow, mit Goldrand
-(() => {
-  const track = document.getElementById("tsTrack");
-  if (!track) return;
-
-  const TESTIMONIALS = [
-    { q: "„Präsenz wie vereinbart, Berichte lückenlos. Übergaben funktionieren.“", a: "Objektleiter, Großbaustelle Berlin-City" },
-    { q: "„Start binnen weniger Tage, sauber organisiert und dokumentiert.“", a: "Projektleiter, Bauherr Berlin" },
-    { q: "„Ruhige Umsetzung, klare Eskalationen, kein Theater.“", a: "FM-Leitung, Gewerbepark" },
-    { q: "„Revierfahrten mit GPS und Fotobelegen – auditfähig.“", a: "Sicherheitsbeauftragter, Industrie" },
-    { q: "„Doorman dezent und verbindlich; Besucherprozesse liefen.“", a: "Center Manager, Office-Quartier" },
-    { q: "„Event: Einlassfluss stabil, Backstage geschützt, Funkdisziplin top.“", a: "Veranstaltungsleitung, Messe" },
-    { q: "„Nachtschicht störungsfrei; Hotspots konsequent angelaufen.“", a: "Bauüberwachung, Innenstadt" },
-    { q: "„Schichtberichte präzise; Abweichungen mit Maßnahmen dokumentiert.“", a: "Technischer Leiter, Campus" },
-    { q: "„Kommunikation schnell, höflich, erreichbar.“", a: "Hausverwaltung, Bestand" },
-    { q: "„Kosten planbar, Leistung konstant.“", a: "Betreiber, Logistikstandort" },
-    { q: "„Kurzfristiger Ersatz pünktlich und eingearbeitet.“", a: "Objektleitung, Rechenzentrum" },
-    { q: "„Auftreten diskret; Wirkung nach außen professionell.“", a: "Eigentümervertretung, Neubauprojekt" }
-  ];
-
-  track.innerHTML = "";
-  track.style.willChange = "transform";
-
-  const makeCard = (t) => {
-    const art = document.createElement("article");
-    art.className = "card ts-card";
-    art.innerHTML = `<p class="text-gray-200 italic">${t.q}</p><p class="text-yellow-500 mt-3 text-sm">— ${t.a}</p>`;
-    return art;
-  };
-  const makePage = (slice) => {
-    const page = document.createElement("div");
-    page.className = "ts-page";
-    slice.forEach(x => page.appendChild(makeCard(x)));
-    return page;
-  };
-
-  const pages = [];
-  for (let i = 0; i < TESTIMONIALS.length; i += 3) {
-    pages.push(makePage(TESTIMONIALS.slice(i, i + 3)));
-  }
-  pages.forEach(p => track.appendChild(p));
-  if (pages.length) track.appendChild(pages[0].cloneNode(true));
-
-  let idx = 0;
-  const total = pages.length;
-  const step = () => {
-    idx++;
-    track.style.transition = "transform 700ms ease-in-out";
-    track.style.transform = `translateX(-${idx * 100}%)`;
-    if (idx === total) {
-      setTimeout(() => {
-        track.style.transition = "none";
-        track.style.transform = "translateX(0%)";
-        idx = 0;
-        void track.offsetWidth;
-        track.style.transition = "transform 700ms ease-in-out";
-      }, 740);
-    }
-  };
-
-  let timer = setInterval(step, 5200);
-  track.addEventListener("mouseenter", () => { clearInterval(timer); });
-  track.addEventListener("mouseleave", () => { timer = setInterval(step, 5200); });
 })();
