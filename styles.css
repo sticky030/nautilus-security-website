@@ -1,6 +1,5 @@
 /* © Nautilus Security – Styles (Brand Navy/Gold, einheitliche Cards & Reveal) */
 
-/* ===== Brand ===== */
 :root{
   --navy:#0E2235;
   --ink:#233040;
@@ -11,13 +10,12 @@
   --space-md:3rem;
 }
 
-/* Grundfarben / Rhythmus */
 html{ scroll-behavior:smooth; }
 body{ background:#0a0f1c; color:#fff; }
 section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
 #home{ padding-top:0; padding-bottom:0; }
 
-/* Sticky Header (Glass) */
+/* Sticky Header */
 .site-header{
   position: sticky; top:0; z-index:1000;
   background: rgba(14,34,53,.72);
@@ -26,7 +24,7 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
   border-bottom: 1px solid rgba(255,255,255,.06);
 }
 
-/* Navigation – aktiver Link */
+/* Aktiver Link */
 #mainNav .nav-link{ position:relative; }
 #mainNav .nav-link.nav-active::after{
   content:""; position:absolute; left:0; bottom:-10px; height:2px; width:100%;
@@ -35,28 +33,30 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
   transform:scaleX(1);
 }
 
-/* Tailwind-Yellow → Brand-Gold */
+/* Brand mapping */
 .text-yellow-500, .hover\:text-yellow-500:hover { color: var(--gold) !important; }
 .bg-yellow-500 { background-color: var(--gold) !important; }
 .hover\:bg-yellow-400:hover { background-color: var(--gold-weak) !important; }
 .border-yellow-500 { border-color: var(--gold) !important; }
 .text-yellow-400 { color: var(--gold-weak) !important; }
 
-/* Focus-Ring (dezent Gold) */
+/* Focus */
 :focus-visible{
   outline:none;
   box-shadow:0 0 0 3px color-mix(in oklab, var(--gold) 35%, transparent);
   border-color:var(--gold) !important;
 }
 
-/* Hero – feiner Goldschimmer */
+/* Hero */
 .hero{
+  min-height: 92vh;           /* sorgt dafür, dass „Über uns“ nicht im ersten Viewport steht */
+  display:flex; align-items:center; justify-content:center;
   background:
     radial-gradient(120% 100% at 110% -10%, rgba(199,154,58,.12), transparent),
     var(--navy);
 }
 
-/* Premium-Buttons */
+/* Buttons */
 .btn--gold{
   background: transparent; color: var(--gold);
   border: 1px solid var(--gold);
@@ -78,7 +78,7 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
 #stickyCta.is-visible{ opacity:1; transform:translateY(0); pointer-events:auto; }
 @media (prefers-reduced-motion: reduce){ #stickyCta{ transition:none } }
 
-/* ===== Karten (einheitlich mit Gold-Glow) ===== */
+/* Karten */
 .card{
   position: relative;
   border: 1px solid var(--line);
@@ -106,7 +106,7 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
 }
 .icon-gold{ width:1.25rem;height:1.25rem;color:var(--gold); }
 
-/* ===== FAQ ===== */
+/* FAQ */
 .faq-item{
   background:#0f1627; border:1px solid #2a3350; border-radius:.75rem; overflow:hidden;
   transition: box-shadow 220ms ease, border-color 220ms ease, transform 180ms ease;
@@ -119,27 +119,38 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
 .faq-a{ max-height:0; overflow:hidden; opacity:0; padding:0 1.25rem; transition:max-height .35s ease, opacity .2s ease; }
 .faq-item.open .faq-a{ padding:.5rem 1.25rem 1rem 1.25rem; opacity:1; max-height:220px; }
 
-/* ===== Testimonials (3 pro Seite, mobil 1) ===== */
+/* Testimonials: 3 pro Seite (mobil 1) – KEIN Glow, aber permanenter Goldrand */
 #tsViewport{ width:100%; overflow:hidden; }
 #tsTrack{ display:flex; transition: transform 700ms ease-in-out; will-change: transform; }
 .ts-page{
   min-width:100%;
   display:grid; gap:1.25rem;
-  grid-template-columns: 1fr;    /* mobil: 1 */
+  grid-template-columns: 1fr;
 }
 @media (min-width:768px){
   .ts-page{ grid-template-columns: repeat(3, minmax(0,1fr)); }
 }
-.ts-card{ padding:1rem 1.25rem; }
+.ts-card{
+  padding:1rem 1.25rem;
+  border:1px solid rgba(199,154,58,.50) !important;   /* feiner Rand dauerhaft */
+  box-shadow:none !important;                          /* kein Glow */
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+  transform:none !important;
+}
+.ts-card:hover, .ts-card:focus-within{
+  border-color: rgba(199,154,58,.70) !important;       /* nur leichte Betonung */
+  box-shadow:none !important;
+  transform:none !important;
+}
 
-/* ===== Einheitlicher Scroll-Reveal (ohne AOS) ===== */
+/* Scroll-Reveal */
 .reveal{ opacity:0; transform:translateY(14px); }
 .reveal.is-inview{ opacity:1; transform:none; transition: opacity .6s ease, transform .6s ease; }
 @media (prefers-reduced-motion: reduce){
   .reveal, .reveal.is-inview{ opacity:1 !important; transform:none !important; transition:none !important; }
 }
 
-/* Kleinzeug */
+/* Kleines Motion-Utility */
 @keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
 .animate-slide-down{ animation: slideDown 180ms ease-out both; }
 
