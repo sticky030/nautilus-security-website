@@ -1,209 +1,58 @@
 <!doctype html>
-<html lang="de" class="no-js">
+<html lang="de">
 <head>
-  <!-- JS-Gate: verhindert Aufblitzen vor Aktivierung des Reveals -->
-  <script>document.documentElement.classList.replace('no-js','js');</script>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0E2235">
   <title>Nautilus Security · Sicherheit mit Struktur.</title>
-
-  <style>
-    :root{
-      --navy:#0E2235; --ink:#233040; --bg:#0a0f1c;
-      --gold:#C79A3A; --gold-weak:#d8b766; --line:rgba(255,255,255,.08);
-      --radius:14px; --maxw:1100px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0; font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:var(--bg); color:#fff}
-    img{display:block; max-width:100%; height:auto}
-    a,button{cursor:pointer}
-
-    /* Helpers / layout */
-    .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
-    .row{display:flex}.col{display:flex;flex-direction:column}
-    .center{justify-content:center; align-items:center; text-align:center}
-    .between{justify-content:space-between}
-    .gap-8{gap:8px}.gap-10{gap:10px}.gap-12{gap:12px}.gap-16{gap:16px}.gap-24{gap:24px}
-    .py-12{padding:12px 0}.py-48{padding:48px 0}.p-16{padding:16px}.p-20{padding:20px}
-    .mb-6{margin-bottom:6px}.mb-8{margin-bottom:8px}.mb-12{margin-bottom:12px}.mb-16{margin-bottom:16px}.mb-20{margin-bottom:20px}
-    .text-center{text-align:center}
-    .span-2{grid-column:1 / -1}
-    [id]{scroll-margin-top:90px}
-
-    /* Grid */
-    .grid{display:grid}
-    .grid-2{grid-template-columns:1fr}
-    .grid-3{grid-template-columns:1fr}
-    @media (min-width:860px){
-      .grid-2{grid-template-columns:repeat(2,1fr)}
-      .grid-3{grid-template-columns:repeat(3,1fr)}
-      .hide-md-down{display:flex !important}
-      .hide-md-up{display:none !important}
-    }
-
-    /* Header */
-    .site-header{
-      position:sticky; top:0; z-index:1000;
-      background: rgba(14,34,53,.72);
-      backdrop-filter: saturate(1.15) blur(8px);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .brand{color:#fff; text-decoration:none}
-    .brand-name{font-weight:700}
-    .nav button{background:none;border:0;color:#eaeaea;font-weight:600}
-    .nav button:hover{color:var(--gold)}
-    .nav-link{position:relative}
-    .nav-link.nav-active::after{
-      content:""; position:absolute; left:0; bottom:-8px; height:2px; width:100%;
-      background:linear-gradient(90deg,var(--gold),#e5c778); border-radius:2px;
-    }
-    .burger{background:none;border:0;color:#fff;font-size:26px}
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999}
-    .drawer{
-      position:fixed; top:0; right:0; height:100dvh; width:min(76%,360px);
-      background:var(--navy); padding:20px; z-index:1001;
-      box-shadow:-12px 0 36px rgba(0,0,0,.35);
-    }
-    .hidden{display:none}
-
-    /* Typo */
-    .h1{font-size:clamp(28px,4.5vw,48px); line-height:1.1; font-weight:800}
-    .h2{font-size:clamp(22px,3vw,30px); font-weight:800}
-    .h3{font-size:clamp(18px,2.2vw,22px); font-weight:700}
-    .lead{color:#d5dbe7}
-
-    /* Hero */
-    .hero{
-      min-height:92vh; display:flex; align-items:center; justify-content:center;
-      background:
-        radial-gradient(120% 100% at 110% -10%, rgba(199,154,58,.12), transparent),
-        var(--navy);
-    }
-
-    /* Buttons */
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 16px; border-radius:10px; font-weight:700;
-      border:1px solid transparent; gap:10px;
-      transition: transform .2s ease, box-shadow .25s ease, background .2s ease, color .2s ease, border-color .2s ease;
-    }
-    .btn--gold{ color:var(--navy); background:var(--gold); border-color:var(--gold) }
-    .btn--gold:hover{ transform:translateY(-1px); box-shadow:0 12px 28px rgba(199,154,58,.27) }
-    .btn--ghost{ color:#eaeaea; background:transparent; border-color:var(--gold) }
-    .btn--ghost:hover{ color:var(--navy); background:var(--gold) }
-
-    /* Sticky CTA */
-    .sticky-cta{
-      position:fixed; bottom:20px; right:20px; z-index:1000;
-      opacity:0; transform:translateY(8px); pointer-events:none;
-      transition:opacity .25s ease, transform .25s ease;
-    }
-    .sticky-cta.is-visible{ opacity:1; transform:translateY(0); pointer-events:auto }
-
-    /* Cards */
-    .card{
-      position:relative; border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
-      border-radius:var(--radius);
-      box-shadow:0 6px 24px rgba(0,0,0,.08);
-      transition: transform .20s ease, box-shadow .25s ease, border-color .20s ease, outline .2s ease;
-    }
-    .card:hover, .card:focus-within{
-      transform: translateY(-2px);
-      border-color: rgba(199,154,58,.35);
-      box-shadow: 0 10px 28px rgba(0,0,0,.12), 0 0 28px 6px rgba(199,154,58,.22);
-      outline: none;
-    }
-    .icon{
-      width:40px;height:40px;display:flex;align-items:center;justify-content:center;
-      border-radius:10px;border:1px solid rgba(199,154,58,.35);
-      background:linear-gradient(180deg, rgba(199,154,58,.10), rgba(199,154,58,.02));
-      color:var(--gold); font-weight:700;
-    }
-    .muted{color:#d1d5db}
-
-    /* FAQ */
-    .faq-item{ background:#0f1627; border:1px solid #2a3350; border-radius:12px; overflow:hidden; transition: box-shadow .22s ease, border-color .22s ease, transform .18s ease }
-    .faq-item:hover{ border-color: rgba(255,215,0,.45); box-shadow: 0 8px 18px rgba(255,215,0,.08), inset 0 0 0 1px rgba(255,215,0,.15); transform: translateY(-1px) }
-    .faq-item.open{ border-color: rgba(255,215,0,.55); box-shadow: 0 10px 22px rgba(255,215,0,.12), inset 0 0 0 1px rgba(255,215,0,.20) }
-    .faq-q{ width:100%; text-align:left; background:none; border:0; color:#fff; font-weight:700; padding:16px 18px; position:relative }
-    .faq-q::after{ content:"▼"; position:absolute; right:14px; top:50%; transform:translateY(-50%) rotate(0); transition:transform .28s ease; opacity:.9 }
-    .faq-item.open .faq-q::after{ transform:translateY(-50%) rotate(180deg) }
-    .faq-a{ max-height:0; overflow:hidden; opacity:0; padding:0 18px; transition:max-height .35s ease, opacity .2s ease }
-    .faq-item.open .faq-a{ padding:8px 18px 16px 18px; opacity:1; max-height:220px }
-
-    /* Testimonials */
-    #tsViewport{ width:100%; overflow:hidden }
-    #tsTrack{ display:flex; transition: transform 700ms ease-in-out; will-change: transform }
-    .ts-page{
-      min-width:100%; display:grid; gap:16px; grid-template-columns:1fr;
-    }
-    @media (min-width:860px){ .ts-page{ grid-template-columns:repeat(3,minmax(0,1fr)) } }
-    .ts-card{
-      padding:16px 18px; border:1px solid rgba(199,154,58,.50) !important;
-      box-shadow:none !important; background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
-      transform:none !important;
-    }
-    .ts-card:hover, .ts-card:focus-within{ border-color: rgba(199,154,58,.70) !important }
-
-    /* Footer */
-    .footer{border-top:1px solid rgba(255,255,255,.1); color:#e7e7e7}
-
-    /* Smooth Reveal – erst sichtbar, wenn .is-inview gesetzt ist */
-    .js section[id]:not(#home){ opacity:0; transform:translateY(14px); will-change:opacity,transform }
-    .js section[id].is-inview{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease }
-
-    /* Noscript Fallback */
-    noscript .noscript-hide{ display:none }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0E2235">
+  <link rel="preload" href="logo-gold-transparent.png" as="image">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <!-- Header -->
   <header class="site-header">
     <div class="container row between center py-12">
-      <a href="#home" class="brand row center gap-10 nav-link" data-target="home" aria-label="Startseite">
+      <a href="#home" class="brand row center gap-10">
         <img src="logo-gold-transparent.png" alt="Nautilus Security" width="36" height="36">
         <strong class="brand-name">Nautilus Security</strong>
       </a>
 
-      <nav id="mainNav" class="nav hide-md-down row center gap-24">
-        <button class="nav-link" data-target="about"       type="button">Über uns</button>
-        <button class="nav-link" data-target="services"    type="button">Unsere Leistung</button>
-        <button class="nav-link" data-target="why"         type="button">Warum wir</button>
-        <button class="nav-link" data-target="values"      type="button">Werte</button>
-        <button class="nav-link" data-target="team"        type="button">Team</button>
-        <button class="nav-link" data-target="jobs"        type="button">Jobs</button>
-        <button class="nav-link" data-target="faq"         type="button">FAQ</button>
-        <button class="nav-link" data-target="testimonials"type="button">Kunden</button>
-        <button class="btn btn--gold cta-btn" data-target="contact" type="button">Kontakt</button>
+      <nav class="nav hide-md-down row center gap-24">
+        <a href="#about"        class="nav-link">Über uns</a>
+        <a href="#services"     class="nav-link">Unsere Leistung</a>
+        <a href="#why"          class="nav-link">Warum wir</a>
+        <a href="#values"       class="nav-link">Werte</a>
+        <a href="#team"         class="nav-link">Team</a>
+        <a href="#jobs"         class="nav-link">Jobs</a>
+        <a href="#faq"          class="nav-link">FAQ</a>
+        <a href="#testimonials" class="nav-link">Kunden</a>
+        <a href="#contact"      class="btn btn--gold">Kontakt</a>
       </nav>
 
       <button id="burger" class="burger hide-md-up" aria-label="Menü öffnen">☰</button>
     </div>
 
     <!-- Mobile -->
-    <div id="mobileOverlay" class="overlay hidden"></div>
+    <div id="mobileOverlay" class="overlay hidden" aria-hidden="true"></div>
     <aside id="mobileMenu" class="drawer hidden" aria-label="Mobilmenü">
       <div class="row between center mb-16">
         <div class="row center gap-10">
-          <img src="logo-gold-transparent.png" alt="Nautilus Security" width="28" height="28">
+          <img src="logo-gold-transparent.png" alt="" width="28" height="28">
           <strong>Nautilus Security</strong>
         </div>
-        <button class="mobile-link" data-target="home" aria-label="Menü schließen">×</button>
+        <button id="closeDrawer" aria-label="Menü schließen">×</button>
       </div>
       <nav class="col gap-12">
-        <button class="mobile-link" data-target="about"        type="button">Über uns</button>
-        <button class="mobile-link" data-target="services"     type="button">Unsere Leistung</button>
-        <button class="mobile-link" data-target="why"          type="button">Warum wir</button>
-        <button class="mobile-link" data-target="values"       type="button">Werte</button>
-        <button class="mobile-link" data-target="team"         type="button">Team</button>
-        <button class="mobile-link" data-target="jobs"         type="button">Jobs</button>
-        <button class="mobile-link" data-target="faq"          type="button">FAQ</button>
-        <button class="mobile-link" data-target="testimonials" type="button">Kunden</button>
-        <button class="btn btn--gold mobile-link" data-target="contact" type="button">Kontakt</button>
+        <a href="#about"        class="mobile-link">Über uns</a>
+        <a href="#services"     class="mobile-link">Unsere Leistung</a>
+        <a href="#why"          class="mobile-link">Warum wir</a>
+        <a href="#values"       class="mobile-link">Werte</a>
+        <a href="#team"         class="mobile-link">Team</a>
+        <a href="#jobs"         class="mobile-link">Jobs</a>
+        <a href="#faq"          class="mobile-link">FAQ</a>
+        <a href="#testimonials" class="mobile-link">Kunden</a>
+        <a href="#contact"      class="btn btn--gold">Kontakt</a>
       </nav>
     </aside>
   </header>
@@ -215,8 +64,8 @@
       <h1 class="h1 mb-8">Sicherheit mit Struktur.</h1>
       <p class="lead mb-20">Nachtwache · 24/7 Objektschutz · Events — dokumentiert, verbindlich, auditfähig.</p>
       <div class="row center gap-12">
-        <button class="btn btn--gold cta-btn" data-target="contact" type="button">Kontakt aufnehmen</button>
-        <button class="btn btn--ghost nav-link" data-target="services" type="button">Leistungen ansehen</button>
+        <a href="#contact"  class="btn btn--gold">Kontakt aufnehmen</a>
+        <a href="#services" class="btn btn--ghost">Leistungen ansehen</a>
       </div>
     </div>
   </section>
@@ -227,11 +76,17 @@
       <div class="grid grid-2 gap-16">
         <article class="card p-20">
           <h2 class="h2 mb-8">Über uns</h2>
-          <p class="muted">Berlin-basiert. Fokus Nacht & 24/7-Objekte. Klare Prozesse, dokumentierte Übergaben, feste Ansprechpartner. Startfähig ab 01.01.2026 (nach §34a-Erlaubnis).</p>
+          <p class="muted">
+            Berlin-basiert. Fokus Nacht & 24/7-Objekte. Klare Prozesse, dokumentierte Übergaben,
+            feste Ansprechpartner. Startfähig ab 01.01.2026 (nach §34a-Erlaubnis).
+          </p>
         </article>
         <article class="card p-20">
           <h3 class="h3 mb-8">Kennzahlen</h3>
-          <p class="muted">Schichtberichte, KPI-Kurzlagen, optional GPS-Nachweise. Servicefenster werktags 08–18 Uhr, Einsatzleitung erreichbar, Eskalationswege definiert.</p>
+          <p class="muted">
+            Schichtberichte, KPI-Kurzlagen, optional GPS-Nachweise. Servicefenster werktags 08–18 Uhr,
+            Einsatzleitung erreichbar, Eskalationswege definiert.
+          </p>
         </article>
       </div>
     </div>
@@ -384,263 +239,15 @@
   </section>
 
   <!-- Sticky CTA -->
-  <button id="stickyCta" class="btn btn--gold sticky-cta">Kontakt</button>
+  <a id="stickyCta" class="btn btn--gold sticky-cta" href="#contact">Kontakt</a>
 
   <footer class="footer">
     <div class="container row between center py-12">
       <p>© <span id="year"></span> Nautilus Security</p>
-      <p><a class="nav-link" data-target="home">Nach oben</a></p>
+      <p><a href="#home">Nach oben</a></p>
     </div>
   </footer>
 
-  <script>
-    // Jahr im Footer
-    (function(){ var y=document.getElementById("year"); if(y) y.textContent=new Date().getFullYear(); })();
-
-    // Mobile-Menü & Smooth-Scroll
-    (function(){
-      var burger=document.getElementById("burger");
-      var mobileMenu=document.getElementById("mobileMenu");
-      var mobileOverlay=document.getElementById("mobileOverlay");
-      function toggle(open){
-        if(!mobileMenu||!mobileOverlay) return;
-        mobileMenu.classList.toggle("hidden", !open);
-        mobileOverlay.classList.toggle("hidden", !open);
-      }
-      burger && burger.addEventListener("click", function(){ toggle(true); });
-      mobileOverlay && mobileOverlay.addEventListener("click", function(){ toggle(false); });
-
-      document.querySelectorAll(".mobile-link, .nav-link, .cta-btn").forEach(function(btn){
-        btn.addEventListener("click", function(){
-          var id = btn.getAttribute("data-target");
-          if(id){
-            var el = document.getElementById(id);
-            if(id==="about") el && el.classList.add("is-inview"); // sichtbar, wenn direkt angewählt
-            el && el.scrollIntoView({behavior:"smooth"});
-            toggle(false);
-          }
-        });
-      });
-    })();
-
-    // Scrollspy – aktiver Link
-    (function(){
-      var links=document.querySelectorAll(".nav-link");
-      var ids=["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
-      var sections=ids.map(function(id){return document.getElementById(id)}).filter(Boolean);
-      if(!sections.length) return;
-
-      var io=new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          if(!entry.isIntersecting) return;
-          var id=entry.target.id;
-          links.forEach(function(l){
-            var active = l.getAttribute("data-target")===id;
-            l.classList.toggle("nav-active", active);
-            l.classList.toggle("text-yellow-500", active);
-            l.classList.toggle("font-bold", active);
-          });
-        });
-      },{rootMargin:"-42% 0px -52% 0px", threshold:0.01});
-
-      sections.forEach(function(sec){ io.observe(sec); });
-    })();
-
-    // FAQ Akkordeon
-    (function(){
-      var list=document.getElementById("faqList");
-      if(!list) return;
-      list.querySelectorAll(".faq-item").forEach(function(item){
-        var q=item.querySelector(".faq-q");
-        var a=item.querySelector(".faq-a");
-        if(!q||!a) return;
-        a.style.overflow="hidden"; a.style.maxHeight="0px"; a.style.opacity="0";
-        a.style.transition="max-height 380ms cubic-bezier(.25,.8,.25,1), opacity 260ms ease";
-        q.setAttribute("aria-expanded","false"); a.setAttribute("aria-hidden","true");
-        q.addEventListener("click", function(){
-          var open=item.classList.toggle("open");
-          if(open){
-            a.style.maxHeight=a.scrollHeight+"px"; a.style.opacity="1";
-            q.setAttribute("aria-expanded","true"); a.setAttribute("aria-hidden","false");
-            a.addEventListener("transitionend", function onEnd(ev){
-              if(ev.propertyName!=="max-height") return;
-              a.style.maxHeight="none"; a.removeEventListener("transitionend", onEnd);
-            });
-          } else {
-            var h=a.scrollHeight; a.style.maxHeight=h+"px";
-            requestAnimationFrame(function(){
-              a.style.maxHeight="0px"; a.style.opacity="0";
-              q.setAttribute("aria-expanded","false"); a.setAttribute("aria-hidden","true");
-            });
-          }
-        });
-      });
-    })();
-
-    // Sticky CTA
-    (function(){
-      var cta=document.getElementById("stickyCta");
-      var hero=document.getElementById("home");
-      if(!cta) return;
-      function thresh(){ return hero ? hero.offsetHeight*0.4 : window.innerHeight*0.4; }
-      var bottomGuard=320, ticking=false;
-      function onScroll(){
-        if(ticking) return; ticking=true;
-        requestAnimationFrame(function(){
-          var y=window.scrollY||window.pageYOffset;
-          var docH=document.documentElement.scrollHeight;
-          var vpH=window.innerHeight;
-          var fromBottom=docH-(y+vpH);
-          var visible = y>thresh() && fromBottom>bottomGuard;
-          cta.classList.toggle("is-visible", visible);
-          ticking=false;
-        });
-      }
-      window.addEventListener("scroll", onScroll, {passive:true});
-      window.addEventListener("resize", onScroll);
-      onScroll();
-      cta.addEventListener("click", function(){
-        var c=document.getElementById("contact"); c && c.scrollIntoView({behavior:"smooth"});
-      });
-    })();
-
-    // Smooth Reveal
-    (function(){
-      var sections=[].slice.call(document.querySelectorAll("section[id]"));
-      if(!sections.length) return;
-      var about=document.getElementById("about");
-      var normals=sections.filter(function(s){ return s!==about; });
-
-      var io=new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if(e.isIntersecting){
-            e.target.classList.add("is-inview");
-            io.unobserve(e.target);
-          }
-        });
-      },{threshold:0.08, rootMargin:"0px 0px 28% 0px"});
-
-      normals.forEach(function(el){ io.observe(el); });
-
-      function activateAbout(){
-        if(about) io.observe(about);
-        window.removeEventListener("scroll", activateAbout);
-        window.removeEventListener("wheel", activateAbout);
-        window.removeEventListener("touchstart", activateAbout);
-        window.removeEventListener("keydown", activateAbout);
-      }
-      window.addEventListener("scroll", activateAbout, {once:true, passive:true});
-      window.addEventListener("wheel", activateAbout, {once:true, passive:true});
-      window.addEventListener("touchstart", activateAbout, {once:true, passive:true});
-      window.addEventListener("keydown", activateAbout, {once:true});
-
-      // Initial-Check (Reload mid-page)
-      var vh=window.innerHeight||document.documentElement.clientHeight;
-      normals.forEach(function(el){
-        var r=el.getBoundingClientRect();
-        if(r.top<vh*0.92 && r.bottom>vh*0.08) el.classList.add("is-inview");
-      });
-    })();
-
-    // Forms (mailto-Fallback; Endpoints optional)
-    (function(){
-      var FORMSPREE_CONTACT=""; // z.B. https://formspree.io/f/xxxxxx
-      var FORMSPREE_CAREER ="";
-      function handleForm(formId, endpoint, subject){
-        var form=document.getElementById(formId);
-        var status=document.getElementById(formId==="contactForm"?"contactStatus":"careerStatus");
-        if(!form) return;
-        form.addEventListener("submit", async function(e){
-          e.preventDefault();
-          if(status){ status.textContent=""; status.style.color=""; }
-          var requireds=form.querySelectorAll("[required]");
-          for(var i=0;i<requireds.length;i++){
-            var el=requireds[i];
-            if(!el.value || !String(el.value).trim()){
-              if(status){ status.textContent="Bitte Pflichtfelder ausfüllen."; status.style.color="#f87171"; }
-              return;
-            }
-          }
-          if(endpoint){
-            try{
-              var fd=new FormData(form);
-              var res=await fetch(endpoint,{method:"POST",body:fd,headers:{"Accept":"application/json"}});
-              if(res.ok){ if(status){ status.textContent="Vielen Dank. Wir melden uns werktags zeitnah."; status.style.color="#C79A3A"; } form.reset(); return; }
-              throw new Error("Fehler");
-            }catch(_){
-              if(status){ status.textContent="Übermittlung fehlgeschlagen. Bitte per E-Mail senden."; status.style.color="#f87171"; }
-            }
-          }
-          // mailto fallback
-          var fd2=new FormData(form), kv=[];
-          fd2.forEach(function(v,k){ if(String(v).trim()) kv.push(k+": "+v); });
-          var body=encodeURIComponent(kv.join("\n"));
-          location.href="mailto:kontakt@nautilus-security.de?subject="+encodeURIComponent(subject)+"&body="+body;
-        });
-      }
-      handleForm("contactForm", FORMSPREE_CONTACT, "Kontaktanfrage – Nautilus Security");
-      handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
-    })();
-
-    // Testimonials – 3 pro Seite (mobil 1), Endlos-Slider
-    (function(){
-      var track=document.getElementById("tsTrack");
-      if(!track) return;
-      var TESTIMONIALS=[
-        {q:'"Präsenz wie vereinbart, Berichte lückenlos. Übergaben funktionieren."',a:"Objektleiter, Großbaustelle Berlin-City"},
-        {q:'"Start binnen weniger Tage, sauber organisiert und dokumentiert."',a:"Projektleiter, Bauherr Berlin"},
-        {q:'"Ruhige Umsetzung, klare Eskalationen, kein Theater."',a:"FM-Leitung, Gewerbepark"},
-        {q:'"Revierfahrten mit GPS und Fotobelegen – auditfähig."',a:"Sicherheitsbeauftragter, Industrie"},
-        {q:'"Doorman dezent und verbindlich; Besucherprozesse liefen."',a:"Center Manager, Office-Quartier"},
-        {q:'"Event: Einlassfluss stabil, Backstage geschützt, Funkdisziplin top."',a:"Veranstaltungsleitung, Messe"},
-        {q:'"Nachtschicht störungsfrei; Hotspots konsequent angelaufen."',a:"Bauüberwachung, Innenstadt"},
-        {q:'"Schichtberichte präzise; Abweichungen mit Maßnahmen dokumentiert."',a:"Technischer Leiter, Campus"},
-        {q:'"Kommunikation schnell, höflich, erreichbar."',a:"Hausverwaltung, Bestand"},
-        {q:'"Kosten planbar, Leistung konstant."',a:"Betreiber, Logistikstandort"},
-        {q:'"Kurzfristiger Ersatz pünktlich und eingearbeitet."',a:"Objektleitung, Rechenzentrum"},
-        {q:'"Auftreten diskret; Wirkung nach außen professionell."',a:"Eigentümervertretung, Neubauprojekt"}
-      ];
-      track.innerHTML="";
-      function card(t){
-        var art=document.createElement("article");
-        art.className="ts-card";
-        art.innerHTML='<p class="muted" style="font-style:italic">'+t.q+'</p><p style="color:#C79A3A;margin-top:8px;font-size:14px">— '+t.a+"</p>";
-        return art;
-      }
-      function page(slice){
-        var p=document.createElement("div"); p.className="ts-page";
-        slice.forEach(function(x){ p.appendChild(card(x)); });
-        return p;
-      }
-      var pages=[], i=0;
-      for(i=0;i<TESTIMONIALS.length;i+=3){ pages.push(page(TESTIMONIALS.slice(i,i+3))); }
-      pages.forEach(function(p){ track.appendChild(p); });
-      if(pages.length) track.appendChild(pages[0].cloneNode(true));
-      var idx=0, total=pages.length;
-      function step(){
-        idx++; track.style.transition="transform 700ms ease-in-out";
-        track.style.transform="translateX(-"+(idx*100)+"%)";
-        if(idx===total){
-          setTimeout(function(){
-            track.style.transition="none"; track.style.transform="translateX(0%)"; idx=0; void track.offsetWidth;
-            track.style.transition="transform 700ms ease-in-out";
-          },740);
-        }
-      }
-      var timer=setInterval(step,5200);
-      track.addEventListener("mouseenter", function(){ clearInterval(timer); });
-      track.addEventListener("mouseleave", function(){ timer=setInterval(step,5200); });
-    })();
-  </script>
-
-  <noscript>
-    <style>
-      /* Fallback: alles sichtbar ohne JS */
-      section[id]{opacity:1 !important; transform:none !important}
-    </style>
-    <div class="container py-12">
-      <p>Hinweis: JavaScript ist deaktiviert. Die Seite funktioniert, aber ohne Animationen.</p>
-    </div>
-  </noscript>
+  <script src="app.js" defer></script>
 </body>
 </html>
