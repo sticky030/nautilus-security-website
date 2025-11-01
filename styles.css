@@ -107,3 +107,76 @@ footer{ padding-top:1.1rem; padding-bottom:1.1rem; color:#e7e7e7; }
   box-shadow:0 10px 15px -3px rgb(0 0 0 / .25);
 }
 .ts-card p{ line-height:1.5; }
+:root{
+  --navy:#0E2235; --gold:#C79A3A; --ink:#233040;
+  --line:rgba(255,255,255,.08); --muted:#6b7785;
+}
+
+/* Sticky Header (Glass) – wirkt erst, wenn <header> die Klasse .site-header hat */
+.site-header{
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(14,34,53,.72);
+  -webkit-backdrop-filter: saturate(1.15) blur(8px);
+  backdrop-filter: saturate(1.15) blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+/* Navi-Underline (Gold) – wirkt auf Container mit Klasse .nav */
+.nav a{
+  position: relative; padding-bottom: .4rem;
+}
+.nav a::after{
+  content:""; position:absolute; left:0; bottom:0; height:2px; width:100%;
+  background: linear-gradient(90deg,var(--gold),#e5c778);
+  transform: scaleX(0); transform-origin:left;
+  transition: transform .25s ease;
+}
+.nav a:hover::after, .nav a[aria-current="page"]::after{ transform: scaleX(1); }
+
+/* Hero feiner Gold-Schimmer – wirkt mit Klasse .hero */
+.hero{
+  background:
+    radial-gradient(120% 100% at 110% -10%, rgba(199,154,58,.12), transparent),
+    var(--navy);
+}
+
+/* Premium-Buttons – Klasse zusätzlich vergeben: .btn--gold */
+.btn--gold{
+  background: transparent; color: var(--gold);
+  border: 1px solid var(--gold);
+  transition: color .2s ease, background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.btn--gold:hover{
+  background: var(--gold); color: var(--navy);
+  box-shadow: 0 8px 24px rgba(199,154,58,.25);
+  transform: translateY(-1px);
+}
+
+/* Cards – zusätzlich Klasse .card vergeben */
+.card{
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.08);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.12);
+  border-color: rgba(255,255,255,.12);
+}
+
+/* Scroll-Reveal */
+.reveal{ opacity:0; transform:translateY(12px); }
+.reveal.is-inview{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease; }
+@media (prefers-reduced-motion: reduce){
+  .reveal, .reveal.is-inview{ opacity:1; transform:none; transition:none; }
+}
+
+/* Sanftes Scrollen & Anker-Abstand */
+html{ scroll-behavior:smooth; }
+:target{ scroll-margin-top:84px; }
+
+/* Testimonials-Grid – Container mit Klasse .testimonials zeigt 3 Spalten (mobil 1) */
+.testimonials{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:1.25rem; }
+@media (max-width:900px){ .testimonials{ grid-template-columns:1fr; } }
