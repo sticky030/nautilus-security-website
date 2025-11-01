@@ -1,112 +1,91 @@
-/* Nautilus Security – Navy/Gold, ohne Animationsexperimente */
+/* © Nautilus Security – Styles (Brand Navy/Gold, einheitliche Cards & Reveal) */
+
 :root{
   --navy:#0E2235;
   --ink:#233040;
-  --bg:#0a0f1c;
   --gold:#C79A3A;
+  --gold-weak:#d8b766;
   --line:rgba(255,255,255,.08);
-  --radius:14px;
+  --space-lg:4.5rem;
+  --space-md:3rem;
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0; font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; background:var(--bg); color:#fff}
-img{display:block; max-width:100%; height:auto}
-a,button{cursor:pointer; color:inherit; text-decoration:none}
+html{ scroll-behavior:smooth; }
+body{ background:#0a0f1c; color:#fff; }
+section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
+#home{ padding-top:0; padding-bottom:0; }
 
-/* Layout utilities */
-.container{max-width:1100px; margin:0 auto; padding:0 20px}
-.row{display:flex}
-.col{display:flex; flex-direction:column}
-.center{justify-content:center; align-items:center; text-align:center}
-.between{justify-content:space-between}
-.gap-10{gap:10px} .gap-12{gap:12px} .gap-16{gap:16px} .gap-24{gap:24px}
-.py-12{padding:12px 0} .py-48{padding:48px 0}
-.mb-6{margin-bottom:6px} .mb-8{margin-bottom:8px} .mb-12{margin-bottom:12px} .mb-16{margin-bottom:16px} .mb-20{margin-bottom:20px}
-.p-16{padding:16px} .p-20{padding:20px}
-.text-center{text-align:center}
-.span-2{grid-column:1 / -1}
-[id]{ scroll-margin-top: 90px }
-
-/* Grid */
-.grid{display:grid}
-.grid-2{grid-template-columns:1fr}
-.grid-3{grid-template-columns:1fr}
-@media (min-width: 860px){
-  .grid-2{grid-template-columns:repeat(2,1fr)}
-  .grid-3{grid-template-columns:repeat(3,1fr)}
-  .hide-md-down{display:flex !important}
-  .hide-md-up{display:none !important}
-}
-
-/* Header */
+/* Sticky Header */
 .site-header{
-  position:sticky; top:0; z-index:1000;
+  position: sticky; top:0; z-index:1000;
   background: rgba(14,34,53,.72);
+  -webkit-backdrop-filter: saturate(1.15) blur(8px);
   backdrop-filter: saturate(1.15) blur(8px);
-  border-bottom:1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
 }
-.brand{display:inline-flex; align-items:center; color:#fff}
-.brand-name{font-weight:700}
 
-/* Nav */
-.nav .nav-link{font-weight:600; color:#eaeaea; position:relative}
-.nav .nav-link:hover{color:var(--gold)}
-.nav .nav-link::after{
-  content:""; position:absolute; left:0; bottom:-8px; height:2px; width:0;
-  background: linear-gradient(90deg,var(--gold),#e5c778); border-radius:2px; transition:width .2s ease;
+/* Aktiver Link */
+#mainNav .nav-link{ position:relative; }
+#mainNav .nav-link.nav-active::after{
+  content:""; position:absolute; left:0; bottom:-10px; height:2px; width:100%;
+  background: linear-gradient(90deg,var(--gold),#e5c778);
+  border-radius:2px;
+  transform:scaleX(1);
 }
-.nav .nav-link:hover::after{ width:100% }
 
-.burger{background:none; border:0; color:#fff; font-size:26px}
-.overlay{position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:999}
-.drawer{
-  position:fixed; top:0; right:0; height:100dvh; width:min(76%,360px);
-  background:var(--navy); padding:20px; z-index:1001;
-  box-shadow:-12px 0 36px rgba(0,0,0,.35);
+/* Brand mapping */
+.text-yellow-500, .hover\:text-yellow-500:hover { color: var(--gold) !important; }
+.bg-yellow-500 { background-color: var(--gold) !important; }
+.hover\:bg-yellow-400:hover { background-color: var(--gold-weak) !important; }
+.border-yellow-500 { border-color: var(--gold) !important; }
+.text-yellow-400 { color: var(--gold-weak) !important; }
+
+/* Focus */
+:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px color-mix(in oklab, var(--gold) 35%, transparent);
+  border-color:var(--gold) !important;
 }
-.hidden{display:none}
 
-/* Typo */
-.h1{font-size: clamp(28px, 4.5vw, 48px); line-height:1.1; font-weight:800}
-.h2{font-size: clamp(22px, 3vw, 30px); font-weight:800}
-.h3{font-size: clamp(18px, 2.2vw, 22px); font-weight:700}
-.lead{color:#d5dbe7}
-
-/* Hero */
+/* Hero – höher, damit „Über uns“ nicht im ersten Viewport landet */
 .hero{
-  min-height:92vh; display:flex; align-items:center; justify-content:center;
+  min-height: 92vh;
+  display:flex; align-items:center; justify-content:center;
   background:
     radial-gradient(120% 100% at 110% -10%, rgba(199,154,58,.12), transparent),
     var(--navy);
 }
 
 /* Buttons */
-.btn{
-  display:inline-flex; align-items:center; justify-content:center; gap:10px;
-  padding:10px 16px; border-radius:10px; font-weight:700; border:1px solid transparent;
-  transition: transform .2s ease, box-shadow .25s ease, background .2s ease, color .2s ease, border-color .2s ease;
+.btn--gold{
+  background: transparent; color: var(--gold);
+  border: 1px solid var(--gold);
+  transition: color .2s ease, background .2s ease, box-shadow .2s ease, transform .2s ease;
 }
-.btn--gold{ color:var(--navy); background:var(--gold); border-color:var(--gold) }
-.btn--gold:hover{ transform:translateY(-1px); box-shadow:0 12px 28px rgba(199,154,58,.27) }
-.btn--ghost{ color:#eaeaea; background:transparent; border-color:var(--gold) }
-.btn--ghost:hover{ color:var(--navy); background:var(--gold) }
+.btn--gold:hover{
+  background: var(--gold); color: var(--navy);
+  box-shadow: 0 8px 24px rgba(199,154,58,.25);
+  transform: translateY(-1px);
+}
 
 /* Sticky CTA */
-.sticky-cta{
-  position:fixed; bottom:20px; right:20px; z-index:1000;
+#stickyCta{
   opacity:0; transform:translateY(8px); pointer-events:none;
   transition:opacity .25s ease, transform .25s ease;
+  bottom: clamp(16px, 2.5vh, 24px);
+  right: clamp(12px, 2.5vw, 24px);
 }
-.sticky-cta.is-visible{ opacity:1; transform:translateY(0); pointer-events:auto }
+#stickyCta.is-visible{ opacity:1; transform:translateY(0); pointer-events:auto; }
+@media (prefers-reduced-motion: reduce){ #stickyCta{ transition:none } }
 
-/* Cards */
+/* Karten */
 .card{
-  position:relative; border:1px solid var(--line);
+  position: relative;
+  border: 1px solid var(--line);
   background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
-  border-radius: var(--radius);
+  border-radius: 14px;
   box-shadow: 0 6px 24px rgba(0,0,0,.08);
-  transition: transform .20s ease, box-shadow .25s ease, border-color .20s ease, outline .2s ease;
+  transition: transform .20s ease, box-shadow .25s ease, border-color .20s ease;
 }
 .card:hover, .card:focus-within{
   transform: translateY(-2px);
@@ -116,40 +95,63 @@ a,button{cursor:pointer; color:inherit; text-decoration:none}
     0 0 28px 6px rgba(199,154,58,.22);
   outline: none;
 }
-.icon{
-  width:40px; height:40px; display:flex; align-items:center; justify-content:center;
-  border-radius:10px; border:1px solid rgba(199,154,58,.35);
+.card-title{ font-size:1.125rem; font-weight:700; color:#fff; margin-bottom:.25rem; }
+.card-text{ color:#d1d5db; }
+
+/* Icon-Kacheln */
+.icon-wrap{
+  width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;
+  border-radius:.75rem;border:1px solid rgba(199,154,58,.35);
   background:linear-gradient(180deg, rgba(199,154,58,.10), rgba(199,154,58,.02));
-  color:var(--gold); font-weight:700;
 }
-.muted{color:#d1d5db}
+.icon-gold{ width:1.25rem;height:1.25rem;color:var(--gold); }
 
 /* FAQ */
 .faq-item{
-  background:#0f1627; border:1px solid #2a3350; border-radius:12px; overflow:hidden;
+  background:#0f1627; border:1px solid #2a3350; border-radius:.75rem; overflow:hidden;
   transition: box-shadow 220ms ease, border-color 220ms ease, transform 180ms ease;
 }
 .faq-item:hover{ border-color: rgba(255,215,0,.45); box-shadow: 0 8px 18px rgba(255,215,0,.08), inset 0 0 0 1px rgba(255,215,0,.15); transform: translateY(-1px); }
 .faq-item.open{ border-color: rgba(255,215,0,.55); box-shadow: 0 10px 22px rgba(255,215,0,.12), inset 0 0 0 1px rgba(255,215,0,.20); }
-.faq-q{ width:100%; text-align:left; background:none; border:0; color:#fff; font-weight:700; padding:16px 18px; position:relative }
-.faq-q::after{ content:"▼"; position:absolute; right:14px; top:50%; transform:translateY(-50%) rotate(0); transition:transform .28s ease; opacity:.9 }
-.faq-item.open .faq-q::after{ transform:translateY(-50%) rotate(180deg) }
-.faq-a{ max-height:0; overflow:hidden; opacity:0; padding:0 18px; transition:max-height .35s ease, opacity .2s ease }
-.faq-item.open .faq-a{ padding:8px 18px 16px 18px; opacity:1; max-height:220px }
+.faq-q{ position:relative; padding:1rem 1.75rem 1rem 1.25rem; color:#fff; font-weight:600; text-align:left; width:100%; }
+.faq-q::after{ content:"▼"; position:absolute; right:.75rem; top:50%; transform:translateY(-50%) rotate(0deg); transition:transform 280ms ease; opacity:.9; }
+.faq-item.open .faq-q::after{ transform:translateY(-50%) rotate(180deg); }
+.faq-a{ max-height:0; overflow:hidden; opacity:0; padding:0 1.25rem; transition:max-height .35s ease, opacity .2s ease; }
+.faq-item.open .faq-a{ padding:.5rem 1.25rem 1rem 1.25rem; opacity:1; max-height:220px; }
 
-/* Testimonials */
-#tsViewport{ width:100%; overflow:hidden }
-#tsTrack{ display:flex; transition: transform 700ms ease-in-out; will-change: transform }
-.ts-page{ min-width:100%; display:grid; gap:16px; grid-template-columns: 1fr; }
-@media (min-width: 860px){ .ts-page{ grid-template-columns: repeat(3, minmax(0,1fr)) } }
+/* Testimonials – KEIN Glow, permanenter Goldrand */
+#tsViewport{ width:100%; overflow:hidden; }
+#tsTrack{ display:flex; transition: transform 700ms ease-in-out; will-change: transform; }
+.ts-page{
+  min-width:100%;
+  display:grid; gap:1.25rem;
+  grid-template-columns: 1fr; /* mobil 1 */
+}
+@media (min-width:768px){
+  .ts-page{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
 .ts-card{
-  padding:16px 18px;
-  border:1px solid rgba(199,154,58,.55) !important; /* statischer Goldrand */
+  padding:1rem 1.25rem;
+  border:1px solid rgba(199,154,58,.50) !important;
   box-shadow:none !important;
   background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
   transform:none !important;
 }
-.ts-card:hover, .ts-card:focus-within{ border-color: rgba(199,154,58,.70) !important }
+.ts-card:hover, .ts-card:focus-within{
+  border-color: rgba(199,154,58,.70) !important;
+  box-shadow:none !important;
+  transform:none !important;
+}
 
-/* Footer */
-.footer{border-top:1px solid rgba(255,255,255,.1); color:#e7e7e7}
+/* Scroll-Reveal – snappier & früher */
+.reveal{ opacity:0; transform:translateY(8px); }
+.reveal.is-inview{ opacity:1; transform:none; transition: opacity .5s ease, transform .5s ease; }
+@media (prefers-reduced-motion: reduce){
+  .reveal, .reveal.is-inview{ opacity:1 !important; transform:none !important; transition:none !important; }
+}
+
+/* Kleines Motion-Utility */
+@keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+.animate-slide-down{ animation: slideDown 180ms ease-out both; }
+
+footer{ padding-top:1.1rem; padding-bottom:1.1rem; color:#e7e7e7; }
