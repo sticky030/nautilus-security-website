@@ -230,3 +230,32 @@ handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
 
   cta.addEventListener("click", ()=>document.getElementById("contact")?.scrollIntoView({behavior:"smooth"}));
 })();
+// Scroll-Reveal (arbeitet mit .reveal)
+(() => {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window) || !els.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('is-inview'); io.unobserve(e.target); }});
+  }, { threshold: 0.12, rootMargin: "60px" });
+  els.forEach(el => io.observe(el));
+})();
+
+// Testimonials Auto-Rotate – Container benötigt Klasse .testimonials
+(() => {
+  const track = document.querySelector('.testimonials');
+  if (!track) return;
+  const cards = Array.from(track.children);
+  if (cards.length <= 3) return; // keine Rotation nötig
+  let groupSize = window.matchMedia('(min-width: 901px)').matches ? 3 : 1;
+  let index = 0;
+  const show = () => { cards.forEach((c, i) => c.style.display = (i >= index && i < index + groupSize) ? '' : 'none'); };
+  const next = () => { index = (index + groupSize) % cards.length; show(); };
+  show();
+  let timer = setInterval(next, 6000);
+  track.addEventListener('mouseenter', () => clearInterval(timer));
+  track.addEventListener('mouseleave', () => timer = setInterval(next, 6000));
+  window.addEventListener('resize', () => {
+    const s = window.matchMedia('(min-width: 901px)').matches ? 3 : 1;
+    if (s !== groupSize){ groupSize = s; index = 0; show(); }
+  });
+})();
