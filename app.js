@@ -297,3 +297,95 @@ document.addEventListener('DOMContentLoaded', function () {
 // Reflow-Trigger (z. B. nach Bild-Load, Hash-Navigation, Menüaktionen)
 window.addEventListener('load', () => { if (window.AOS) AOS.refreshHard(); });
 window.addEventListener('hashchange', () => { if (window.AOS) AOS.refresh(); });
+/* ===== Smooth-In / AOS + Fallback ===== */
+(function () {
+  // allen sichtbaren Sections die Klasse .reveal geben (falls vergessen/entfernt)
+  document.querySelectorAll('section').forEach(s => s.classList.add('reveal'));
+  
+  // AOS erst NACH vollständigem Load initialisieren (stabiler als DOMContentLoaded)
+  window.addEventListener('load', function () {
+    if (window.AOS && typeof AOS.init === 'function') {
+      AOS.init({
+        duration: 700,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 80,
+        mirror: false
+      });
+      AOS.refreshHard();
+    }
+  });
+
+  // Fallback-Animation für .reveal via IntersectionObserver
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) {
+    const els = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && els.length) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(el => io.observe(el));
+    } else {
+      // ganz einfacher Fallback
+      els.forEach(el => el.classList.add('is-visible'));
+    }
+  }
+})();
+
+/* ===== Testimonials (zeigt immer zuverlässig 3 Stück im Wechsel) ===== */
+(function () {
+  const track = document.getElementById('tsTrack');
+  if (!track) return;
+
+  // falls schon Inhalte vorhanden (deine eigene Logik), NICHT überschreiben
+  if (track.children.length > 0) return;
+
+  // deine Testimonials (bearbeitbar)
+  const TESTIMONIALS = [
+    { q: "Verlässlich, ruhig, sauber dokumentiert – genau so stelle ich mir Nachtwache vor.", a: "Objektleiter, Bauprojekt Berlin" },
+    { q: "Übergaben und Checklisten sind top. Abweichungen wurden nachvollziehbar gelöst.", a: "FM-Leitung, Gewerbeimmobilie" },
+    { q: "Schnell startklar, klare Ansprechpartner, Reporting ohne Lücken.", a: "Bauherr, Innenstadtlage" },
+    { q: "Unauffällig im Auftritt, souverän in der Sache – professionell.", a: "Eventkoordination, Veranstalter" },
+    { q: "Planbare Takte, pünktliche Rückmeldungen, messbare Qualität.", a: "Technischer Leiter, Campus" },
+    { q: "Revier- und Alarmdienste mit GPS-Nachweis – auditfähig.", a: "Sicherheitsbeauftragter, Industrie" }
+  ];
+
+  // Hilfsfunktion: 1 Karte
+  const cardHTML = (t) => `
+    <article class="card p-6 mx-2 max-w-md">
+      <p class="text-gray-200 italic">“${t.q}”</p>
+      <p class="text-yellow-500 mt-3 text-sm">— ${t.a}</p>
+    </article>
+  `;
+
+  // 3er-Set rendern
+  let idx = 0;
+  function renderSet() {
+    const out = [];
+    for (let i = 0; i < 3; i++) {
+      out.push(cardHTML(TESTIMONIALS[(idx + i) % TESTIMONIALS.length]));
+    }
+    track.innerHTML = out.join('');
+    idx = (idx + 3) % TESTIMONIALS.length;
+  }
+
+  // Startzustand
+  track.style.willChange = 'opacity, transform';
+  track.style.transition = 'opacity .5s ease';
+  function next() {
+    track.style.opacity = '0';
+    setTimeout(() => {
+      renderSet();
+      track.style.opacity = '1';
+    }, 250);
+  }
+
+  renderSet();
+  // alle 5s zum nächsten 3er-Set
+  setInterval(next, 5000);
+})();
