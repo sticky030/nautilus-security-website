@@ -6,7 +6,7 @@
   if (y) y.textContent = new Date().getFullYear();
 })();
 
-// Burger-Menü
+// Burger-Menü + Smooth Scroll
 (() => {
   const burger = document.getElementById("burger");
   const mobileMenu = document.getElementById("mobileMenu");
@@ -20,19 +20,20 @@
   burger?.addEventListener("click", () => toggleMobile("open"));
   mobileOverlay?.addEventListener("click", () => toggleMobile("close"));
 
-  // Smooth scroll für Buttons mit data-target
   document.querySelectorAll(".mobile-link, .nav-link, .cta-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-target");
       if (id) {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        const el = document.getElementById(id);
+        if (id === "about") el?.classList.add("is-inview"); // sicher sichtbar, wenn direkt angewählt
+        el?.scrollIntoView({ behavior: "smooth" });
         toggleMobile("close");
       }
     });
   });
 })();
 
-// Scrollspy (Gold-Underline und Bold für aktiven Abschnitt)
+// Scrollspy
 (() => {
   const links = document.querySelectorAll(".nav-link");
   const ids = ["home","about","services","why","values","team","jobs","faq","testimonials","contact"];
@@ -55,7 +56,7 @@
   sections.forEach(sec => io.observe(sec));
 })();
 
-// FAQ Akkordeon
+// FAQ
 (() => {
   const list = document.getElementById("faqList");
   if (!list) return;
@@ -97,7 +98,7 @@
   });
 })();
 
-// Sticky CTA Sichtbarkeit
+// Sticky CTA
 (() => {
   const cta = document.getElementById("stickyCta");
   const hero = document.getElementById("home");
@@ -127,14 +128,18 @@
   cta.addEventListener("click", () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }));
 })();
 
-// Einheitlicher Scroll-Reveal (ohne AOS)
+// Einheitlicher Scroll-Reveal – „Über uns“ NICHT beim Laden zeigen
 (() => {
-  // allen <section> sicher die Klasse .reveal geben
+  // allen Sections die Reveal-Klasse geben
   document.querySelectorAll("section").forEach(s => s.classList.add("reveal"));
 
   const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const all = Array.from(document.querySelectorAll(".reveal"));
+  const about = document.getElementById("about");
+  const normals = all.filter(el => el !== about);
+
   if (prefersReduced) {
-    document.querySelectorAll(".reveal").forEach(el => el.classList.add("is-inview"));
+    all.forEach(el => el.classList.add("is-inview"));
     return;
   }
 
@@ -145,14 +150,28 @@
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  }, { threshold: 0.14, rootMargin: "-5% 0px -60% 0px" });
 
-  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  // Normale Sektionen direkt beobachten
+  normals.forEach(el => io.observe(el));
+
+  // „Über uns“ erst beobachten, wenn der Nutzer wirklich scrollt
+  if (about) {
+    const activateAbout = () => {
+      io.observe(about);
+      window.removeEventListener("scroll", activateAbout);
+      window.removeEventListener("wheel", activateAbout);
+      window.removeEventListener("touchstart", activateAbout);
+    };
+    window.addEventListener("scroll", activateAbout, { once:true, passive:true });
+    window.addEventListener("wheel", activateAbout, { once:true, passive:true });
+    window.addEventListener("touchstart", activateAbout, { once:true, passive:true });
+  }
 })();
 
-// Form-Handler (Formspree optional, sonst Mailto)
+// Form-Handler
 (() => {
-  const FORMSPREE_CONTACT = ""; // z.B. https://formspree.io/f/xxxxxx
+  const FORMSPREE_CONTACT = ""; // https://formspree.io/f/xxxxxx
   const FORMSPREE_CAREER  = "";
 
   function handleForm(formId, endpoint, subject) {
@@ -164,7 +183,6 @@
       e.preventDefault();
       if (status) { status.textContent = ""; status.style.color = ""; }
 
-      // simple required check
       const requireds = form.querySelectorAll("[required]");
       for (const el of requireds) {
         if (!el.value || !String(el.value).trim()) {
@@ -188,7 +206,6 @@
         }
       }
 
-      // Mailto-Fallback
       const fd = new FormData(form);
       const kv = [];
       fd.forEach((v, k) => { if (String(v).trim()) kv.push(`${k}: ${v}`); });
@@ -201,12 +218,11 @@
   handleForm("careerForm",  FORMSPREE_CAREER,  "Bewerbung – Nautilus Security");
 })();
 
-// Testimonials – stabiler 3er-Slider (mobil 1), ohne Konflikte
+// Testimonials – 3 pro Seite (mobil 1), ohne Glow
 (() => {
   const track = document.getElementById("tsTrack");
   if (!track) return;
 
-  // Premium-Ton (angepasst)
   const TESTIMONIALS = [
     { q: "„Präsenz wie vereinbart, Berichte lückenlos. Übergaben funktionieren.“", a: "Objektleiter, Großbaustelle Berlin-City" },
     { q: "„Start binnen weniger Tage, sauber organisiert und dokumentiert.“", a: "Projektleiter, Bauherr Berlin" },
@@ -222,33 +238,29 @@
     { q: "„Auftreten diskret; Wirkung nach außen professionell.“", a: "Eigentümervertretung, Neubauprojekt" }
   ];
 
-  // Track aufräumen (verhindert Doppel-Init)
   track.innerHTML = "";
   track.style.willChange = "transform";
 
-  // Hilfsfunktion: Seite (3 Karten mobil=1 per CSS)
+  const makeCard = (t) => {
+    const art = document.createElement("article");
+    art.className = "card ts-card";
+    art.innerHTML = `<p class="text-gray-200 italic">${t.q}</p><p class="text-yellow-500 mt-3 text-sm">— ${t.a}</p>`;
+    return art;
+  };
   const makePage = (slice) => {
     const page = document.createElement("div");
     page.className = "ts-page";
-    slice.forEach(x => {
-      const art = document.createElement("article");
-      art.className = "card ts-card";
-      art.innerHTML = `<p class="text-gray-200 italic">${x.q}</p><p class="text-yellow-500 mt-3 text-sm">— ${x.a}</p>`;
-      page.appendChild(art);
-    });
+    slice.forEach(x => page.appendChild(makeCard(x)));
     return page;
   };
 
-  // In Seiten à 3 aufteilen
   const pages = [];
   for (let i = 0; i < TESTIMONIALS.length; i += 3) {
     pages.push(makePage(TESTIMONIALS.slice(i, i + 3)));
   }
-  // Einfügen + Loop-Klon
   pages.forEach(p => track.appendChild(p));
   if (pages.length) track.appendChild(pages[0].cloneNode(true));
 
-  // Slider Logik
   let idx = 0;
   const total = pages.length;
   const step = () => {
@@ -256,12 +268,10 @@
     track.style.transition = "transform 700ms ease-in-out";
     track.style.transform = `translateX(-${idx * 100}%)`;
     if (idx === total) {
-      // Loop zurücksetzen
       setTimeout(() => {
         track.style.transition = "none";
         track.style.transform = "translateX(0%)";
         idx = 0;
-        // Reflow, dann Transition wieder an
         void track.offsetWidth;
         track.style.transition = "transform 700ms ease-in-out";
       }, 740);
@@ -269,7 +279,6 @@
   };
 
   let timer = setInterval(step, 5200);
-  // Pause bei Hover
   track.addEventListener("mouseenter", () => { clearInterval(timer); });
   track.addEventListener("mouseleave", () => { timer = setInterval(step, 5200); });
 })();
