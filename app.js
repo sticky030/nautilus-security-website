@@ -415,3 +415,49 @@
     }
   });
 })();
+/* === SAFE SMOOTH REVEAL (kein HTML-/Text-Change) === */
+(() => {
+  // Abschnitte holen (Hero bleibt sofort sichtbar)
+  const sections = Array.from(document.querySelectorAll('section'));
+  if (!sections.length) return;
+  const hero = document.getElementById('home');
+
+  // JS ist aktiv → Reveal-System scharf schalten
+  document.body.classList.add('ns-ready');
+
+  // Alle außer Hero als "pending" markieren (erst jetzt greift das CSS-Hide)
+  sections.forEach(s => {
+    if (s !== hero) s.classList.add('ns-pending');
+  });
+
+  const reveal = el => {
+    el.classList.add('ns-in');
+    el.classList.remove('ns-pending');
+  };
+
+  // Fallback ohne IntersectionObserver: alles sanft einblenden
+  if (!('IntersectionObserver' in window)) {
+    setTimeout(() => sections.forEach(s => s !== hero && reveal(s)), 150);
+    return;
+  }
+
+  // Früh triggern → wirkt smooth
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        reveal(e.target);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px 28% 0px' });
+
+  sections.forEach(s => { if (s !== hero) io.observe(s); });
+
+  // Bereits sichtbare beim Laden sanft zeigen
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  sections.forEach(s => {
+    if (s === hero) return;
+    const r = s.getBoundingClientRect();
+    if (r.top < vh * 0.92 && r.bottom > vh * 0.08) reveal(s);
+  });
+})();
