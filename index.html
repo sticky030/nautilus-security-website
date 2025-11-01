@@ -24,7 +24,7 @@
 </head>
 <body class="min-h-screen font-sans bg-[#0a0f1c] text-white scroll-smooth">
   <!-- Header -->
-  <header id="site-header" class="border-b border-yellow-500 bg-[#0a0f1c] p-4 shadow-md sticky top-0 z-50">
+  <header id="site-header" class="header site-header border-b border-yellow-500 bg-[#0a0f1c] p-4 shadow-md sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center relative">
       <div class="flex items-center space-x-3">
         <img src="./logo-gold-transparent.png" alt="Logo Nautilus Security" width="40" height="40" class="w-10 h-10" />
@@ -36,7 +36,7 @@
           <button id="burger" class="text-yellow-500 text-2xl" aria-label="Navigation öffnen">☰</button>
         </div>
       </div>
-      <nav class="hidden md:flex space-x-4 text-sm" id="mainNav" aria-label="Hauptnavigation">
+      <nav class="hidden md:flex space-x-4 text-sm nav" id="mainNav" aria-label="Hauptnavigation">
         <button data-target="home" class="nav-link hover:text-yellow-500 transition">Start</button>
         <button data-target="about" class="nav-link hover:text-yellow-500 transition">Über uns</button>
         <button data-target="services" class="nav-link hover:text-yellow-500 transition">Leistungen</button>
@@ -66,14 +66,14 @@
 
   <main>
     <!-- Hero -->
-    <section id="home" class="hero-relaxed flex items-center justify-center text-center px-4 bg-gradient-to-b from-[#0b1222] via-[#0a0f1c] to-[#0a0f1c]" data-aos="fade-up">
+    <section id="home" class="hero hero-relaxed flex items-center justify-center text-center px-4 bg-gradient-to-b from-[#0b1222] via-[#0a0f1c] to-[#0a0f1c]" data-aos="fade-up">
       <div>
         <div class="mx-auto mb-6 w-52 md:w-64 lg:w-72 aspect-square rounded-full bg-[#0d1528] flex items-center justify-center shadow-2xl ring-2 ring-yellow-500/60 ring-offset-2 ring-offset-[#0a0f1c]">
           <img src="./logo-gold-transparent.png" alt="Nautilus Security Logo" class="w-48 md:w-64 lg:w-72 drop-shadow-xl opacity-95" width="256" height="256" />
         </div>
         <h2 class="text-4xl font-bold text-yellow-500 mb-4">Sicherheit mit Struktur.</h2>
         <div class="mt-8">
-          <button data-target="contact" class="cta-btn bg-yellow-500 text-black px-6 py-3 rounded-full text-lg shadow-lg hover:bg-yellow-400 transition-transform transform hover:scale-105">Jetzt Kontakt aufnehmen</button>
+          <button data-target="contact" class="cta-btn btn--gold px-6 py-3 rounded-full text-lg shadow-lg transition-transform transform hover:scale-105">Jetzt Kontakt aufnehmen</button>
         </div>
       </div>
     </section>
@@ -207,7 +207,7 @@
         <li>Zusatzqualifikationen (Erste Hilfe, Fremdsprachen, Spezialschulungen) von Vorteil</li>
       </ul>
       <div class="text-center mt-8">
-        <button data-target="career-form" class="cta-btn bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition">Jetzt bewerben</button>
+        <button data-target="career-form" class="cta-btn btn--gold px-6 py-2 rounded transition">Jetzt bewerben</button>
       </div>
     </section>
 
@@ -233,7 +233,7 @@
           <label class="block text-sm mb-2" for="cvFile">Lebenslauf (PDF, optional)</label>
           <input id="cvFile" type="file" accept="application/pdf" class="w-full text-sm" />
         </div>
-        <button type="submit" class="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition-transform transform hover:scale-105">Bewerbung senden</button>
+        <button type="submit" class="btn--gold px-6 py-2 rounded transition">Bewerbung senden</button>
         <p id="careerStatus" class="text-sm mt-2"></p>
       </form>
     </section>
@@ -270,7 +270,7 @@
         <input id="ct_email" name="email" type="email" placeholder="Ihre E-Mail" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required />
         <label class="sr-only" for="ct_msg">Ihre Nachricht</label>
         <textarea id="ct_msg" name="message" placeholder="Ihre Nachricht..." rows="5" class="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white" required></textarea>
-        <button type="submit" class="bg-yellow-500 text-black px-6 py-2 rounded hover:bg-yellow-400 transition-transform transform hover:scale-105">Absenden</button>
+        <button type="submit" class="btn--gold px-6 py-2 rounded transition">Absenden</button>
         <p id="contactStatus" class="text-sm mt-2"></p>
       </form>
     </section>
