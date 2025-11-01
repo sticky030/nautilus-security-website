@@ -281,3 +281,43 @@
   track.addEventListener("mouseenter", () => { clearInterval(timer); });
   track.addEventListener("mouseleave", () => { timer = setInterval(step, 5200); });
 })();
+
+/* === Scroll Reveal (ohne Layout-/Text-Änderungen) === */
+(() => {
+  // Alle Sections markieren – Hero #home sofort sichtbar lassen
+  const sections = Array.from(document.querySelectorAll('section'));
+  sections.forEach(s => s.classList.add('reveal'));
+
+  const hero = document.getElementById('home');
+  if (hero) hero.classList.add('is-inview');
+
+  // Bewegungen systemweit reduziert? -> alles direkt anzeigen
+  const prefersReduced =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    sections.forEach(s => s.classList.add('is-inview'));
+    return;
+  }
+
+  // Früh triggern, damit es "smooth" wirkt
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-inview');
+        io.unobserve(e.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px 25% 0px' // 25% extra unten -> früheres Einblenden
+  });
+
+  sections.forEach(s => { if (s !== hero) io.observe(s); });
+
+  // Falls beim Reload schon im Viewport
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  sections.forEach(s => {
+    const r = s.getBoundingClientRect();
+    if (r.top < vh * 0.92 && r.bottom > vh * 0.08) s.classList.add('is-inview');
+  });
+})();
