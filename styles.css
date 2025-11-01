@@ -30,7 +30,6 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
   content:""; position:absolute; left:0; bottom:-10px; height:2px; width:100%;
   background: linear-gradient(90deg,var(--gold),#e5c778);
   border-radius:2px;
-  transform:scaleX(1);
 }
 
 /* Brand mapping */
@@ -78,7 +77,7 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
 #stickyCta.is-visible{ opacity:1; transform:translateY(0); pointer-events:auto; }
 @media (prefers-reduced-motion: reduce){ #stickyCta{ transition:none } }
 
-/* Karten */
+/* Karten (Standard) */
 .card{
   position: relative;
   border: 1px solid var(--line);
@@ -143,11 +142,20 @@ section[id]{ padding-top:var(--space-lg); padding-bottom:var(--space-lg); }
   transform:none !important;
 }
 
-/* Scroll-Reveal – snappier & früher */
-.reveal{ opacity:0; transform:translateY(8px); }
-.reveal.is-inview{ opacity:1; transform:none; transition: opacity .5s ease, transform .5s ease; }
+/* ===== Smooth Reveal =====
+   Greift nur, wenn JS "has-reveal" auf <html> gesetzt hat. */
+.has-reveal section.reveal{ 
+  opacity:0; 
+  transform: translateY(10px); 
+}
+.has-reveal section.reveal.is-inview{ 
+  opacity:1; 
+  transform:none; 
+  transition: opacity .55s ease, transform .55s ease; 
+}
 @media (prefers-reduced-motion: reduce){
-  .reveal, .reveal.is-inview{ opacity:1 !important; transform:none !important; transition:none !important; }
+  .has-reveal section.reveal,
+  .has-reveal section.reveal.is-inview{ opacity:1 !important; transform:none !important; transition:none !important; }
 }
 
 /* Kleines Motion-Utility */
