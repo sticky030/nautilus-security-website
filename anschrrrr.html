@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Vendor-Pack · Anschreiben · Nautilus Security</title>
+  <style>
+    :root {
+      --nautilus-navy: #0E2235;
+      --nautilus-gold: #C79A3A;
+      --text-muted: #7A8895;
+      --line-soft: #D7DFE7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 32px 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--nautilus-navy);
+      background: #FFFFFF;
+    }
+
+    .document {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: block;
+      width: 260px; /* größeres Logo */
+      height: auto;
+      margin-bottom: 16px;
+    }
+
+    .doc-title {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--nautilus-gold);
+      margin-bottom: 6px;
+    }
+
+    .company-line {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .divider {
+      border-bottom: 2px solid var(--nautilus-gold);
+      width: 72px;
+      margin-bottom: 24px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin: 18px 0 4px;
+    }
+
+    .inline-fields {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .dot {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .field {
+      border: none;
+      border-bottom: 1px solid var(--line-soft);
+      padding: 2px 0;
+      background: transparent;
+      font: inherit;
+      color: inherit;
+      min-width: 40px;
+    }
+
+    .field::placeholder {
+      color: #B0BCC8;
+    }
+
+    .field:focus {
+      outline: none;
+      border-bottom-color: var(--nautilus-gold);
+    }
+
+    .field-short {
+      width: 180px;
+      max-width: 100%;
+    }
+
+    .field-long {
+      width: 100%;
+      margin-bottom: 2px;
+    }
+
+    .field-multiline {
+      width: 100%;
+      border: 1px solid var(--line-soft);
+      border-radius: 6px;
+      padding: 6px 8px;
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .field-multiline:focus {
+      border-color: var(--nautilus-gold);
+      outline: none;
+    }
+
+    .body-text {
+      margin-top: 20px;
+    }
+
+    .body-text p {
+      margin: 0 0 10px;
+    }
+
+    .body-text p + p {
+      margin-top: 6px;
+    }
+
+    .closing {
+      margin-top: 20px;
+    }
+
+    .signature-name {
+      font-weight: 600;
+      margin-top: 18px;
+    }
+
+    .signature-role {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .signature-contact {
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .footer {
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--line-soft);
+      padding-top: 8px;
+      margin-top: 22px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF;
+        padding: 20mm;
+      }
+      .field,
+      .field-multiline {
+        border-color: #CCCCCC;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="document">
+    <img src="logo-gold-transparent.png" alt="Nautilus Security Logo" class="logo">
+
+    <div class="doc-title">Vendor-Pack · Anschreiben Subunternehmer</div>
+    <div class="company-line">Nautilus Security UG (haftungsbeschränkt) · „Sicherheit mit Struktur“</div>
+    <div class="divider"></div>
+
+    <!-- Adressat -->
+    <div class="section-label">Adressat</div>
+    <div class="inline-fields">
+      <input class="field field-short" type="text" placeholder="Unternehmen">
+      <span class="dot">·</span>
+      <input class="field field-short" type="text" placeholder="Abteilung/Einkauf">
+      <span class="dot">·</span>
+      <input class="field field-short" type="text" placeholder="Ansprechpartner">
+    </div>
+
+    <!-- Betreff -->
+    <div class="section-label">Betreff</div>
+    <input
+      class="field field-long"
+      type="text"
+      value="Subunternehmer-Profil · Nachtwache &amp; 24/7-Objektschutz in Berlin (29–31 €/h)"
+    >
+
+    <!-- Region -->
+    <div class="section-label">Region</div>
+    <input
+      class="field field-long"
+      type="text"
+      value="Großraum Berlin/Brandenburg · Baustellen, Bestandsobjekte, Events"
+    >
+
+    <!-- Leistungsrahmen -->
+    <div class="section-label">Leistungsrahmen</div>
+    <textarea
+      class="field-multiline"
+    >Nachtwache, 24/7-Objektschutz, Event-Security – ohne Waffen- und Geld-/Wertdienstleistungen</textarea>
+
+    <!-- Anschreiben-Body -->
+    <div class="section-label">Anschreiben mit klarem Leistungsversprechen</div>
+
+    <div class="body-text">
+      <p>
+        Sehr geehrte*r <input class="field field-short" type="text" placeholder="Name Ansprechpartner">,
+      </p>
+
+      <p>
+        Nautilus Security UG (haftungsbeschränkt) ist auf strukturierte Nachtwachen, 24/7-Objektschutz
+        und Event-Security ohne waffenrechtliche Komponenten und ohne Geld-/Werttransport im Raum Berlin spezialisiert.
+        Unser Ansatz: klare SOPs, saubere Roster und prüffähige Einsatzdokumentation – statt improvisierter Schichten.
+      </p>
+
+      <p>
+        Für Subaufträge arbeiten wir mit einem transparenten Preisrahmen: 31&nbsp;€/h für ad-hoc Lücken,
+        30&nbsp;€/h ab ca. 160&nbsp;Stunden/Monat je Linie/Objekt und 29&nbsp;€/h bei planbarer,
+        mehrmonatiger Auslastung. Zuschläge für Nacht-, Sonn- und Feiertagsarbeit werden 1:1 durchgereicht.
+      </p>
+
+      <p>
+        Operativ sichern wir die Besetzung über eine fokussierte Mannschaft (6–8 Kräfte, 2–3 Springer),
+        dokumentierte Übergaben und eine definierte Eskalationslogik bei Ausfällen.
+        Alleinarbeit wird über Totmann-/Alive-Check-Prozesse mit festen Rückmeldeintervallen abgesichert.
+        Incidents, Rundgänge und Schließgänge werden über standardisierte Formblätter (Wachbuch, Incident-Report,
+        Rundgang-Checklisten) nachvollziehbar dokumentiert.
+      </p>
+
+      <p>
+        Die Bewachungshaftpflicht ist mit 10&nbsp;Mio.&nbsp;€ je Schadenfall hinterlegt und deckt u. a.
+        Schlüsselverlust, Obhut-/Tätigkeitsschäden, reine Vermögensschäden, Umwelt und Fehlalarme ab;
+        ein Gewerbe-Rechtsschutz ergänzt die Vertrags- und Streitfallseite. Die Kombination aus Deckung,
+        klarer Preislogik und schlanken SOPs erlaubt es, Linien stabil zu übernehmen und in Ihre bestehenden
+        Strukturen einzubetten.
+      </p>
+
+      <p>
+        Gern klären wir in einem kurzen Gespräch, welche Objekte oder Linien sich für einen Pilot-Start eignen
+        und mit welchem Stundensatzmodell (29/30/31&nbsp;€/h) wir operativ und wirtschaftlich am sinnvollsten einsteigen.
+      </p>
+
+      <div class="closing">
+        <p>Mit freundlichen Grüßen</p>
+
+        <p class="signature-name">Philipp De Boer</p>
+        <div class="signature-role">
+          Geschäftsführer · Nautilus Security UG (haftungsbeschränkt)
+        </div>
+        <div class="signature-contact">
+          Kontakt: T&nbsp;030&nbsp;985&nbsp;57&nbsp;615 · M&nbsp;0176&nbsp;2284&nbsp;4636 ·
+          E&nbsp;<a href="mailto:kontakt@nautilus-security.de">kontakt@nautilus-security.de</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Nautilus Security UG (haftungsbeschränkt) · Korrespondenz: Kollwitzstraße&nbsp;76, 10435&nbsp;Berlin
+    </div>
+  </div>
+</body>
+</html>
