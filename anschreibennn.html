@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Vendor-Pack · Anschreiben · Nautilus Security</title>
+  <style>
+    :root {
+      --nautilus-navy: #0E2235;
+      --nautilus-gold: #C79A3A;
+      --text-muted: #7A8895;
+      --bg-soft: #F5F7F9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 32px 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--nautilus-navy);
+      background: #E5E8EC;
+    }
+
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      padding: 40px 48px;
+      border-radius: 12px;
+      box-shadow: 0 18px 45px rgba(6, 20, 33, 0.12);
+    }
+
+    .letter-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-start;
+      border-bottom: 1px solid #D7DFE7;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+
+    .header-left .logo {
+      display: block;
+      width: 220px; /* größeres Logo */
+      height: auto;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 12px;
+    }
+
+    .company-name {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .company-claim {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--nautilus-gold);
+      margin-bottom: 10px;
+    }
+
+    .company-contact {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .document-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--nautilus-gold);
+      margin-top: 16px;
+      margin-bottom: 18px;
+    }
+
+    .block-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .address-block {
+      margin-bottom: 18px;
+    }
+
+    .address-lines {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .subject-block {
+      margin-bottom: 18px;
+    }
+
+    .subject-line {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--nautilus-navy);
+    }
+
+    .keyfacts {
+      display: flex;
+      gap: 24px;
+      padding: 16px 18px;
+      background: var(--bg-soft);
+      border-radius: 10px;
+      margin: 16px 0 26px;
+    }
+
+    .keyfact {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .keyfact-value {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #1A2733;
+    }
+
+    .letter-meta {
+      margin-bottom: 8px;
+      text-align: right;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .letter-body p {
+      margin: 0 0 10px;
+    }
+
+    .letter-body p + p {
+      margin-top: 6px;
+    }
+
+    .closing-block {
+      margin-top: 22px;
+    }
+
+    .signature-name {
+      font-weight: 600;
+      margin-top: 18px;
+    }
+
+    .signature-role {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .signature-contact {
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .letter-footer {
+      border-top: 1px solid #D7DFE7;
+      margin-top: 26px;
+      padding-top: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF;
+        padding: 0;
+      }
+      .page {
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        width: 100%;
+        padding: 24mm 20mm;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="letter-header">
+      <div class="header-left">
+        <img src="logo-gold-transparent.png" alt="Nautilus Security Logo" class="logo">
+      </div>
+      <div class="header-right">
+        <div class="company-name">Nautilus Security UG (haftungsbeschränkt)</div>
+        <div class="company-claim">Sicherheit mit Struktur</div>
+        <div class="company-contact">
+          T&nbsp;030&nbsp;985&nbsp;57&nbsp;615 · M&nbsp;0176&nbsp;2284&nbsp;4636<br>
+          E&nbsp;<a href="mailto:kontakt@nautilus-security.de">kontakt@nautilus-security.de</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="document-label">
+      Vendor-Pack · Anschreiben Subunternehmer
+    </div>
+
+    <section class="address-block">
+      <div class="block-label">Adressat</div>
+      <div class="address-lines">
+        [Unternehmen]<br>
+        [Abteilung/Einkauf]<br>
+        [Ansprechpartner]
+      </div>
+    </section>
+
+    <section class="subject-block">
+      <div class="block-label">Betreff</div>
+      <div class="subject-line">
+        Subunternehmer-Profil · Nachtwache &amp; 24/7-Objektschutz in Berlin (29–31&nbsp;€/h)
+      </div>
+    </section>
+
+    <section class="keyfacts">
+      <div class="keyfact">
+        <div class="block-label">Region</div>
+        <div class="keyfact-value">
+          Großraum Berlin/Brandenburg · Baustellen, Bestandsobjekte, Events
+        </div>
+      </div>
+      <div class="keyfact">
+        <div class="block-label">Leistungsrahmen</div>
+        <div class="keyfact-value">
+          Nachtwache, 24/7-Objektschutz, Event-Security – ohne Waffen- und Geld-/Wertdienstleistungen
+        </div>
+      </div>
+    </section>
+
+    <!-- Optional: Datum, falls gewünscht -->
+    <!-- <div class="letter-meta">Berlin, den [Datum]</div> -->
+
+    <main class="letter-body">
+      <p>
+        Sehr geehrte*r [Name Ansprechpartner],
+      </p>
+
+      <p>
+        Nautilus Security UG (haftungsbeschränkt) ist auf strukturierte Nachtwachen, 24/7-Objektschutz
+        und Event-Security ohne waffenrechtliche Komponenten und ohne Geld-/Werttransport im Raum Berlin spezialisiert.
+        Unser Ansatz: klare SOPs, saubere Roster und prüffähige Einsatzdokumentation – statt improvisierter Schichten.
+      </p>
+
+      <p>
+        Für Subaufträge arbeiten wir mit einem transparenten Preisrahmen: 31&nbsp;€/h für ad-hoc Lücken,
+        30&nbsp;€/h ab ca. 160&nbsp;Stunden/Monat je Linie/Objekt und 29&nbsp;€/h bei planbarer,
+        mehrmonatiger Auslastung. Zuschläge für Nacht-, Sonn- und Feiertagsarbeit werden 1:1 durchgereicht.
+      </p>
+
+      <p>
+        Operativ sichern wir die Besetzung über eine fokussierte Mannschaft (6–8 Kräfte, 2–3 Springer),
+        dokumentierte Übergaben und eine definierte Eskalationslogik bei Ausfällen.
+        Alleinarbeit wird über Totmann-/Alive-Check-Prozesse mit festen Rückmeldeintervallen abgesichert.
+        Incidents, Rundgänge und Schließgänge werden über standardisierte Formblätter (Wachbuch, Incident-Report,
+        Rundgang-Checklisten) nachvollziehbar dokumentiert.
+      </p>
+
+      <p>
+        Die Bewachungshaftpflicht ist mit 10&nbsp;Mio.&nbsp;€ je Schadenfall hinterlegt und deckt u. a.
+        Schlüsselverlust, Obhut-/Tätigkeitsschäden, reine Vermögensschäden, Umwelt und Fehlalarme ab;
+        ein Gewerbe-Rechtsschutz ergänzt die Vertrags- und Streitfallseite. Die Kombination aus Deckung,
+        klarer Preislogik und schlanken SOPs erlaubt es, Linien stabil zu übernehmen und in Ihre bestehenden
+        Strukturen einzubetten.
+      </p>
+
+      <p>
+        Gern klären wir in einem kurzen Gespräch, welche Objekte oder Linien sich für einen Pilot-Start eignen
+        und mit welchem Stundensatzmodell (29/30/31&nbsp;€/h) wir operativ und wirtschaftlich am sinnvollsten einsteigen.
+      </p>
+
+      <div class="closing-block">
+        <p>Mit freundlichen Grüßen</p>
+
+        <p class="signature-name">Philipp De Boer</p>
+        <div class="signature-role">
+          Geschäftsführer · Nautilus Security UG (haftungsbeschränkt)
+        </div>
+        <div class="signature-contact">
+          T&nbsp;030&nbsp;985&nbsp;57&nbsp;615 · M&nbsp;0176&nbsp;2284&nbsp;4636 ·
+          E&nbsp;<a href="mailto:kontakt@nautilus-security.de">kontakt@nautilus-security.de</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="letter-footer">
+      Nautilus Security UG (haftungsbeschränkt) · Korrespondenzadresse: Kollwitzstraße&nbsp;76, 10435&nbsp;Berlin
+    </footer>
+  </div>
+</body>
+</html>
