@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Vendor-Pack · Anschreiben · Nautilus Security</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0E2235">
+<style>
+/* ===== Nautilus · Premium Equalizer Layout (Navy/Gold) ===== */
+:root{
+  --navy:#0E2235; --gold:#C79A3A; --bg:#0E2235;
+  --card:#12283e; --muted:#9fb3c8; --line:#1f3b56; --ink:#fff;
+  --r:14px; --s1:8px; --s2:12px; --s3:16px; --s4:22px; --s5:30px;
+  --fz:16px; --fz-sm:13px; --fz-xs:11px; --fz-h2:18px; --fz-h1:24px;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;padding:0;
+  background:var(--bg);color:var(--ink);
+  font:var(--fz)/1.55 Inter,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrapper{max-width:980px;margin:0 auto;padding:var(--s5) var(--s3) 60px}
+
+/* Header – Premium, ohne Gold-Spot hinter Logo */
+.header{
+  display:flex;gap:var(--s3);align-items:center;
+  padding:var(--s3);
+  background:linear-gradient(135deg,#0E2235 0%,#152e47 55%,#1c3854 100%);
+  border-radius:var(--r);
+  border:1.4px solid var(--gold);
+  box-shadow:0 14px 40px rgba(0,0,0,.55);
+  margin-bottom:var(--s3);
+  position:relative;
+  overflow:hidden;
+}
+.header::after{
+  content:"";
+  position:absolute;
+  inset:auto -40px -42px;
+  height:4px;
+  background:linear-gradient(90deg,transparent 0,var(--gold) 40%,rgba(12,18,31,0.3) 100%);
+}
+.logo{
+  padding:10px;
+  border-radius:999px;
+  border:1px solid var(--gold);
+}
+.logo img{width:86px;height:86px;display:block}
+.hgroup{flex:1;min-width:0}
+.hgroup h1{
+  margin:0 0 4px;
+  font-size:var(--fz-h1);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.hgroup .sub{
+  margin:2px 0 0;
+  color:#f0d9a1;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-size:var(--fz-xs);
+}
+.hgroup .meta-line{
+  margin-top:12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  font-size:var(--fz-sm);
+  color:var(--muted);
+}
+.hgroup .meta-line span strong{color:#f6e6c3}
+.rule{
+  border:0;border-top:1.5px solid var(--gold);
+  margin:var(--s3) 0 var(--s3);
+}
+
+/* Section label */
+.section-label{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:var(--fz-xs);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#f0d9a1;
+  margin-bottom:10px;
+}
+.section-label::before{
+  content:"";
+  width:32px;height:2px;
+  background:linear-gradient(90deg,rgba(199,154,58,.2),var(--gold));
+  border-radius:999px;
+}
+
+/* Cards */
+.card{
+  background:var(--card);
+  border-radius:var(--r);
+  padding:var(--s3);
+  box-shadow:0 1px 0 rgba(0,0,0,.35);
+  margin:var(--s3) 0;
+  position:relative;
+  border:1px solid var(--line);
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:4px;
+  background:linear-gradient(180deg,rgba(199,154,58,.1),var(--gold));
+  border-radius:var(--r) 0 0 var(--r);
+}
+.card h2{margin:0 0 var(--s1);font-size:var(--fz-h2)}
+.card h3{margin:16px 0 6px;font-size:15px;color:#f4e0b0}
+.card p{margin:4px 0 var(--s1);color:var(--muted)}
+
+/* Lists */
+ul{
+  margin:6px 0 8px 20px;
+  padding:0;
+  color:var(--muted);
+}
+li{margin:2px 0 0}
+
+/* Info rows */
+.info-row{
+  display:grid;grid-template-columns:170px 1fr;
+  border-radius:10px;overflow:hidden;
+  border:1px solid var(--line);
+}
+.info-row + .info-row{margin-top:10px}
+.info-row .k{
+  background:linear-gradient(180deg,#0c1b2a,#07121f);
+  color:#f2f5fb;
+  font-weight:600;padding:8px 10px;
+  border-right:1px solid #1f3b56;
+}
+.info-row .v{
+  padding:8px 10px;
+  background:#0b1f32;
+  display:flex;
+  align-items:center;
+}
+
+/* Eingabefelder (digital ausfüllbar) */
+.field{
+  width:100%;
+  border:1px solid #9fb3c8;
+  border-radius:6px;
+  padding:6px 8px;
+  font:inherit;
+  font-size:var(--fz-sm);
+  color:#e7f0ff;
+  background:rgba(3,14,27,.85);
+}
+.field::placeholder{color:#778aa2}
+.field:focus{
+  outline:none;
+  border-color:var(--gold);
+  box-shadow:0 0 0 1px var(--gold);
+}
+
+/* Inline field in Anrede */
+.field-inline{
+  width:230px;
+  max-width:60%;
+  display:inline-block;
+  margin:0 4px;
+}
+
+/* Footer */
+.footer{
+  margin-top:28px;padding-top:14px;
+  border-top:1px solid var(--line);
+  font-size:var(--fz-sm);color:var(--muted);
+}
+.footer a{color:var(--gold)}
+
+/* Print */
+@media print{
+  @page{size:A4; margin:14mm 14mm 16mm 14mm}
+  html,body{
+    background:#0E2235;color:#ffffff;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .wrapper{max-width:none;padding:0}
+  a[href]:after{content:""}
+  .field,.field-inline{
+    border-color:#9fb3c8;
+    background:#0b1f32;
+  }
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="header">
+    <div class="logo">
+      <img src="logo-gold-transparent.png" alt="Nautilus Security Logo">
+    </div>
+    <div class="hgroup">
+      <h1>Nautilus Security UG (haftungsbeschränkt)</h1>
+      <div class="sub">Sicherheit mit Struktur</div>
+      <div class="meta-line">
+        <span><strong>GF:</strong> Philipp De&nbsp;Boer</span>
+        <span><strong>Korrespondenz:</strong> Kollwitzstraße&nbsp;76, 10435&nbsp;Berlin</span>
+        <span><strong>Kontakt:</strong> T 030&nbsp;985&nbsp;57&nbsp;615 · M 0176&nbsp;2284&nbsp;4636</span>
+      </div>
+    </div>
+  </header>
+  <hr class="rule">
+
+  <!-- Meta / Kopfzeile -->
+  <section class="card" id="meta">
+    <div class="section-label">Vendor · Anschreiben</div>
+    <h2>1 · Anschreiben mit klarem Leistungsversprechen</h2>
+    <div class="info-row">
+      <div class="k">Adressat</div>
+      <div class="v">
+        <input class="field" type="text"
+               placeholder="[Unternehmen · Abteilung/Einkauf · Ansprechpartner]">
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="k">Betreff</div>
+      <div class="v">
+        <input class="field" type="text"
+               value="Subunternehmer-Profil · Nachtwache &amp; 24/7-Objektschutz im Großraum Berlin (29–31 €/h)">
+      </div>
+    </div>
+  </section>
+
+  <!-- Anschreiben -->
+  <section class="card" id="anschreiben">
+    <div class="section-label">Leistungsprofil &amp; Setup</div>
+
+    <p>
+      Sehr geehrte*r Frau/Herr
+      <input class="field field-inline" type="text" placeholder="Name Ansprechpartner">
+      ,
+    </p>
+
+    <p>
+      mit Nautilus Security erhalten Sie einen Subunternehmer, der Nachtwachen, 24/7-Objektschutz und Event-Security
+      im Großraum Berlin übernimmt – bewusst ohne waffenrechtliche Komponenten und ohne Geld-/Werttransporte.
+      Ziel ist eine risikoreduzierte, klar strukturierte Bewachung, die sich sauber in Ihre bestehenden Prozesse einfügt.
+    </p>
+
+    <h3>Leistungsrahmen in Kürze</h3>
+    <p><strong>Einsatzspektrum:</strong> Nachtwachen, 24/7-Objektschutz, Veranstaltungsschutz</p>
+    <p><strong>Region:</strong> Großraum Berlin</p>
+    <p><strong>Ausrichtung:</strong> Keine Geld-/Werttransporte, keine waffenrechtlichen Leistungen</p>
+    <p><strong>Zielbild:</strong> Stabile Linien, niedrige Ausfallquote, klare Zuständigkeiten</p>
+
+    <h3>Preis- und Mengengerüst</h3>
+    <p>Für Subaufträge arbeiten wir mit einem transparenten Preisrahmen:</p>
+    <p>31&nbsp;€/h für kurzfristige Lücken und Ad-hoc-Bedarfe</p>
+    <p>30&nbsp;€/h ab ca. 160&nbsp;Std./Monat je Objekt</p>
+    <p>29&nbsp;€/h bei planbarer, mehrmonatiger Auslastung</p>
+    <p>
+      Zuschläge für Nacht-, Sonn- und Feiertagsarbeit werden klar getrennt ausgewiesen und 1:1 durchgereicht – ohne versteckte Margen.
+      Einkauf und Controlling können jederzeit trennen, welcher Anteil aus Basisstundensätzen und welcher aus tariflichen Zuschlägen resultiert.
+    </p>
+
+    <h3>Kapazität &amp; Skalierung</h3>
+    <p>
+      Kurzfristig können wir im Großraum Berlin 1–3 Objekte mit jeweils ca. 160–250&nbsp;Std./Monat stabil besetzen.
+      Eine schrittweise Skalierung kann in Abstimmung mit Ihrer Disposition geplant werden, ohne die Ausfallquote zu erhöhen
+      oder die Besetzungsqualität zu verwässern.
+    </p>
+
+    <h3>Risikomanagement &amp; Haftungsrahmen</h3>
+    <p>
+      Die Bewachungshaftpflicht ist mit 10&nbsp;Mio.&nbsp;€ je Schadenfall hinterlegt und umfasst u. a.:
+    </p>
+    <ul>
+      <li>Schlüsselverlust</li>
+      <li>Obhuts- und Tätigkeitsschäden</li>
+      <li>reine Vermögensschäden</li>
+      <li>Umweltschäden</li>
+      <li>Fehlalarme</li>
+    </ul>
+    <p>
+      Ein ergänzender gewerblicher Rechtsschutz deckt die Vertrags- und Streitfallseite ab.
+      Der haftungsseitige Rahmen für eine langfristige, revisionssichere Zusammenarbeit ist damit klar gesetzt.
+    </p>
+
+    <h3>Operative Stabilität ohne Mikromanagement für Sie</h3>
+    <ul>
+      <li>Namentliche Kernmannschaft je Objekt mit definiertem Backup-Ring</li>
+      <li>Alleinarbeit abgesichert über verbindliche Alive-Checks mit festen Intervallen und dokumentierter Eskalationslogik</li>
+      <li>Dokumentation von Rundgängen, Schließgängen, Incidents und Übergaben über standardisierte, revisionssichere Formblätter (Wachbuch, Incident-Report, Rundgang-Checklisten)</li>
+    </ul>
+    <p>
+      Ihre Objektleitung und Disposition erhalten damit nachvollziehbare, exportierbare Unterlagen,
+      ohne dass Sie sich im Tagesgeschäft in Detailsteuerung verlieren müssen.
+    </p>
+
+    <h3>Einbindung in Ihre Struktur</h3>
+    <p>
+      Wir verstehen uns ausdrücklich als ergänzender Subpartner und arbeiten im Rahmen Ihrer bestehenden Dispositions-
+      und Reportingstrukturen. Dazu gehören:
+    </p>
+    <ul>
+      <li>klar benannte Ansprechpartner auf Geschäftsführungs- und Dispositionsebene</li>
+      <li>strukturierte Übergabe der Objektrahmen (Dienstanweisungen, Schlüsselkonzepte, Meldewege)</li>
+      <li>definierte Kommunikationswege bei Störungen, Ausfällen oder Mehrbedarfen</li>
+    </ul>
+
+    <h3>Nächster Schritt</h3>
+    <p>
+      Gern schlage ich ein kurzes Abstimmungsgespräch (ca. 15 Minuten) vor, in dem wir
+    </p>
+    <p>ein erstes Objekt,</p>
+    <p>das passende Stundensatzmodell (29/30/31&nbsp;€/h) und</p>
+    <p>die Einsteuerung als Subunternehmer in Ihren Vendor-Pool</p>
+    <p>konkret festlegen.</p>
+
+    <p>Mit freundlichen Grüßen</p>
+
+    <p>
+      <b>Philipp De Boer</b><br>
+      Geschäftsführer · Nautilus Security UG (haftungsbeschränkt)<br>
+      T 030&nbsp;985&nbsp;57&nbsp;615 · M 0176&nbsp;2284&nbsp;4636<br>
+      E <a href="mailto:kontakt@nautilus-security.de">kontakt@nautilus-security.de</a>
+    </p>
+
+    <p>Korrespondenz: Kollwitzstraße&nbsp;76, 10435&nbsp;Berlin</p>
+  </section>
+
+  <footer class="footer">
+    <div><strong>Kontakt:</strong> T 030&nbsp;985&nbsp;57&nbsp;615 · M 0176&nbsp;2284&nbsp;4636 ·
+      E <a href="mailto:kontakt@nautilus-security.de">kontakt@nautilus-security.de</a></div>
+    <div>Korrespondenz: Kollwitzstraße&nbsp;76, 10435&nbsp;Berlin</div>
+  </footer>
+
+</div>
+</body>
+</html>
