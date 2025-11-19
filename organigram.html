@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Vendor-Pack · Organisation & Verantwortlichkeiten · Nautilus Security</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0E2235">
+<style>
+/* ===== Nautilus · Premium Layout (Navy/Gold) ===== */
+:root{
+  --navy:#0E2235; --gold:#C79A3A; --bg:#0E2235;
+  --card:#12283e; --muted:#9fb3c8; --line:#1f3b56; --ink:#fff;
+  --r:14px; --s1:8px; --s2:12px; --s3:16px; --s4:22px; --s5:30px;
+  --fz:16px; --fz-sm:13px; --fz-xs:11px; --fz-h2:18px; --fz-h1:24px;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;padding:0;
+  background:var(--bg);color:var(--ink);
+  font:var(--fz)/1.55 Inter,system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrapper{max-width:980px;margin:0 auto;padding:var(--s5) var(--s3) 60px}
+
+/* Header */
+.header{
+  display:flex;gap:var(--s3);align-items:center;
+  padding:var(--s3);
+  background:linear-gradient(135deg,#0E2235 0%,#152e47 55%,#1c3854 100%);
+  border-radius:var(--r);
+  border:1.4px solid var(--gold);
+  box-shadow:0 14px 40px rgba(0,0,0,.55);
+  margin-bottom:var(--s3);
+  position:relative;
+  overflow:hidden;
+}
+.header::after{
+  content:"";
+  position:absolute;
+  inset:auto -40px -42px;
+  height:4px;
+  background:linear-gradient(90deg,transparent 0,var(--gold) 40%,rgba(12,18,31,0.3) 100%);
+}
+.logo{
+  padding:10px;
+  border-radius:999px;
+  border:1px solid var(--gold);
+}
+.logo img{width:86px;height:86px;display:block}
+.hgroup{flex:1;min-width:0}
+.hgroup h1{
+  margin:0 0 4px;
+  font-size:var(--fz-h1);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.hgroup .sub{
+  margin:2px 0 0;
+  color:#f0d9a1;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-size:var(--fz-xs);
+}
+.hgroup .meta-line{
+  margin-top:12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  font-size:var(--fz-sm);
+  color:var(--muted);
+}
+.hgroup .meta-line span strong{color:#f6e6c3}
+.rule{
+  border:0;border-top:1.5px solid var(--gold);
+  margin:var(--s3) 0 var(--s3);
+}
+
+/* Section label */
+.section-label{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:var(--fz-xs);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#f0d9a1;
+  margin-bottom:10px;
+}
+.section-label::before{
+  content:"";
+  width:32px;height:2px;
+  background:linear-gradient(90deg,rgba(199,154,58,.2),var(--gold));
+  border-radius:999px;
+}
+
+/* Card */
+.card{
+  background:var(--card);
+  border-radius:var(--r);
+  padding:var(--s3);
+  box-shadow:0 1px 0 rgba(0,0,0,.35);
+  margin:var(--s3) 0;
+  position:relative;
+  border:1px solid var(--line);
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:4px;
+  background:linear-gradient(180deg,rgba(199,154,58,.1),var(--gold));
+  border-radius:var(--r) 0 0 var(--r);
+}
+.card h2{margin:0 0 var(--s2);font-size:var(--fz-h2)}
+.card h3{margin:var(--s3) 0 var(--s1);font-size:15px;color:#f4e0b0}
+.card p{margin:4px 0 var(--s1);color:var(--muted)}
+
+/* Org-Grid */
+.org-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  margin-top:var(--s2);
+}
+@media (max-width:780px){
+  .org-grid{grid-template-columns:1fr}
+}
+.org-node{
+  border-radius:12px;
+  background:#101f33;
+  border:1px solid var(--line);
+  box-shadow:0 10px 24px rgba(0,0,0,.4);
+  position:relative;
+  padding:14px 14px 12px;
+}
+.org-node::before{
+  content:"";
+  position:absolute;
+  inset:0 auto auto 0;
+  width:100%;
+  height:3px;
+  background:linear-gradient(90deg,rgba(199,154,58,.2),var(--gold));
+  border-radius:12px 12px 0 0;
+}
+.org-role{
+  font-size:13px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#f0d9a1;
+  margin-top:8px;
+  margin-bottom:4px;
+}
+.org-name{
+  font-size:15px;
+  font-weight:600;
+  color:#ffffff;
+}
+.org-desc{
+  margin-top:6px;
+  font-size:13px;
+  color:var(--muted);
+}
+.org-meta{
+  margin-top:8px;
+  font-size:12px;
+  color:#c3d0e3;
+}
+
+/* Footer */
+.footer{
+  margin-top:28px;padding-top:14px;
+  border-top:1px solid var(--line);
+  font-size:var(--fz-sm);color:var(--muted);
+}
+.footer a{color:var(--gold)}
+
+/* Print */
+@media print{
+  @page{size:A4; margin:14mm 14mm 16mm 14mm}
+  html,body{
+    background:#0E2235;color:#ffffff;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .wrapper{max-width:none;padding:0}
+  a[href]:after{content:""}
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="header">
+    <div class="logo">
+      <img src="logo-gold-transparent.png" alt="Nautilus Security Logo">
+    </div>
+    <div class="hgroup">
+      <h1>Nautilus Security UG (haftungsbeschränkt)</h1>
+      <div class="sub">Sicherheit mit Struktur</div>
+      <div class="meta-line">
+        <span><strong>GF:</strong> Philipp De&nbsp;Boer</span>
+        <span><strong>Korrespondenz:</strong> Kollwitzstraße&nbsp;76, 10435&nbsp;Berlin</span>
+        <span><strong>Kontakt:</strong> T 030&nbsp;985&nbsp;57&nbsp;615 · M 0176&nbsp;2284&nbsp;4636</span>
+      </div>
+    </div>
+  </header>
+  <hr class="rule">
+
+  <section class="card" id="orga">
+    <div class="section-label">Organisation</div>
+    <h2>8 · Organisation &amp; Verantwortlichkeiten</h2>
+    <p>
+      Die Verantwortlichkeiten bei Nautilus Security UG (haftungsbeschränkt) sind klar zugeordnet. Für den Auftraggeber
+      bedeutet das: eindeutige Ansprechpartner auf Geschäftsführungs-, Steuerungs- und Reporting-Ebene.
+    </p>
+
+    <div class="org-grid">
+      <div class="org-node">
+        <div class="org-role">Geschäftsführung</div>
+        <div class="org-name">Philipp De&nbsp;Boer</div>
+        <div class="org-desc">
+          Gesamtverantwortung für Strategie, Verträge, Compliance und Risikomanagement.
+          Abschluss von Rahmenvereinbarungen, Eskalationsinstanz bei Grundsatzthemen.
+        </div>
+        <div class="org-meta">
+          Entscheidungsbefugnis: Budget, Vertragsinhalte, Eskalationsentscheidungen, Auswahl Schlüsselkunden.
+        </div>
+      </div>
+
+      <div class="org-node">
+        <div class="org-role">Operative Steuerung / Dispo</div>
+        <div class="org-name">Operative Einsatzkoordination</div>
+        <div class="org-desc">
+          Einsatzplanung, Besetzungssteuerung, Ersatzorganisation, tägliche Abstimmung mit der Disposition des Auftraggebers.
+          Sicherstellung der vereinbarten Besetzungs- und Reaktionszeiten.
+        </div>
+        <div class="org-meta">
+          Verantwortlich für: Rosterplanung, Ausfallmanagement, Alive-Check-Überwachung, operative Kommunikation.
+        </div>
+      </div>
+
+      <div class="org-node">
+        <div class="org-role">Qualität &amp; Reporting</div>
+        <div class="org-name">Qualität / Objektbetreuung</div>
+        <div class="org-desc">
+          Auswertung von Wachbuch, Incident-Reports und Rundgangnachweisen, Ableitung von Maßnahmen,
+          Reporting an Objektleitung und Controlling des Auftraggebers.
+        </div>
+        <div class="org-meta">
+          Verantwortlich für: KPI-Reporting, Dokumentationsqualität, Lessons Learned, Anpassung objektbezogener SOPs.
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    <div><strong>Kontakt:</strong> T 030&nbsp;985&nbsp;57&nbsp;615 · M 0176&nbsp;2284&nbsp;4636 ·
+      E <a href="mailto:kontakt@nautilus-security.de">kontakt@nautilus-security.de</a></div>
+    <div>Korrespondenz: Kollwitzstraße&nbsp;76, 10435&nbsp;Berlin</div>
+  </footer>
+
+</div>
+</body>
+</html>
